@@ -274,7 +274,7 @@ rst_epilog += """
 .. |list_pir| image:: /img/list_cpn/list_pir.png
 .. |list_imu| image:: /img/list_cpn/list_imu.png
 
-.. |list_pan_tilt| image:: /img/list_cpn/list_pan_tilt.png
+.. |list_pan_tilt_kit| image:: /img/list_cpn/list_pan_tilt.png
 
 """
 # purchase links
