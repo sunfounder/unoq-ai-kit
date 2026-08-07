@@ -3,48 +3,35 @@
    :end-before: end_hello_message
 
 Module A: Basic Interaction
-========================================
+===============================
 
-Arduino is one of the most popular open-source platforms for learning electronics and programming. It allows beginners to easily build interactive projects that connect the digital world with physical devices such as lights, sensors, motors, and displays.
+In this module, you'll explore the fundamentals of hardware control using the Arduino UNO Q and a breadboard — **no Python, no web UI, just Arduino sketches running on the STM32 microcontroller**. Through 15 hands-on experiments, you'll go from blinking an LED to reading a 10-axis IMU over I2C.
 
-At the heart of Arduino is a microcontroller board, which acts as a small computer capable of reading inputs from sensors and controlling outputs such as LEDs, buzzers, and motors. By writing simple programs, users can create systems that respond to the environment and interact with people.
+Each lesson introduces at most one genuinely new concept. Everything else builds on what you already know, so you can focus on the one new thing each time.
 
-In this module, we will use the Arduino UNO Q together with the Arduino App Lab platform to explore the fundamentals of embedded systems and hardware interaction. Through hands-on experiments, you will learn how to control electronic components, read sensor data, and build interactive devices step by step.
+By the end of this module, you will be able to:
 
-The Arduino platform is especially suitable for beginners because it combines:
-
-* Simple programming based on C/C++ style syntax
-* Accessible hardware with clear input and output interfaces
-* A large ecosystem of sensors, modules, and community resources
-* Fast prototyping, allowing ideas to become working projects quickly
-
-Throughout the lessons in this module, you will explore key Arduino concepts such as:
-
-* Digital input and output
-* Analog signal reading
-* PWM (Pulse Width Modulation) control
-* Sensor data acquisition
-* Basic hardware wiring and debugging
-
-By completing these activities, you will gradually understand how electronic systems work and how software can control physical devices.
-
-More importantly, Arduino is not only about learning electronics — it is also a gateway to Internet of Things (IoT), smart devices, robotics, and AI-powered systems. The skills you learn in this chapter will become the foundation for building more advanced projects later in the course.
-
-Let's begin our journey into the world of Arduino and discover how simple code can bring hardware to life.
+* Wire components on a breadboard and read circuit diagrams
+* Use digital and analog I/O to control LEDs, buzzers, and motors
+* Read sensors — light, temperature, distance, motion
+* Control servos and DC motors with the Robot Shield
+* Communicate with complex sensors over I2C
 
 .. toctree::
    :maxdepth: 1
 
-   1. Hello LED <1_hello_led>
-   2. Button LED <2_button_led>
-   3. Tilt Alarm <3_tilt_alarm>
-   4. Potentiometer LED <4_potentiometer_led>
-   5. RGB LED <5_rgb_led>
-   6. Photoresistor Night Light <6_photoresistor_led>
-   7. DHT11 Temperature & Humidity <7_dht11>
-   8. Ultrasonic Radar <8_ultrasonic>
-   9. Thermistor Fan <9_thermistor_fan>
-   10. Joystick LED <10_joystick_led>
-   11. Servo Pan-Tilt <11_servo>
-   12. IMU Attitude Detection <12_imu>
-   13. Arduino IDE Comparison <13_ide_comparison>
+   1_hello_led
+   2_button_led
+   3_tilt_alarm
+   4_photoresistor_led
+   5_potentiometer_buzzer
+   6_rgb_led
+   7_motor
+   8_servo
+   9_ultrasonic
+   10_dht11
+   11_imu
+   12_thermistor_fan
+   13_joystick_servo
+   14_imu_servo
+

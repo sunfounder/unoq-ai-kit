@@ -2,20 +2,10 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-1. Hello LED
+01 Hello LED
 ======================
 
 Welcome to your first hardware lesson! In the Get Started section, you blinked the onboard LED on the UNO Q. Now you'll build a real circuit on a breadboard and control an external LED with code — the "Hello World" of electronics.
-
-Before we start, let's briefly cover the basics:
-
-**What is an LED?**
-
-LED stands for **Light Emitting Diode**. It's a tiny light that turns on when current flows through it in the correct direction. Current enters through the **anode** (long leg, +) and exits through the **cathode** (short leg, −). If you connect it backwards, it simply won't light up — no damage done.
-
-**Why do we need a resistor?**
-
-An LED will draw as much current as it can get. Without a resistor to limit the flow, the LED burns out in seconds. The 220Ω resistor acts like a narrow pipe — it lets just the right amount of current through to keep the LED bright and safe.
 
 In this lesson, you will learn to:
 
@@ -33,15 +23,15 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * Arduino Uno Q
-     - 1 * Red LED
-     - 1 * 220Ω Resistor
-     - Jumper Wires
-   * - |list_uno_q|
+   * - 1 * Pan Tilt Kit
+     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_resistor` (220Ω)
+     - Several :ref:`cpn_wires`
+   * - |list_pan_tilt|
      - |list_red_led|
      - |list_220ohm|
      - |list_wire|
-   * - 1 * Breadboard
+   * - 1 * :ref:`cpn_breadboard`
      - 1 * USB Cable
      -
      -
@@ -58,21 +48,9 @@ In this lesson, you will learn to:
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/1_hello_led_fritzing.png
-   :width: 700
+.. image:: img/wiring_led.png
+   :width: 500
    :align: center
-
-Here are the connections to make:
-
-#. Place the 220Ω resistor between the LED's cathode row and the breadboard's **negative (−) rail**.
-
-#. Insert the red LED with the **anode** (long leg) and **cathode** (short leg) in separate rows, so the cathode shares a row with the resistor.
-
-   Can't tell the legs apart? Look at the LED's plastic dome — the cathode side has a **flat edge**.
-
-#. Connect the LED's anode row to **digital pin 5** on the UNO Q with a Male-to-Female jumper wire.
-
-#. Connect the breadboard's **negative (−) rail** to any **GND** pin on the UNO Q with another Male-to-Female jumper wire.
 
 .. warning::
 
@@ -82,7 +60,7 @@ Here are the connections to make:
 
 The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
 
-.. image:: img/1_hello_led_schematic.png
+.. image:: img/sche_1_led.png
    :width: 500
    :align: center
 
@@ -95,49 +73,45 @@ The resistor limits the current to a safe level. When pin 5 outputs 0V (LOW), no
 2. Code
 ----------
 
-**Import the Code**
+**Import and Run the Code**
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **My Apps**.
+#. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-#. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: img/1_import_app.png
+   .. image:: img/app_import_app.png
       :width: 600
-      :align: center
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``1_hello_led.zip``.
 
-#. The app will appear in **My Apps**. Click it to open.
+#. Select **Import from Computer**.
 
-   .. image:: img/1_app_open.png
+   .. image:: img/app_import_pc.png
       :width: 600
-      :align: center
 
-**Run the Code**
+
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``01 Hello LED.zip``. The app appears in **My Apps** — click it to open.
+
+   .. image:: img/1_import_led.png
+      :width: 600
+
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/1_app_run.png
-      :width: 600
-      :align: center
+   .. image:: img/app_run.png
+      :width: 500
+
 
 #. Wait a few seconds for the upload to finish, then check your breadboard — the LED should blink: half a second on, half a second off.
 
-.. image:: img/1_blink_result.gif
-   :width: 400
-   :align: center
 
-**The Code**
+**The Sketch (sketch.ino)**
 
-Now that you've seen the LED blink, let's look at the code that makes it happen.
+Now that you've seen the LED blink, let's look at the sketch file that makes it happen.
 
 .. code-block:: cpp
    :linenos:
 
    /*
-    * Lesson 1: Hello LED
     * Blinks an external LED connected to pin 5.
     */
 
@@ -168,13 +142,35 @@ Every Arduino sketch has two functions, and this program follows a simple rhythm
        LED OFF → wait 500ms
        (repeat)
 
-Here's what each part does:
+#. Pin Declaration and Setup
 
-* ``const int ledPin = 5;`` — Gives pin 5 a meaningful name. If you ever move the LED to a different pin, you only need to change this one line.
-* ``pinMode(ledPin, OUTPUT);`` — Tells the UNO Q that this pin will **send** voltage out (rather than **read** voltage in). Called once in ``setup()`` because the pin's role doesn't change.
-* ``digitalWrite(ledPin, HIGH);`` — Sets the pin to 5V. Current flows from the pin, through the LED, through the resistor, to GND → the LED lights up.
-* ``digitalWrite(ledPin, LOW);`` — Sets the pin to 0V. No voltage difference → no current → the LED turns off.
-* ``delay(500);`` — Pauses the program for 500 milliseconds (half a second). Without ``delay()``, the on/off switching happens millions of times per second — too fast for your eyes to see.
+   - A constant ``ledPin`` stores the pin number, making it easy to change later
+   - ``pinMode()`` configures the pin as an output since it sends voltage out to the LED
+   - This only needs to run once at startup, so it goes in ``setup()``
+
+   .. code-block:: arduino
+
+      const int ledPin = 5;
+
+      void setup() {
+          pinMode(ledPin, OUTPUT);
+      }
+
+#. The Blink Loop
+
+   - ``digitalWrite(ledPin, HIGH)`` sets the pin to 5V, allowing current to flow through the LED
+   - ``delay(500)`` pauses the program for half a second, keeping the LED on
+   - ``digitalWrite(ledPin, LOW)`` drops the pin to 0V, stopping the current and turning the LED off
+   - Another ``delay(500)`` keeps it off before ``loop()`` runs from the top again
+
+   .. code-block:: arduino
+
+      void loop() {
+          digitalWrite(ledPin, HIGH);
+          delay(500);
+          digitalWrite(ledPin, LOW);
+          delay(500);
+      }
 
 3. Experiment
 ----------------
@@ -196,25 +192,6 @@ Try adjusting the ``delay()`` values and observe how the blink changes:
    * - ON ``delay(100)``, OFF ``delay(900)``
      - Quick flash, long pause
 
-**Challenge: Heartbeat Pattern**
-
-Make the LED pulse like a heartbeat — two quick beats, then a rest:
-
-.. code-block:: cpp
-
-   void loop() {
-       // First beat
-       digitalWrite(ledPin, HIGH);
-       delay(100);
-       digitalWrite(ledPin, LOW);
-       delay(100);
-
-       // Second beat
-       digitalWrite(ledPin, HIGH);
-       delay(100);
-       digitalWrite(ledPin, LOW);
-       delay(700);  // Pause between heartbeats
-   }
 
 **Challenge: SOS Signal**
 
@@ -271,7 +248,6 @@ SOS in Morse code is three short, three long, three short (··· −−− ··
 * **Cause:** The LED was connected without a resistor and burned out.
 * **Solution:** Replace the LED with a new one. Double-check that the 220Ω resistor is correctly in the circuit before running again.
 
-**Run button does nothing**
 
 * **Cause:** The board is not connected, or App Lab can't find it.
 * **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.

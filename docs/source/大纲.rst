@@ -2,7 +2,7 @@ UNO Q AIoT学习套件课程大纲
 =======================================
 
 本课程基于 Arduino UNO Q 与 Arduino App Lab 平台设计，通过硬件实验、物联网应用和 AI 技术实践，逐步引导学习者掌握 电子控制、设备交互、云端连接以及智能设备开发。
-课程共分为 四个模块，由浅入深完成从 基础硬件控制 → IoT系统开发 → AI交互应用 → Edge AI开发 的学习路径。
+课程共分为六个模块，由浅入深完成从 基础硬件控制 → IoT系统开发 → 多媒体交互 → Edge AI视觉 → AI大语言模型 → 综合AI项目 的学习路径。
 
 模块A：基础交互（13课）
 模块主题：探索 Arduino App Lab 与基础硬件控制
@@ -77,6 +77,8 @@ UNO Q AIoT学习套件课程大纲
 
 7. Telegram Bot 控制设备使用 Telegram 机器人远程读取传感器数据并控制设备。
 
+8. 用OpenCV,检测到什么颜色，就显示什么颜色
+
 学习成果
 完成本模块后，学习者可以：
 ● 构建简单的 Web UI 控制界面
@@ -84,95 +86,408 @@ UNO Q AIoT学习套件课程大纲
 ● 开发基础 IoT 应用系统
 
 
-模块C：AI 与大语言模型应用（4课）
-模块主题：AI驱动的智能交互应用
-结合 大语言模型（LLM）与硬件设备，探索 AI 在智能设备和物联网中的应用。
-课程内容
-1. AI 聊天机器人接入 Gemini 或 ChatGPT，实现文本聊天机器人。
+模块C：多媒体交互（6课）
+--------------------------
 
-2. AI控制灯输入自然语言控制RGB LED，比如关闭灯，点亮红灯等。
+模块主题：使用 Multimedia Carrier 的麦克风和喇叭，实现语音识别（STT）、语音合成（TTS）以及语音控制硬件。
 
-3. AI 电子宠物使用点阵屏显示表情，通过 AI 对话改变宠物状态。
+本模块无需面包板接线——所有硬件（麦克风、喇叭、按键）都在 Carrier 上。
 
-4. AI 云台交互AI 判断用户回答并控制云台点头或摇头。
+Lesson 1：Camera Basics
 
-学习成果
-完成本模块后，学习者可以：
-● 将 AI 服务与硬件系统结合
-● 实现语音和文本交互控制设备
-● 开发简单的 AIoT 智能应用
+目标：认识 CSI 摄像头。
 
-模块D：Edge AI 与 Edge Impulse 应用（10课）
-模块介绍：学习使用 Edge Impulse 与边缘 AI 技术，通过摄像头和麦克风实现视觉识别、语音识别和智能控制，并掌握 AI 模型训练与部署的方法。
+内容：Camera Brick、实时画面、Image Stream、Vision Pipeline。
 
-Module 1：AI快速入门（开箱即用）
-目标： 10分钟跑通AI Demo（建立信心）
+最后：在 Web UI 显示摄像头画面。
+
+Lesson 2：Local TTS
+
+目标：让喇叭播放声音。
+
+内容：Web UI 输入文字 → 点击按钮 → 喇叭朗读。学习 EdgeTTS 初始化和语音合成。
+
+Lesson 3：File TTS
+
+目标：导入文本文件 → 喇叭朗读。
+
+内容：上传 .txt 文件 → TTS 整篇朗读。学习文件读取和长文本分段播放。
+
+Lesson 4：Local STT（已完成）
+
+目标：听到的语音，用文字打印出来。
+
+内容：自动录音 → 本地 Whisper STT → print("You said: ...")。学习语音转文字。
+
+文档和README.md需要提示第一次会报这个错
+
+Recognizing...
+[STT] saved 50880 bytes pcm -> /app/audio_output/stt_last.wav
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[STT] get_result timed out
+
+
+Lesson 5：Robot Shield Button + Local STT
+
+新增一个知识点：事件驱动。
+
+USR 按下 → 开始录音；USR 松开 → 停止录音 → 本地 STT → "You said: ..."
+
+学生开始接触事件驱动编程。
+
+Lesson 6：Voice Command
+
+新增一个知识点：语音控制硬件。
+
+Speech → Text → if text == "red": RGB = Red
+
+说 "Red" 亮红灯，"Yellow" 亮黄灯，"Green" 亮绿灯。学习 STT → 关键词匹配 → Bridge 的完整链路。
+
+Lesson 7：STT + TTS Combined
+
+新增一个知识点：语音指令 + 语音反馈闭环。
+
+Speech → STT → if "turn left" → Servo left + TTS "OK, turning left"
+
+说 "Turn left" → 云台左转 + 喇叭回复。学习 STT → 动作执行 → TTS 反馈的完整闭环。
+
+学习成果：掌握 STT（语音转文字）和 TTS（文字转语音）；理解事件驱动编程模式；实现语音到硬件的完整控制链路。
+
+
+模块D：Edge AI —— AI Vision（8课）
+
+Lesson 1 AI Camera Basics
+
+目标：
+
+认识 AI Camera。
+
 内容：
-● Arduino App Lab介绍
-● 摄像头 + 麦克风初始化
-● 运行官方AI Demo
-项目：
-1）AI视觉识别入门
-    ○ 识别：杯子 / 人 / 手机
-    ○ 在Web UI显示结果
-2） AI语音唤醒
-    ○ 识别关键词（Hello Arduino）
-    ○ 蜂鸣器反馈
-Module 2：AI视觉交互
-目标：AI"看见世界并做出反应"
-项目：
-1）AI目标跟踪云台
-    ○ 摄像头识别人脸
-    ○ 云台自动跟随（Pan-Tilt）
-2）AI手势识别控制
-    ○ 手势控制LED / 蜂鸣器
-    ○ 手势 = 指令
-3）AI视觉报警系统
-    ○ 检测到人 → 蜂鸣器报警
 
-Module 3：AI语音交互系统
-目标：构建一个"能听能说"的AI设备
-项目：
-1）语音控制系统
-● 语音控制：
-    ○ 开灯
-    ○ 云台转动
-    ○ 蜂鸣器响
-2）AI语音助手（进阶）
-    ○ STT + TTS
-    ○ 播放语音反馈（喇叭）
-    ○  示例："Turn left" → 云台左转 + 语音回复
-3）语音+视觉融合
-    ○ 语音询问：
-        ■ "What do you see?"
-        ■ AI回答识别结果
-Module 4：传感器AI应用
-目标： 多传感器 + AI融合
-1）智能环境监测
-    ○ DHT11读取温湿度
-    ○ 语音播报数据
-Module 5：训练你的AI模型
-目标：用户自己"做AI模型"
+Camera Brick
+实时画面
+Image Stream
+Vision Pipeline
+
+最后：
+
+显示摄像头画面。
+
+Lesson 2 AI Vision Recognition（已有）
+
 内容：
-    ○ Edge Impulse基础
-    ○ 数据采集（声音 / 图像）
-    ○ 模型训练
-    ○ 导出 .eim
-    ○ App Lab部署
+
+Object Detection
+Bounding Box
+Label
+Confidence
+
 项目：
-1）自定义语言识别
-2）自定义物体识别
-Module 6：AI系统级项目
-目标：构建完整AI系统（可展示/可传播）
-项目：
-1）AI智能安防摄像头
-    ○ 人体检测
-    ○ 自动跟踪
-    ○ 报警 + 语音提示
-2）AI智能家居中控
-● 语音控制设备
-● 环境监测
-● Web控制界面
-3）AI行为感知系统（高级）
-    ○ IMU + Camera
-    ○ 判断用户行为（站立 / 移动）
+
+识别常见物体。
+
+Lesson 3 Face Alarm（已有）
+
+内容：
+
+If Person
+↓
+
+RGB
+
+Buzzer
+
+OLED
+
+学生第一次体验：
+
+AI + 硬件联动。
+
+Lesson 4 Face Tracking Camera（已有）
+
+内容：
+
+Face
+
+↓
+
+PID
+
+↓
+
+Servo
+
+AI 控制舵机。
+
+Lesson 5 AI Color Light（已有）
+
+例如：
+
+Apple
+
+↓
+
+Red LED
+
+Bottle
+
+↓
+
+Blue LED
+
+学生理解：
+
+Vision 可以控制硬件。
+
+Lesson 6 Custom AI Model（推荐新增）
+
+介绍：
+
+Edge Impulse。
+
+训练：
+
+Rock
+
+Paper
+
+Scissors
+
+或者：
+
+SunFounder
+
+Others
+
+哪怕只是演示，也非常有价值。
+
+Lesson 7 Smart Vision Project（综合）
+
+例如：
+
+AI Sorting
+
+或者：
+
+AI Smart Guard
+
+综合：
+
+Camera
+
+↓
+
+Vision
+
+↓
+
+Servo
+
+↓
+
+OLED
+
+↓
+
+RGB
+
+↓
+
+Buzzer
+
+Edge AI 到这里就有：
+
+8 节课
+
+而且非常完整。
+
+模块E：AI 大语言模型交互（7课）
+
+这一章不要叫 LLM。
+
+因为里面其实还有 STT 和 TTS。
+
+这里还需要新增单独控制喇叭和麦克风的示例
+
+1. 让喇叭播放声音
+2. 听到的语音，用喇叭播放
+3. AI Light Control（已有）:Turn on blue light.
+
+Lesson 2 AI RGB Assistant
+
+自然语言：
+
+Make it purple.
+
+Lesson 3 AI Servo Assistant
+
+自然语言：
+
+Turn 45 degrees.
+
+Lesson 4 Speech Control
+
+这里只讲：
+
+Speech
+
+↓
+
+Whisper
+
+↓
+
+Text
+
+↓
+
+if...
+
+没有 GPT。
+
+例如：
+
+Turn Left
+
+↓
+
+Servo
+
+学生知道：
+
+这是语音识别。
+
+Lesson 5 AI Chat Assistant
+
+开始加入：
+
+Speech
+
+↓
+
+Whisper
+
+↓
+
+LLM
+
+↓
+
+Reply
+Lesson 6 AI Environment Assistant
+
+加入：
+
+DHT
+
+Light
+
+↓
+
+LLM
+
+↓
+
+建议。
+
+例如：
+
+It's a little hot today.
+
+Lesson 7 AI Control Center
+
+LLM
+
+↓
+
+Tool Call
+
+↓
+
+控制：
+
+RGB
+
+OLED
+
+Servo
+
+模块F：AI 综合项目（4课）
+
+这一章全部综合。
+
+例如：
+
+Project 1 AI Security Guard
+
+Face
+
+↓
+
+Alarm
+
+↓
+
+TTS
+
+Project 2 AI Smart Home
+
+Temperature
+
+Light
+
+↓
+
+LLM
+
+↓
+
+Control
+
+Project 3 AI Vision Assistant
+
+Camera
+
+↓
+
+Vision
+
+↓
+
+LLM
+
+↓
+
+Explain
+
+例如：
+
+I see a bottle on the table.
+
+Project 4 AI Robot Assistant
+
+Camera
+
+Speech
+
+LLM
+
+Servo
+
+OLED
+
+RGB
+
+全部融合。
+
+................................................
+
+喇叭和麦克风的使用需要用FileZilla将docker-img-make传输到UNO Q内，一般/home/username/目录下
+
+docker-img-make 是一个 Shell 脚本（没有 .sh 后缀也没关系），只需要赋予执行权限即可：
+
+chmod +x docker-img-make
+
+然后运行：
+
+./docker-img-make

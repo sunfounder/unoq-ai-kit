@@ -25,6 +25,14 @@ if errorlevel 9009 (
 
 if "%1" == "" goto help
 
+REM ==== 在这里加入自动同步共享文档 ====
+echo ==> Updating submodule docs/source/_shared ...
+cd ..
+git submodule update --init --remote docs/source/_shared
+cd docs
+REM ===================================
+
+
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 

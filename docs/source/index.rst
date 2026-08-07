@@ -1,18 +1,23 @@
+.. start_hello_message
+
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Welcome to the SunFounder Raspberry Pi, Arduino, and ESP32 Community on Facebook!
 
-    **Why Join?**
+    Why join?
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - Get technical support from the SunFounder team and community members
+    - Learn from shared projects, tips, and tutorials
+    - Preview upcoming products and new features
+    - Access exclusive discounts and promotions
+    - Participate in community events and giveaways
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Join us on Facebook: [|link_sf_facebook|]
 
-Inventor Lab Kit with Original Arduino Uno R3
+.. end_hello_message
+
+
+Aruino UNO Q AI Starter Kit
 =================================================
 
 Thank You for Choosing the Inventor Lab Kit.
@@ -26,26 +31,20 @@ Thank You for Choosing the Inventor Lab Kit.
         * |link_german_tutorials|
         * |link_jp_tutorials|
         * |link_en_tutorials|
-   
-    Please click on the respective links to access the document in your preferred language.
 
-* :download:`Inventor Lab Kit Handbook with the Answers </_static/pdf/Inventor Lab Kit Handbook with the Answers.pdf>`
-
-Embark on your electronics journey with the Inventor Lab Kit, designed for learners and enthusiasts. Centered around the Arduino Uno R3, this kit includes everything from basic components like LEDs and buzzers to advanced modules such as RFID systems and ultrasonic sensors, along with a mini-multimeter for circuit analysis.
-
-The kit excels in educational clarity, gradually introducing beginners to programming and circuit design. Instead of pre-written code, it guides you step-by-step through writing your own scripts, enhancing understanding and retention. Projects range from simple tasks like lighting LEDs and using a joystick, to complex applications such as building a radar system and an automatic soap dispenser.
-
-Ideal for both beginners and those looking to expand their skills, the Inventor Lab Kit makes learning both accessible and exciting, providing all the tools needed to explore and innovate in the world of electronics.
-
+关于模拟引脚，需要最终确认下到底是A3~A0, 还是A2~A5
 
 
 .. toctree::
     :maxdepth: 1
 
     About this Kit <self>
-    lessons/lessons
-    videos/videos
-    faq
+    get_start/get_start
+    basic/basic
+    media/media
+    iot/iot
+    edge_ai/edge_ai
+
 
 **Copyright Notice**
 

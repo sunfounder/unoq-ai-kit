@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.sunfounder.com)",
+      "Bash(git clone *)",
+      "Bash(git -C /tmp/inventor-lab-kit-ref sparse-checkout set docs/source/lessons docs/source/_static/img)",
+      "Bash(git -C /tmp/inventor-lab-kit-ref checkout)",
+      "Read(//tmp/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(gh api *)",
+      "Bash(curl -s \"https://api.github.com/repos/sunfounder/inventor-lab-kit/contents/docs/source/lessons\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(d['name']\\) for d in data]\")",
+      "PowerShell(\\(Invoke-RestMethod -Uri \"https://api.github.com/repos/sunfounder/inventor-lab-kit/contents/docs/source/lessons\"\\).name)",
+      "PowerShell(Start-Process \"f:\\\\Basic Kits\\\\Arduino\\\\uno q kit\\\\����\\\\unoq-ai-kit\\\\iot\\\\01 UI Control LED\\\\01-ui-control-led\\\\assets\\\\index.html\")",
+      "PowerShell($src = \"f:\\\\Basic Kits\\\\Arduino\\\\uno q kit\\\\代码\\\\unoq-ai-kit\\\\iot\\\\01 UI Control LED\\\\01-ui-control-led\"; $dest = \"f:\\\\Basic Kits\\\\Arduino\\\\uno q kit\\\\代码\\\\unoq-ai-kit\\\\iot\\\\01 UI Control LED\\\\01-ui-control-led.zip\"; if \\(Test-Path $dest\\) { Remove-Item $dest }; Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory\\($src, $dest\\); Write-Host \"Done: $dest\")",
+      "PowerShell(Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip = [System.IO.Compression.ZipFile]::OpenRead\\(\"f:\\\\Basic Kits\\\\Arduino\\\\uno q kit\\\\代码\\\\unoq-ai-kit\\\\iot\\\\01 UI Control LED\\\\01-ui-control-led.zip\"\\); $zip.Entries | Select-Object FullName, Length | Format-Table -AutoSize; $zip.Dispose\\(\\))",
+      "Bash(sed -i 's#<a href=\"https://app.arduino.cc/\" target=\"_blank\">Arduino Cloud</a># |link_arduino_cloud| #' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's#<a href=\"https://app.arduino.cc/devices\" target=\"_blank\">devices</a># |link_cloud_devices| #' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's#<a href=\"https://app.arduino.cc/things\" target=\"_blank\">things</a># |link_cloud_things| #' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's#<a href=\"https://app.arduino.cc/dashboards\" target=\"_blank\">dashboards</a># |link_cloud_dashboards| #' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's/  |link_/ |link_/g' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's/|link_arduino_cloud|  /|link_arduino_cloud| /g' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's/|link_cloud_devices|  /|link_cloud_devices| /g' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's/|link_cloud_things|  /|link_cloud_things| /g' \"3_cloud_buzzer.rst\")",
+      "Bash(sed -i 's/|link_cloud_dashboards|  /|link_cloud_dashboards| /g' \"3_cloud_buzzer.rst\")"
+    ]
+  }
+}
