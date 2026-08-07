@@ -1,0 +1,8 @@
+profiles:
+  default:
+    platforms:
+      - platform: arduino:zephyr
+    libraries:
+      - RobotShield (1.0.3)
+
+default_profile: default

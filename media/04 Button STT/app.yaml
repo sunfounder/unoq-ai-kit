@@ -1,0 +1,8 @@
+name: 02 Button Local STT
+description: Hold a button to record speech, release for local speech recognition
+python:
+  entry: python/main.py
+bricks:
+- robot_shield: {}
+- sunfounder_stt: {}
+icon: 🎙️

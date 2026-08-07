@@ -1,0 +1,267 @@
+/* ============================================================
+   AI Vision Recognition — follows IoT Web UI Design System
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                 Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    background: #eceff1;
+    color: #37474f;
+    min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #23425d;
+    letter-spacing: -0.2px;
+}
+
+header img {
+    position: absolute;
+    left: 40px;
+    height: 28px;
+    width: auto;
+}
+
+/* ── Main ───────────────────────────────────────────────── */
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 48px 24px 48px;
+}
+
+/* ── Two-column layout ──────────────────────────────────── */
+
+.main-layout {
+    display: flex;
+    gap: 24px;
+    max-width: 1100px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 32px 32px 24px;
+    text-align: center;
+}
+
+.card-video {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-results {
+    width: 280px;
+    flex-shrink: 0;
+    text-align: left;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* ── Status row ─────────────────────────────────────────── */
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b0bec5;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.status-indicator.on {
+    background: #29a3d9;
+    box-shadow: 0 0 0 4px rgba(41, 163, 217, 0.15);
+}
+
+.status-indicator.error {
+    background: #d32f2f;
+    box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.12);
+}
+
+.status-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #90a4ae;
+}
+
+/* ── Camera ─────────────────────────────────────────────── */
+
+.camera-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #1a1a2e;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.camera-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 10px;
+    background: #000;
+}
+
+.video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.camera-icon {
+    font-size: 56px;
+    margin-bottom: 10px;
+}
+
+/* ── Detection results ──────────────────────────────────── */
+
+.results-header h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #23425d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.no-detections {
+    color: #90a4ae;
+    font-size: 13px;
+    text-align: center;
+    padding: 24px 0;
+}
+
+.detection-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eceff1;
+}
+
+.detection-item:last-child {
+    border-bottom: none;
+}
+
+.detection-icon {
+    font-size: 24px;
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.detection-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.detection-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #37474f;
+}
+
+.detection-confidence {
+    font-size: 12px;
+    color: #90a4ae;
+}
+
+.detection-bar {
+    height: 4px;
+    background: #eceff1;
+    border-radius: 2px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.detection-bar-fill {
+    height: 100%;
+    background: #29a3d9;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* ── Status text ────────────────────────────────────────── */
+
+#status-text {
+    font-size: 14px;
+    color: #607d8b;
+}
+
+/* ── Error ──────────────────────────────────────────────── */
+
+#error-container {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #ffebee;
+    color: #c62828;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 800px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .card-results {
+        width: 100%;
+        max-height: none;
+    }
+
+    header {
+        padding: 16px 20px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+}

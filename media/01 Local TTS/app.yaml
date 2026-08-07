@@ -1,0 +1,6 @@
+name: 01 - Text-to-Speech
+python:
+  entry: python/main.py
+bricks:
+- robot_shield: {}
+- sunfounder_tts: {}

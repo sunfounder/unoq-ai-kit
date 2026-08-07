@@ -1,0 +1,8 @@
+name: 03 Face Alarm
+description: Sound a buzzer alarm when a face is detected — AI meets hardware
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: face-detection
+- arduino:web_ui: {}
+icon: 🚨

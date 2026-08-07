@@ -1,0 +1,5 @@
+name: 02 Button-Controlled Light
+description: Press a button to turn on an LED — your first interactive circuit
+ports: []
+bricks: []
+icon: 🔘

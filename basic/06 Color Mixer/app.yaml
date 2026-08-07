@@ -1,0 +1,5 @@
+name: 06 Color Mixer
+description: Mix millions of colors with an RGB LED and three PWM channels
+ports: []
+bricks: []
+icon: 🎨

@@ -1,0 +1,11 @@
+name: 03 AI Voice Vision Assistant V7
+description: Live camera, voice conversation, cloud vision, and voice-controlled LED
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: face-detection
+- arduino:web_ui: {}
+- arduino:cloud_llm:
+    variables:
+      API_KEY: ""
+icon: 🤖

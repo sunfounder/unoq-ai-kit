@@ -1,0 +1,5 @@
+name: 01 Hello LED
+description: Blink an external LED connected to pin 5 — the "Hello World" of electronics
+ports: []
+bricks: []
+icon: 💡

@@ -1,0 +1,5 @@
+name: 12 Thermistor-Controlled Fan
+description: Automatically adjusts fan speed based on temperature
+ports: []
+bricks: []
+icon: 🌪️

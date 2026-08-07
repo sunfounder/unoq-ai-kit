@@ -1,0 +1,9 @@
+name: 07 Voice-Controlled Pan-Tilt
+description: Control the pan-tilt with voice commands and receive spoken feedback
+python:
+  entry: python/main.py
+bricks:
+- robot_shield: {}
+- sunfounder_stt: {}
+- sunfounder_tts: {}
+icon: 🎤

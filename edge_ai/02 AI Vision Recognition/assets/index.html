@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vision Recognition</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Vision Recognition</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="main-layout">
+            <!-- Camera feed card -->
+            <div class="card card-video">
+                <div class="status-row">
+                    <span class="status-indicator" id="status-dot"></span>
+                    <span class="status-label" id="status-label">Connecting</span>
+                </div>
+
+                <div class="camera-container">
+                    <div id="video-placeholder" class="video-placeholder">
+                        <div class="camera-icon">📷</div>
+                        <p>Searching for camera...</p>
+                    </div>
+                    <iframe id="camera-stream" title="Camera" frameborder="0"
+                            allow="autoplay" style="display: none;"></iframe>
+                </div>
+
+                <p id="status-text">Live object detection</p>
+                <p id="error-container"></p>
+            </div>
+
+            <!-- Detection results card -->
+            <div class="card card-results">
+                <div class="results-header">
+                    <h2>Detected Objects</h2>
+                </div>
+                <div id="detections-list">
+                    <div class="no-detections">
+                        <p>Point the camera at a cup, person, or cell phone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

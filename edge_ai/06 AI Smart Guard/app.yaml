@@ -1,0 +1,7 @@
+name: 06 AI Smart Guard
+description: Full security system — detects intruders and triggers alarm + voice alert
+ports: []
+bricks:
+- arduino:video_object_detection: {}
+- arduino:web_ui: {}
+icon: 🛡️

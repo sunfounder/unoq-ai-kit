@@ -1,0 +1,9 @@
+name: 01 AI Light Control
+description: Talk to an RGB LED in natural language — the LLM understands your intent
+ports: []
+bricks:
+- arduino:web_ui: {}
+- arduino:cloud_llm:
+    variables:
+      API_KEY: ""
+icon: 💬

@@ -1,0 +1,8 @@
+name: 01 AI Camera Basics
+description: Display the CSI camera feed — your first step into Edge AI
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: face-detection
+- arduino:web_ui: {}
+icon: 📷

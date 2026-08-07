@@ -1,0 +1,5 @@
+name: 03 Tilt Alarm
+description: Sound an alarm when tilted — tilt switch + active buzzer
+ports: []
+bricks: []
+icon: 🚨

@@ -1,0 +1,5 @@
+name: 04 Photoresistor Night Light
+description: Automatically lights up LEDs when it gets dark
+ports: []
+bricks: []
+icon: 🌙

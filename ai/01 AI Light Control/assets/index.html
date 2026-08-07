@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Light Control</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Light Control</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="status-dot"></span>
+                <span class="status-label" id="status-label">Connecting</span>
+            </div>
+
+            <!-- Color preview -->
+            <div id="color-preview" class="color-preview off"></div>
+            <p id="color-name">Off</p>
+
+            <!-- Chat -->
+            <div id="chat-box" class="chat-box">
+                <div class="msg bot">Welcome!<br>Ask AI to control the RGB LED.</div>
+            </div>
+
+            <!-- Input area -->
+            <textarea id="command-input"
+                      placeholder="Try: Turn the light red"
+                      rows="3" autocomplete="off"></textarea>
+            <button id="send-btn">Send</button>
+
+            <p class="core-concept">AI converts natural language into hardware commands.</p>
+
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

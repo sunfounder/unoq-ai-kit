@@ -1,0 +1,7 @@
+name: 08 Camera Snapshot
+description: Press an external button to capture and save a photo
+python:
+  entry: python/main.py
+bricks:
+- robot_shield: {}
+icon: 📷

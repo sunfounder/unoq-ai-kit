@@ -1,0 +1,6 @@
+name: 02 UI Control RGB LED
+description: Control an RGB LED color via a web color picker
+ports: []
+bricks:
+- arduino:web_ui: {}
+icon: 🎨

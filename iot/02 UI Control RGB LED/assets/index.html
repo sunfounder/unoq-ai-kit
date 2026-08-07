@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Control RGB LED</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>UI Control RGB LED</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="status-dot"></span>
+                <span class="status-label" id="status-label">Ready</span>
+            </div>
+
+            <!-- Color wheel -->
+            <div class="wheel-container">
+                <canvas id="color-wheel" width="240" height="240"></canvas>
+                <div class="wheel-indicator" id="wheel-indicator"></div>
+            </div>
+
+            <!-- Brightness slider -->
+            <div class="slider-row">
+                <span class="slider-icon">☀</span>
+                <input type="range" id="brightness-slider" min="0" max="100" value="100">
+            </div>
+
+            <!-- Current color info -->
+            <p id="rgb-values">R: 0 &nbsp;&nbsp; G: 0 &nbsp;&nbsp; B: 0</p>
+            <p id="hex-value">#000000</p>
+
+            <p id="status-text">Drag the color wheel to control the RGB LED</p>
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

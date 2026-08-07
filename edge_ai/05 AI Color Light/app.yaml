@@ -1,0 +1,7 @@
+name: 05 AI Color Light
+description: Detect objects and display a matching color on an RGB LED
+ports: []
+bricks:
+- arduino:video_object_detection: {}
+- arduino:web_ui: {}
+icon: 💡

@@ -1,0 +1,5 @@
+name: 13 Joystick Servo
+description: Control two servos (pan & tilt) with a joystick — push to reset
+ports: []
+bricks: []
+icon: 🕹️

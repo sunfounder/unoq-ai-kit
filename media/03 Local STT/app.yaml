@@ -1,0 +1,8 @@
+name: 01 Local STT Auto Listen
+description: Automatically records speech and prints local STT results
+python:
+  entry: python/main.py
+bricks:
+- robot_shield: {}
+- sunfounder_stt: {}
+icon: 🎤

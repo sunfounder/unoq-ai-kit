@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Vision Assistant</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+        <div>
+            <h1>AI Voice Vision Assistant</h1>
+            <p>Live Camera · Speech-to-Text · Cloud Vision · Text-to-Speech</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="card camera-card">
+            <div class="card-heading">
+                <div>
+                    <h2>Camera</h2>
+                    <p id="camera-status-text">Live camera preview</p>
+                </div>
+                <button id="camera-toggle" class="camera-toggle on" type="button">
+                    Camera ON
+                </button>
+            </div>
+
+            <div class="camera-container">
+                <div id="video-placeholder" class="video-placeholder">
+                    <div class="camera-icon">📷</div>
+                    <p id="placeholder-text">Searching for camera...</p>
+                </div>
+
+                <iframe
+                    id="camera-stream"
+                    title="Live camera stream"
+                    frameborder="0"
+                    allow="autoplay"
+                    style="display: none;">
+                </iframe>
+            </div>
+
+            <p class="camera-hint">
+                Keep the camera on, then ask “What do you see?”
+            </p>
+        </section>
+
+        <section class="card assistant-card">
+            <div class="connection">
+                <span id="status-dot" class="status-indicator"></span>
+                <span id="status-label">Connecting</span>
+            </div>
+
+            <div id="status-panel" class="status-panel">
+                <strong id="status-title">Connecting...</strong>
+                <span id="status-message">Waiting for the app.</span>
+            </div>
+
+            <button id="talk-button" type="button" disabled>
+                <span class="mic">🎤</span>
+                <span id="button-label">Hold to Speak</span>
+            </button>
+
+            <section class="conversation">
+                <article class="message user">
+                    <div class="message-label">You said</div>
+                    <div id="heard-text">Your speech will appear here.</div>
+                </article>
+
+                <article class="message assistant">
+                    <div class="message-label">AI reply</div>
+                    <div id="reply-text">The AI response will appear here.</div>
+                </article>
+            </section>
+
+            <div class="device-row">
+                <div>
+                    <strong>LED on D5</strong>
+                    <span>Controlled only by voice</span>
+                </div>
+                <span id="led-indicator" class="led-indicator"></span>
+            </div>
+
+            <p id="error-container"></p>
+
+            <p class="hint">
+                Try “Turn on the LED”, “Turn off the LED”, or “What do you see?”
+            </p>
+        </section>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

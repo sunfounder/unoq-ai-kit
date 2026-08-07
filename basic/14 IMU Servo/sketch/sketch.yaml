@@ -1,0 +1,9 @@
+profiles:
+  default:
+    platforms:
+      - platform: arduino:zephyr
+    libraries:
+      - SunFounder_IMU (1.1.2)
+      - RobotShield (1.0.4)
+
+default_profile: default
