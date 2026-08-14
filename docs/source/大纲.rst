@@ -59,7 +59,7 @@ UNO Q AIoT学习套件课程大纲
 ● 理解数字信号、模拟信号、PWM 的区别和应用场景
 
 
-模块B：UI / Arduino Cloud / IoT 应用（7课）
+模块C：UI / Arduino Cloud / IoT 应用（7课）
 模块主题：构建物联网与远程控制应用
 学习使用 Arduino App Lab UI 与 Arduino Cloud，实现设备远程控制、数据上传和可视化展示。
 课程内容
@@ -78,6 +78,219 @@ UNO Q AIoT学习套件课程大纲
 7. Telegram Bot 控制设备使用 Telegram 机器人远程读取传感器数据并控制设备。
 
 8. 用OpenCV,检测到什么颜色，就显示什么颜色
+05 Sensor Data Dashboard
+
+**目标：**学习如何把 UNO Q 采集的传感器数据实时发送到网页，并通过图表观察变化趋势。
+
+我建议用光敏传感器，因为变化非常直观——用手遮住、拿开就能马上看到曲线变化。
+
+效果：
+
+Light Monitor
+
+Current Light Level
+        68 %
+
+100 ┤
+ 80 ┤       ╭────╮
+ 60 ┤   ╭───╯    ╰──
+ 40 ┤───╯
+ 20 ┤
+  0 └──────────────────
+      0   10   20   30 s
+
+● Live
+
+主要知识点：
+
+Analog Sensor
+      ↓
+Arduino Sketch
+      ↓
+Bridge
+      ↓
+Python
+      ↓
+Web UI
+      ↓
+Real-time Chart
+
+这一课重点不是“读取光敏传感器”，而是第一次引入 real-time data visualization。
+
+06 Camera Basics
+
+这个保持你现在已经做好的基础项目。
+
+**目标：**学习如何获取 UNO Q Camera 画面，并在浏览器中实时显示。
+
+Camera
+   ↓
+UNO Q
+   ↓
+Web Browser
+   ↓
+Live View
+
+这一课不要塞太多功能，因为它实际上是在为下一课铺路。
+
+07 IoT Security Monitor
+
+这个可以作为 Camera Basics 的综合升级项目。
+
+**目标：**使用摄像头和传感器制作一个简单的家庭安全监控系统。
+
+建议硬件：
+
+Camera
+PIR Motion Sensor
+Passive Buzzer
+LED
+
+如果套件里 PIR 不合适，也可以换成超声波传感器做 proximity detection。
+
+网页：
+
+        SECURITY MONITOR
+
+┌──────────────────────────────┐
+│                              │
+│          LIVE CAMERA         │
+│                              │
+└──────────────────────────────┘
+
+● MONITORING
+
+Motion Status       No Motion
+Alarm               OFF
+
+Recent Events
+
+14:21:08    Motion detected
+14:21:15    Area clear
+14:26:32    Motion detected
+
+检测到运动：
+
+PIR detects motion
+        ↓
+Web UI → MOTION DETECTED
+        ↓
+LED ON
+        ↓
+Buzzer alarm
+        ↓
+Add event + timestamp
+
+这里第一次让学生接触：
+
+Monitoring + Detection + Alarm + Event Log
+
+完成以后，Camera Basics 的意义也会更明确：前一课学“摄像头”，这一课学“摄像头可以拿来做什么”。
+
+08 Smart Doorbell
+
+这个和 Security Monitor 看起来有点接近，但核心概念其实不同。
+
+Security Monitor 是：
+
+系统主动检测
+
+Smart Doorbell 是：
+
+用户触发一个 IoT Event
+
+硬件：
+
+Push Button
+Camera
+Buzzer
+
+访客按下按钮：
+
+Doorbell Button
+      ↓
+   UNO Q
+      ↓
+┌─────────────────────────┐
+│ 🔔 Someone is at        │
+│    the door!            │
+│                         │
+│     LIVE CAMERA         │
+│                         │
+│ 15:32:18 Doorbell       │
+└─────────────────────────┘
+
+可以设计：
+
+按下实体按钮 → 蜂鸣器“叮咚”
+网页显示 Someone is at the door!
+Camera 显示访客
+记录 Doorbell 时间
+几秒后通知状态自动恢复
+
+主要知识：
+
+Physical Event → UNO Q → Web Notification
+
+不过这一课我建议先记着，后面真正写课程时再决定是否保留。因为它和 Security Monitor 都用了 Camera，连续两课可能稍微重复。
+
+09 Telegram IoT Bot
+
+这个我觉得很值得加入，而且和前面所有项目都不一样。
+
+它第一次让 UNO Q 真正和互联网服务通信，而不是只在本地网页或者 Arduino Cloud 中交互。
+
+最简单的版本不要一开始做得太复杂。
+
+例如：
+
+User → Telegram
+
+/status
+   ↓
+UNO Q
+   ↓
+Telegram:
+
+🌡 Temperature: 25.6 °C
+💧 Humidity: 57 %
+💡 LED: OFF
+
+还可以：
+
+/led_on
+/led_off
+
+实现：
+
+Telegram
+   ↓
+Internet
+   ↓
+UNO Q Python
+   ↓
+Bridge
+   ↓
+Arduino
+   ↓
+LED
+
+这样学生会非常直观地理解：
+
+我在手机上发一条 Telegram 消息，家里的 UNO Q 就可以执行操作。
+
+后面甚至可以把它和 Security Monitor 联系起来：
+
+Motion detected
+       ↓
+UNO Q
+       ↓
+Telegram Bot
+       ↓
+📱 手机收到
+
+⚠️ Motion detected!
+Time: 14:32:18
 
 学习成果
 完成本模块后，学习者可以：
@@ -86,7 +299,7 @@ UNO Q AIoT学习套件课程大纲
 ● 开发基础 IoT 应用系统
 
 
-模块C：多媒体交互（6课）
+模块B：多媒体交互（6课）
 --------------------------
 
 模块主题：使用 Multimedia Carrier 的麦克风和喇叭，实现语音识别（STT）、语音合成（TTS）以及语音控制硬件。

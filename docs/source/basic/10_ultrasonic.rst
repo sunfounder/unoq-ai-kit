@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-09 Ultrasonic Radar
+10 Ultrasonic Radar
 =====================
 
 Bats fly in complete darkness without crashing — they emit high-pitched sounds and listen for the echoes to "see" their surroundings. In this lesson, you'll use the same principle with an **ultrasonic sensor** (HC-SR04) to build a parking radar: it measures how far away an object is and beeps faster as you get closer. No more crashing into things — your circuit now has sonar.
@@ -42,37 +42,19 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   The HC-SR04 has four pins — **VCC** (5V), **Trig** (trigger), **Echo**, and **GND**. The two middle pins (Trig and Echo) are the ones you connect to the UNO Q's digital pins. If your sensor has a small jumper cap on the back, leave it in place — it configures the operating mode. The active buzzer has polarity: the pin marked **+** goes to pin 5, **−** to GND.
+   The HC-SR04 has four pins — **VCC** (3.3V), **Trig** (trigger), **Echo**, and **GND**. The two middle pins (Trig and Echo) are the ones you connect to the UNO Q's digital pins. If your sensor has a small jumper cap on the back, leave it in place — it configures the operating mode. The active buzzer has polarity: the pin marked **+** goes to pin 5, **−** to GND.
 
 **Wiring Diagram**
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_ultrasonic.png
+.. image:: /img/wiring/wiring_ultrasonic.png
    :width: 500
    :align: center
 
 .. warning::
 
    Swapping Trig and Echo is the most common wiring mistake with the HC-SR04. Remember: **Trig → pin 3**, **Echo → pin 2**. If the sensor always reports "Out of range," check these two wires first before anything else.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/8_ultrasonic_schematic.png
-   :width: 500
-   :align: center
-
-The ultrasonic sensor works by sending out a burst of 40 kHz sound waves (inaudible to humans) and timing how long the echo takes to return. The code triggers a measurement with a short pulse on the Trig pin, then measures the echo duration on the Echo pin:
-
-  **Trig pin → 10 µs HIGH pulse → sensor emits 8 ultrasonic bursts**
-
-  **Echo pin → goes HIGH → sound travels out, bounces off object, returns → Echo goes LOW**
-
-  **Distance = (echo duration in µs) × 0.0343 ÷ 2**
-
-The factor 0.0343 is the speed of sound in cm/µs. Dividing by 2 accounts for the round trip — the sound travels to the object and back.
 
 2. Code
 ----------
@@ -83,21 +65,21 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``09 Ultrasonic Radar.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``10 Ultrasonic Radar.zip``. The app appears in **My Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -291,7 +273,7 @@ Try changing the distance thresholds and observe how the radar responds:
 **Distance always shows "Out of range"**
 
 * **Cause:** The Trig and Echo pins are swapped, or the module isn't receiving power.
-* **Solution:** Double-check: Trig → pin 3, Echo → pin 2, VCC → 5V, GND → GND. Swapping Trig and Echo is the most common wiring mistake with this sensor. Also verify the breadboard power rails are connected.
+* **Solution:** Double-check: Trig → pin 3, Echo → pin 2, VCC → 3.3V, GND → GND. Swapping Trig and Echo is the most common wiring mistake with this sensor. Also verify the breadboard power rails are connected.
 
 **Distance readings are consistently too high or too low**
 

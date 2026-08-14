@@ -42,35 +42,19 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   The 220Ω resistors have color bands **Red → Red → Brown → Gold**. The photoresistor is the small disk with a wavy pattern on top — it has no polarity, so one leg to 5V and the other to analog pin. Its resistance drops when light hits it: bright light → low resistance → higher voltage at A0 → higher ``analogRead()`` value.
+   The 220Ω resistors have color bands **Red → Red → Brown → Gold**. The photoresistor is the small disk with a wavy pattern on top — it has no polarity, so one leg to 3.3V and the other to analog pin. Its resistance drops when light hits it: bright light → low resistance → higher voltage at A0 → higher ``analogRead()`` value.
 
 **Wiring Diagram**
 
 Follow the diagram below to place each component on the breadboard and connect the wires. Pay special attention to the four LEDs — each needs its own 220Ω resistor in series, and they share a common GND rail.
 
-.. image:: img/wiring_photoresistor_led.png
+.. image:: /img/wiring/wiring_photoresistor_led.png
    :width: 500
    :align: center
 
 .. warning::
 
    Each LED must have its **own** 220Ω resistor. Never connect multiple LEDs to a single resistor — the LEDs will share current unevenly and may burn out. Also, double-check that each LED's long leg (anode) goes toward its digital pin and the short leg (cathode) goes toward GND.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/sche_5_photo_led.png
-   :width: 500
-   :align: center
-
-The photoresistor and a fixed resistor form a **voltage divider** — the same principle you'll use with the potentiometer in Lesson 5, except the photoresistor changes resistance automatically based on light instead of manually with a knob. The voltage at A0 tells the board how bright the room is:
-
-  **Bright room → photoresistor resistance drops → higher voltage at A0 → high analogRead() value**
-
-  **Dark room → photoresistor resistance rises → lower voltage at A0 → low analogRead() value**
-
-The code reads this voltage and lights up more LEDs when it's bright, fewer when it's dark — like a light meter. (To reverse this — dark → more LEDs, like a night light — swap the photoresistor with the fixed resistor in the circuit.)
 
 2. Code
 ----------
@@ -81,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -95,7 +79,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -276,13 +260,13 @@ A real night light should turn **off** during the day and only activate at night
 
 **Only 1 LED lights up, or no LEDs in a dim room**
 
-* **Cause:** This is expected behavior — with the photoresistor connected to 5V, bright light produces a higher ``analogRead()`` value and lights more LEDs. In a dark room, the reading is low and fewer LEDs turn on.
-* **Solution:** Shine a flashlight directly on the photoresistor — all 4 LEDs should light up. If you want the opposite behavior (dark → more LEDs, like a real night light), swap the photoresistor and fixed resistor: connect the photoresistor between A0 and GND, and the fixed resistor between 5V and A0.
+* **Cause:** This is expected behavior — with the photoresistor connected to 3.3V, bright light produces a higher ``analogRead()`` value and lights more LEDs. In a dark room, the reading is low and fewer LEDs turn on.
+* **Solution:** Shine a flashlight directly on the photoresistor — all 4 LEDs should light up. If you want the opposite behavior (dark → more LEDs, like a real night light), swap the photoresistor and fixed resistor: connect the photoresistor between A0 and GND, and the fixed resistor between 3.3V and A0.
 
 **All 4 LEDs stay on all the time**
 
 * **Cause:** The photoresistor circuit has a short or the wrong resistor is installed, always reading maximum value.
-* **Solution:** Check that the fixed resistor from A0 to GND is installed (usually 10kΩ — Brown-Black-Orange). Without it, A0 floats near 5V and always reads high. Also check for loose jumper wires.
+* **Solution:** Check that the fixed resistor from A0 to GND is installed (usually 10kΩ — Brown-Black-Orange). Without it, A0 floats near 3.3V and always reads high. Also check for loose jumper wires.
 
 **Some LEDs never turn on**
 

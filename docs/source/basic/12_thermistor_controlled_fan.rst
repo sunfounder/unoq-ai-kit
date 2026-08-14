@@ -5,7 +5,7 @@
 12 Thermistor-Controlled Fan
 ==============================
 
-You've controlled a motor manually (Lesson 7) and sensed temperature digitally (Lesson 10). Now you'll connect the two to build an **automatic cooling system**: a temperature sensor that reads the room, and a fan that spins faster as it gets warmer — all without any human input. This is how your laptop's cooling fan, your car's radiator fan, and industrial temperature controllers work.
+You've controlled a motor manually and sensed temperature digitally in earlier lessons. Now you'll connect the two to build an **automatic cooling system**: a temperature sensor that reads the room, and a fan that spins faster as it gets warmer — all without any human input. This is how your laptop's cooling fan, your car's radiator fan, and industrial temperature controllers work.
 
 In this lesson, you will learn to:
 
@@ -42,35 +42,19 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   The thermistor is the small black bead with two leads — it looks like a tiny capacitor. It has **no polarity**, so either lead can go to GND. The 10kΩ resistor has color bands **Brown → Black → Orange → Gold**. Together, the thermistor and the 10kΩ resistor form a **voltage divider** — the same principle as the potentiometer in Lesson 4, except the thermistor changes resistance automatically with temperature, not manually with a knob.
+   The thermistor is the small black bead with two leads — it looks like a tiny capacitor. It has **no polarity**, so either lead can go to GND. The 10kΩ resistor has color bands **Brown → Black → Orange → Gold**. Together, the thermistor and the 10kΩ resistor form a **voltage divider** — the same principle as the potentiometer you used earlier, except the thermistor changes resistance automatically with temperature, not manually with a knob.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires. The motor connects to the Robot Shield's **M0** terminal, and the thermistor connects between A0 and GND, and the 10kΩ resistor connects between A0 and 5V.
+Follow the diagram below to place each component on the breadboard and connect the wires. The motor connects to the Robot Shield's **M0** terminal, and the thermistor connects between A0 and GND, and the 10kΩ resistor connects between A0 and 3.3V.
 
-.. image:: img/wiring_thermistor_fan.png
+.. image:: /img/wiring/wiring_thermistor_fan.png
    :width: 600
    :align: center
 
 .. warning::
 
    The thermistor bead is fragile — avoid bending the leads repeatedly at the body.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/sche_12_thermistor_fan.png
-   :width: 500
-   :align: center
-
-The NTC (Negative Temperature Coefficient) thermistor's resistance **decreases** as temperature rises. The 10kΩ fixed resistor and the thermistor form a voltage divider — as the thermistor's resistance changes, the voltage at 0 changes proportionally. The code reads this voltage, converts it to a temperature, and adjusts the motor accordingly:
-
-  **Cold room → high thermistor resistance → low voltage at 0 → low analogRead() → motor OFF**
-
-  **Warm room → medium thermistor resistance → medium voltage at 0 → motor at partial speed**
-
-  **Hot room → low thermistor resistance → high voltage at 0 → high analogRead() → motor at FULL speed**
 
 2. Code
 ----------
@@ -81,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -99,7 +83,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
    
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -155,7 +139,7 @@ Now that you've seen the automatic cooling system respond to your body heat, let
        } else if (tempC > 50) {
            power = 100;                     // Above 50°C: fan at MAX
        } else {
-           power = map((int)tempC, 25, 50, 0, 100);  // Smooth range
+           power = map((int)tempC, 25, 50, 20, 100);  // Smooth range
        }
 
        motor.setPower(power);
@@ -239,7 +223,7 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
       } else if (tempC > 50) {
           power = 100;
       } else {
-          power = map((int)tempC, 25, 50, 0, 100);
+          power = map((int)tempC, 25, 50, 20, 100);
       }
 
       motor.setPower(power);
@@ -324,12 +308,12 @@ Reverse the system: make the motor spin when the temperature is **below** a thre
 **Motor does not spin, even when the thermistor feels warm**
 
 * **Cause:** The temperature isn't exceeding 25°C, or the thermistor circuit is wired incorrectly.
-* **Solution:** Check the battery connection. Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and 0, 10kΩ resistor between 0 and 5V.
+* **Solution:** Check the battery connection. Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and 0, 10kΩ resistor between 0 and 3.3V.
 
 **Temperature readings are way off (0°C, 100°C, or negative)**
 
 * **Cause:** The thermistor and resistor are swapped in the voltage divider, or the wrong resistor value is used.
-* **Solution:** The thermistor should connect GND → 0, and the 10kΩ resistor should connect 0 → 5V. Swapping them inverts the voltage divider behavior. Double-check the resistor is 10kΩ (Brown-Black-Orange), not 220Ω (Red-Red-Brown).
+* **Solution:** The thermistor should connect GND → 0, and the 10kΩ resistor should connect 0 → 3.3V. Swapping them inverts the voltage divider behavior. Double-check the resistor is 10kΩ (Brown-Black-Orange), not 220Ω (Red-Red-Brown).
 
 **Temperature changes very slowly or not at all**
 

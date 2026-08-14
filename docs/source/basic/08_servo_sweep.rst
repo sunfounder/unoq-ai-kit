@@ -33,29 +33,13 @@ In this lesson, you will learn to:
 
 The Pan Tilt Kit is already assembled. Connect the servo to channel 0 on the Robot Shield's servo header.
 
-.. image:: img/wiring_servo.png
+.. image:: /img/wiring/wiring_servo.png
    :width: 500
    :align: center
 
 .. warning::
 
    Never force the servo horn by hand while it's powered — the internal gears can strip.
-
-**Circuit Diagram**
-
-Inside the servo, a small DC motor, a gear train, and a potentiometer work together in a closed-loop system — the servo reads its own position and adjusts until it matches the commanded angle.
-
-.. image:: img/sche_8_servo.png
-   :width: 500
-   :align: center
-
-Unlike the DC motor from Lesson 7 (which spins continuously), a servo moves to a specific position and stops. The Robot Shield sends a PWM signal to the servo's signal wire — the pulse width encodes the desired angle, and the servo's internal electronics do the rest:
-
-  **Short pulse → servo rotates toward -90°**
-
-  **Medium pulse → servo centers at 0°**
-
-  **Long pulse → servo rotates toward +90°**
 
 2. Code
 ----------
@@ -66,13 +50,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -84,7 +68,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
    
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -210,7 +194,7 @@ The servo is your first **positional actuator** — instead of setting a speed, 
    :widths: 30 35 35
 
    * - Feature
-     - DC Motor (Lesson 7)
+     - DC Motor (used earlier)
      - Servo (This Lesson)
    * - Movement
      - Continuous rotation
@@ -274,7 +258,7 @@ Instead of a smooth sweep, make the servo snap quickly between two positions —
 
 **Challenge: Knob-Controlled Servo**
 
-Connect a potentiometer (Lesson 4) to A2 and use it to control the servo angle in real time — turn the knob, the servo follows. This is how RC car steering and volume knobs on audio equipment work.
+Connect a potentiometer (used in the Analog Input lesson) to A2 and use it to control the servo angle in real time — turn the knob, the servo follows. This is how RC car steering and volume knobs on audio equipment work.
 
 .. dropdown:: Click to reveal solution
    :open:
@@ -348,4 +332,4 @@ Your robot just gained a joint! Servos bring precision and control to motion —
 * How a servo holds its position using an internal potentiometer feedback loop
 * How to map an analog input (potentiometer) directly to servo angle — the foundation of remote control
 
-In the next lesson, you'll combine the servo with a joystick — dual-axis analog input for intuitive, two-dimensional control. Where the joystick points, the servo follows.
+In the next lesson, you'll return to the potentiometer — but this time using it to shift the pitch of a melody played through a passive buzzer.

@@ -15,6 +15,7 @@ The Arduino UNO Q unlocks a new level of performance for the Arduino ecosystem, 
 
 The board can be programmed using **Arduino App Lab**, which provides an integrated environment for developing hybrid applications. Users can also develop MCU-side programs using the **Arduino IDE** when needed.
 
+* |link_unoq_manual|
 
 Pinout
 ---------------
@@ -283,10 +284,3 @@ These connectors are designed to work with dedicated **UNO Q carrier boards**, s
 
 This expansion interface enables the UNO Q to support more advanced applications such as multimedia processing and AI-based projects.
 
-UNO Q Resources
-------------------
-
-* |link_unoq_manual|
-* |link_unoq_datasheet|
-* |link_unoq_schematics|
-* |link_unoq_step_files|

@@ -48,27 +48,13 @@ In this lesson, you will learn to:
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_led.png
+.. image:: /img/wiring/wiring_led.png
    :width: 500
    :align: center
 
 .. warning::
 
    Never connect an LED directly between a pin and GND without a resistor. The LED will draw too much current and burn out immediately.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/sche_1_led.png
-   :width: 500
-   :align: center
-
-When pin 5 outputs 5V (HIGH), current flows along this path:
-
-  **Pin 5 → LED anode → LED cathode → 220Ω resistor → GND**
-
-The resistor limits the current to a safe level. When pin 5 outputs 0V (LOW), no current flows and the LED turns off.
 
 2. Code
 ----------
@@ -79,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -97,7 +83,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -122,7 +108,7 @@ Now that you've seen the LED blink, let's look at the sketch file that makes it 
    }
 
    void loop() {
-       digitalWrite(ledPin, HIGH);  // Turn the LED on (5V)
+       digitalWrite(ledPin, HIGH);  // Turn the LED on (3.3V)
        delay(500);                  // Wait half a second
        digitalWrite(ledPin, LOW);   // Turn the LED off (0V)
        delay(500);                  // Wait half a second
@@ -158,7 +144,7 @@ Every Arduino sketch has two functions, and this program follows a simple rhythm
 
 #. The Blink Loop
 
-   - ``digitalWrite(ledPin, HIGH)`` sets the pin to 5V, allowing current to flow through the LED
+   - ``digitalWrite(ledPin, HIGH)`` sets the pin to 3.3V, allowing current to flow through the LED
    - ``delay(500)`` pauses the program for half a second, keeping the LED on
    - ``digitalWrite(ledPin, LOW)`` drops the pin to 0V, stopping the current and turning the LED off
    - Another ``delay(500)`` keeps it off before ``loop()`` runs from the top again

@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-10 Temperature & Humidity Monitor
+11 Temperature & Humidity Monitor
 =================================
 
 So far you've worked with simple sensors — buttons, tilt switches, photoresistors, and ultrasonic modules. Now you'll use your first **digital sensor module**: the DHT11, which measures both **temperature** and **humidity** and communicates readings digitally over a single data pin. The sensor does the hard work of converting physical conditions into numbers — you just call a function and get the answer. This is also your first lesson using an **external library** to talk to a sensor.
@@ -45,27 +45,13 @@ In this lesson, you will learn to:
 
 Follow the diagram below to place each component on the breadboard and connect the wires. The DHT11 module has three pins — the labels on the PCB tell you exactly where each wire goes.
 
-.. image:: img/wiring_dht11.png
+.. image:: /img/wiring/wiring_dht11.png
    :width: 500
    :align: center
 
 .. warning::
 
-   Double-check the DHT11's pin labels before powering on. **VCC → 5V**, **DATA → pin 2**, **GND → GND**. Connecting VCC to 3.3V instead of 5V will cause unreliable readings. Also, the DHT11 needs about 1 second to stabilize after power-on — don't expect valid readings immediately.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/7_dht11_schematic.png
-   :width: 500
-   :align: center
-
-The DHT11 uses a **single-wire communication protocol** — a single data pin carries all the information. The sensor sends 40 bits of data (humidity integer, humidity decimal, temperature integer, temperature decimal, checksum) as a series of precisely timed pulses. The DHT library decodes these pulses for you automatically:
-
-  **Pin 2 sends a start signal → DHT11 responds → transmits 40 bits as timed pulses → library decodes into temperature and humidity values**
-
-You never need to decode the pulses yourself — ``dht.readTemperature()`` and ``dht.readHumidity()`` handle all of it.
+   Double-check the DHT11's pin labels before powering on. **VCC → 3.3V**, **DATA → pin 2**, **GND → GND**. Also, the DHT11 needs about 1 second to stabilize after power-on — don't expect valid readings immediately.
 
 2. Code
 ----------
@@ -76,17 +62,17 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``10 Temperature & Humidity Monitor.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``11 Temperature & Humidity Monitor.zip``. The app appears in **My Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
@@ -94,7 +80,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
    
       This project uses the **DHT sensor library** and **Adafruit Unified Sensor**. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -237,7 +223,7 @@ This lesson introduces the ``millis()`` non-blocking timer — one of the most i
 
 **Why Non-Blocking Timing Matters**
 
-In Lesson 1, you used ``delay(500)`` to blink an LED. During those 500 milliseconds, the board does **nothing else** — no button checks, no sensor readings, no Serial output. The DHT11 requires at least 2 seconds between readings. Compare the two approaches:
+In the first lesson, you used ``delay(500)`` to blink an LED. During those 500 milliseconds, the board does **nothing else** — no button checks, no sensor readings, no Serial output. The DHT11 requires at least 2 seconds between readings. Compare the two approaches:
 
 .. list-table::
    :header-rows: 1
@@ -292,12 +278,12 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 **Serial Monitor shows "Failed to read from DHT11!" repeatedly**
 
 * **Cause:** The DHT11 is wired incorrectly, the library is not installed, or the sensor needs time to stabilize.
-* **Solution:** Check VCC → 5V, DATA → pin 2, GND → GND. In the Library Manager, verify the **DHT sensor library** is installed. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
+* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. In the Library Manager, verify the **DHT sensor library** is installed. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
 
 **Readings are all zeros or negative values**
 
-* **Cause:** The DHT11 module is receiving insufficient power (connected to 3.3V instead of 5V), or the ``DHTTYPE`` is misconfigured.
-* **Solution:** Make sure VCC is connected to **5V** (not 3.3V). Check that ``#define DHTTYPE DHT11`` matches your sensor — using ``DHT22`` with a DHT11 sensor produces invalid readings.
+* **Cause:** The DHT11 module is not receiving power, or the ``DHTTYPE`` is misconfigured.
+* **Solution:** Make sure VCC is connected to **3.3V**. Check that ``#define DHTTYPE DHT11`` matches your sensor — using ``DHT22`` with a DHT11 sensor produces invalid readings.
 
 **Humidity reading doesn't change or is stuck at 0%**
 

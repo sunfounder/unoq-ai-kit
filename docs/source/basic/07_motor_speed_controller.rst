@@ -35,27 +35,9 @@ In this lesson, you will learn to:
 **Wiring Diagram**
 
 
-.. image:: img/wiring_motor.png
+.. image:: /img/wiring/wiring_motor.png
    :width: 600
    :align: center
-
-.. warning::
-
-**Circuit Diagram**
-
-The Robot Shield's onboard MCU receives commands via I2C from the STM32 and drives the motor through an H-bridge — a circuit that can reverse the voltage polarity to change motor direction.
-
-.. image:: img/sche_7_motor.png
-   :width: 500
-   :align: center
-
-The ``Motor`` class in the code sends commands to the Robot Shield, which handles the power delivery. Inside the Robot Shield, an H-bridge controls both speed (via PWM) and direction (by reversing voltage polarity):
-
-  **Positive power → current flows one way → motor spins forward**
-
-  **Negative power → voltage polarity reversed → motor spins backward**
-
-  **Zero power → H-bridge shorts motor terminals → motor brakes (stops quickly)**
 
 2. Code
 ----------
@@ -66,13 +48,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -84,7 +66,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -164,7 +146,7 @@ This lesson introduces the ``Motor`` class — a completely new kind of output. 
 
    - After starting the Serial Monitor and I2C bus, ``motor.begin()`` initializes the motor driver
    - This must be called in ``setup()`` before you can use ``setPower()``
-   - This follows the same initialization pattern used with the ``Pwm`` class in Lesson 5
+   - This follows the same initialization pattern used earlier with the ``Pwm`` class for PWM output
 
    .. code-block:: arduino
 

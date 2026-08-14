@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-Module C: AI & Large Language Models
+Module E: AI & Large Language Models
 ========================================
 
 In this module, you'll connect your UNO Q to **large language models** (LLMs) like OpenAI's GPT. Instead of writing code to control every detail of your hardware, you'll describe what you want in natural language — and the AI will figure out the rest.

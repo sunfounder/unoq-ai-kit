@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-11 IMU Attitude
+14 IMU Attitude
 ==================
 
 In previous lessons, your sensors communicated through simple voltages. The DHT11 took it a step further with a custom single-wire protocol. Now you'll use **I2C** — a two-wire bus that lets multiple sensors share the same pins. Your IMU packs four sensors into one chip, all talking through I2C: accelerometer (motion), gyroscope (rotation), magnetometer (compass), and barometer (altitude). You'll read all of them at once.
@@ -32,23 +32,13 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-.. image:: img/wiring_imu.png
+.. image:: /img/wiring/wiring_imu.png
    :width: 500
    :align: center
 
 .. warning::
 
    The IMU communicates over the same I2C bus as the Robot Shield. Both can share the bus without conflict — I2C is designed for multiple devices.
-
-**Circuit Diagram**
-
-
-
-The IMU communicates over I2C (Inter-Integrated Circuit) — a two-wire bus where one wire carries the clock signal (SCL) and the other carries data (SDA). Every I2C device has a unique address, so the UNO Q can talk to the IMU, the Robot Shield, and other I2C sensors all on the same two wires:
-
-  **UNO Q → SCL/SDA bus → IMU (accelerometer + gyroscope + magnetometer + barometer)**
-
-The **SunFounder_IMU** library handles the I2C communication — you call ``imu.read()`` and the library queries all four sensors, converts raw data into meaningful units (m/s², deg/s, Gauss, hPa, meters), and returns clean values.
 
 2. Code
 ----------
@@ -57,9 +47,9 @@ The **SunFounder_IMU** library handles the I2C communication — you call ``imu.
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
-#. Open **Arduino App Lab** and import ``11 IMU Calibration.zip`` from the ``unoq-ai-kit/basic/`` folder.
+#. Open **Arduino App Lab** and import ``14 IMU Calibration.zip`` from the ``unoq-ai-kit/basic/`` folder.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 #. Click **Run** (▶) and open the **Serial Monitor** (📊).
@@ -93,7 +83,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 **Step 2: Apply Calibration and Run**
 
-#. Open ``11 IMU Attitude`` in App Lab and navigate to ``sketch/calibration_data.h``.
+#. Open ``14 IMU Attitude`` in App Lab and navigate to ``sketch/calibration_data.h``.
 
 #. Replace the default calibration values with the ones you copied from the calibration step.
 
@@ -351,7 +341,7 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
 **Accelerometer values drift or are inaccurate**
 
 * **Cause:** The sensor is uncalibrated.
-* **Solution:** Run the **11 IMU Calibration** project to generate calibration values for your specific sensor. Copy the output into ``calibration_data.h``. Without calibration, the default values (bias=0, scale=1) should still produce reasonable results — just less precise.
+* **Solution:** Run the **14 IMU Calibration** project to generate calibration values for your specific sensor. Copy the output into ``calibration_data.h``. Without calibration, the default values (bias=0, scale=1) should still produce reasonable results — just less precise.
 
 **I2C bus hangs or freezes**
 
@@ -372,4 +362,4 @@ Congratulations! You've used I2C — the most common communication bus for compl
 * How calibration bias and scale improve sensor accuracy
 * How the SunFounder_IMU library abstracts away complex I2C register reads
 
-In the next lesson, you'll combine a sensor with an actuator — using a thermistor to control a fan speed automatically based on temperature.
+In the next lesson, you'll put your calibrated IMU to work in real time — converting accelerometer data into roll and pitch angles to control two servos with the tilt of your hand, like a camera gimbal or a drone stabilizer.

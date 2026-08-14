@@ -28,7 +28,7 @@ In this lesson, you will learn to:
      - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
    * - |list_pan_tilt|
-     - |list_joystick|
+     - |list_joystick_module|
      - |list_breadboard|
      - |list_wire|
    * - 1 * USB Cable
@@ -42,35 +42,15 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   The Pan Tilt Kit includes the UNO Q, Robot Shield, two servos, camera, battery, and structural parts — already assembled. The joystick module has five pins: VCC and GND power it, VRx and VRy output X and Y positions, and SW is a push button.
+   The Pan Tilt Kit includes the UNO Q, Robot Shield, two servos, camera, battery, and structural parts — already assembled. The joystick module has five pins: VCC and GND power it, VRx and VRy output X and Y positions, and SW is a push button. Connect **VCC to 3.3V** (not 5V) — the UNO Q's analog inputs measure 0–3.3V, and VRx/VRy feed A3/A2.
 
 **Wiring Diagram**
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_joystick_servo.png
+.. image:: /img/wiring/wiring_joystick_servo.png
    :width: 600
    :align: center
-
-.. warning::
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/sche_13_joystick_servo.png
-   :width: 500
-   :align: center
-
-The joystick is two potentiometers at right angles — pushing left/right changes the X-axis voltage, pushing up/down changes the Y-axis voltage. The UNO Q reads these on A2 and A3. The two servos connect to the Robot Shield's servo headers:
-
-  **Joystick X → A3 → code → pan servo (channel 0)**
-
-  **Joystick Y → A2 → code → tilt servo (channel 1)**
-
-  **Joystick button → D2 → press → reset both servos to 0°**
-
-The code uses **incremental control** — each loop adds or subtracts 1° — rather than mapping the stick position directly to an angle. This gives smoother, more deliberate movement with a dead zone to filter out tiny voltage fluctuations when the stick is at rest.
 
 2. Code
 ----------
@@ -81,13 +61,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -99,7 +79,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -289,24 +269,11 @@ The dead zone determines how far you must push the stick before the servos move.
 
 Change ``stepSize`` from 1 to 3 and observe how the servos move faster but less smoothly. Try stepSize = 5 for very fast motion. What's the trade-off between speed and smoothness?
 
-.. dropdown:: Click to reveal solution
-   :open:
+Larger stepSize = faster movement but choppier motion. 
 
-   Larger stepSize = faster movement but choppier motion. At stepSize = 1, the servo moves like a precision instrument. At stepSize = 5, it feels like a video game controller. The ideal value depends on your application — surgical robots use tiny steps, game controllers use larger ones.
-
-**Challenge: Reverse One Axis**
-
-Modify the code so pushing the joystick UP tilts the servo DOWN (like an inverted flight control). Hint: you only need to change one sign in the incremental logic.
-
-.. dropdown:: Click to reveal solution
-   :open:
-
-   Change the pan control line from:
-   ``if (yValue > yCenter + deadZone) panAngle += stepSize;``
-   to:
-   ``if (yValue > yCenter + deadZone) panAngle -= stepSize;``
-
-   (and the opposite for the ``<`` condition). This inverts the Y-axis — common in drone and airplane controls.
+* At stepSize = 1, the servo moves like a precision instrument. 
+* At stepSize = 5, it feels like a video game controller. 
+* The ideal value depends on your application — surgical robots use tiny steps, game controllers use larger ones.
 
 4. Troubleshooting
 --------------------

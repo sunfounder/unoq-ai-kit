@@ -9,3 +9,6 @@
 需要将copy-of-blink-led的内容全部提到\Copy of Blink LED目录下，再重新压缩。
 
 Cloud LLM输入API之后，需要等一分钟左右运行代码，否则又重新让填写
+
+
+Arduino UNO Q的IO口输入输出电流是多少，需要用1K电阻

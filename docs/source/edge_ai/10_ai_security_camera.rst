@@ -52,7 +52,7 @@ Here are the connections to make:
 
 #. Connect the active buzzer: **VCC** to **pin 6**, **GND** to any **GND** pin.
 
-#. Connect the DHT11 module: **VCC** → **5V**, **DATA** → **pin 2**, **GND** → **GND**.
+#. Connect the DHT11 module: **VCC** → **3.3V**, **DATA** → **pin 2**, **GND** → **GND**.
 
 #. All other components (camera, microphone, speaker) are built into the Multimedia Carrier.
 
@@ -272,7 +272,7 @@ Log every security event (detection time, alarm duration, environment readings) 
 
 **Challenge: Email or Telegram Alert**
 
-If your UNO Q is connected to Wi-Fi (Module B), send a Telegram notification when the alarm triggers. Combine the AI security pipeline from this lesson with the IoT skills from Module B.
+If your UNO Q is connected to Wi-Fi (Module C), send a Telegram notification when the alarm triggers. Combine the AI security pipeline from this lesson with the IoT skills from Module C.
 
 4. Troubleshooting
 --------------------
@@ -308,6 +308,6 @@ Congratulations! You've built a complete AI security camera — the most complex
 * Text-to-Speech for audible alerts
 * Environmental monitoring as a background task
 
-This project demonstrates what's possible when you combine the hardware skills from Module A, the connectivity options from Module B, the LLM integration from Module C, and the edge AI capabilities from Module D.
+This project demonstrates what's possible when you combine the hardware skills from Module A, the multimedia capabilities from Module B, the connectivity options from Module C, the edge AI capabilities from Module D, and the LLM integration from Module E.
 
 You've come a long way from blinking an LED. Your UNO Q can now see, hear, speak, track, monitor, and respond — a truly intelligent device, built by you.

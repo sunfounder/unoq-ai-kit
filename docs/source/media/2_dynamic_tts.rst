@@ -51,9 +51,9 @@ This project uses the following App Lab Bricks and libraries:
 
 **Wiring Diagram**
 
-Connect the DHT11: VCC to 5V, DATA to pin 2, GND to GND.
+Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND.
 
-.. image:: img/wiring_dht11.png
+.. image:: /img/wiring/wiring_dht11.png
    :width: 500
    :align: center
 
@@ -198,7 +198,7 @@ Change the f-string to make the announcement sound different:
 **"Failed to read from the DHT11 sensor"**
 
 * **Cause:** The DHT11 is wired incorrectly, or the library is missing.
-* **Solution:** Check connections: VCC→5V, DATA→D2, GND→GND. Install the DHT sensor library if prompted.
+* **Solution:** Check connections: VCC→3.3V, DATA→D2, GND→GND. Install the DHT sensor library if prompted.
 
 **No sound from the speaker**
 

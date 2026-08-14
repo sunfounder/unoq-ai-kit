@@ -2,10 +2,10 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-05 Variable Pitch Melody
+09 Variable Pitch Melody
 ========================
 
-In Lesson 4, you used a photoresistor to read light levels — your first analog sensor. Now you'll use a **potentiometer** to control a passive buzzer — not just a single tone, but a repeating four-note melody. Turn the knob one way and the entire melody shifts higher; turn it the other way and it drops lower. The musical intervals stay intact — the tune is recognizable at any pitch.
+Earlier, you used a photoresistor to read light levels — your first analog sensor. Now you'll use a **potentiometer** to control a passive buzzer — not just a single tone, but a repeating four-note melody. Turn the knob one way and the entire melody shifts higher; turn it the other way and it drops lower. The musical intervals stay intact — the tune is recognizable at any pitch.
 
 In this lesson, you will learn to:
 
@@ -43,35 +43,18 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   A **passive buzzer** is different from the active buzzer you used in Lesson 3. An active buzzer has a built-in oscillator — you just apply DC voltage and it beeps at a fixed frequency. A passive buzzer has no internal oscillator — you must supply an AC signal (a square wave from PWM) to make it vibrate. This gives you control over the **pitch** (frequency), which is exactly what we need for this lesson. The potentiometer has three pins — the middle pin is the **wiper** (variable output), and the two outer pins connect to 5V and GND.
+   A **passive buzzer** is different from the active buzzer you've used before. An active buzzer has a built-in oscillator — you just apply DC voltage and it beeps at a fixed frequency. A passive buzzer has no internal oscillator — you must supply an AC signal (a square wave from PWM) to make it vibrate. This gives you control over the **pitch** (frequency), which is exactly what we need for this lesson. The potentiometer has three pins — the middle pin is the **wiper** (variable output), and the two outer pins connect to 3.3V and GND.
 
 **Wiring Diagram**
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_pot_buzzer.png
+A passive buzzer has **no polarity** — you can connect it either way. However, the potentiometer's three pins are not interchangeable. Connect the **left pin to 3.3V**, the **middle pin to A2**, and the **right pin to GND**. Reversing 3.3V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it).
+
+.. image:: /img/wiring/wiring_pot_buzzer.png
    :width: 500
    :align: center
 
-.. warning::
-
-   A passive buzzer has **no polarity** — you can connect it either way. However, the potentiometer's three pins are not interchangeable. Connect the **left pin to 5V**, the **middle pin to A2**, and the **right pin to GND**. Reversing 5V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it).
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation.
-
-.. image:: img/sche_5_pot_buzzer.png
-   :width: 500
-   :align: center
-
-The potentiometer acts as a **voltage divider** — as you turn the knob, the voltage on the middle pin smoothly varies between 0V and 5V. The UNO Q reads this voltage on pin A2, and the code converts it to a pitch percentage that shifts the melody:
-
-  **Knob fully counter-clockwise → 0V on A2 → analogRead() returns 0 → mapped to 50% → melody plays lower**
-
-  **Knob at midpoint → 2.5V on A2 → analogRead() returns ~512 → mapped to ~125% → melody plays a little high**
-
-  **Knob fully clockwise → 5V on A2 → analogRead() returns 1023 → mapped to 200% → melody plays an octave higher**
 
 2. Code
 ----------
@@ -82,15 +65,15 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``05 Variable Pitch Melody.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``09 Variable Pitch Melody.zip``. The app appears in **My Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
@@ -98,7 +81,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 #. Wait a few seconds for the upload to finish, then open the **Serial Monitor** (📊 icon in the top bar). You should hear a repeating four-note melody. Turn the potentiometer — the entire melody shifts higher or lower while keeping the same tune. Open the Serial Monitor to see the current frequency.
@@ -186,7 +169,7 @@ This lesson introduces three new ideas — a melody stored in an array, pitch co
 
 #. **Library Include, Melody Array, and Constants**
 
-   - ``MELODY[]`` stores four note frequencies — C4 (262 Hz), E4 (330 Hz), G4 (392 Hz), C5 (523 Hz) — in an array, just like the LED pins in Lesson 4
+   - ``MELODY[]`` stores four note frequencies — C4 (262 Hz), E4 (330 Hz), G4 (392 Hz), C5 (523 Hz) — in an array, just like the LED pin arrays you used earlier
    - ``MELODY_LENGTH`` is calculated automatically from the array size — add more notes and it updates without changing any other code
    - ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` define how far the potentiometer can shift the pitch: 50% (one octave lower) to 200% (one octave higher)
 
@@ -229,10 +212,20 @@ This lesson introduces three new ideas — a melody stored in an array, pitch co
 
 You've used both types now — let's compare them:
 
-  * **Active buzzer** (Lesson 3 — Tilt Alarm): Has a built-in oscillator. Apply DC voltage → it beeps at a fixed frequency. Simple on/off control. Good for alarms and alerts.
+  * **Active buzzer** (Tilt Alarm): Has a built-in oscillator. Apply DC voltage → it beeps at a fixed frequency. Simple on/off control. Good for alarms and alerts.
   * **Passive buzzer** (this lesson): No internal oscillator. You supply a square wave (AC signal) via PWM. You control both the frequency (pitch) and the duty cycle (volume/timbre). Good for music, sound effects, and variable tones.
 
   **With an active buzzer you say "beep or don't beep." With a passive buzzer you say "play this exact note."**
+
+**Two Ways to Drive a Passive Buzzer**
+
+In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5** with ``tone(buzzerPin, 800)`` — one line of code, no library. This lesson uses a different approach: the buzzer connects to **P5** on the Robot Shield and is driven by the ``Pwm`` class from the RobotShield library. Both methods work — so why the change?
+
+  * **``tone()`` on a digital pin** — Arduino generates the square wave in **software** on the main MCU. Simple and direct, perfect when you just need a beep or a siren.
+
+  * **``Pwm`` on the Robot Shield** — the Robot Shield's own chip generates the wave in **hardware** (I2C carries only the frequency and pulse settings). The main MCU stays free to read sensors, do math, and run other code.
+
+  * **This lesson's goal is the math** — ``setFreq()`` and ``setPulse()`` make the frequency → period → duty cycle relationship **explicit**. ``tone()`` hides all of that behind one function call, so you'd never see the ``1000000 / frequency`` conversion that connects pitch to microseconds. Seeing it here prepares you for PWM control of motors, servos, and LEDs, where the same period/pulse concepts apply.
 
 3. Experiment
 ----------------
@@ -269,39 +262,6 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` to control how far the kn
    * - 25 to 400
      - Extreme — very low rumble to piercing high notes
 
-**Challenge: Add a Fifth Note**
-
-Add one more note to the melody — try G4 (392 Hz) between the existing notes so the melody goes C4→E4→G4→G4→C5. Change only the ``MELODY`` array — the ``MELODY_LENGTH`` calculation adapts automatically.
-
-.. dropdown:: Click to reveal solution
-   :open:
-
-   .. code-block:: cpp
-
-      const uint16_t MELODY[] = {262, 330, 392, 392, 523};
-
-   The ``MELODY_LENGTH`` macro counts the elements — no other code changes needed.
-
-**Challenge: Change Note Duration with the Potentiometer**
-
-Instead of controlling pitch, make the potentiometer control how long each note plays. Map the potentiometer to ``NOTE_DURATION`` from 100 ms to 500 ms — fast melody at one end, slow at the other.
-
-.. dropdown:: Click to reveal solution
-   :open:
-
-   .. code-block:: cpp
-
-      void loop() {
-          for (int note = 0; note < MELODY_LENGTH; note++) {
-              int potValue = analogRead(POT_PIN);
-              int noteDuration = map(potValue, 0, 1023, 100, 500);
-
-              playFrequency(MELODY[note]);
-              delay(noteDuration);
-              stopBuzzer();
-              delay(50);
-          }
-      }
 
 4. Troubleshooting
 --------------------
@@ -314,11 +274,11 @@ Instead of controlling pitch, make the potentiometer control how long each note 
 **Melody pitch does not change when turning the knob**
 
 * **Cause:** The potentiometer is wired incorrectly, or the code is reading the wrong pin.
-* **Solution:** Verify the middle pin of the potentiometer connects to A2. The outer pins should connect to 5V and GND. Open the Serial Monitor — if the potentiometer value stays at 0 or 1023 regardless of knob position, the wiring is likely wrong.
+* **Solution:** Verify the middle pin of the potentiometer connects to A2. The outer pins should connect to 3.3V and GND. Open the Serial Monitor — if the potentiometer value stays at 0 or 1023 regardless of knob position, the wiring is likely wrong.
 
 **Knob works backwards (clockwise lowers the pitch)**
 
-* **Cause:** The outer pins of the potentiometer are swapped (5V and GND reversed).
+* **Cause:** The outer pins of the potentiometer are swapped (3.3V and GND reversed).
 * **Solution:** Swap the connections to the two outer pins of the potentiometer. Alternatively, use ``map(potValue, 0, 1023, 200, 50)`` to reverse the behavior in code.
 
 **Buzzer sounds weak or distorted**
@@ -336,10 +296,10 @@ Instead of controlling pitch, make the potentiometer control how long each note 
 
 Congratulations! You've made music — not just a single tone, but a melody that you can control with a knob. In this lesson, you learned:
 
-* How to store a melody in an **array** and play notes in sequence with a ``for`` loop (building on Lesson 4's array lesson)
+* How to store a melody in an **array** and play notes in sequence with a ``for`` loop (building on earlier array lessons)
 * How ``map()`` converts a potentiometer reading into a pitch percentage that shifts the entire melody
 * How PWM generates audio frequencies via the Robot Shield — the same technology behind dimmable LEDs
 * The relationship between **frequency** (pitch in Hz), **period** (microseconds per cycle), and **duty cycle**
 * The difference between active buzzers and passive buzzers
 
-The combination of arrays, analog input, and PWM opens up a world of possibilities — from musical instruments to audio feedback. In the next lesson, you'll level up to **three channels of PWM** simultaneously, using an RGB LED to mix millions of colors.
+The combination of arrays, analog input, and PWM opens up a world of possibilities — from musical instruments to audio feedback. In the next lesson, you'll use an ultrasonic sensor to measure distance with sound waves — building a proximity alarm that beeps faster as obstacles get closer.

@@ -42,33 +42,19 @@ In this lesson, you will learn to:
 
 .. tip::
 
-   No external resistor is needed for either component. The tilt switch uses ``INPUT_PULLUP`` (just like the button in Lesson 2), and the active buzzer has its own internal circuitry. If your buzzer has a sticker covering the top, peel it off before use — it protects the sound hole during shipping.
+   No external resistor is needed for either component. The tilt switch uses ``INPUT_PULLUP`` (just like the button you used earlier), and the active buzzer has its own internal circuitry. If your buzzer has a sticker covering the top, peel it off before use — it protects the sound hole during shipping.
 
 **Wiring Diagram**
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_tilt_buzzer.png
+.. image:: /img/wiring/wiring_tilt_buzzer.png
    :width: 500
    :align: center
 
 .. warning::
 
    The active buzzer has **polarity** — it only works in one direction. Check that the pin labeled **+** (or the longer leg) connects to pin 5, and the pin labeled **−** (or the shorter leg) connects to GND. Reversing it won't damage the buzzer, but it won't make any sound.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/3_tilt_alarm_schematic.png
-   :width: 500
-   :align: center
-
-The tilt switch is closed (conducting) when upright, pulling pin 2 to GND (LOW). When tilted, the internal ball rolls away, the switch opens, and ``INPUT_PULLUP`` pulls pin 2 to 5V (HIGH). The code detects this change and activates the buzzer:
-
-  **Upright → switch closed → pin 2 connects to GND (LOW) → buzzer OFF**
-
-  **Tilted → switch open → pin 2 pulled HIGH → buzzer sounds alarm**
 
 2. Code
 ----------
@@ -79,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -93,7 +79,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 

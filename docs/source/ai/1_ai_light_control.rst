@@ -48,7 +48,7 @@ In this lesson, you will learn to:
 
 Follow the diagram below to connect the RGB LED to the Robot Shield's PWM channels.
 
-.. image:: img/wiring_rgb_led.png
+.. image:: /img/wiring/wiring_rgb_led.png
    :width: 500
    :align: center
 
@@ -83,13 +83,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
       :align: center
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
       :align: center
 

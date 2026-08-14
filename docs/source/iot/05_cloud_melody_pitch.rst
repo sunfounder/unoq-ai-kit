@@ -2,10 +2,13 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-3. Arduino Cloud Melody Pitch
+05 Arduino Cloud Melody Pitch
 ===================================
 
 So far, your web controls worked over a local connection — your browser and UNO Q were on the same network. Now you'll use **Arduino Cloud** to control your hardware from **anywhere with internet access**. A cloud slider lets you raise or lower the pitch of a repeating four-note melody (C4 → E4 → G4 → C5) — move the slider on your phone and the melody shifts in real time.
+
+   .. image:: img/3_cloud_dashboard_slider.png
+      :width: 90%
 
 In this lesson, you will learn to:
 
@@ -23,11 +26,11 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * Pan Tilt Kit
+   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
      - 1 * Passive :ref:`cpn_buzzer`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-   * - |list_pan_tilt_kit|
+   * - |list_uno_q|
      - |list_passive_buzzer|
      - |list_wire|
      - |list_usb_cable|
@@ -35,11 +38,11 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-.. image:: img/3_cloud_buzzer_fritzing.png
-   :width: 700
-   :align: center
+Connect the passive buzzer between **D5** and **GND** — the sketch drives it with ``tone()``.
 
-Connect the passive buzzer to PWM channel **P5** on the Robot Shield.
+.. image:: /img/wiring/wiring_pc_buzzer.png
+   :width: 500
+   :align: center
 
 2. Setup
 ---------------
@@ -102,6 +105,7 @@ Connect the passive buzzer to PWM channel **P5** on the Robot Shield.
 
    .. image:: img/3_cloud_dashboard_new.png
       :width: 90%
+
 #. Inside the dashboard, click on **Edit**.
 
    .. image:: img/3_cloud_dashboard_edit.png
@@ -117,11 +121,12 @@ Connect the passive buzzer to PWM channel **P5** on the Robot Shield.
    .. image:: img/3_cloud_dashboard_slider.png
       :width: 90%
 
-**4. Import and Run the Code**
+3. Run the App
+----------------
 
 #. In App Lab, go to **My Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``03 Arduino Cloud Melody Pitch.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``05 Arduino Cloud Melody Pitch.zip``. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 
@@ -131,105 +136,34 @@ Connect the passive buzzer to PWM channel **P5** on the Robot Shield.
 #. Enter the **Device ID** and **Secret Key** you saved when creating the device.
 
    .. image:: img/3_cloud_brick_secret_id.png
-
-
+      :width: 90%
+      
 #. Click the **Run** button (▶). The melody plays immediately at the default pitch. Open the cloud dashboard on your phone — move the slider and the melody pitch shifts in real time.
 
    .. image:: img/4_cloud_result.png
       :width: 90%
 
-3. Code
-----------
-
-**The Sketch (sketch.ino)**
-
-.. code-block:: cpp
-   :linenos:
-
-   #include <Arduino_RouterBridge.h>
-   #include "RobotShield.h"
-
-   const int MIN_PITCH_LEVEL = 0;
-   const int MAX_PITCH_LEVEL = 50;
-   const int MIN_PITCH_PERCENT = 50;
-   const int MAX_PITCH_PERCENT = 200;
-   const int NOTE_DURATION = 250;
-   const int NOTE_GAP = 50;
-
-   Pwm buzzer(5);
-
-   const uint16_t MELODY[] = {262, 330, 392, 523};
-   const int MELODY_LENGTH = sizeof(MELODY) / sizeof(MELODY[0]);
-
-   volatile int pitchLevel = 25;
-   int currentNote = 0;
-   unsigned long noteStartTime = 0;
-   bool notePlaying = false;
-
-   void playFrequency(uint16_t frequency) {
-       uint32_t period = 1000000UL / frequency;
-       uint16_t pulse = period / 2;
-       buzzer.setEnable(false);
-       buzzer.setFreq(frequency);
-       buzzer.setPulse(pulse);
-       buzzer.setEnable(true);
-   }
-
-   void stopBuzzer() { buzzer.setEnable(false); }
-
-   void setPitchLevel(int value) {
-       pitchLevel = constrain(value, MIN_PITCH_LEVEL, MAX_PITCH_LEVEL);
-   }
-
-   void setup() {
-       Serial.begin(115200);
-       I2cBus::i2c().begin();
-       buzzer.begin();
-       buzzer.setEnable(false);
-
-       Bridge.begin();
-       Bridge.provide("set_pitch_level", setPitchLevel);
-   }
-
-   void loop() {
-       unsigned long now = millis();
-
-       if (!notePlaying) {
-           int pitchPercent = map(pitchLevel, 0, 50, 50, 200);
-           uint16_t frequency = MELODY[currentNote] * pitchPercent / 100;
-           playFrequency(frequency);
-           noteStartTime = now;
-           notePlaying = true;
-       }
-
-       if (notePlaying && now - noteStartTime >= NOTE_DURATION) {
-           stopBuzzer();
-           notePlaying = false;
-           currentNote++;
-           if (currentNote >= MELODY_LENGTH) currentNote = 0;
-           delay(NOTE_GAP);
-       }
-   }
-
-**The Code — main.py**
-
-.. code-block:: python
-   :linenos:
-
-   from arduino.app_bricks.arduino_cloud import ArduinoCloud
-   from arduino.app_utils import App, Bridge
-
-   iot_cloud = ArduinoCloud()
-
-   def pitch_callback(client, value):
-       pitch_level = max(0, min(50, int(value)))
-       Bridge.call("set_pitch_level", pitch_level)
-
-   iot_cloud.register("pitch", value=25, on_write=pitch_callback)
-
-   App.run()
-
 **How it Works**
+
+The cloud melody project is a multi-file app — the sketch plays the melody on the MCU, and Python handles the cloud connection:
+
+* ``05 Arduino Cloud Melody Pitch/`` — the app folder
+
+  * Bricks
+
+    * Arduino Cloud
+
+  * Files
+
+    * ``python/``
+
+      * ``main.py`` — Cloud variable registration and callback
+
+    * ``sketch/``
+
+      * ``sketch.ino`` — Melody playback on D5
+
+    * ``app.yaml`` — App metadata (name, icon, bricks used)
 
 .. mermaid::
 
@@ -244,9 +178,20 @@ Connect the passive buzzer to PWM channel **P5** on the Robot Shield.
        P->>S: Bridge.call("set_pitch_level", 40)
        S->>S: pitchLevel = 40 → melody plays higher
 
-The sketch plays a four-note melody continuously — C4, E4, G4, C5 — using ``millis()`` to time each note's 250 ms duration. The pitch level (0–50) from the cloud slider is mapped to a percentage (50%–200%) that shifts the entire melody up or down. ``Bridge.provide("set_pitch_level", setPitchLevel)`` exposes the pitch update function to Python, and ``Bridge.call("set_pitch_level", pitch_level)`` sends the cloud value to the sketch. The melody keeps playing regardless — the cloud only changes the pitch.
+Here's what each component does:
 
-3. Experiment
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * Plays a four-note melody — C4, E4, G4, C5 — continuously, using ``tone()`` to generate each frequency on D5
+  * Times each 250 ms note with ``millis()`` instead of ``delay()``, so cloud updates arrive between notes
+  * ``setPitchLevel()`` constrains the incoming value (0–50) and maps it to a pitch percentage (50%–200%) that shifts the whole melody
+  * ``Bridge.provide("set_pitch_level", setPitchLevel)`` exposes the update function to Python
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``iot_cloud.register("pitch", value=25, on_write=pitch_callback)`` registers the cloud variable with a default of 25
+  * ``pitch_callback()`` fires on every slider change — it clamps the value and calls ``Bridge.call("set_pitch_level", pitch_level)``
+  * The melody keeps playing regardless — the cloud only changes the pitch
+
+4. Experiment
 ----------------
 
 **Adjust the Pitch Range**
@@ -257,7 +202,7 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` in the sketch to control 
 
 Add a fifth note to the ``MELODY`` array — try inserting G4 (392 Hz) between the existing notes so the melody goes C4→E4→G4→G4→C5. The ``MELODY_LENGTH`` calculation adapts automatically.
 
-4. Troubleshooting
+5. Troubleshooting
 --------------------
 
 **Cloud dashboard shows "Device Offline"**
@@ -275,7 +220,7 @@ Add a fifth note to the ``MELODY`` array — try inserting G4 (392 Hz) between t
 * **Cause:** Using an active buzzer (fixed pitch) instead of a passive one.
 * **Solution:** Make sure you're using the passive buzzer. Active buzzers can't play variable frequencies — they only do on/off at a single frequency.
 
-5. Summary
+6. Summary
 -------------
 
 Your hardware is now internet-controlled! In this lesson, you learned:

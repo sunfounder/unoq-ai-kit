@@ -25,15 +25,15 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 - **Arduino App Lab**: Web-based IDE — the primary development tool for this course. No driver installation needed. Students create/edit/import/run apps in a browser-like environment.
 - **Arduino IDE**: Introduced in a comparison lesson (Module A, lesson 13).
 - **Edge Impulse**: Used in Module D for AI model training and deployment.
-- **LLM Integration**: Module C connects to Gemini/ChatGPT for AI-driven hardware interaction.
+- **LLM Integration**: Module E connects to Gemini/ChatGPT for AI-driven hardware interaction.
 
 ## Course Structure (6 Modules)
 
 | Module | Lessons | Theme |
 |--------|---------|-------|
-| A: Basic Interaction | 15 | Sketch-only hardware control — no Python, no Web UI |
-| B: Multimedia | 7 | Camera, STT, TTS — no breadboard, Carrier-only |
-| C: IoT | 3 | Bridge, Web UI, Python+Sketch hybrid |
+| A: Basic Interaction | 17 | Sketch-only hardware control — no Python, no Web UI |
+| B: Multimedia | 9 | Camera, STT, TTS — no breadboard, Carrier-only |
+| C: IoT | 9 | Bridge, Web UI, Python+Sketch hybrid |
 | D: Edge AI | 6 | Camera + AI vision + physical response |
 | E: AI & LLM | 7 | CloudLLM, natural language, Tool Calling |
 | F: AI Projects | 4 | Vision + Voice + LLM fusion |
@@ -44,17 +44,19 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 2. Button-Controlled Light — digital input
 3. Tilt Alarm — digital input + active buzzer
 4. Photoresistor Night Light — analogRead (first analog lesson)
-5. Variable Pitch Buzzer — analog input + PWM audio
+5. PIR Motion Alarm — digital sensor (motion) + active buzzer alarm
 6. Color Mixer — RGB PWM color mixing
 7. Motor Speed Controller — DC motor PWM
 8. Servo Sweep — servo library
-9. Ultrasonic Radar — timing-based sensor
-10. Temperature & Humidity Monitor — DHT11 sensor
-11. IMU Attitude — I2C + calibration (depends on 11 IMU Calibration)
+9. Variable Pitch Melody — analog input + PWM audio
+10. Ultrasonic Radar — timing-based sensor
+11. Temperature & Humidity Monitor — DHT11 sensor
 12. Thermistor-Controlled Fan — analog input + PWM motor
 13. Joystick Servo — dual-axis control + auto-calibration
-14. IMU Servo — motion-controlled servo
-15. IDE Comparison — App Lab vs Arduino IDE
+14. IMU Attitude — I2C + calibration (depends on 14 IMU Calibration)
+15. IMU Servo — motion-controlled servo
+16. LED Matrix Patterns — built-in 8×13 display
+17. Opposite Reaction Game — game logic, button+buzzer+display
 
 **Pedagogical principle**: Each lesson introduces at most one genuinely new concept. Everything else builds on previously learned knowledge, so students feel "I already know this, just one small new thing."
 
@@ -89,7 +91,8 @@ Introduction
     - Components Needed: 4-col table, :header-rows: 0, 2 sub-rows per component
     - .. tip:: for hints
     - Wiring Diagram: Fritzing breadboard image. NO text steps.
-    - Circuit Diagram: Schematic image. Include current flow path.
+    - NO Circuit Diagram — schematics were removed from all basic
+      lessons (readers found them redundant with the Fritzing diagram)
 
 2. Code
     - Import and Run the Code: #. auto-numbered steps with screenshots
@@ -185,9 +188,9 @@ after the Run button step:
 
 ---
 
-### Module B: IoT (iot/)
+### Module C: IoT (iot/)
 
-**Canonical reference:** `iot/1_ui_led.rst`
+**Canonical reference:** `iot/01_ui_led.rst`
 
 Multi-file App Lab projects (Python + Sketch + HTML/JS/CSS + assets).
 The **Code** section replaces inline source code with a project structure
@@ -210,12 +213,16 @@ Introduction
     - Components Needed: SAME format as Module A (4-col, 2 sub-rows)
     - Wiring Diagram: Fritzing image. Brief text description OK here
       (circuit is usually simpler — same as a basic lesson).
+      Text description goes ABOVE the image (same as Module A).
     - NO Circuit Diagram, NO .. warning:: (unless relevant)
 
-2. Code
-    - Import and Run the Code: #. auto-numbered steps, fewer screenshots
+2. Run the App
+    - NO "Import and Run the Code" sub-heading — the #. steps go
+      directly under the section title, fewer screenshots
       (only the result GIF at the end).
-    - How it Works: (NO separate "The Code" block — source is multi-file)
+    - **How it Works** sub-heading: (NO inline source code — IoT
+      projects are multi-file and too long for the page; describe the
+      architecture instead)
         - Transition sentence
         - Project structure: RST nested list with Bricks / Libraries / Files
           * First lesson of module: list Bricks, Libraries, AND Files
@@ -223,6 +230,12 @@ Introduction
         - .. mermaid:: sequenceDiagram (Browser → Python → Sketch → Hardware)
         - Component explanations: **Name (file)** — where it runs
           * API call — what it does (sub-bullets under each component)
+    - Cloud lessons (05–06): section number shifts to 3 because a
+      "2. Setup" section (Cloud account/Device/Thing/Dashboard) comes
+      between Build the Circuit and Run the App. The Setup section
+      covers only the Cloud-side setup (Device/Thing/Dashboard) —
+      all import/run steps live under Run the App, same as every
+      other lesson.
 
 3. Experiment
     - Descriptive **bold sub-heading**
@@ -343,7 +356,7 @@ Introduction
 
 ### Diagrams
 - **Fritzing** (`*_fritzing.png`): Breadboard wiring. No accompanying text — the diagram is the single source of truth. Text descriptions easily fall out of sync when the diagram is updated.
-- **Schematic** (`*_schematic.png`): Electrical notation. Use the same reference designators as the Fritzing diagram.
+- **Schematic** (`*_schematic.png`): REMOVED from basic lessons — no longer used.
 
 ### Directory Trees
 - **Never** use ASCII art (``├──``, ``└──``, ``│``) in code blocks for directory structures — they misalign across fonts.
@@ -387,6 +400,111 @@ Introduction
 - 4 columns, no header row, 25/25/25/25 width ratio.
 - Components that span rows (like Arduino) can appear alone in a row.
 
+### No Lesson Number References
+
+**Never** reference specific lesson numbers in RST lesson files or project
+READMEs. The lesson order may change — numeric references would become stale
+and require updating across every file.
+
+Instead, use descriptive references:
+
+- ❌ ``In Lesson 12, you used a joystick...``
+- ✅ ``Earlier, you used a joystick...``
+- ❌ ``the DHT11 from Lesson 10``
+- ✅ ``the DHT11 you used earlier``
+- ❌ ``the same pattern from Lesson 2``
+- ✅ ``the same ``INPUT_PULLUP`` pattern you learned earlier``
+- ❌ ``just like the LED pins in Lesson 4``
+- ✅ ``just like the LED pin arrays you used earlier``
+
+Acceptable alternatives (when referring to a specific future/other lesson
+by topic, not number):
+
+- ``the IMU calibration project``
+- ``the previous lesson``
+- ``the servo sweep lesson``
+- ``the motor you used earlier``
+
+### Lesson Numbering Convention
+
+RST files and code folders use two numbering styles:
+
+- **Lessons 1–4**: Old-style, no leading zero (``1_hello_led.rst``, ``2_button_led.rst``, ``3_tilt_alarm.rst``, ``4_photoresistor_led.rst``)
+- **Lessons 5+**: New-style with leading zero (``05_pir_motion_alarm.rst``, ``06_color_mixer.rst``, etc.)
+
+Code folders always use the two-digit format: ``01 Hello LED/``, ``05 PIR Motion Alarm/``.
+
+When inserting a new lesson between existing ones, renumber all subsequent
+lessons AND update every zip filename reference in RST files, READMEs, and
+``app.yaml`` files. Use this checklist:
+
+1. Rename code folders (highest → lowest to avoid conflicts)
+2. Rename RST files
+3. Update ``# NN`` title in every shifted README.md
+4. Update ``name: NN`` in every shifted ``app.yaml``
+5. Update ``Import `NN Name.zip``` in every shifted README
+6. Update title number + underline in every shifted RST file
+7. Update zip filename references in all RST ``:ref:`` and inline text
+8. Update ``basic.rst`` toctree
+9. Run a comprehensive grep for old numbers in all files
+
+### README Step Numbering
+
+In the **How to Use the Example** section, steps must be sequential with
+no gaps. The base pattern is:
+
+```
+1. Open **Arduino App Lab**.
+2. Select **My Apps** → ...
+3. Import `NN Name.zip` from `unoq-ai-kit\basic`.
+4. Click **Run**.
+5. [Expected result.]
+```
+
+For projects that require battery power, insert an additional step
+between Import and Run:
+
+```
+3. Import `NN Name.zip` from `unoq-ai-kit\basic`.
+4. Connect the battery pack to the Robot Shield.
+5. Click **Run**.
+6. [Expected result.]
+```
+
+For projects with extra setup steps (e.g. IMU calibration), add steps
+after Run but before the result step. All numbering must be sequential.
+
+### README Wiring Image Requirement
+
+Every project that uses breadboard wiring **must** include a wiring image
+in the Wiring section. The image file lives in ``assets/docs_assets/``
+inside the project folder. The Wiring section format is:
+
+```
+## Wiring
+
+[One short sentence describing the connection.]
+
+![Wiring Diagram](assets/docs_assets/wiring_xxx.png)
+```
+
+Projects with no breadboard wiring (built-in LED matrix, IMU-only via QWIIC)
+may explain this in text without an image.
+
+### Zip Reference Consistency
+
+The zip filename referenced in READMEs and RST files must match the
+folder number:
+
+- Folder ``05 PIR Motion Alarm/`` → ``05 PIR Motion Alarm.zip``
+- Folder ``14 IMU Calibration/`` → ``14 IMU Calibration.zip``
+
+When a lesson imports a **different** project's zip (e.g., IMU Servo
+imports IMU Calibration), verify that the referenced zip matches the
+**target** project's folder number, not the source lesson's number:
+
+- ``15_imu_servo.rst`` → ``import ``14 IMU Calibration.zip``` ← correct (calibration project is at 14)
+
 ### Tone
 - Conversational, encouraging, direct. Use "you" and "your".
 - Explain why, not just what. Every component choice has a reason.
@@ -396,6 +514,36 @@ Introduction
 - Placeholder naming: `<lesson_number>_<description>.png`
 - Example: `1_hello_led_fritzing.png`, `1_hello_led_schematic.png`, `1_blink_result.gif`
 - Images referenced as `img/filename.png` (Sphinx resolves from source dir).
+
+### Wiring Diagrams Location
+
+All wiring (Fritzing) diagrams live in one shared folder:
+``docs/source/img/wiring/``, referenced with an **absolute path**:
+
+.. code-block:: rst
+
+   .. image:: /img/wiring/wiring_led.png
+
+- Naming: ``wiring_<component>.png`` (e.g., ``wiring_pot_buzzer.png``,
+  ``wiring_pc_buzzer_pir.png``)
+- Lesson-specific screenshots (import dialogs, Serial Monitor, results)
+  stay in each module's own ``img/`` folder (``basic/img/``, ``iot/img/``)
+  and are referenced with the relative ``img/filename.png`` path.
+
+### Shared App Screenshots Location
+
+The three shared App Lab screenshots used by every lesson's import steps
+live directly in ``docs/source/img/`` and are referenced with **absolute
+paths**:
+
+.. code-block:: rst
+
+   .. image:: /img/app_import_app.png
+   .. image:: /img/app_import_pc.png
+   .. image:: /img/app_run.png
+
+Never reference these with a relative ``img/`` path — the files exist only
+at the ``img/`` root, not in each module's ``img/`` folder.
 
 ## File Organization
 
@@ -414,7 +562,7 @@ docs/source/
 │   └── arduino_ide.rst
 ├── basic/                       # Module A: Basic Interaction
 │   ├── basic.rst                # Module index + toctree
-│   └── <n>_<lesson_name>.rst    # Individual lessons (1–13)
+│   └── <n>_<lesson_name>.rst    # Individual lessons (1–17)
 ├── media/                       # Module B: Multimedia (STT, TTS, Camera)
 ├── iot/                         # Module C: IoT
 ├── ai/                          # Module E: AI/LLM
@@ -445,7 +593,7 @@ The student imports these via: App Lab → Import App → navigate to folder →
 
 ## IoT Web UI Design System
 
-This is the canonical design for all Module B (IoT) web UIs. The
+This is the canonical design for all Module C (IoT) web UIs. The
 `01 UI Control LED` project is the reference implementation. **Future
 IoT UIs must follow this design system exactly — only change
 functionality and text, never layout or colors.**

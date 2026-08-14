@@ -2,17 +2,17 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-14 IMU Servo
+15 IMU Servo
 ======================
 
-In Lesson 13, you used a joystick to control servos — you pushed a stick and the servo followed. Now you'll remove the joystick entirely. **Tilt the board itself** and the servos respond — just like tilting a smartphone to steer a racing game, or the motion controls in a VR headset. The IMU from Lesson 11 provides the motion data; the servos from Lesson 8 do the moving; and the math you'll learn converts gravity into angles.
+Earlier, you used a joystick to control servos — you pushed a stick and the servo followed. Now you'll remove the joystick entirely. **Tilt the board itself** and the servos respond — just like tilting a smartphone to steer a racing game, or the motion controls in a VR headset. The IMU provides the motion data; the servos do the moving; and the math you'll learn converts gravity into angles.
 
 In this lesson, you will learn to:
 
 * Convert accelerometer data into **roll and pitch** angles using ``atan2()``
 * Apply **multi-sample averaging** to smooth noisy sensor data
 * Use incremental servo control with a **dead zone** for fluid, jitter-free motion
-* Fuse two previous lessons — IMU (Lesson 11) and servos (Lesson 8) — into one system
+* Fuse two concepts learned earlier — IMU readings and servo control — into one integrated system
 
 1. Build the Circuit
 ----------------------
@@ -38,7 +38,7 @@ In this lesson, you will learn to:
 **Wiring Diagram**
 
 
-.. image:: img/wiring_imu_servo.png
+.. image:: /img/wiring/wiring_imu_servo.png
    :width: 600
    :align: center
 
@@ -46,31 +46,15 @@ In this lesson, you will learn to:
 
    Don't move the board during the first second — the IMU auto-calibrates its center position at startup.
 
-**Circuit Diagram**
-
-The schematic below shows how the IMU (via I2C on the Multimedia Carrier) and the servos (via the Robot Shield) work together. Both share the same I2C bus — the IMU reads motion, the servos respond to it.
-
-.. image:: img/sche_14_imu_servo.png
-   :width: 500
-   :align: center
-
-The IMU's accelerometer measures gravity along three axes. By analyzing how gravity splits across X, Y, and Z, the code calculates roll (left/right tilt) and pitch (forward/back tilt) angles. These angles drive the servos through incremental stepping:
-
-  **Board tilted left → accelerometer X changes → roll angle calculated → pan servo moves left**
-
-  **Board tilted forward → accelerometer Y changes → pitch angle calculated → tilt servo moves down**
-
-  **Board level → gravity only on Z → roll and pitch near 0° → both servos center**
-
 2. Code
 ----------
 **Step 1: Calibrate the IMU**
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
-#. Open **Arduino App Lab** and import ``11 IMU Calibration.zip`` from the ``unoq-ai-kit/basic/`` folder.
+#. Open **Arduino App Lab** and import ``14 IMU Calibration.zip`` from the ``unoq-ai-kit/basic/`` folder.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 #. Click **Run** (▶) and open the **Serial Monitor** (📊).
@@ -104,7 +88,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 **Step 2: Apply Calibration and Run**
 
-#. Open ``14 IMU Servo.zip`` in App Lab and navigate to ``sketch/calibration_data.h``.
+#. Open ``15 IMU Servo.zip`` in App Lab and navigate to ``sketch/calibration_data.h``.
 
 #. Replace the default calibration values with the ones you copied from the calibration step.
 
@@ -117,7 +101,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
     
         This project uses the **RobotShield** and **SunFounder_IMU** libraries. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -335,16 +319,6 @@ The dead zone determines how steady you must hold the board before the servos re
 
 Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoothly. Then try ``maxStep = 1`` for ultra-smooth motion. What feels best to you?
 
-**Challenge: Reverse One Axis**
-
-Hold the board flat and tilt it left — the pan servo should move left. If it moves right instead, that axis needs to be reversed. Change the sign of ``roll`` or ``pitch`` in the code to fix it, just like in Lesson 13.
-
-.. dropdown:: Click to reveal solution
-   :open:
-
-   To reverse the pan axis, change ``targetPan = constrain((int)roll, ...)`` to ``targetPan = constrain((int)-roll, ...)``.
-
-   To reverse the tilt axis, change ``targetTilt = constrain((int)-pitch, ...)`` to ``targetTilt = constrain((int)pitch, ...)``.
 
 4. Troubleshooting
 --------------------

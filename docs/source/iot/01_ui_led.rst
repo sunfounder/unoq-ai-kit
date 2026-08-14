@@ -5,8 +5,12 @@
 01 UI Control LED
 =====================
 
-In Module A, you controlled an LED with code running on the UNO Q. Now you'll control it from a **webpage** — click a button in your browser, and an LED on your desk turns on. This is your first step into the hybrid architecture of the UNO Q: **Python** on the Linux processor handles the web server, while the **sketch** on the microcontroller controls the hardware. They talk to each other through the **Bridge**.
+In Module A, you controlled an LED with code running on the UNO Q. In Module B, you used the Multimedia Carrier's built-in speaker, microphone, and camera. Now you'll control hardware from a **webpage** — click a button in your browser, and an LED on your desk turns on. This is your first step into the hybrid architecture of the UNO Q: **Python** on the Linux processor handles the web server, while the **sketch** on the microcontroller controls the hardware. They talk to each other through the **Bridge**.
 
+.. image:: img/led_result.png
+   :width: 600
+   :align: center
+  
 In this lesson, you will learn to:
 
 * Understand the Python + Sketch hybrid architecture of App Lab
@@ -42,28 +46,27 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-.. image:: img/1_ui_led_fritzing.png
-   :width: 700
+Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — the same circuit you built in the very first Module A lesson.
+
+.. image:: /img/wiring/wiring_led.png
+   :width: 500
    :align: center
 
-Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — the same circuit from Module A, Lesson 1.
+2. Run the App
+----------------
 
-2. Code
-----------
-
-**Import and Run the Code**
 
 #. In App Lab, go to **My Apps** → **Create new app** -> **Import App** → **Import from Computer**. 
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``1_ui_led.zip``. Open the app.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``01 UI Control LED.zip``. Open the app.
 
 #. Click the **Run** button (▶). A **Web UI** tab opens automatically.
 
 #. You'll see a large circular button labeled "**LED IS OFF**". Click it — the LED lights up and the button glows teal with "**LED IS ON**". Click again to turn it off.
 
-.. image:: img/1_ui_led_result.gif
-   :width: 600
-   :align: center
+   .. image:: img/led_result.png
+     :width: 600
+     :align: center
 
 **How it Works**
 
@@ -71,7 +74,7 @@ Now that you've seen the LED respond to your click, let's understand what's happ
 
 An App Lab project is a folder containing multiple files. Here's what each one does:
 
-* ``1_ui_led/`` — the app folder
+* ``01 UI Control LED/`` — the app folder
 
   * Bricks
 
@@ -79,7 +82,8 @@ An App Lab project is a folder containing multiple files. Here's what each one d
 
   * Sketch libraries
 
-    * 
+    * None — this project uses only built-in libraries
+
   * Files
 
     * ``assets/``
@@ -161,7 +165,7 @@ In ``style.css``, modify the LED button's appearance:
    * - ``width/height``
      - 200px for a larger button, 64px for a smaller one
    * - ``.led-on`` background
-     - Change ``#008184`` to ``#ff4444`` for a red glow
+     - Change ``#29a3d9`` to ``#ff4444`` for a red glow
    * - ``box-shadow``
      - Increase the spread for a bigger glow effect
    * - ``transition`` duration
@@ -182,14 +186,6 @@ Modify ``get_led_status()`` in ``main.py`` to include extra info:
        }
 
 Then update ``index.html`` to display the timestamp alongside the button.
-
-**Challenge: Two LEDs, Two Buttons**
-
-Add a second LED on pin 6. Create a second button in the HTML with its own event handling. You'll need to:
-
-* Add a second ``Bridge.provide()`` in the sketch for ``set_led2_state``
-* Add a second ``ui.on_message()`` handler in Python for ``toggle_led2``
-* Add a second button in ``index.html`` with its own click handler in ``app.js``
 
 4. Troubleshooting
 --------------------
@@ -224,4 +220,4 @@ You've built a web-controlled LED using the UNO Q's hybrid architecture! In this
 * How Socket.IO provides real-time browser ↔ server communication
 * How to trace a full data path across three processors
 
-The pattern you learned — Python hosts the web UI, the sketch controls hardware, the Bridge connects them — is the foundation of every App Lab project in this module. In the next lesson, you'll extend this to control an RGB LED with sliders.
+The pattern you learned — Python hosts the web UI, the sketch controls hardware, the Bridge connects them — is the foundation of every App Lab project in this module. In the next lesson, you'll extend this to control an RGB LED with a color picker.

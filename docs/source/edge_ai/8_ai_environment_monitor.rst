@@ -48,7 +48,7 @@ In this lesson, you will learn to:
 
 Here are the connections to make:
 
-#. Connect the DHT11 module: **VCC** → **5V**, **DATA** → **digital pin 2**, **GND** → **GND**.
+#. Connect the DHT11 module: **VCC** → **3.3V**, **DATA** → **digital pin 2**, **GND** → **GND**.
 
 #. The Multimedia Carrier's speaker will announce readings aloud — no extra wiring needed.
 
@@ -228,7 +228,7 @@ Add a button that triggers an immediate reading announcement when pressed (combi
 **Speaker announces "Sensor read failed" or values are zero**
 
 * **Cause:** DHT11 wiring issue, or sensor needs time to stabilize.
-* **Solution:** Check VCC → 5V, DATA → pin 2, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
+* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
 
 **Announcements are too quiet or too loud**
 

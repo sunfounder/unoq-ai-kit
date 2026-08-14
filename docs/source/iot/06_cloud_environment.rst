@@ -2,10 +2,14 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-4. Arduino Cloud Environment Monitor
+06 Arduino Cloud Environment Monitor
 ======================================
 
-In Lesson 3, commands flowed **from** the cloud **to** your device. Now you'll reverse the flow — uploading temperature and humidity data **from** your UNO Q **up to** Arduino Cloud, where you can view it as live gauges. You'll also add a cloud switch that controls an LED on your desk from anywhere in the world. This is the core pattern of IoT: devices report, cloud stores and visualizes.
+In the previous lesson, commands flowed **from** the cloud **to** your device. Now you'll reverse the flow — uploading temperature and humidity data **from** your UNO Q **up to** Arduino Cloud, where you can view it as live gauges. You'll also add a cloud switch that controls an LED on your desk from anywhere in the world. This is the core pattern of IoT: devices report, cloud stores and visualizes.
+
+.. image:: img/4_cloud_dashboards.png
+   :width: 600
+   :align: center
 
 In this lesson, you will learn to:
 
@@ -42,11 +46,11 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-.. image:: img/4_cloud_env_fritzing.png
-   :width: 700
-   :align: center
+Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND. Connect the LED through a 220Ω resistor to pin D5.
 
-Connect the DHT11: VCC to 5V, DATA to pin 2, GND to GND. Connect the LED through a 220Ω resistor to pin D5.
+.. image:: /img/wiring/wiring_dht11_led.png
+   :width: 500
+   :align: center
 
 2. Setup
 ---------------
@@ -144,11 +148,12 @@ Connect the DHT11: VCC to 5V, DATA to pin 2, GND to GND. Connect the LED through
    .. image:: img/4_cloud_dashboard_finish.png
       :width: 90%
 
-**4. Import and Run the Code**
+3. Run the App
+----------------
 
 #. In App Lab, go to **My Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``04 Arduino Cloud Environment Monitor.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``06 Arduino Cloud Environment Monitor.zip``. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 
@@ -164,87 +169,27 @@ Connect the DHT11: VCC to 5V, DATA to pin 2, GND to GND. Connect the LED through
    .. image:: img/4_cloud_result.png
       :width: 90%
 
-3. Code
-----------
-
-**The Sketch (sketch.ino)**
-
-.. code-block:: cpp
-   :linenos:
-
-   #include <Arduino_RouterBridge.h>
-   #include "DHT.h"
-
-   #define DHTPIN 2
-   #define DHTTYPE DHT11
-
-   DHT dht(DHTPIN, DHTTYPE);
-
-   const int LED_PIN = 5;
-   const unsigned long SENSOR_INTERVAL = 5000;
-   unsigned long previousSensorMillis = 0;
-
-   void setLedState(bool state) {
-       digitalWrite(LED_PIN, state ? HIGH : LOW);
-   }
-
-   void setup() {
-       Serial.begin(115200);
-       pinMode(LED_PIN, OUTPUT);
-       digitalWrite(LED_PIN, LOW);
-       dht.begin();
-
-       Bridge.begin();
-       Bridge.provide("set_led_state", setLedState);
-   }
-
-   void loop() {
-       unsigned long currentMillis = millis();
-       if (currentMillis - previousSensorMillis < SENSOR_INTERVAL) return;
-       previousSensorMillis = currentMillis;
-
-       float humidity = dht.readHumidity();
-       float temperature = dht.readTemperature();
-
-       if (isnan(humidity) || isnan(temperature)) {
-           Serial.println("Failed to read from DHT11.");
-           return;
-       }
-
-       Bridge.notify("update_environment_cloud", temperature, humidity);
-   }
-
-**The Code — main.py**
-
-.. code-block:: python
-   :linenos:
-
-   from arduino.app_bricks.arduino_cloud import ArduinoCloud
-   from arduino.app_utils import App, Bridge
-
-   iot_cloud = ArduinoCloud()
-
-   def led_callback(client, value):
-       led_state = bool(value)
-       Bridge.call("set_led_state", led_state)
-
-   def update_environment_cloud(temperature, humidity):
-       iot_cloud.temperature = float(temperature)
-       iot_cloud.humidity = float(humidity)
-
-   # Cloud → device: LED switch
-   iot_cloud.register("led", value=False, on_write=led_callback, interval=0.5)
-
-   # Device → cloud: temperature and humidity
-   iot_cloud.register("temperature")
-   iot_cloud.register("humidity")
-
-   # Listen for sensor updates pushed by the sketch
-   Bridge.provide("update_environment_cloud", update_environment_cloud)
-
-   App.run()
-
 **How it Works**
+
+The environment monitor is a multi-file app — the sketch reads the DHT11, and Python carries data between the sketch and the cloud:
+
+* ``06 Arduino Cloud Environment Monitor/`` — the app folder
+
+  * Bricks
+
+    * Arduino Cloud
+
+  * Files
+
+    * ``python/``
+
+      * ``main.py`` — Cloud variable registration and callbacks
+
+    * ``sketch/``
+
+      * ``sketch.ino`` — DHT11 reading and LED control
+
+    * ``app.yaml`` — App metadata (name, icon, bricks used)
 
 .. mermaid::
 
@@ -265,11 +210,19 @@ Connect the DHT11: VCC to 5V, DATA to pin 2, GND to GND. Connect the LED through
        P->>S: Bridge.call("set_led_state", True)
        S->>S: digitalWrite(5, HIGH)
 
-This lesson introduces **bidirectional cloud communication**. Data flows both ways: the sketch pushes temperature and humidity readings up to the cloud every 5 seconds via ``Bridge.notify()``, and the cloud dashboard switch sends LED commands down to the sketch via ``Bridge.call()``.
+Here's what each component does:
 
-* ``Bridge.notify("update_environment_cloud", temp, hum)`` — The sketch **pushes** data to Python. Unlike ``Bridge.provide()`` which waits to be called, ``notify()`` actively sends data when the sketch has something to report.
-* ``iot_cloud.register("led", on_write=led_callback)`` — The cloud switch triggers ``led_callback`` whenever its value changes, which calls ``Bridge.call("set_led_state", True)`` to control the LED.
-* ``iot_cloud.temperature = float(temperature)`` — Assigning to the registered cloud variable automatically uploads it. No explicit ``cloud.update()`` call needed.
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * Reads the DHT11 every 5 seconds with a non-blocking ``millis()`` timer (``SENSOR_INTERVAL = 5000``)
+  * ``Bridge.notify("update_environment_cloud", temperature, humidity)`` **pushes** each reading up to Python — unlike ``Bridge.provide()`` which waits to be called, ``notify()`` actively sends data when the sketch has something to report
+  * ``Bridge.provide("set_led_state", setLedState)`` exposes the LED control function for Python
+
+**Python (main.py)** — runs on the Linux MPU
+  * Registers three cloud variables: ``temperature`` and ``humidity`` (device → cloud) and ``led`` (cloud → device)
+  * ``update_environment_cloud()`` receives sketch readings and assigns them to the cloud variables — assigning to a registered variable automatically uploads it, no explicit update call needed
+  * ``led_callback()`` fires when the dashboard switch changes — it calls ``Bridge.call("set_led_state", led_state)`` to control the LED on D5
+
+This lesson introduces **bidirectional cloud communication**: sensor data flows up every 5 seconds, LED commands flow down the moment you flip the switch.
 
 4. Experiment
 ----------------
@@ -293,7 +246,7 @@ In ``update_environment_cloud``, check if temperature exceeds 30°C. If so, set 
 **Sensor reads always return "error"**
 
 * **Cause:** DHT11 wiring issue, or the sensor needs time to stabilize.
-* **Solution:** Check VCC → 5V, DATA → pin 2, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
+* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
 
 **Cloud switch doesn't control the LED**
 
@@ -310,4 +263,4 @@ Your UNO Q is a bidirectional cloud-connected device! In this lesson, you learne
 * How ``iot_cloud.register()`` creates cloud variables with automatic synchronization
 * How to create cloud dashboards with multiple widget types
 
-In the next lesson, you'll build something fun — a browser game controlled by a physical button.
+In the next lesson, you'll build a smart doorbell — a push button, a camera, and a web page that announces visitors.

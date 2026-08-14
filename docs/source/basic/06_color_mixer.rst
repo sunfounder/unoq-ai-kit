@@ -48,29 +48,13 @@ In this lesson, you will learn to:
 
 Follow the diagram below to place each component on the breadboard and connect the wires. Notice how the three resistors connect to three different PWM pins — each color channel gets its own independent control.
 
-.. image:: img/wiring_rgb_led.png
+.. image:: /img/wiring/wiring_rgb_led.png
    :width: 500
    :align: center
 
 .. warning::
 
    The RGB LED's **longest leg must go to GND**. The three shorter legs each connect to a separate PWM pin **through a 220Ω resistor**. Never connect an RGB LED pin directly to a digital pin without a resistor — each channel needs current limiting. Also, the flat edge of the LED package indicates the cathode side — use it to identify the correct orientation.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/sche_6_rgb_led.png
-   :width: 500
-   :align: center
-
-Inside the RGB LED package, three separate LED elements share a common cathode (GND). Each anode has its own pin and its own current-limiting resistor. By varying the PWM pulse width on each channel independently, you control how much red, green, and blue light mixes together:
-
-  **Red channel → P6 → setPulse(r) → controls how much red is in the mix**
-
-  **Green channel → P5 → setPulse(g) → controls how much green is in the mix**
-
-  **Blue channel → P4 → setPulse(b) → controls how much blue is in the mix**
 
 2. Code
 ----------
@@ -81,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -99,7 +83,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
   
       This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
    
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -191,7 +175,7 @@ This lesson introduces your first custom function — a reusable block of code y
 
 #. Three PWM Objects for Three Color Channels
 
-   - Three independent ``Pwm`` objects are created, one for each color channel — the same class used in Lesson 5
+   - Three independent ``Pwm`` objects are created, one for each color channel — the same class used earlier for PWM output
    - Pin P6 controls red, pin P5 controls green, and pin P4 controls blue
    - Each channel receives its own pulse width value, allowing any combination of brightness across the three colors
 
@@ -205,7 +189,7 @@ This lesson introduces your first custom function — a reusable block of code y
 
    - All three channels are initialized with a common frequency of 1000 Hz and enabled for output
    - The I2C bus is started once, then each PWM channel is configured individually
-   - This follows the same pattern from Lesson 5, repeated for each primary color
+   - This follows the same initialization pattern used for PWM output, repeated for each primary color
 
    .. code-block:: arduino
 
@@ -405,4 +389,4 @@ You just painted with light! In this lesson, you learned:
 * How **additive color mixing** works: red + green = yellow, green + blue = cyan, red + blue = magenta, all three = white
 * How to create smooth color transitions by gradually changing PWM values in ``for`` loops
 
-Functions are a game-changer — from now on, you can package complex logic into named, reusable blocks. In the next lesson, you'll use your first **library-based sensor** (the DHT11 temperature and humidity sensor), learning how to include external code that someone else has already written and tested.
+Functions are a game-changer — from now on, you can package complex logic into named, reusable blocks. In the next lesson, you'll control a DC motor — spinning a fan with speed and direction control using the Robot Shield's H-bridge.

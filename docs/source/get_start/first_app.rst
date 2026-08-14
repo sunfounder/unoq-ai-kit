@@ -126,7 +126,7 @@ You can import apps created by yourself or shared by others.
 
 #. Drag and drop your file or select **Import from computer**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 #. Select a ``.zip`` file and click **Open**.

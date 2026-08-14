@@ -48,27 +48,13 @@ In this lesson, you will learn to:
 
 Follow the diagram below to place each component on the breadboard and connect the wires.
 
-.. image:: img/wiring_button.png
+.. image:: /img/wiring/wiring_button.png
    :width: 500
    :align: center
 
 .. warning::
 
    Buttons bridge across the center gap of the breadboard — pins on the same side are always connected. Make sure the two wires go to **opposite sides** of the button. If the LED stays on (or off) no matter what, try rotating the button 90°.
-
-**Circuit Diagram**
-
-The schematic below shows the same circuit in electrical notation. Learning to read schematics will help you understand how any circuit works, even without a physical photo.
-
-.. image:: img/2_button_led_schematic.png
-   :width: 500
-   :align: center
-
-When the button is **not pressed**, pin 2 reads HIGH (pulled up to 5V internally through the built-in pull-up resistor). When the button **is pressed**, it creates a direct path to GND — far stronger than the weak pull-up — and pin 2 drops to LOW. The code detects this change to control the LED:
-
-  **Button released → pin 2 pulled HIGH → LED OFF**
-
-  **Button pressed → pin 2 shorted to GND (LOW) → LED ON**
 
 2. Code
 ----------
@@ -79,13 +65,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
-   .. image:: img/app_import_app.png
+   .. image:: /img/app_import_app.png
       :width: 600
 
 
 #. Select **Import from Computer**.
 
-   .. image:: img/app_import_pc.png
+   .. image:: /img/app_import_pc.png
       :width: 600
 
 
@@ -93,7 +79,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. image:: img/app_run.png
+   .. image:: /img/app_run.png
       :width: 500
 
 
@@ -148,7 +134,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
 #. Setup — Configuring Input and Output
 
    - Two pins are declared: one for input (``buttonPin``) and one for output (``ledPin``)
-   - ``INPUT_PULLUP`` enables the chip's built-in pull-up resistor, pulling the pin to 5V by default
+   - ``INPUT_PULLUP`` enables the chip's built-in pull-up resistor, pulling the pin to 3.3V by default
    - When the button is pressed, the pin connects to GND and reads LOW — no external resistor needed
 
    .. code-block:: arduino
@@ -181,7 +167,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
 
 #. Why ``INPUT_PULLUP`` Reads ``LOW`` When Pressed
 
-   - The internal pull-up resistor weakly connects pin 2 to 5V, so it reads HIGH when nothing is connected
+   - The internal pull-up resistor weakly connects pin 2 to 3.3V, so it reads HIGH when nothing is connected
    - Pressing the button creates a direct path to GND (0V) — much stronger than the weak pull-up — so the voltage drops to LOW immediately
    - Without ``INPUT_PULLUP``, the pin would be "floating" when released, giving random HIGH/LOW readings
 
