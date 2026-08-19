@@ -60,7 +60,7 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **pin 2**, **GND** → **G
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``09 Telegram IoT Bot.zip``. Open it.
 

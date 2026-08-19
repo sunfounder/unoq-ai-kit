@@ -63,7 +63,7 @@ A passive buzzer has **no polarity** — you can connect it either way. However,
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
+#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
    .. image:: /img/app_import_app.png
       :width: 600
@@ -73,7 +73,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
    .. image:: /img/app_import_pc.png
       :width: 600
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``09 Variable Pitch Melody.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``09 Variable Pitch Melody.zip``. The app appears in **Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 

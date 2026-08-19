@@ -151,7 +151,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND. Connect the LED throu
 3. Run the App
 ----------------
 
-#. In App Lab, go to **My Apps** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``06 Arduino Cloud Environment Monitor.zip``. Open it.
 

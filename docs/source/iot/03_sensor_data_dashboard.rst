@@ -56,7 +56,7 @@ Connect the photoresistor between **3.3V** and **A0**, and the 10kΩ resistor be
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``03 Sensor Data Dashboard.zip``. Open it.
 

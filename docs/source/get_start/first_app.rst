@@ -70,7 +70,7 @@ This allows the device to start your application without manual interaction.
    .. image:: img/app_copy_name.png
       :width: 600
 
-#. The new app will appear under **My Apps**.
+#. The new app will appear under **Apps**.
 
    .. image:: img/app_my_apps.png
       :width: 600
@@ -79,7 +79,7 @@ This allows the device to start your application without manual interaction.
 
 **Create a New App**
 
-#. You can also create a new app from scratch in the **My Apps** page.
+#. You can also create a new app from scratch in the **Apps** page.
 
    .. image:: img/app_create_new.png
       :width: 600
@@ -89,7 +89,7 @@ This allows the device to start your application without manual interaction.
    .. image:: img/app_new_name.png
       :width: 600
 
-#. The newly created app will appear under **My Apps**.
+#. The newly created app will appear under **Apps**.
 
    .. image:: img/app_new_app.png
       :width: 600
@@ -119,7 +119,7 @@ This allows the device to start your application without manual interaction.
 
 You can import apps created by yourself or shared by others.
 
-#. In the **My Apps** page, open the dropdown next to **Create new app +** and select **Import App**.
+#. In the **Apps** page, open the dropdown next to **Create new app +** and select **Import App**.
 
    .. image:: img/app_import.png
       :width: 600
@@ -134,7 +134,7 @@ You can import apps created by yourself or shared by others.
    .. image:: img/app_import_open.png
       :width: 600
 
-#. The imported app will appear under **My Apps**.
+#. The imported app will appear under **Apps**.
 
    .. image:: img/app_import_in.png
       :width: 600

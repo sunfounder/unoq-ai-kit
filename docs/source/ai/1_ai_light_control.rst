@@ -81,7 +81,7 @@ Each color channel gets independent PWM control:
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
+#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
    .. image:: /img/app_import_app.png
       :width: 600
@@ -93,7 +93,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/ai/`` folder and select ``01 AI Light Control.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/ai/`` folder and select ``01 AI Light Control.zip``. The app appears in **Apps** — click it to open.
 
 #. Click the **Run** button (▶). App Lab will ask for your **OpenAI API Key**. Enter it and click Save, then click Run again.
 

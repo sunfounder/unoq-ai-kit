@@ -59,7 +59,7 @@ In this lesson, you will learn to:
 
 **Import the Code**
 
-#. Open **Arduino App Lab**, go to **My Apps**. Click **Import App**, then **Import from Computer**.
+#. Open **Arduino App Lab**, go to **Apps**. Click **Import App**, then **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/edge_ai/`` and select ``2_ai_voice_wakeup.zip``.
 

@@ -61,7 +61,7 @@ Here are the connections to make:
 
 **Import the Code**
 
-#. In App Lab, go to **My Apps** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/edge_ai/`` and select ``10_ai_security_camera.zip``.
 

@@ -141,7 +141,7 @@ Connecting UNO Q to **Arduino App Lab**
 .. image:: img/app_overview.png
    :width: 800
 
-* **My Apps** – Displays created or duplicated applications. Click an app to edit and run it.  
+* **Apps** – Displays created or duplicated applications. Click an app to edit and run it.  
 * **Examples** – Official examples provided by Arduino®, including audio classification, object detection, and GPIO control.  
 * **Bricks** – Modular code building blocks that simplify the creation of advanced applications.  
 * **Learn** – Built-in documentation to help you understand App Lab features.  

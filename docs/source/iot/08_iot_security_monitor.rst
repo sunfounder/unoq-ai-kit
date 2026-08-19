@@ -60,7 +60,7 @@ Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → *
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``08 IoT Security Monitor.zip``. Open it.
 

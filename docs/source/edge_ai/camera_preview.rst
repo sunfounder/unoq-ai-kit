@@ -72,7 +72,7 @@ Now let's confirm the camera works. Import and run the Camera Preview project:
 
 (Or the Edge AI version of this project, depending on your course structure.)
 
-#. Open **Arduino App Lab**, go to **My Apps**. Import the Camera Preview project from your computer.
+#. Open **Arduino App Lab**, go to **Apps**. Import the Camera Preview project from your computer.
 
 #. Click **Run** (▶).
 

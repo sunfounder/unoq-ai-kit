@@ -63,7 +63,7 @@ Follow the diagram below to place each component on the breadboard and connect t
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
+#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
    .. image:: /img/app_import_app.png
       :width: 600
@@ -75,7 +75,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 600
 
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``02 Button-Controlled Light.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``02 Button-Controlled Light.zip``. The app appears in **Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 

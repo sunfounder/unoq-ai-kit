@@ -62,7 +62,7 @@ In this lesson, you will learn to:
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``02 UI Control RGB LED.zip``. Open it.
 

@@ -56,7 +56,7 @@ Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — 
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** -> **Import App** → **Import from Computer**. 
+#. In App Lab, go to **Apps** → **Create new app** -> **Import App** → **Import from Computer**. 
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``01 UI Control LED.zip``. Open the app.
 

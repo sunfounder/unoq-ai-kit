@@ -60,7 +60,7 @@ Connect the push button between **D2** and **GND** (uses ``INPUT_PULLUP``), and 
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``07 Smart Doorbell.zip``. Open it.
 

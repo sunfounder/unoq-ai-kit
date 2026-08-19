@@ -38,7 +38,7 @@ In this lesson, you will learn to:
 
 **Import and Run the Code**
 
-#. Open **Arduino App Lab**, go to **My Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
+#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
    .. image:: /img/app_import_app.png
       :width: 600
@@ -48,7 +48,7 @@ In this lesson, you will learn to:
    .. image:: /img/app_import_pc.png
       :width: 600
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``16 LED Matrix Patterns.zip``. The app appears in **My Apps** — click it to open.
+#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``16 LED Matrix Patterns.zip``. The app appears in **Apps** — click it to open.
 
 #. Click the **Run** button (▶) in the top-right corner.
 

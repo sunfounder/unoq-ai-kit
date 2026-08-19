@@ -67,7 +67,7 @@ The servos receive position commands from the UNO Q. The pan servo sweeps left/r
 
 **Import the Code**
 
-#. In App Lab, go to **My Apps** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/edge_ai/`` and select ``3_ai_object_tracking.zip``.
 

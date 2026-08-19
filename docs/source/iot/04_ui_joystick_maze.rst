@@ -49,7 +49,7 @@ Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D2**, *
 ----------------
 
 
-#. In App Lab, go to **My Apps** → **Create new app** → **Import App** → **Import from Computer**.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
 #. Navigate to ``unoq-ai-kit/iot/`` and select ``04 UI Joystick Maze.zip``. Open it.
 
