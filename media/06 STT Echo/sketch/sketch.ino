@@ -1,5 +1,5 @@
 /*
- * Lesson 2: Button-Controlled Local STT
+ * STT Echo
  *
  * Wiring:
  *   Button pin 1 -> D2

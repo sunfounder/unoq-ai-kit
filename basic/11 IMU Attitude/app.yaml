@@ -1,5 +1,0 @@
-name: 11 IMU Attitude
-description: Read accelerometer, gyroscope, magnetometer & barometer data from the 10-axis IMU
-ports: []
-bricks: []
-icon: 🧭

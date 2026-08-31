@@ -25,7 +25,7 @@ Connect the photoresistor with a 10 kΩ resistor to analog pin A0, and four LEDs
 ## How to Use the Example
 
 1. Open **Arduino App Lab**.
-2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
+2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
 3. Import `04 Photoresistor Night Light.zip` from `unoq-ai-kit\basic`.
 4. Click **Run**.
 5. Cover the photoresistor with your hand — more LEDs light up. Shine a flashlight on it — they turn off.

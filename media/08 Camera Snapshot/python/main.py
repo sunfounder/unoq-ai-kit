@@ -1,6 +1,5 @@
 """Capture and save a photo when the external button is pressed."""
 
-# import os
 import time
 from pathlib import Path
 
@@ -9,7 +8,6 @@ import cv2
 from arduino.app_peripherals.camera import Camera
 from arduino.app_utils import Bridge
 
-# os.makedirs("./audio_output", exist_ok=True)
 
 BUTTON_RPC = "button_read"
 POLL_INTERVAL = 0.05

@@ -1,33 +1,40 @@
 /*
- * Drives a DC motor on M0: forward → brake → reverse → brake.
+ * Drives a DC motor on the Robot Shield's M0 terminal:
+ * forward → stop → reverse → stop.
+ *
+ * M0 direction pin -> D4
+ * M0 PWM pin       -> D5
  */
 
-#include "RobotShield.h"
-
-Motor motor("M0", 4, 5);  // Motor on port M0, direction pins 4 and 5
+const int motorDirPin = 4;  // Motor direction control
+const int motorPwmPin = 5;  // Motor speed control (PWM)
 
 void setup() {
     Serial.begin(115200);
-    I2cBus::i2c().begin();
-    motor.begin();
+
+    pinMode(motorDirPin, OUTPUT);
+    pinMode(motorPwmPin, OUTPUT);
+    analogWrite(motorPwmPin, 0);  // Motor starts stopped
 
     Serial.println("=== MotorTest Ready ===");
 }
 
 void loop() {
     Serial.println("M0: Forward 50%");
-    motor.setPower(50);      // Forward at 50% power
+    digitalWrite(motorDirPin, HIGH);   // Forward direction
+    analogWrite(motorPwmPin, 128);     // ~50% speed (0-255)
     delay(3000);
 
-    Serial.println("M0: Brake");
-    motor.setPower(0);       // Stop (brake)
+    Serial.println("M0: Stop");
+    analogWrite(motorPwmPin, 0);       // Stop the motor
     delay(1000);
 
     Serial.println("M0: Reverse 50%");
-    motor.setPower(-50);     // Reverse at 50% power
+    digitalWrite(motorDirPin, LOW);    // Reverse direction
+    analogWrite(motorPwmPin, 128);     // ~50% speed
     delay(3000);
 
-    Serial.println("M0: Brake");
-    motor.setPower(0);       // Stop (brake)
+    Serial.println("M0: Stop");
+    analogWrite(motorPwmPin, 0);       // Stop the motor
     delay(3000);
 }

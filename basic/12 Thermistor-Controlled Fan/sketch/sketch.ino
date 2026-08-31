@@ -1,12 +1,17 @@
 /*
  * Reads an NTC thermistor and adjusts motor speed based on temperature.
+ *
+ * Thermistor: A0
+ * Motor on the Robot Shield's M0 terminal:
+ *   direction pin -> D4
+ *   PWM pin       -> D5
  */
 
-#include "RobotShield.h"
 #include <math.h>
 
 const int tempPin = A0;                  // Thermistor on analog pin A0
-Motor motor("M0", 4, 5);                // Motor on port M0
+const int motorDirPin = 4;               // Motor direction control
+const int motorPwmPin = 5;               // Motor speed control (PWM)
 
 // NTC thermistor parameters (Beta model)
 const float beta = 3950.0;              // Beta coefficient for this thermistor
@@ -17,9 +22,10 @@ const float nominalTemp = 25.0 + 273.15; // 25°C in Kelvin
 void setup() {
     Serial.begin(115200);
 
-    I2cBus::i2c().begin();
-    motor.begin();
-    motor.setPower(0);                   // Motor starts OFF
+    pinMode(motorDirPin, OUTPUT);
+    pinMode(motorPwmPin, OUTPUT);
+    digitalWrite(motorDirPin, HIGH);     // Fan blows forward
+    analogWrite(motorPwmPin, 0);         // Motor starts OFF
 
     Serial.println("=== Temperature Controlled Motor ===");
 }
@@ -41,10 +47,11 @@ void loop() {
     } else if (tempC > 50) {
         power = 100;                     // Above 50°C: fan at MAX
     } else {
-        power = map((int)tempC, 25, 50, 0, 100);  // Smooth range
+        power = map((int)tempC, 25, 50, 20, 100);  // Smooth range
     }
 
-    motor.setPower(power);
+    // Convert 0-100% to the 0-255 PWM range
+    analogWrite(motorPwmPin, map(power, 0, 100, 0, 255));
 
     Serial.print("Temperature: ");
     Serial.print(tempC, 1);              // Print with 1 decimal place

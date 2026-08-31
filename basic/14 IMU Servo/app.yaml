@@ -1,5 +1,0 @@
-name: 14 IMU Servo
-description: Motion-controlled pan-tilt — tilt the IMU to move two servos in real time
-ports: []
-bricks: []
-icon: 🤖

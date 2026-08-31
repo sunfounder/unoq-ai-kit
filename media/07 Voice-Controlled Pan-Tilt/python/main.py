@@ -4,7 +4,6 @@ Hold the external button to record. Release it to recognize the speech,
 move the corresponding servo to a fixed angle, and speak a confirmation.
 """
 
-# import os
 import time
 from typing import Optional, Tuple
 
@@ -13,7 +12,6 @@ from arduino.app_utils import Bridge
 from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
-# os.makedirs("./audio_output", exist_ok=True)
 
 BUTTON_RPC = "button_read"
 POLL_INTERVAL = 0.05
@@ -47,8 +45,9 @@ print("Preparing the audio input and output...", flush=True)
 
 
 stt = STT(type="local_fast", language="en")
-tts = EdgeTTS(gain=0.4)
+tts = EdgeTTS()
 tts.set_voice("en-US-JennyNeural")
+tts.set_volume(50)
 
 print("Voice-controlled pan-tilt is ready.", flush=True)
 print("Supported commands:", flush=True)
@@ -80,6 +79,8 @@ try:
             print("Recognizing...", flush=True)
             stt.stop_listening()
             text = stt.get_result()
+            if isinstance(text, dict):
+                text = text.get("text", "")
             recording = False
 
             if text and text.strip():

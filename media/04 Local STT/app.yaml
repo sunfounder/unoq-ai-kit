@@ -1,0 +1,7 @@
+name: 04 Local STT
+description: Automatically records speech and prints local STT results
+python:
+  entry: python/main.py
+bricks:
+- sunfounder_stt: {}
+icon: 🎤

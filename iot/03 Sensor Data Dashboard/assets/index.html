@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensor Data Dashboard</title>
+  <link rel="icon" type="image/png" href="./img/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Sensor Data Dashboard</h1>
+    <img src="./img/sf_logo.png" alt="SunFounder Logo">
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="status-row">
+        <span id="status-dot" class="status-indicator"></span>
+        <span id="status-label" class="status-label">Ready</span>
+      </div>
+
+      <section class="dashboard-panel">
+        <div class="reading-section">
+          <span class="reading-label">CURRENT LIGHT LEVEL</span>
+          <div class="reading-value"><span id="light-value">--</span><span class="unit">%</span></div>
+          <div class="level-track"><div id="level-fill" class="level-fill"></div></div>
+        </div>
+
+        <div class="chart-section">
+          <div class="chart-header">
+            <div>
+              <span class="chart-title">Light Level Over Time</span>
+              <span class="chart-subtitle">Last 30 seconds</span>
+            </div>
+            <span class="live-badge"><span></span> LIVE</span>
+          </div>
+          <div class="chart-wrap"><canvas id="light-chart"></canvas></div>
+        </div>
+      </section>
+
+      <p id="hint-text">Cover and uncover the photoresistor to watch the light level change.</p>
+      <p id="error-container"></p>
+    </div>
+  </main>
+
+  <script src="libs/socket.io.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

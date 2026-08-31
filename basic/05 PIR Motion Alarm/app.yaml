@@ -1,0 +1,5 @@
+name: 05 PIR Motion Alarm
+description: Detect motion with a PIR sensor and sound a passive buzzer alarm
+ports: []
+bricks: []
+icon: 🚨

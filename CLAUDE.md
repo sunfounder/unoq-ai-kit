@@ -41,7 +41,7 @@ Each app's README.md follows this structure:
 ## How to Use the Example
 
 1. Open **Arduino App Lab**.
-2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
+2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
 3. Import `<NN> <Lesson Name>.zip` from `unoq-ai-kit\<module>`.
 4. Click **Run**.
 5. <What to do in the Web UI to see the result.>

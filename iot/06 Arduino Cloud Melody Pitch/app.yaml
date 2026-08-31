@@ -1,0 +1,9 @@
+name: 05 Arduino Cloud Melody Pitch
+description: Use an Arduino Cloud slider to raise or lower the pitch of a repeating melody
+ports: []
+bricks:
+- arduino:arduino_cloud:
+    variables:
+      ARDUINO_DEVICE_ID: ""
+      ARDUINO_SECRET: ""
+icon: 🎵

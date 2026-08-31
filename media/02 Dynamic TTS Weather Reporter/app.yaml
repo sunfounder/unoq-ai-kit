@@ -3,6 +3,5 @@ description: Read temperature and humidity from a DHT11 sensor and announce the 
 python:
   entry: python/main.py
 bricks:
-- robot_shield: {}
 - sunfounder_tts: {}
 icon: 🔊

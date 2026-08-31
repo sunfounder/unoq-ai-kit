@@ -9,8 +9,8 @@ void setup() {
 }
 
 void loop() {
-    digitalWrite(ledPin, HIGH);  // Turn the LED on (5V)
+    digitalWrite(ledPin, HIGH);  // Turn the LED on
     delay(500);                  // Wait half a second
-    digitalWrite(ledPin, LOW);   // Turn the LED off (0V)
+    digitalWrite(ledPin, LOW);   // Turn the LED off
     delay(500);                  // Wait half a second
 }

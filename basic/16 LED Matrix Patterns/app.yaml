@@ -1,0 +1,5 @@
+name: 16 LED Matrix Patterns
+description: Display five simple icons on the built-in LED matrix
+ports: []
+bricks: []
+icon: ⬛

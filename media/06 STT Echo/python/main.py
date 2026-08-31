@@ -4,7 +4,6 @@ Hold the button to record. Release it to stop recording, recognize
 the speech locally, and repeat the recognized sentence aloud.
 """
 
-# import os
 import time
 
 from arduino.app_utils import Bridge
@@ -12,7 +11,6 @@ from arduino.app_utils import Bridge
 from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
-# os.makedirs("./audio_output", exist_ok=True)
 
 BUTTON_RPC = "button_read"
 POLL_INTERVAL = 0.05
@@ -23,8 +21,9 @@ AUDIO_OUTPUT_DIR = "/app/audio_output"
 
 
 
-tts = EdgeTTS(gain=0.4)
+tts = EdgeTTS()
 tts.set_voice("en-US-JennyNeural")
+tts.set_volume(50)
 
 print("Preparing the audio input...", flush=True)
 stt = STT(type="local_fast", language="en")
@@ -57,6 +56,8 @@ try:
             print("Recognizing...", flush=True)
             stt.stop_listening()
             text = stt.get_result()
+            if isinstance(text, dict):
+                text = text.get("text", "")
 
             if text and text.strip():
                 text = text.strip()

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Doorbell</title>
+  <link rel="icon" type="image/png" href="./img/sf_logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Smart Doorbell</h1>
+  <img src="./img/sf_logo.png" alt="SunFounder Logo">
+</header>
+
+<main>
+  <div class="card">
+    <div class="status-row">
+      <span class="status-indicator" id="connection-dot"></span>
+      <span class="status-label" id="connection-label">Connecting</span>
+    </div>
+
+    <div id="visitor-alert" class="visitor-alert">
+      <div class="alert-icon">🔔</div>
+      <div>
+        <span class="alert-caption">DOORBELL STATUS</span>
+        <strong id="alert-text">Waiting for visitors...</strong>
+      </div>
+    </div>
+
+    <div class="camera-container">
+      <div id="video-placeholder" class="video-placeholder">
+        <div class="camera-icon">📷</div>
+        <p>Starting camera...</p>
+      </div>
+      <img id="camera-stream" class="camera-stream" alt="Live camera preview" style="display:none;">
+    </div>
+
+    <section class="snapshot-section">
+      <div class="snapshot-icon">📸</div>
+      <div>
+        <span class="snapshot-caption">LAST VISITOR PHOTO</span>
+        <strong id="snapshot-text">No visitor photo yet</strong>
+      </div>
+    </section>
+
+    <section class="events-section">
+      <div class="events-header">
+        <div>
+          <h2>Recent Visitors</h2>
+          <p>Doorbell presses recorded in this session</p>
+        </div>
+        <button id="clear-events" type="button">CLEAR</button>
+      </div>
+
+      <div id="event-list" class="event-list">
+        <div class="empty-events">No visitors yet.</div>
+      </div>
+    </section>
+
+    <p id="error-container"></p>
+  </div>
+</main>
+
+<script src="libs/socket.io.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,14 +1,13 @@
-\
-    /*
-     * Dynamic TTS Weather Reporter
-     *
-     * Wiring:
-     *   DHT11 VCC  -> 5V
-     *   DHT11 DATA -> D2
-     *   DHT11 GND  -> GND
-     *
-     * Python requests the current sensor values through Bridge.
-     */
+/*
+ * Dynamic TTS Weather Reporter
+ *
+ * Wiring:
+ *   DHT11 VCC  -> 3.3V
+ *   DHT11 DATA -> D2
+ *   DHT11 GND  -> GND
+ *
+ * Python requests the current sensor values through Bridge.
+ */
 
     #include "DHT.h"
     #include <Arduino_RouterBridge.h>

@@ -1,0 +1,6 @@
+name: 07 Smart Doorbell
+description: Build a smart doorbell with a push button, passive buzzer, live camera preview, visitor snapshot, and browser notification.
+ports: []
+bricks:
+- arduino:web_ui: {}
+icon: 🔔

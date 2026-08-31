@@ -1,0 +1,8 @@
+name: 10 IoT Voice Message
+description: Record with the STT brick microphone API and play through the TTS brick speaker API
+ports: []
+bricks:
+- arduino:web_ui: {}
+- sunfounder_stt: {}
+- sunfounder_tts: {}
+icon: 🎙️

@@ -1,0 +1,7 @@
+name: 03 Voice Recorder
+description: Record with the STT brick microphone API and play through the TTS brick speaker API
+ports: []
+bricks:
+- sunfounder_stt: {}
+- sunfounder_tts: {}
+icon: 🎙️

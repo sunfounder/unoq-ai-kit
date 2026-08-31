@@ -1,0 +1,5 @@
+name: 11 Temperature & Humidity Monitor
+description: Read temperature and humidity with a DHT11 sensor
+ports: []
+bricks: []
+icon: 🌡️

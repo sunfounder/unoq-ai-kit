@@ -1,32 +1,33 @@
 /*
- * Sweeps a servo on channel 0 between -45° and +45°.
+ * Sweeps a servo between 45° and 135° (centered on 90°).
+ *
+ * Pan servo -> pin 9
  */
 
-#include "RobotShield.h"
+#include <Arduino_HardwareServo.h>
 
-Servo servo(0);  // Servo on channel 0
+HardwareServo myservo;  // Pan servo on D9
 
 void setup() {
     Serial.begin(115200);
-    I2cBus::i2c().begin();
-    servo.begin();
+    myservo.attach(9);
 
     Serial.println("=== ServoSweep Ready ===");
 }
 
 void loop() {
-    // Sweep from -45° to +45°
-    for (int16_t angle = -45; angle <= 45; angle += 2) {
-        servo.setAngle(angle);
-        Serial.print("Servo 0 angle: ");
+    // Sweep from 45° to 135° (=-45° to +45° around the 90° center)
+    for (int angle = 45; angle <= 135; angle += 2) {
+        myservo.write(angle);
+        Serial.print("Servo angle: ");
         Serial.println(angle);
         delay(30);
     }
 
-    // Sweep back from +45° to -45°
-    for (int16_t angle = 45; angle >= -45; angle -= 2) {
-        servo.setAngle(angle);
-        Serial.print("Servo 0 angle: ");
+    // Sweep back from 135° to 45°
+    for (int angle = 135; angle >= 45; angle -= 2) {
+        myservo.write(angle);
+        Serial.print("Servo angle: ");
         Serial.println(angle);
         delay(30);
     }

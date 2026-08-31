@@ -3,7 +3,6 @@ description: Control the pan-tilt and capture photos using voice commands
 python:
   entry: python/main.py
 bricks:
-- robot_shield: {}
 - sunfounder_stt: {}
 - sunfounder_tts: {}
 icon: 📷

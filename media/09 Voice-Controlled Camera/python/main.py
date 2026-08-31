@@ -1,6 +1,5 @@
 """Control a pan-tilt and capture photos using spoken commands."""
 
-# import os
 import time
 from pathlib import Path
 from typing import Callable, Optional
@@ -14,7 +13,6 @@ from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
 
-# os.makedirs("./audio_output", exist_ok=True)
 
 LISTEN_SECONDS = 4
 PAUSE_BETWEEN_CYCLES = 0.8
@@ -31,8 +29,9 @@ print("Preparing audio input and output...", flush=True)
 print("Loading local speech recognition...", flush=True)
 stt = STT(type="local_fast", language="en")
 
-tts = EdgeTTS(gain=0.4)
+tts = EdgeTTS()
 tts.set_voice("en-US-JennyNeural")
+tts.set_volume(50)
 
 print("Initializing camera...", flush=True)
 camera = Camera()
@@ -139,6 +138,8 @@ try:
 
             print("Recognizing...", flush=True)
             text = stt.get_result(timeout=60)
+            if isinstance(text, dict):
+                text = text.get("text", "")
             recognized_text = text.strip() if text else ""
 
             if not recognized_text:

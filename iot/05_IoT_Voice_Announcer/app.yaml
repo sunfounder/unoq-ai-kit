@@ -1,0 +1,7 @@
+name: 05 IoT Voice Announcer
+description: Type a message in the Web UI and let UNO Q speak it aloud
+ports: []
+bricks:
+- arduino:web_ui: {}
+- sunfounder_tts: {}
+icon: 🔊

@@ -1,0 +1,7 @@
+name: 05 Voice-Controlled RGB LED
+description: Speak a color command to control an RGB LED with local speech recognition
+python:
+  entry: python/main.py
+bricks:
+- sunfounder_stt: {}
+icon: 🌈

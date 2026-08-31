@@ -1,0 +1,461 @@
+/* ============================================================
+   Joystick Maze
+   SunFounder Web UI style
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                 Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    background: #eceff1;
+    color: #37474f;
+    min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #23425d;
+    letter-spacing: -0.2px;
+}
+
+header img {
+    position: absolute;
+    left: 40px;
+    height: 28px;
+    width: auto;
+}
+
+/* ── Main ───────────────────────────────────────────────── */
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 48px 24px;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 30px 36px 30px;
+    max-width: 760px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ── Status ─────────────────────────────────────────────── */
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b0bec5;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.status-indicator.on {
+    background: #29a3d9;
+    box-shadow: 0 0 0 4px rgba(41, 163, 217, 0.15);
+}
+
+.status-indicator.success {
+    background: #43a047;
+    box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.14);
+}
+
+.status-indicator.error {
+    background: #d32f2f;
+    box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.12);
+}
+
+.status-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #90a4ae;
+}
+
+/* ── Game information ───────────────────────────────────── */
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin-bottom: 22px;
+}
+
+.info-item {
+    min-width: 115px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    color: #90a4ae;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    color: #23425d;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.info-divider {
+    width: 1px;
+    background: #eceff1;
+    margin: 0 26px;
+}
+
+/* ── Maze ───────────────────────────────────────────────── */
+
+.maze {
+    width: min(100%, 650px);
+    aspect-ratio: 13 / 9;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 3px;
+    padding: 6px;
+    background: #f4f7f9;
+    border: 1px solid #dfe5e8;
+    border-radius: 10px;
+}
+
+.cell {
+    position: relative;
+    border-radius: 4px;
+    background: #fff;
+    border: 1px solid #edf1f3;
+}
+
+.cell.wall {
+    background: #607d8b;
+    border-color: #607d8b;
+}
+
+.cell.player::after {
+    content: "";
+    position: absolute;
+    inset: 20%;
+    border-radius: 50%;
+    background: #29a3d9;
+    box-shadow: 0 0 0 4px rgba(41, 163, 217, 0.12);
+    z-index: 2;
+}
+
+.cell.goal::before {
+    content: "";
+    position: absolute;
+    inset: 24%;
+    border-radius: 3px;
+    background: #f9a825;
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 4px rgba(249, 168, 37, 0.12);
+    z-index: 1;
+}
+
+/* Player stays visible after reaching the goal. */
+.cell.player.goal::before {
+    inset: 10%;
+    background: transparent;
+    border: 3px solid #43a047;
+    border-radius: 50%;
+    transform: none;
+    box-shadow: 0 0 0 5px rgba(67, 160, 71, 0.10);
+}
+
+.cell.player.goal::after {
+    inset: 28%;
+    background: #29a3d9;
+    box-shadow: none;
+}
+
+/* ── Message / error ────────────────────────────────────── */
+
+#status-text {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #607d8b;
+    min-height: 22px;
+}
+
+#status-text.success-text {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+#error-container {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #ffebee;
+    color: #c62828;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ── Legend ─────────────────────────────────────────────── */
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 18px;
+    color: #78909c;
+    font-size: 13px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.legend-player {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #29a3d9;
+}
+
+.legend-goal {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    background: #f9a825;
+    transform: rotate(45deg);
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+
+#restart-button,
+#play-again-button {
+    border: none;
+    border-radius: 8px;
+    background: #29a3d9;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    cursor: pointer;
+    padding: 11px 22px;
+    margin-top: 22px;
+    transition: background .2s, transform .15s;
+}
+
+#restart-button:hover,
+#play-again-button:hover {
+    background: #168dc1;
+}
+
+#restart-button:active,
+#play-again-button:active {
+    transform: scale(.97);
+}
+
+/* ── Win dialog ─────────────────────────────────────────── */
+
+.win-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(38, 50, 56, 0.38);
+    z-index: 20;
+}
+
+.win-overlay.show {
+    display: flex;
+}
+
+.win-dialog {
+    width: min(420px, 100%);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, .18);
+    padding: 34px 34px 30px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #e8f5e9;
+    color: #43a047;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.win-dialog h2 {
+    color: #23425d;
+    font-size: 26px;
+    margin-bottom: 7px;
+}
+
+.win-dialog > p {
+    color: #607d8b;
+    font-size: 14px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: center;
+    gap: 54px;
+    margin: 26px 0 20px;
+}
+
+.result-row div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.result-row span {
+    color: #90a4ae;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.result-row strong {
+    color: #23425d;
+    font-size: 22px;
+}
+
+.restart-hint {
+    line-height: 1.5;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+    header {
+        padding: 16px 20px;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    header img {
+        left: 20px;
+        height: 23px;
+    }
+
+    main {
+        padding: 28px 14px;
+    }
+
+    .card {
+        padding: 24px 14px;
+    }
+
+    .maze {
+        gap: 2px;
+        padding: 4px;
+    }
+
+    .info-divider {
+        margin: 0 15px;
+    }
+}
+
+
+/* ============================================================
+   Final hybrid theme
+   Keep the SunFounder page/card light and make only the game
+   canvas dark for stronger contrast.
+   ============================================================ */
+
+.maze {
+    background: #111827;
+    border: 1px solid #26344a;
+    padding: 8px;
+    gap: 3px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+        0 8px 24px rgba(35, 66, 93, 0.10);
+}
+
+.cell {
+    background: #172033;
+    border: 1px solid #202b40;
+}
+
+.cell.wall {
+    background: #475569;
+    border-color: #53647a;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.cell.player::after {
+    background: #29a3d9;
+    box-shadow:
+        0 0 0 4px rgba(41, 163, 217, 0.18),
+        0 0 16px rgba(41, 163, 217, 0.48);
+}
+
+.cell.goal::before {
+    background: #f9a825;
+    box-shadow:
+        0 0 0 4px rgba(249, 168, 37, 0.15),
+        0 0 14px rgba(249, 168, 37, 0.38);
+}
+
+/* Keep both the player and completion marker visible at the goal. */
+.cell.player.goal::before {
+    background: transparent;
+    border: 3px solid #43a047;
+    box-shadow:
+        0 0 0 5px rgba(67, 160, 71, 0.13),
+        0 0 15px rgba(67, 160, 71, 0.25);
+}
+
+.cell.player.goal::after {
+    background: #29a3d9;
+}

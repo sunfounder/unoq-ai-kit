@@ -1,6 +1,5 @@
-"""Read a DHT11 sensor and announce the values every five seconds."""
+"""Read a DHT11 sensor and announce the values every 30 seconds."""
 
-# import os
 import time
 
 from arduino.app_utils import Bridge
@@ -11,13 +10,13 @@ from sunfounder_tts import EdgeTTS
 WEATHER_RPC = "read_weather"
 ANNOUNCEMENT_INTERVAL = 30
 
-# os.makedirs("./audio_output", exist_ok=True)
 
-tts = EdgeTTS(gain=0.4)
+tts = EdgeTTS()
 tts.set_voice("en-US-JennyNeural")
+tts.set_volume(50)
 
 print("Dynamic TTS Weather Reporter")
-print("The temperature and humidity will be announced every 5 seconds.")
+print("The temperature and humidity will be announced every 30 seconds.")
 
 try:
     while True:

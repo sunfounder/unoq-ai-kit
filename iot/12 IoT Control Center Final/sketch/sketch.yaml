@@ -1,0 +1,11 @@
+profiles:
+  default:
+    platforms:
+      - platform: arduino:zephyr
+    libraries:
+      - RobotShield (1.0.6)
+      - DHT sensor library (1.4.6)
+      - Adafruit Unified Sensor (1.1.15)
+      - SunFounder_IMU (1.1.2)
+
+default_profile: default

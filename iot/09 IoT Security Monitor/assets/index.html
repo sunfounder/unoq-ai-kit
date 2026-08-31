@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Security Monitor</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>IoT Security Monitor</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="connection-dot"></span>
+                <span class="status-label" id="connection-label">Connecting</span>
+            </div>
+
+            <div class="camera-container">
+                <div id="video-placeholder" class="video-placeholder">
+                    <div class="camera-icon">📷</div>
+                    <p>Searching for camera...</p>
+                </div>
+
+                <img
+                    id="camera-stream"
+                    class="camera-stream"
+                    alt="Live camera preview"
+                    style="display: none;">
+            </div>
+
+            <section class="monitor-panel">
+                <div class="motion-card" id="motion-card">
+                    <div class="motion-icon" id="motion-icon">✓</div>
+                    <div>
+                        <span class="motion-caption">MOTION STATUS</span>
+                        <strong id="motion-text">AREA CLEAR</strong>
+                    </div>
+                </div>
+
+                <div class="alarm-card">
+                    <span class="alarm-caption">ALARM</span>
+                    <div class="alarm-state">
+                        <span class="alarm-dot" id="alarm-dot"></span>
+                        <strong id="alarm-text">OFF</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="snapshot-section">
+                <div class="snapshot-icon">📸</div>
+                <div>
+                    <span class="snapshot-caption">LAST SNAPSHOT</span>
+                    <strong id="snapshot-text">No photo captured yet</strong>
+                </div>
+            </section>
+
+            <section class="events-section">
+                <div class="events-header">
+                    <div>
+                        <h2>Recent Events</h2>
+                        <p>Motion changes detected by the PIR sensor</p>
+                    </div>
+                    <button id="clear-events" type="button">CLEAR</button>
+                </div>
+
+                <div id="event-list" class="event-list">
+                    <div class="empty-events" id="empty-events">
+                        No motion events yet.
+                    </div>
+                </div>
+            </section>
+
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

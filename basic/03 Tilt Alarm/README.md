@@ -23,7 +23,7 @@ Connect the tilt switch to digital pin D2 and the active buzzer to pin D5.
 ## How to Use the Example
 
 1. Open **Arduino App Lab**.
-2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
+2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
 3. Import `03 Tilt Alarm.zip` from `unoq-ai-kit\basic`.
 4. Click **Run**.
 5. Keep the breadboard flat — the buzzer is silent. Tilt it — a rhythmic alarm sounds (two short beeps, one long beep). Straighten it — the alarm stops.

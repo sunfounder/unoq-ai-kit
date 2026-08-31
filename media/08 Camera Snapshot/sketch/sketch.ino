@@ -1,5 +1,5 @@
 /*
- * Lesson 8: Camera Snapshot
+ * Camera Snapshot
  *
  * Wiring:
  *   Button pin 1 -> D2

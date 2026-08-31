@@ -1,27 +1,28 @@
 /*
- * Lesson 7: Voice-Controlled Pan-Tilt
+ * Voice-Controlled Pan-Tilt
  *
  * Hold the button connected to D2 and speak a command. Python performs
  * speech recognition and calls one of the Bridge functions below.
  *
- * Pan servo:  P0
- * Tilt servo: P1
+ * Pan servo:  D9
+ * Tilt servo: D10
  * Button:     D2 to GND
  */
 
 #include <Arduino_RouterBridge.h>
-#include "RobotShield.h"
+#include <Arduino_HardwareServo.h>
 
 const int BUTTON_PIN = 2;
 
+// Servo offsets from the 90° center position
 const int LEFT_ANGLE = -45;
 const int RIGHT_ANGLE = 45;
 const int UP_ANGLE = -45;
 const int DOWN_ANGLE = 45;
 const int CENTER_ANGLE = 0;
 
-Servo panServo(0);
-Servo tiltServo(1);
+HardwareServo panServo;
+HardwareServo tiltServo;
 
 int buttonRead(String dummy)
 {
@@ -32,36 +33,36 @@ int buttonRead(String dummy)
 int panLeft(String dummy)
 {
     (void)dummy;
-    panServo.setAngle(LEFT_ANGLE);
+    panServo.write(90 + LEFT_ANGLE);
     return LEFT_ANGLE;
 }
 
 int panRight(String dummy)
 {
     (void)dummy;
-    panServo.setAngle(RIGHT_ANGLE);
+    panServo.write(90 + RIGHT_ANGLE);
     return RIGHT_ANGLE;
 }
 
 int tiltUp(String dummy)
 {
     (void)dummy;
-    tiltServo.setAngle(UP_ANGLE);
+    tiltServo.write(90 + UP_ANGLE);
     return UP_ANGLE;
 }
 
 int tiltDown(String dummy)
 {
     (void)dummy;
-    tiltServo.setAngle(DOWN_ANGLE);
+    tiltServo.write(90 + DOWN_ANGLE);
     return DOWN_ANGLE;
 }
 
 int centerPanTilt(String dummy)
 {
     (void)dummy;
-    panServo.setAngle(CENTER_ANGLE);
-    tiltServo.setAngle(CENTER_ANGLE);
+    panServo.write(90 + CENTER_ANGLE);
+    tiltServo.write(90 + CENTER_ANGLE);
     return CENTER_ANGLE;
 }
 
@@ -69,12 +70,11 @@ void setup()
 {
     pinMode(BUTTON_PIN, INPUT_PULLUP);
 
-    I2cBus::i2c().begin();
-    panServo.begin();
-    tiltServo.begin();
+    panServo.attach(9);
+    tiltServo.attach(10);
 
-    panServo.setAngle(CENTER_ANGLE);
-    tiltServo.setAngle(CENTER_ANGLE);
+    panServo.write(90 + CENTER_ANGLE);
+    tiltServo.write(90 + CENTER_ANGLE);
 
     Bridge.begin();
     Bridge.provide("button_read", buttonRead);

@@ -1,0 +1,6 @@
+name: 04 UI Joystick Maze
+description: Guide a character through a browser maze using a physical joystick.
+ports: []
+bricks:
+- arduino:web_ui: {}
+icon: 🕹️

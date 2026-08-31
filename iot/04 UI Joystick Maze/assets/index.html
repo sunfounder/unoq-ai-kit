@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joystick Maze</title>
+    <link rel="icon" type="image/png" href="./img/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Joystick Maze</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="status-dot"></span>
+                <span class="status-label" id="status-label">Ready</span>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">MOVES</span>
+                    <span class="info-value" id="moves">0</span>
+                </div>
+                <div class="info-divider"></div>
+                <div class="info-item">
+                    <span class="info-label">TIME</span>
+                    <span class="info-value" id="time">0.0 s</span>
+                </div>
+            </div>
+
+            <div id="maze" class="maze" aria-label="Joystick maze game"></div>
+
+            <p id="status-text">Move the joystick to reach the goal.</p>
+            <p id="error-container"></p>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="legend-player"></span>
+                    <span>Player</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-goal"></span>
+                    <span>Goal</span>
+                </div>
+            </div>
+
+            <button id="restart-button">RESTART</button>
+        </div>
+    </main>
+
+    <div id="win-overlay" class="win-overlay" aria-hidden="true">
+        <div class="win-dialog">
+            <div class="success-icon">✓</div>
+            <h2>Maze Complete!</h2>
+            <p>You reached the goal.</p>
+
+            <div class="result-row">
+                <div>
+                    <span>Moves</span>
+                    <strong id="final-moves">0</strong>
+                </div>
+                <div>
+                    <span>Time</span>
+                    <strong id="final-time">0.0 s</strong>
+                </div>
+            </div>
+
+            <p class="restart-hint">
+                Press the joystick button or click below to play again.
+            </p>
+
+            <button id="play-again-button">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+name: 08 IoT Security Monitor
+description: Monitor a live camera feed, detect motion with a PIR sensor, trigger an passive buzzer, and capture security snapshots.
+ports: []
+bricks:
+  - arduino:web_ui: {}
+icon: 🛡️

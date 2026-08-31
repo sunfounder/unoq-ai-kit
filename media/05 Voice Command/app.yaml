@@ -1,8 +1,0 @@
-name: 03 Voice-Controlled RGB LED
-description: Speak a color command to control an RGB LED with local speech recognition
-python:
-  entry: python/main.py
-bricks:
-- robot_shield: {}
-- sunfounder_stt: {}
-icon: 🌈

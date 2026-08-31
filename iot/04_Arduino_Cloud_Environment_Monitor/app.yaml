@@ -1,9 +1,0 @@
-name: 04 Arduino Cloud Environment Monitor
-description: Upload temperature and humidity to Arduino Cloud and control an external LED remotely.
-ports: []
-bricks:
-  - arduino:arduino_cloud:
-      variables:
-        ARDUINO_DEVICE_ID: ""
-        ARDUINO_SECRET: ""
-icon: 🌤️
