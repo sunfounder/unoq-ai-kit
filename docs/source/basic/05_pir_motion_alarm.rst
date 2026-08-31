@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Create a two-tone siren effect by alternating between two frequencies
 * Understand why PIR sensors need a warm-up period before they work reliably
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,18 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   No external resistor is needed for either component. The PIR sensor module has built-in signal conditioning — its OUT pin outputs a clean HIGH or LOW that you read with ``digitalRead()``, just like a button. The passive buzzer needs a **frequency signal** to produce sound — unlike an active buzzer (which has a built-in oscillator and only needs DC voltage), a passive buzzer requires a square wave at the desired frequency, which Arduino's ``tone()`` function generates for you. The PIR sensor has three pins: **VCC** (connect to 3.3V), GND (ground), and OUT (signal).
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
+
+Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT → D2** — and the passive buzzer to **D5**.
 
 .. image:: /img/wiring/wiring_pc_buzzer_pir.png
    :width: 600
    :align: center
 
-2. Code
-----------
+2. Run the App
+----------------
 
 **Step 1: Import and Run**
 

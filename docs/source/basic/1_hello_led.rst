@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use ``pinMode()`` and ``digitalWrite()`` to control an external LED
 * Use ``delay()`` to create a blinking pattern
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   The 220Ω resistor has color bands **Red → Red → Brown → Gold**. You can also use your Resistor Card to identify it.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the LED to **D5** through a 220Ω resistor: the long leg (anode) goes to D5, the short leg (cathode) to the resistor and GND. Never connect an LED without a resistor — it burns out immediately.
 
 .. image:: /img/wiring/wiring_led.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Never connect an LED directly between a pin and GND without a resistor. The LED will draw too much current and burn out immediately.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

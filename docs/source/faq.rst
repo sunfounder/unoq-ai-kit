@@ -44,6 +44,38 @@ Note: To ensure the UNO Q board is properly detected by the Arduino App Lab, you
 https://docs.arduino.cc/tutorials/uno-q/user-manual/#linux-host-setup-required-for-linux-users
 
 
+.. _enable_external_carriers:
+
+Enable External Carriers (one-time setup)
+-------------------------------------------
+
+Before you can use the camera, you must enable external carriers on your
+UNO Q. This is a **one-time setup** — once enabled, it stays enabled for
+every project.
+
+#. On the App Lab home page, click the **Settings** button.
+
+   .. image:: /img/app_settings.png
+      :width: 500
+      :align: center
+
+#. Turn on **Enable external carriers connected to your Arduino UNO Q**.
+   A prompt appears, telling you to plug in the carriers while the board
+   is powered off.
+
+   .. image:: /img/app_enable_carrier.png
+      :width: 500
+      :align: center
+
+#. Check which connector your camera is plugged into — for example, if it
+   is on **Camera0**, select the matching type (e.g. **type1-2lanes**) for
+   Camera0. Then click **Apply and Reboot**.
+
+   .. image:: /img/app_camera0.png
+      :width: 500
+      :align: center
+
+
 
 Flashing a New Image to the UNO Q
 -------------------------------------------

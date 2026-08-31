@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Combine the LED matrix, buttons, and a passive buzzer into a single interactive system
 * Use a simple software **debounce** to prevent a single press from registering multiple times
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   This game uses the **built-in LED matrix** — no external display needed. The two buttons are your left and right controls, and the passive buzzer provides audio feedback. Both buttons use ``INPUT_PULLUP`` so they read ``HIGH`` when unpressed and ``LOW`` when pressed.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the left button to D3 and the right button to D2 — both use ``INPUT_PULLUP``, so do not add external pull-up or pull-down resistors — and the passive buzzer to D5; it has no polarity, so either pin can go to GND, while the built-in LED matrix needs no wiring.
 
 .. image:: /img/wiring/wiring_buzzer_button.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Both buttons must use ``INPUT_PULLUP`` mode — do not add external pull-up or pull-down resistors. The passive buzzer has no polarity; either pin can go to GND.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

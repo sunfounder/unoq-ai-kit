@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Understand **additive color mixing**: how red, green, and blue combine to form every other color
 * Use parameters to make functions flexible and reusable
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   The RGB LED has **four legs**. The longest leg is the **common cathode** (connect to GND). The other three legs are, from longest to shortest side: **Red**, **Ground (longest)**, **Green**, **Blue**.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires. Notice how the three resistors connect to three different PWM pins — each color channel gets its own independent control.
+The RGB LED has **four legs**: the longest is the **common cathode** — connect it to **GND** — and the other three (Red, Green, Blue) go to **D8, D7, D6**, each channel through its own 220Ω resistor. Never connect a channel directly to a digital pin without a resistor — it burns out.
 
 .. image:: /img/wiring/wiring_rgb_led.png
    :width: 500
    :align: center
 
-.. warning::
-
-   The RGB LED's **longest leg must go to GND**. The three shorter legs each connect to a separate PWM pin **through a 220Ω resistor**. Never connect an RGB LED pin directly to a digital pin without a resistor — each channel needs current limiting. Also, the flat edge of the LED package indicates the cathode side — use it to identify the correct orientation.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 
@@ -79,10 +75,6 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. note::      
-  
-      This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
-   
    .. image:: /img/app_run.png
       :width: 500
 
@@ -97,62 +89,54 @@ Now that you've seen the full color cycle in action, let's look at the sketch fi
    :linenos:
 
    /*
-    * Cycles through 8 colors using an RGB LED and 3-channel PWM.
+    * Cycles through 8 colors using an RGB LED and analogWrite().
+    *
+    * Red   -> D8
+    * Green -> D7
+    * Blue  -> D6
     */
 
-   #include "RobotShield.h"
-
-   Pwm red(6);    // Red channel on P6
-   Pwm green(5);  // Green channel on P5
-   Pwm blue(4);   // Blue channel on P4
+   const int redPin = 8;
+   const int greenPin = 7;
+   const int bluePin = 6;
 
    void setup() {
-       I2cBus::i2c().begin();
-
-       red.begin();
-       green.begin();
-       blue.begin();
-
-       red.setFreq(1000);
-       green.setFreq(1000);
-       blue.setFreq(1000);
-
-       red.setEnable(true);
-       green.setEnable(true);
-       blue.setEnable(true);
+       pinMode(redPin, OUTPUT);
+       pinMode(greenPin, OUTPUT);
+       pinMode(bluePin, OUTPUT);
    }
 
    // Set all three color channels at once
-   // r, g, b: pulse width from 0 (off) to 1000 (full brightness)
-   void setColor(uint16_t r, uint16_t g, uint16_t b) {
-       red.setPulse(r);
-       green.setPulse(g);
-       blue.setPulse(b);
+   // r, g, b: brightness from 0 (off) to 255 (full brightness)
+   void setColor(int r, int g, int b) {
+       analogWrite(redPin, r);
+       analogWrite(greenPin, g);
+       analogWrite(bluePin, b);
    }
 
    void loop() {
-       setColor(1000, 0, 0);      // Red
+       setColor(255, 0, 0);      // Red
        delay(1000);
 
-       setColor(0, 1000, 0);      // Green
+       setColor(0, 255, 0);      // Green
        delay(1000);
 
-       setColor(0, 0, 1000);      // Blue
+       setColor(0, 0, 255);      // Blue
        delay(1000);
 
-       setColor(1000, 1000, 0);   // Yellow   (red + green)
+       setColor(255, 255, 0);    // Yellow   (red + green)
        delay(1000);
 
-       setColor(0, 1000, 1000);   // Cyan     (green + blue)
+       setColor(0, 255, 255);    // Cyan     (green + blue)
        delay(1000);
 
-       setColor(1000, 0, 1000);   // Magenta  (red + blue)
+       setColor(255, 0, 255);    // Magenta  (red + blue)
        delay(1000);
 
-       setColor(1000, 1000, 1000);// White    (all three)
+       setColor(255, 255, 255);  // White    (all three)
        delay(1000);
 
-       setColor(0, 0, 0);         // Off      (none)
+       setColor(0, 0, 0);        // Off      (none)
        delay(1000);
    }
 
@@ -163,9 +147,8 @@ This lesson introduces your first custom function — a reusable block of code y
 .. code-block:: text
 
    setup() → runs once at startup:
-       Initialize I2C bus (Robot Shield communication)
-       Initialize 3 PWM channels (P6, P5, P4)
-       Set each to 1000 Hz, enable all outputs
+       Set pins 8, 7, and 6 as OUTPUT
+       (red, green, and blue channels)
 
    loop() → runs over and over forever:
        For each of 8 colors:
@@ -173,71 +156,70 @@ This lesson introduces your first custom function — a reusable block of code y
            Wait 1000ms so the color is visible
        (then cycle repeats from Red)
 
-#. Three PWM Objects for Three Color Channels
+#. Three Pin Constants for Three Color Channels
 
-   - Three independent ``Pwm`` objects are created, one for each color channel — the same class used earlier for PWM output
-   - Pin P6 controls red, pin P5 controls green, and pin P4 controls blue
-   - Each channel receives its own pulse width value, allowing any combination of brightness across the three colors
+   - Three ``const int`` pin constants are created, one for each color channel — giving each pin a meaningful name
+   - Pin 8 controls red, pin 7 controls green, and pin 6 controls blue
+   - Each channel receives its own brightness value, allowing any combination of brightness across the three colors
 
    .. code-block:: arduino
 
-      Pwm red(6);
-      Pwm green(5);
-      Pwm blue(4);
+      const int redPin = 8;
+      const int greenPin = 7;
+      const int bluePin = 6;
 
-#. Setup: Initializing All Three Channels
+#. Setup: Configuring All Three Channels as Outputs
 
-   - All three channels are initialized with a common frequency of 1000 Hz and enabled for output
-   - The I2C bus is started once, then each PWM channel is configured individually
-   - This follows the same initialization pattern used for PWM output, repeated for each primary color
+   - All three channels are set to ``OUTPUT`` mode so they can drive the LED
+   - ``pinMode()`` tells the microcontroller that each pin should send signals out to the LED
+   - This follows the same ``pinMode()`` pattern you used in earlier lessons, repeated for each primary color
 
    .. code-block:: arduino
 
       void setup() {
-          I2cBus::i2c().begin();
-          red.begin();    green.begin();    blue.begin();
-          red.setFreq(1000); green.setFreq(1000); blue.setFreq(1000);
-          red.setEnable(true); green.setEnable(true); blue.setEnable(true);
+          pinMode(redPin, OUTPUT);
+          pinMode(greenPin, OUTPUT);
+          pinMode(bluePin, OUTPUT);
       }
 
 #. The Custom ``setColor()`` Function
 
    - This is a **function definition** — a reusable block of code with the name ``setColor``
    - ``void`` means it does not return a value; it just performs an action
-   - The three parameters ``(r, g, b)`` accept the pulse width for each channel, and all three PWM channels are set in a single step
+   - The three parameters ``(r, g, b)`` accept the brightness for each channel, and all three channels are set in a single step
 
    .. code-block:: arduino
 
-      void setColor(uint16_t r, uint16_t g, uint16_t b) {
-          red.setPulse(r);
-          green.setPulse(g);
-          blue.setPulse(b);
+      void setColor(int r, int g, int b) {
+          analogWrite(redPin, r);
+          analogWrite(greenPin, g);
+          analogWrite(bluePin, b);
       }
 
 #. Calling the Function in the Loop
 
    - Each call to ``setColor()`` passes three numbers representing the brightness of red, green, and blue
-   - ``setColor(1000, 0, 0)`` sends full pulse width to red and zero to the others, producing pure red
-   - ``setColor(1000, 1000, 0)`` lights both red and green equally, producing yellow
+   - ``setColor(255, 0, 0)`` sends full brightness to red and zero to the others, producing pure red
+   - ``setColor(255, 255, 0)`` lights both red and green equally, producing yellow
 
    .. code-block:: arduino
 
-      setColor(1000, 0, 0);      // Red
+      setColor(255, 0, 0);      // Red
       delay(1000);
-      setColor(0, 1000, 0);      // Green
+      setColor(0, 255, 0);      // Green
       delay(1000);
 
 #. Why Functions Matter
 
    - Without ``setColor()``, every color change would need three separate lines of code
-   - With the function, each color is one clear, readable call — ``setColor(1000, 0, 0)``
+   - With the function, each color is one clear, readable call — ``setColor(255, 0, 0)``
    - Functions package logic into named, reusable blocks, making code shorter, cleaner, and easier to understand
 
    .. code-block:: arduino
 
-      red.setPulse(1000);
-      green.setPulse(0);
-      blue.setPulse(0);
+      analogWrite(redPin, 255);
+      analogWrite(greenPin, 0);
+      analogWrite(bluePin, 0);
 
 **Additive Color Mixing**
 
@@ -251,33 +233,33 @@ You've just discovered how screens and displays create every color you see. The 
      - Green
      - Blue
      - Result
-   * - 1000
+   * - 255
      - 0
      - 0
      - Red
    * - 0
-     - 1000
+     - 255
      - 0
      - Green
    * - 0
      - 0
-     - 1000
+     - 255
      - Blue
-   * - 1000
-     - 1000
+   * - 255
+     - 255
      - 0
      - Yellow (red + green)
    * - 0
-     - 1000
-     - 1000
+     - 255
+     - 255
      - Cyan (green + blue)
-   * - 1000
+   * - 255
      - 0
-     - 1000
+     - 255
      - Magenta (red + blue)
-   * - 1000
-     - 1000
-     - 1000
+   * - 255
+     - 255
+     - 255
      - White (all three)
    * - 0
      - 0
@@ -308,7 +290,7 @@ Try adjusting the ``delay()`` after each color to change the cycle speed:
 
 **Challenge: Create Your Own Color**
 
-Pick a color that's not in the basic eight. Use values between 0 and 1000 for each channel to create something unique — orange, purple, pink, teal, warm white, or anything you can imagine. Add it to the cycle in ``loop()``.
+Pick a color that's not in the basic eight. Use values between 0 and 255 for each channel to create something unique — orange, purple, pink, teal, warm white, or anything you can imagine. Add it to the cycle in ``loop()``.
 
 .. dropdown:: Click to reveal hints
    :open:
@@ -323,32 +305,32 @@ Pick a color that's not in the basic eight. Use values between 0 and 1000 for ea
         - Green
         - Blue
         - Approximate Color
-      * - 1000
-        - 200
+      * - 255
+        - ~50
         - 0
         - Orange
-      * - 500
+      * - ~130
         - 0
-        - 500
+        - ~130
         - Purple
-      * - 1000
-        - 150
-        - 300
+      * - 255
+        - ~40
+        - ~75
         - Pink
       * - 0
-        - 500
-        - 500
+        - ~130
+        - ~130
         - Teal
-      * - 1000
-        - 600
-        - 200
+      * - 255
+        - ~155
+        - ~50
         - Warm gold
-      * - 800
-        - 1000
+      * - ~205
+        - 255
         - 0
         - Lime / chartreuse
 
-   The exact look depends on your LED and resistors — experiment! Uneven values (like 1000, 200, 0 for orange) create the most interesting colors.
+   The exact look depends on your LED and resistors — experiment! Uneven values (like 255, ~50, 0 for orange) create the most interesting colors.
 
 
 4. Troubleshooting
@@ -362,12 +344,12 @@ Pick a color that's not in the basic eight. Use values between 0 and 1000 for ea
 **Only one or two colors work, others don't**
 
 * **Cause:** A specific channel's resistor is loose, or the pin assignment is wrong.
-* **Solution:** Test each channel individually — set the other two to 0 and verify that channel lights up on its own. Check that P6 drives red, P5 drives green, and P4 drives blue. Swap pins if needed.
+* **Solution:** Test each channel individually — set the other two to 0 and verify that channel lights up on its own. Check that D8 drives red, D7 drives green, and D6 drives blue. Swap pins if needed.
 
 **Colors look wrong (e.g., blue instead of red)**
 
 * **Cause:** The RGB LED legs are misidentified — the channel-to-pin mapping is swapped.
-* **Solution:** With the flat edge facing you and legs pointing down, the order is typically: Red → Ground (longest) → Green → Blue. If your LED's pinout differs, adjust the ``Pwm`` object declarations to match.
+* **Solution:** With the flat edge facing you and legs pointing down, the order is typically: Red → Ground (longest) → Green → Blue. If your LED's pinout differs, adjust the pin constants at the top of the sketch to match.
 
 **RGB LED was bright for a moment, then died or a color stopped**
 

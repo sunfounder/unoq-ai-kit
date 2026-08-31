@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use a debounce technique to filter out false triggers from mechanical switches
 * Create a rhythmic alarm pattern by sequencing ``delay()`` calls
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   No external resistor is needed for either component. The tilt switch uses ``INPUT_PULLUP`` (just like the button you used earlier), and the active buzzer has its own internal circuitry. If your buzzer has a sticker covering the top, peel it off before use — it protects the sound hole during shipping.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the tilt switch to **D2** and the active buzzer to **D5**: the buzzer is polarized, so its **+** pin (or longer leg) goes to D5 and its **−** pin (or shorter leg) to GND.
 
 .. image:: /img/wiring/wiring_tilt_buzzer.png
    :width: 500
    :align: center
 
-.. warning::
-
-   The active buzzer has **polarity** — it only works in one direction. Check that the pin labeled **+** (or the longer leg) connects to pin 5, and the pin labeled **−** (or the shorter leg) connects to GND. Reversing it won't damage the buzzer, but it won't make any sound.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

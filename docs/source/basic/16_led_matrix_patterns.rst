@@ -14,7 +14,7 @@ In this lesson, you will learn to:
 * Use the ``Arduino_LED_Matrix`` library to render bitmap data
 * Organize code by separating **data** (patterns) from **logic** (the sketch)
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
 **What You Need**
@@ -28,13 +28,15 @@ In this lesson, you will learn to:
    * - |list_uno_q|
      - |list_usb_cable|
 
-.. note::
+**Software Requirements**
 
-   No breadboard wiring is needed. The LED matrix is built into the UNO Q board — it's the grid of tiny white dots above the pin labels. Everything in this lesson runs on the board itself.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
+
+No breadboard wiring is needed — the 8×13 LED matrix is built into the UNO Q board, the grid of tiny white dots above the pin labels, and everything in this lesson runs on the board itself.
 
 
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

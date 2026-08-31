@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Convert a sound wave's round-trip time into a physical distance in centimeters
 * Build a multi-level alarm system that changes behavior based on distance
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   The HC-SR04 has four pins — **VCC** (3.3V), **Trig** (trigger), **Echo**, and **GND**. The two middle pins (Trig and Echo) are the ones you connect to the UNO Q's digital pins. If your sensor has a small jumper cap on the back, leave it in place — it configures the operating mode. The active buzzer has polarity: the pin marked **+** goes to pin 5, **−** to GND.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the HC-SR04's **VCC to 3.3V**, **Trig to pin 3**, **Echo to pin 2**, and **GND to GND** (leave any jumper cap on the sensor's back in place), and connect the active buzzer's **+ pin to D5** and **− pin to GND** — swapping Trig and Echo is the most common wiring mistake, so double-check these two wires.
 
 .. image:: /img/wiring/wiring_ultrasonic.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Swapping Trig and Echo is the most common wiring mistake with the HC-SR04. Remember: **Trig → pin 3**, **Echo → pin 2**. If the sensor always reports "Out of range," check these two wires first before anything else.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

@@ -91,11 +91,11 @@ Here are the connections to make:
     */
 
    #include <Arduino_RouterBridge.h>
-   #include <Servo.h>
+   #include <Arduino_HardwareServo.h>
    #include "microphone.h"
    #include "edge_impulse.h"
 
-   Servo myServo;
+   HardwareServo myServo;
 
    const int ledPin = 5;
    const int buzzerPin = 6;

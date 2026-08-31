@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Implement **auto-calibration** to find the joystick's true center
 * Use a **dead zone** to prevent drift when the stick is at rest
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,20 +40,24 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   The Pan Tilt Kit includes the UNO Q, Robot Shield, two servos, camera, battery, and structural parts — already assembled. The joystick module has five pins: VCC and GND power it, VRx and VRy output X and Y positions, and SW is a push button. Connect **VCC to 3.3V** (not 5V) — the UNO Q's analog inputs measure 0–3.3V, and VRx/VRy feed A3/A2.
+This project uses the following sketch libraries:
+
+* Libraries:
+
+  * ``Arduino_HardwareServo`` (drives the servo with hardware PWM)
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the joystick's VCC to the UNO Q's 3.3V pin (not 5V — its analog inputs measure 0–3.3V), GND to GND, VRx to A3, VRy to A2, and SW to D2; then plug the pan servo into pin 9 and the tilt servo into pin 10 on the Robot Shield's servo headers.
 
 .. image:: /img/wiring/wiring_joystick_servo.png
    :width: 600
    :align: center
 
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 
@@ -77,13 +81,13 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
    .. note::      
       
-      This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
+      This project uses the **Arduino_HardwareServo** library. see :ref:`install_update_lib_c` for installation or updating.
    
    .. image:: /img/app_run.png
       :width: 500
 
 
-#. Wait a few seconds for the upload to finish. **Do not touch the joystick for the first second** — the sketch auto-calibrates its center position. Then move the stick — the pan servo follows left/right, the tilt servo follows up/down. Press the stick to reset both to 0°.
+#. Wait a few seconds for the upload to finish. **Do not touch the joystick for the first second** — the sketch auto-calibrates its center position. Then move the stick — the pan servo follows left/right, the tilt servo follows up/down. Press the stick to reset both to center (90°).
 
 **The Sketch (sketch.ino)**
 
@@ -92,22 +96,36 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
 .. code-block:: cpp
    :linenos:
 
-   #include "RobotShield.h"
+   /*
+    * Joystick Servo Control
+    *
+    * Joystick X (A3) -> pan servo (pin 9)
+    * Joystick Y (A2) -> tilt servo (pin 10)
+    * Joystick SW (D2) -> press to reset both servos to center
+    */
+
+   #include <Arduino_HardwareServo.h>
 
    const int swPin = 2, xPin = A3, yPin = A2;
-   Servo panServo(0), tiltServo(1);
 
-   int panAngle = 0, tiltAngle = 0;
+   HardwareServo panServo;   // Pan servo on pin 9
+   HardwareServo tiltServo;  // Tilt servo on pin 10
+
+   int panAngle = 0, tiltAngle = 0;  // Offset from center (90°), -45..+45
    int xCenter = 512, yCenter = 512;
    const int minAngle = -45, maxAngle = 45;
    const int deadZone = 100, stepSize = 1;
 
    void setup() {
        Serial.begin(115200);
+
        pinMode(swPin, INPUT_PULLUP);
-       I2cBus::i2c().begin();
-       panServo.begin();   panServo.setAngle(0);
-       tiltServo.begin();  tiltServo.setAngle(0);
+
+       panServo.attach(9);
+       tiltServo.attach(10);
+       panServo.write(90);   // Center both servos
+       tiltServo.write(90);
+
        delay(500);
 
        // Auto-calibrate center position
@@ -127,7 +145,7 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
        // Button press → reset to center
        if (digitalRead(swPin) == LOW) {
            panAngle = 0; tiltAngle = 0;
-           panServo.setAngle(0); tiltServo.setAngle(0);
+           panServo.write(90); tiltServo.write(90);
            delay(300); return;
        }
 
@@ -143,8 +161,8 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
        panAngle  = constrain(panAngle, minAngle, maxAngle);
        tiltAngle = constrain(tiltAngle, minAngle, maxAngle);
 
-       panServo.setAngle(panAngle);
-       tiltServo.setAngle(tiltAngle);
+       panServo.write(90 + panAngle);
+       tiltServo.write(90 + tiltAngle);
 
        Serial.print("X: "); Serial.print(xValue);
        Serial.print("  Y: "); Serial.print(yValue);
@@ -161,32 +179,35 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
 .. code-block:: text
 
    setup() → runs once at startup:
-       Initialize servos at 0° (center)
+       Attach pan servo to pin 9 (D9), tilt servo to pin 10 (D10)
+       Center both servos at 90°
        Auto-calibrate: read X and Y 20 times, average to find center
        Print ready message with calibration values
 
    loop() → runs over and over forever:
-       Button pressed? → reset both servos to 0°, skip rest
+       Button pressed? → reset both servos to 90° (center), skip rest
        Read X and Y axis values
        Outside dead zone?
            Y > center + 100 → pan right (step +1°)
            Y < center - 100 → pan left  (step -1°)
            X > center + 100 → tilt right (step +1°)
            X < center - 100 → tilt left  (step -1°)
-       Constrain angles to ±45°
-       Update both servos
+       Constrain offsets to ±45°
+       Write 90° + offset to both servos
        Wait 30ms, repeat
 
 1. **Pin Declarations, Servo Objects, and Variables**
 
    - The joystick provides three inputs: X position on A3, Y position on A2, and a button on pin 2
-   - Two ``Servo`` objects are created on channels 0 and 1 for pan and tilt
+   - Two ``HardwareServo`` objects are declared — ``panServo`` attaches to pin 9 (D9), ``tiltServo`` to pin 10 (D10)
+   - The UNO Q uses ``Arduino_HardwareServo`` because it drives the servo with the STM32's hardware PWM — the standard Servo library causes jitter on this board
+   - ``panAngle`` and ``tiltAngle`` store the offset from the 90° center (from -45° to +45°), not the final angle
    - ``deadZone`` and ``stepSize`` constants control sensitivity and movement granularity
 
    .. code-block:: arduino
 
       const int swPin = 2, xPin = A3, yPin = A2;
-      Servo panServo(0), tiltServo(1);
+      HardwareServo panServo, tiltServo;
 
       int panAngle = 0, tiltAngle = 0;
       int xCenter = 512, yCenter = 512;
@@ -225,17 +246,17 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
 
 4. **Constraining Angles and Updating Servos**
 
-   - ``constrain()`` clamps both angles to the ±45° range, preventing the servos from exceeding mechanical limits
+   - ``constrain()`` clamps both offsets to the ±45° range, keeping the final angles between 45° and 135°
    - Even if the stick is held at the extreme edge, the servos stay within their safe range
-   - The two ``setAngle()`` calls command both servos to their current positions
+   - ``panServo.write(90 + panAngle)`` and ``tiltServo.write(90 + tiltAngle)`` add the offset to the 90° center and command both servos to their absolute positions
 
    .. code-block:: arduino
 
       panAngle  = constrain(panAngle, minAngle, maxAngle);
       tiltAngle = constrain(tiltAngle, minAngle, maxAngle);
 
-      panServo.setAngle(panAngle);
-      tiltServo.setAngle(tiltAngle);
+      panServo.write(90 + panAngle);
+      tiltServo.write(90 + tiltAngle);
 
 5. **Why Incremental Instead of Direct Mapping?**
 
@@ -280,8 +301,8 @@ Larger stepSize = faster movement but choppier motion.
 
 **Servos don't move at all**
 
-* **Cause:** The battery is not connected, or the RobotShield I2C bus isn't initialized.
-* **Solution:** Connect the battery pack to the Robot Shield. Verify ``I2cBus::i2c().begin()`` is called before ``servo.begin()``. Also check that ``servo.setAngle()`` is being called — uncomment the Serial prints to verify.
+* **Cause:** The battery is not connected, or the servos aren't attached to the right pins.
+* **Solution:** Connect the battery pack to the Robot Shield. Verify ``panServo.attach(9)`` and ``tiltServo.attach(10)`` appear in ``setup()``. Also check that ``servo.write()`` is being called — uncomment the Serial prints to verify.
 
 **Servos jitter or twitch at rest**
 

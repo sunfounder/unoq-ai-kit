@@ -2,8 +2,8 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-Module A: Basic Interaction
-===============================
+Module A: Basic Interaction(Sketch Only)
+================================================
 
 In this module, you'll explore the fundamentals of hardware control using the Arduino UNO Q and a breadboard — **no Python, no web UI, just Arduino sketches running on the STM32 microcontroller**. Through 17 hands-on experiments, you'll go from blinking an LED to reading a 10-axis IMU over I2C.
 

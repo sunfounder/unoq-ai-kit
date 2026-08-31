@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use ``if/else`` to make decisions based on input
 * Combine input and output in a single program
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -40,24 +40,20 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      -
 
-.. tip::
+**Software Requirements**
 
-   The 220Ω resistor has color bands **Red → Red → Brown → Gold**. You can also use your Resistor Card to identify it. No external resistor is needed for the button — ``INPUT_PULLUP`` in the code uses the board's built-in resistor, so there's one less component to wire.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
+Connect the button to **D2** and the LED to **D5** through a 220Ω resistor (bands **Red → Red → Brown → Gold**): the button's two wires go to opposite sides of the center gap (one side to D2, the other to GND), and the LED's long leg (anode) goes to D5, short leg (cathode) to the resistor and GND.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Buttons bridge across the center gap of the breadboard — pins on the same side are always connected. Make sure the two wires go to **opposite sides** of the button. If the LED stays on (or off) no matter what, try rotating the button 90°.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

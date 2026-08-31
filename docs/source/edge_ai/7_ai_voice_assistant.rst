@@ -89,13 +89,13 @@ In this lesson, you will learn to:
     */
 
    #include <Arduino_RouterBridge.h>
-   #include <Servo.h>
+   #include <Arduino_HardwareServo.h>
    #include "microphone.h"
    #include "speaker.h"
    #include "camera.h"
    #include "edge_impulse.h"
 
-   Servo myServo;
+   HardwareServo myServo;
    const int servoPin = 9;
 
    void setup() {

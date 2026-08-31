@@ -222,29 +222,11 @@ The analog pin mapping is shown below.
    :width: 600
    :align: center
 
-The UNO Q provides **6 PWM (Pulse Width Modulation) pins**.
+All digital pins from **D0 to D13** on the UNO Q support **PWM (Pulse Width Modulation)**.
 
 PWM allows the board to simulate analog output using digital signals, which is useful for controlling LED brightness, motor speed, or other devices that require variable output levels.
 
-The PWM-capable pins are listed below.
-
-.. list-table:: PWM Pin Mapping
-   :header-rows: 1
-
-   * - Arduino Pin Mapping
-     - Pin Functionality
-   * - D3
-     - GPIO / OPAMP OUT / PWM
-   * - D5 / FDCAN1_RX
-     - GPIO / CAN Bus RX / PWM
-   * - D6
-     - GPIO / PWM
-   * - D9
-     - GPIO / PWM
-   * - D10 / SS
-     - GPIO / SPI SS / PWM
-   * - D11 / MOSI
-     - GPIO / SPI MOSI / PWM
+In your sketch, ``analogWrite(pin, value)`` works on any pin from D0 to D13, with a value from 0 (off) to 255 (full).
 
 **Power Pins**
 

@@ -5,7 +5,7 @@
 02 Dynamic TTS
 =================
 
-In Lesson 1, you made the speaker say a fixed sentence. Now you'll make it speak **dynamic content** — sensor readings that change in real time. A DHT11 sensor measures temperature and humidity, and the speaker announces the values aloud every 30 seconds, like a talking weather station.
+In the previous lesson, you made the speaker say a fixed sentence. Now you'll make it speak **dynamic content** — sensor readings that change in real time. A DHT11 sensor measures temperature and humidity, and the speaker announces the values aloud every 30 seconds, like a talking weather station.
 
 In this lesson, you will learn to:
 
@@ -23,7 +23,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_dht11_module`
+     - 1 * :ref:`cpn_humiture_sensor`
      - 1 * USB Cable
      - Several :ref:`cpn_wires`
    * - |list_pan_tilt|
@@ -31,23 +31,18 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      - |list_wire|
 
-.. note::
-
-   The DHT11 module connects to the Robotshield. The sensor is read by the sketch and the data is sent to Python through Bridge.
-
 **Software Requirements**
 
 This project uses the following App Lab Bricks and libraries:
 
-* Bricks: 
+* Bricks:
 
-  * ``robot_shield`` (Robot Shield hardware access)
   * ``sunfounder_tts`` (EdgeTTS engine)
 
 * Libraries:
 
   * ``DHT sensor library`` (reads temperature and humidity from DHT11/DHT22 sensors)
-  * ``Adafruit Unified Sensor`` (common interface for Adafruit sensor libraries) 
+  * ``Adafruit Unified Sensor`` (common interface for Adafruit sensor libraries)
 
 **Wiring Diagram**
 
@@ -57,12 +52,8 @@ Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND.
    :width: 500
    :align: center
 
-2. Code
-----------
-
-**Import and Run the Code**
-
-All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, import ``02 Dynamic TTS Weather Reporter.zip`` from ``unoq-ai-kit/media/``.
 
@@ -72,35 +63,9 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. Breathe warm air onto the DHT11 — the temperature rises, and the next announcement reflects the change.
 
-**The Code**
+.. note::
 
-.. code-block:: python
-   :linenos:
-
-   import time
-   from arduino.app_utils import Bridge
-   from sunfounder_tts import EdgeTTS
-
-   WEATHER_RPC = "read_weather"
-   ANNOUNCEMENT_INTERVAL = 30
-
-   tts = EdgeTTS(gain=0.4)
-   tts.set_voice("en-US-JennyNeural")
-
-   while True:
-       sensor_data = str(Bridge.call(WEATHER_RPC, "")).strip()
-
-       temperature_text, humidity_text = sensor_data.split(",", 1)
-       temperature = float(temperature_text)
-       humidity = float(humidity_text)
-
-       message = (
-           f"The temperature is {temperature:.1f} degrees Celsius. "
-           f"The humidity is {humidity:.1f} percent."
-       )
-
-       tts.say(message)
-       time.sleep(ANNOUNCEMENT_INTERVAL)
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -202,8 +167,8 @@ Change the f-string to make the announcement sound different:
 
 **No sound from the speaker**
 
-* **Cause:** The audio environment isn't configured.
-* **Solution:** Run ``./docker-img-make`` in the terminal. Verify Lesson 01 works on the same hardware.
+* **Cause:** The Multimedia Carrier isn't properly attached, or the TTS runtime is still being prepared.
+* **Solution:** Check that the Carrier is firmly connected to the UNO Q. On the first run, wait for the TTS runtime download to finish — verify the Local TTS example works on the same hardware.
 
 5. Summary
 -------------

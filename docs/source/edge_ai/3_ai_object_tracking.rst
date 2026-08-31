@@ -96,12 +96,12 @@ The servos receive position commands from the UNO Q. The pan servo sweeps left/r
     */
 
    #include <Arduino_RouterBridge.h>
-   #include <Servo.h>
+   #include <Arduino_HardwareServo.h>
    #include "camera.h"
    #include "edge_impulse.h"
 
-   Servo panServo;   // Left/right
-   Servo tiltServo;  // Up/down
+   HardwareServo panServo;   // Left/right
+   HardwareServo tiltServo;  // Up/down
 
    const int panPin = 9;
    const int tiltPin = 10;

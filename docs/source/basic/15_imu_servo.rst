@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use incremental servo control with a **dead zone** for fluid, jitter-free motion
 * Fuse two concepts learned earlier — IMU readings and servo control — into one integrated system
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25
@@ -30,24 +30,26 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      - |list_imu|
 
+**Software Requirements**
 
-.. tip::
+This project uses the following sketch libraries:
 
-   The Pan Tilt Kit includes the UNO Q, Robot Shield, Multimedia Carrier (with IMU), two servos, camera, and battery — already assembled. No breadboard needed.
+* Libraries:
+
+  * ``Arduino_HardwareServo`` (drives the servo with hardware PWM)
+  * ``SunFounder_IMU`` (reads the 10-axis IMU sensor data)
 
 **Wiring Diagram**
+
+Connect the IMU to the UNO Q's QWIIC connector (no wiring needed), then plug the pan servo into pin 9 and the tilt servo into pin 10 on the Robot Shield's servo headers.
 
 
 .. image:: /img/wiring/wiring_imu_servo.png
    :width: 600
    :align: center
 
-.. warning::
-
-   Don't move the board during the first second — the IMU auto-calibrates its center position at startup.
-
-2. Code
-----------
+2. Run the App
+----------------
 **Step 1: Calibrate the IMU**
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
@@ -99,13 +101,13 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
    .. note::      
     
-        This project uses the **RobotShield** and **SunFounder_IMU** libraries. see :ref:`install_update_lib_c` for installation or updating.
+        This project uses the **Arduino_HardwareServo** and **SunFounder_IMU** libraries. see :ref:`install_update_lib_c` for installation or updating.
    
    .. image:: /img/app_run.png
       :width: 500
 
 
-#. Wait a few seconds for the upload to finish. Keep the board still for the first second, then hold it level — both servos should be centered at 0°. Tilt the board left/right to pan, forward/back to tilt. The servos follow your motion smoothly.
+#. Wait a few seconds for the upload to finish. Keep the board still for the first second, then hold it level — both servos should be centered at their neutral position (90° on the Arduino_HardwareServo API). Tilt the board left/right to pan, forward/back to tilt. The servos follow your motion smoothly.
 
 **The Sketch (sketch.ino)**
 
@@ -114,14 +116,23 @@ Now that you've seen the IMU drive the servos, let's look at the sketch file.
 .. code-block:: cpp
    :linenos:
 
-   #include "RobotShield.h"
+   /*
+    * IMU Servo — tilt the board to move the pan-tilt servos.
+    *
+    * Pan servo  -> pin 9
+    * Tilt servo -> pin 10
+    * IMU        -> I2C (Wire1)
+    */
+
+   #include <Arduino_HardwareServo.h>
    #include "SunFounder_IMU.hpp"
    #include "calibration_data.h"
    #include "Wire.h"
    #include <math.h>
 
    SunFounder_IMU imu(&Wire1);
-   Servo panServo(0), tiltServo(1);
+   HardwareServo panServo;   // Pan servo on pin 9
+   HardwareServo tiltServo;  // Tilt servo on pin 10
 
    const int minAngle = -45, maxAngle = 45;
    const float deadZone = 5.0;
@@ -134,9 +145,10 @@ Now that you've seen the IMU drive the servos, let's look at the sketch file.
    void setup() {
        Serial.begin(115200);
 
-       I2cBus::i2c().begin();
-       panServo.begin();   panServo.setAngle(0);
-       tiltServo.begin();  tiltServo.setAngle(0);
+       panServo.attach(9);
+       tiltServo.attach(10);
+       panServo.write(90);   // Center both servos
+       tiltServo.write(90);
 
        Wire1.begin();
        imuReady = imu.begin();
@@ -184,14 +196,14 @@ Now that you've seen the IMU drive the servos, let's look at the sketch file.
                currentPanAngle += min(maxStep, targetPan - currentPanAngle);
            else
                currentPanAngle -= min(maxStep, currentPanAngle - targetPan);
-           panServo.setAngle(currentPanAngle);
+           panServo.write(90 + currentPanAngle);
        }
        if (abs(targetTilt - currentTiltAngle) >= updateThreshold) {
            if (targetTilt > currentTiltAngle)
                currentTiltAngle += min(maxStep, targetTilt - currentTiltAngle);
            else
                currentTiltAngle -= min(maxStep, currentTiltAngle - targetTilt);
-           tiltServo.setAngle(currentTiltAngle);
+           tiltServo.write(90 + currentTiltAngle);
        }
 
        delay(20);
@@ -204,7 +216,8 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
 .. code-block:: text
 
    setup() → runs once at startup:
-       Initialize Robot Shield and both servos at 0°
+       Attach pan servo to pin 9, tilt servo to pin 10
+       Center both servos with write(90)
        Initialize IMU with calibration data
 
    loop() → runs over and over forever:
@@ -214,23 +227,31 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
        Apply dead zone (ignore < 5°)
        Constrain target to ±45°
        Step servos smoothly toward target (max 2° per frame)
+       Write 90° + offset to each servo
        Wait 20ms, repeat (~50 Hz update rate)
 
 1. **Library Includes and Hardware Objects**
 
-   - The five includes bring in the Robot Shield library for servo control, the IMU library, calibration data, I2C, and math functions
-   - The IMU is created on the ``Wire1`` I2C bus, and two ``Servo`` objects control the pan and tilt channels
+   - The includes bring in the standard **Arduino_HardwareServo** library, the IMU library, the calibration data header, I2C, and math functions
+   - The UNO Q uses ``Arduino_HardwareServo`` because it drives the servo with the STM32's hardware PWM — the standard Servo library causes jitter on this board
+   - The IMU is created on the ``Wire1`` I2C bus; the two ``HardwareServo`` objects are attached to pins 9 and 10 and centered with ``write(90)``
 
    .. code-block:: arduino
 
-      #include "RobotShield.h"
+      #include <Arduino_HardwareServo.h>
       #include "SunFounder_IMU.hpp"
       #include "calibration_data.h"
       #include "Wire.h"
       #include <math.h>
 
       SunFounder_IMU imu(&Wire1);
-      Servo panServo(0), tiltServo(1);
+      HardwareServo panServo;   // Pan servo on pin 9
+      HardwareServo tiltServo;  // Tilt servo on pin 10
+
+      panServo.attach(9);
+      tiltServo.attach(10);
+      panServo.write(90);   // Center both servos
+      tiltServo.write(90);
 
 2. **Multi-Sample Averaging to Reduce Noise**
 
@@ -268,6 +289,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
    - The dead zone ignores tilt angles smaller than 5°, creating a stable region where tiny vibrations and noise do not affect the servos
    - ``constrain()`` clamps the target angles to the safe ±45° range
    - Incremental stepping changes the servo angle by at most 2° per update, preventing jerky motion that would stress the servo gears
+   - ``write(90 + angle)`` converts the ±45° offset into the Arduino_HardwareServo library's 0–180° range, where 90° is the centered position
 
    .. code-block:: arduino
 
@@ -282,7 +304,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
               currentPanAngle += min(maxStep, targetPan - currentPanAngle);
           else
               currentPanAngle -= min(maxStep, currentPanAngle - targetPan);
-          panServo.setAngle(currentPanAngle);
+          panServo.write(90 + currentPanAngle);
       }
 
 **The Math: From Gravity to Angles**
@@ -335,8 +357,8 @@ Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoot
 
 **Servos move in the wrong direction**
 
-* **Cause:** The servo channels are swapped, or the angle sign needs to be reversed.
-* **Solution:** Check that the pan servo is on channel 0 and tilt on channel 1. If they're swapped, the board's left tilt will move the "wrong" servo. You can swap the channel numbers in code or physically swap the servo connectors.
+* **Cause:** The servos are swapped, or the angle sign needs to be reversed.
+* **Solution:** Check that the pan servo is attached to pin 9 and tilt to pin 10. If they're swapped, the board's left tilt will move the "wrong" servo. You can swap the pin numbers in the ``attach()`` calls (``panServo.attach(9)`` / ``tiltServo.attach(10)``) or physically swap the servo connectors.
 
 **Servo reaches limit and stops while board is still tilting**
 

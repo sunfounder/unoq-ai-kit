@@ -11,7 +11,7 @@ In this lesson, you will learn to:
 
 * Use the ``EdgeTTS`` engine to convert text into speech
 * Select different voice characters
-* Control the speaker volume with ``gain``
+* Control the speaker volume with ``set_volume()``
 
 1. Setup
 ----------
@@ -27,25 +27,16 @@ In this lesson, you will learn to:
    * - |list_pan_tilt|
      - |list_usb_cable|
 
-.. note::
-
-   No breadboard, no resistors, no jumper wires. The speaker is built into the Multimedia Carrier.
-
 **Software Requirements**
 
-This project uses the following App Lab Bricks and libraries:
+This project uses the following App Lab Brick:
 
 * Bricks:
 
-  * ``robot_shield`` (Robot Shield hardware access)
   * ``sunfounder_tts`` (EdgeTTS engine)
 
-2. Code
-----------
-
-**Import and Run the Code**
-
-All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, import ``01 Local TTS.zip`` from the ``unoq-ai-kit/media/`` folder.
 
@@ -53,37 +44,22 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
    *"Hello! Welcome to Arduino App Lab."*
 
-**The Code**
+.. note::
 
-.. code-block:: python
-   :linenos:
-
-   from arduino.app_utils import App
-   from sunfounder_tts import EdgeTTS
-
-   tts = EdgeTTS(gain=0.4)
-   tts.set_voice("en-US-JennyNeural")
-
-   print("Speaking...")
-   tts.say("Hello! Welcome to Arduino App Lab.")
-   print("Done.")
-
-   def loop():
-       time.sleep(10)
-
-   App.run(user_loop=loop)
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
 .. code-block:: text
 
-   EdgeTTS(gain=0.4)      → create the TTS engine at 40% volume
+   EdgeTTS()                → create the TTS engine
    tts.set_voice(...)      → choose a voice character
+   tts.set_volume(50)      → set the speaker volume (default 50)
    tts.say(text)           → convert text to speech and play
 
 * ``EdgeTTS`` is a text-to-speech engine that runs locally — it downloads voice models on first use but does not need the internet to play.
-* ``gain=0.4`` controls the volume, from 0.0 (silent) to 1.0 (maximum).
 * ``set_voice("en-US-JennyNeural")`` chooses an American English female voice. You can change this to ``en-US-GuyNeural`` (male) or other voices.
+* ``set_volume(50)`` sets the speaker volume from 0 to 100. The default is 50 — a comfortable range is 30 to 100.
 * ``App.run(user_loop=loop)`` keeps the Python app alive after the speech finishes.
 
 3. Experiment
@@ -118,27 +94,50 @@ Try different voice characters:
    * - ``en-AU-NatashaNeural``
      - Australian English female
 
-**Challenge: Adjust the Volume**
+**Change the Volume**
 
-Change ``gain`` from 0.4 to 0.8, then to 0.1. Find the volume that sounds most comfortable to you.
+``set_volume()`` accepts a value from 0 (silent) to 100 (loudest):
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Value
+     - Effect
+   * - ``30``
+     - Quiet — good for a desk in a quiet room
+   * - ``50``
+     - Default — comfortable for most situations
+   * - ``80``
+     - Loud — fills a room
+
+**Challenge: Speak a Conversation**
+
+Make the speaker say three sentences in a row — a greeting, a question, and an answer:
+
+.. code-block:: python
+
+   tts.say("Hello! Welcome to Arduino App Lab.")
+   tts.say("How are you today?")
+   tts.say("I hope you enjoy building with the UNO Q.")
 
 4. Troubleshooting
 --------------------
 
 **No sound at all**
 
-* **Cause:** The speaker environment isn't configured, or the Multimedia Carrier isn't properly attached.
-* **Solution:** Run ``./docker-img-make`` in the terminal. Check that the Carrier is firmly connected to the UNO Q.
+* **Cause:** The Multimedia Carrier isn't properly attached, or the volume is set too low.
+* **Solution:** Check that the Carrier is firmly connected to the UNO Q. Make sure ``set_volume()`` hasn't been set to a very low value — 30 to 100 is a comfortable range.
 
 **Program ends immediately with no sound**
 
-* **Cause:** ``tts.say()`` may need a few seconds to download the voice model on first run.
-* **Solution:** Wait 5–10 seconds. If there is still no sound, check your internet connection — the first run downloads the model.
+* **Cause:** The TTS runtime is still being set up on first run.
+* **Solution:** The first run can take half an hour or more while App Lab downloads the TTS runtime and audio dependencies — keep the UNO Q connected to the Internet and wait for the setup to finish. This setup only happens once; later runs start much faster.
 
-**Sound is too quiet**
+**The voice sounds robotic or mispronounces words**
 
-* **Cause:** The ``gain`` value is too low.
-* **Solution:** Increase ``gain`` from 0.4 to 0.6 or 0.8.
+* **Cause:** The chosen voice character doesn't fit the text, or the text contains unusual words.
+* **Solution:** Try a different voice from the Experiment section. Keep sentences short and simple — local TTS engines handle common words best.
 
 5. Summary
 -------------
@@ -147,6 +146,6 @@ You've made the UNO Q speak real sentences! In this lesson, you learned:
 
 * How to create a TTS engine with ``EdgeTTS``
 * How to choose a voice character with ``set_voice()``
-* How to control volume with ``gain``
+* How to control the speaker volume with ``set_volume()``
 
 In the next lesson, you'll make the speaker say dynamic content — sensor readings and changing data, not just a fixed sentence.

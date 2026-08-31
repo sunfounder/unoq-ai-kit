@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use ``for`` loops to repeat actions across a group of components
 * Build a 4-level LED bar graph that responds to ambient light
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -34,30 +34,26 @@ In this lesson, you will learn to:
    * - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-     -
+     - 1 * :ref:`cpn_resistor` (10kΩ)
    * - |list_breadboard|
      - |list_wire|
      - |list_usb_cable|
-     -
+     - |list_10kohm|
 
-.. tip::
+**Software Requirements**
 
-   The 220Ω resistors have color bands **Red → Red → Brown → Gold**. The photoresistor is the small disk with a wavy pattern on top — it has no polarity, so one leg to 3.3V and the other to analog pin. Its resistance drops when light hits it: bright light → low resistance → higher voltage at A0 → higher ``analogRead()`` value.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires. Pay special attention to the four LEDs — each needs its own 220Ω resistor in series, and they share a common GND rail.
+Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so either leg works — and the **10kΩ fixed resistor** (bands **Brown → Black → Orange**) between **A0** and **GND**; the two resistors form a voltage divider that turns light into a readable voltage. The four LEDs go to **D2, D3, D4, D5**, each with its **own** 220Ω resistor (bands **Red → Red → Brown → Gold**) and a shared GND rail: the long leg (anode) goes toward the digital pin, the short leg (cathode) toward GND. Never connect multiple LEDs to a single resistor — they share current unevenly and may burn out.
 
 .. image:: /img/wiring/wiring_photoresistor_led.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Each LED must have its **own** 220Ω resistor. Never connect multiple LEDs to a single resistor — the LEDs will share current unevenly and may burn out. Also, double-check that each LED's long leg (anode) goes toward its digital pin and the short leg (cathode) goes toward GND.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 

@@ -10,15 +10,15 @@ Earlier, you used a photoresistor to read light levels — your first analog sen
 In this lesson, you will learn to:
 
 * Apply ``analogRead()`` with a new sensor — the potentiometer
-* Control a passive buzzer's **frequency** with PWM
+* Control a passive buzzer's **frequency** with ``tone()``
 * Use the ``map()`` function to convert potentiometer readings into a pitch percentage
 * Store a melody in an **array** and play notes in sequence
-* Calculate the relationship between **frequency**, **period**, and **duty cycle**
+* Calculate note **frequencies** from a melody array and a pitch percentage
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -41,23 +41,21 @@ In this lesson, you will learn to:
      -
      -
 
-.. tip::
+**Software Requirements**
 
-   A **passive buzzer** is different from the active buzzer you've used before. An active buzzer has a built-in oscillator — you just apply DC voltage and it beeps at a fixed frequency. A passive buzzer has no internal oscillator — you must supply an AC signal (a square wave from PWM) to make it vibrate. This gives you control over the **pitch** (frequency), which is exactly what we need for this lesson. The potentiometer has three pins — the middle pin is the **wiper** (variable output), and the two outer pins connect to 3.3V and GND.
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
 
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires.
-
-A passive buzzer has **no polarity** — you can connect it either way. However, the potentiometer's three pins are not interchangeable. Connect the **left pin to 3.3V**, the **middle pin to A2**, and the **right pin to GND**. Reversing 3.3V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it).
+Connect the passive buzzer — it has **no polarity**, so either orientation works — to **D5**, and the potentiometer's **left pin to 3.3V**, **middle (wiper) pin to A2**, and **right pin to GND**; reversing 3.3V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it). Unlike an **active buzzer**, which buzzes by itself the moment it is powered, a **passive buzzer** makes no sound on its own — the sketch must generate the sound wave with ``tone()``.
 
 .. image:: /img/wiring/wiring_pot_buzzer.png
    :width: 500
    :align: center
 
 
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 
@@ -77,10 +75,6 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. note::
-
-      This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
-
    .. image:: /img/app_run.png
       :width: 500
 
@@ -93,54 +87,83 @@ Now that you've heard the melody change pitch, let's look at the sketch file.
 .. code-block:: cpp
    :linenos:
 
-   #include "RobotShield.h"
+   /*
+    * Variable Pitch Melody
+    *
+    * Turn the potentiometer to raise or lower the pitch of the whole melody.
+    *
+    * Potentiometer: A2
+    * Passive buzzer: D5 (driven with tone())
+    */
 
    const int POT_PIN = A2;
+   const int BUZZER_PIN = 5;
+
    const int MIN_PITCH_PERCENT = 50;
    const int MAX_PITCH_PERCENT = 200;
+
    const int NOTE_DURATION = 250;
    const int NOTE_GAP = 50;
 
-   const uint16_t MELODY[] = {262, 330, 392, 523};  // C4, E4, G4, C5
+   const uint16_t MELODY[] = {
+       262,  // C4
+       330,  // E4
+       392,  // G4
+       523   // C5
+   };
+
    const int MELODY_LENGTH = sizeof(MELODY) / sizeof(MELODY[0]);
 
-   Pwm buzzer(5);
-
-   void playFrequency(uint16_t frequency) {
-       uint32_t period = 1000000UL / frequency;
-       uint16_t pulse = period / 2;
-       buzzer.setEnable(false);
-       buzzer.setFreq(frequency);
-       buzzer.setPulse(pulse);
-       buzzer.setEnable(true);
+   void playFrequency(uint16_t frequency)
+   {
+       tone(BUZZER_PIN, frequency);
    }
 
-   void stopBuzzer() { buzzer.setEnable(false); }
+   void stopBuzzer()
+   {
+       noTone(BUZZER_PIN);
+   }
 
-   void setup() {
+   void setup()
+   {
        Serial.begin(115200);
-       I2cBus::i2c().begin();
-       buzzer.begin();
-       buzzer.setEnable(false);
+
+       pinMode(BUZZER_PIN, OUTPUT);
+       noTone(BUZZER_PIN);
+
        Serial.println("=== Variable Pitch Melody ===");
+       Serial.println("Turn the potentiometer to change the melody pitch.");
    }
 
-   void loop() {
-       for (int note = 0; note < MELODY_LENGTH; note++) {
+   void loop()
+   {
+       for (int note = 0; note < MELODY_LENGTH; note++)
+       {
            int potValue = analogRead(POT_PIN);
-           int pitchPercent = map(potValue, 0, 1023,
-                                  MIN_PITCH_PERCENT, MAX_PITCH_PERCENT);
+
+           int pitchPercent = map(
+               potValue,
+               0,
+               1023,
+               MIN_PITCH_PERCENT,
+               MAX_PITCH_PERCENT
+           );
+
            uint16_t frequency =
                (uint32_t)MELODY[note] * pitchPercent / 100;
 
            playFrequency(frequency);
 
-           Serial.print("Pot: "); Serial.print(potValue);
-           Serial.print("  Pitch: "); Serial.print(pitchPercent);
-           Serial.print("%  Freq: "); Serial.print(frequency);
+           Serial.print("Potentiometer: ");
+           Serial.print(potValue);
+           Serial.print("    Pitch: ");
+           Serial.print(pitchPercent);
+           Serial.print("%    Note frequency: ");
+           Serial.print(frequency);
            Serial.println(" Hz");
 
            delay(NOTE_DURATION);
+
            stopBuzzer();
            delay(NOTE_GAP);
        }
@@ -148,33 +171,36 @@ Now that you've heard the melody change pitch, let's look at the sketch file.
 
 **How it Works**
 
-This lesson introduces three new ideas — a melody stored in an array, pitch control via the potentiometer, and PWM frequency generation — working together:
+This lesson introduces three new ideas — a melody stored in an array, pitch control via the potentiometer, and frequency generation with ``tone()`` — working together:
 
 .. code-block:: text
 
    setup() → runs once at startup:
        Start Serial Monitor
-       Initialize I2C bus (Robot Shield communication)
-       Initialize PWM channel on P5, start disabled
+       Set buzzer pin D5 as an output, start it silent
+       Print startup message
 
    loop() → runs over and over forever:
        For each note in the melody:
            Read potentiometer on A2 (0–1023)
            Map to pitch percentage (50–200%)
            Multiply note frequency by pitch percentage
-           Play the note for 250ms
-           Silence for 50ms gap
+           Play the note for 250ms with tone()
+           Silence for 50ms gap with noTone()
            Print values to Serial Monitor
        (repeat the melody from the beginning)
 
-#. **Library Include, Melody Array, and Constants**
+#. **Constants, Melody Array, and Pins**
 
+   - ``POT_PIN`` (A2) and ``BUZZER_PIN`` (D5) name the pins — the buzzer connects straight to a digital pin, no extra hardware needed
    - ``MELODY[]`` stores four note frequencies — C4 (262 Hz), E4 (330 Hz), G4 (392 Hz), C5 (523 Hz) — in an array, just like the LED pin arrays you used earlier
    - ``MELODY_LENGTH`` is calculated automatically from the array size — add more notes and it updates without changing any other code
    - ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` define how far the potentiometer can shift the pitch: 50% (one octave lower) to 200% (one octave higher)
 
    .. code-block:: arduino
 
+      const int POT_PIN = A2;
+      const int BUZZER_PIN = 5;
       const uint16_t MELODY[] = {262, 330, 392, 523};
       const int MELODY_LENGTH = sizeof(MELODY) / sizeof(MELODY[0]);
       const int MIN_PITCH_PERCENT = 50;
@@ -189,23 +215,24 @@ This lesson introduces three new ideas — a melody stored in an array, pitch co
    .. code-block:: arduino
 
       int potValue = analogRead(POT_PIN);
-      int pitchPercent = map(potValue, 0, 1023, 50, 200);
+      int pitchPercent = map(potValue, 0, 1023,
+                             MIN_PITCH_PERCENT, MAX_PITCH_PERCENT);
       uint16_t frequency = (uint32_t)MELODY[note] * pitchPercent / 100;
 
 #. **Playing and Stopping a Note**
 
-   - ``playFrequency()`` calculates the PWM period (microseconds per cycle) and pulse (half the period for 50% duty cycle), then sets the frequency and enables the output
-   - ``stopBuzzer()`` disables the output between notes, creating a short gap so they don't blur together
+   - ``playFrequency()`` calls ``tone(BUZZER_PIN, frequency)`` — one line of code makes the buzzer produce a square wave at the requested frequency, which you hear as a pitch
+   - ``stopBuzzer()`` calls ``noTone(BUZZER_PIN)`` to silence the buzzer between notes, creating a short gap so they don't blur together
    - The ``for`` loop in ``loop()`` plays each note in sequence, then repeats from the beginning
 
    .. code-block:: arduino
 
       void playFrequency(uint16_t frequency) {
-          uint32_t period = 1000000UL / frequency;
-          uint16_t pulse = period / 2;
-          buzzer.setFreq(frequency);
-          buzzer.setPulse(pulse);
-          buzzer.setEnable(true);
+          tone(BUZZER_PIN, frequency);
+      }
+
+      void stopBuzzer() {
+          noTone(BUZZER_PIN);
       }
 
 **Passive Buzzer vs Active Buzzer**
@@ -213,19 +240,19 @@ This lesson introduces three new ideas — a melody stored in an array, pitch co
 You've used both types now — let's compare them:
 
   * **Active buzzer** (Tilt Alarm): Has a built-in oscillator. Apply DC voltage → it beeps at a fixed frequency. Simple on/off control. Good for alarms and alerts.
-  * **Passive buzzer** (this lesson): No internal oscillator. You supply a square wave (AC signal) via PWM. You control both the frequency (pitch) and the duty cycle (volume/timbre). Good for music, sound effects, and variable tones.
+  * **Passive buzzer** (this lesson): No internal oscillator. You supply a square wave (AC signal) with ``tone()``. You control the frequency (pitch) by choosing the frequency you pass in. Good for music, sound effects, and variable tones.
 
   **With an active buzzer you say "beep or don't beep." With a passive buzzer you say "play this exact note."**
 
-**Two Ways to Drive a Passive Buzzer**
+**tone() with a Frequency You Compute**
 
-In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5** with ``tone(buzzerPin, 800)`` — one line of code, no library. This lesson uses a different approach: the buzzer connects to **P5** on the Robot Shield and is driven by the ``Pwm`` class from the RobotShield library. Both methods work — so why the change?
+In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5** with ``tone(buzzerPin, 800)`` — a fixed siren pitch. This lesson uses the same function and the same pin, but now the frequency changes with every note:
 
-  * **``tone()`` on a digital pin** — Arduino generates the square wave in **software** on the main MCU. Simple and direct, perfect when you just need a beep or a siren.
+  * **``tone(BUZZER_PIN, frequency)``** — Arduino generates the square wave in **software** on the main MCU: it toggles pin D5 at the frequency you pass in. One line of code, no library, no extra hardware.
 
-  * **``Pwm`` on the Robot Shield** — the Robot Shield's own chip generates the wave in **hardware** (I2C carries only the frequency and pulse settings). The main MCU stays free to read sensors, do math, and run other code.
+  * **The frequency comes from your code** — ``MELODY[note] * pitchPercent / 100`` combines the melody array with the knob position. That math is the real goal of this lesson: turning data into sound, not driving the buzzer.
 
-  * **This lesson's goal is the math** — ``setFreq()`` and ``setPulse()`` make the frequency → period → duty cycle relationship **explicit**. ``tone()`` hides all of that behind one function call, so you'd never see the ``1000000 / frequency`` conversion that connects pitch to microseconds. Seeing it here prepares you for PWM control of motors, servos, and LEDs, where the same period/pulse concepts apply.
+  * **``noTone(BUZZER_PIN)``** — stops the wave so you can insert the 50ms silence between notes, keeping them separate.
 
 3. Experiment
 ----------------
@@ -268,8 +295,8 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` to control how far the kn
 
 **Buzzer makes no sound at all**
 
-* **Cause:** The buzzer is not connected properly, or the PWM channel is not enabled.
-* **Solution:** Check that the buzzer's two pins are firmly seated in the breadboard — one connected to pin P5, the other to GND. A passive buzzer has no polarity, so either pin can go to either rail. Make sure the code calls ``buzzer.setEnable(true)``.
+* **Cause:** The buzzer is not connected properly, or the buzzer pin is not set as an output.
+* **Solution:** Check that the buzzer's two pins are firmly seated in the breadboard — one connected to pin D5, the other to GND. A passive buzzer has no polarity, so either pin can go to either rail. Make sure ``setup()`` calls ``pinMode(BUZZER_PIN, OUTPUT)``.
 
 **Melody pitch does not change when turning the knob**
 
@@ -283,13 +310,13 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` to control how far the kn
 
 **Buzzer sounds weak or distorted**
 
-* **Cause:** The duty cycle is not set to 50%.
-* **Solution:** Make sure ``pulse = period / 2`` — this creates a 50% duty cycle, which gives the strongest and cleanest tone.
+* **Cause:** The knob is at the minimum pitch — the lowest notes (around 131 Hz) sound weak and buzzy on a small buzzer.
+* **Solution:** Turn the knob toward the middle or upper range. If the sound is still weak at high pitches, reseat the buzzer's pins in the breadboard — a loose connection can muffle the tone.
 
 **Serial Monitor shows correct frequency but no sound**
 
 * **Cause:** The buzzer might be an active buzzer (with internal oscillator) instead of a passive one.
-* **Solution:** Active buzzers ignore PWM frequency changes — they only beep at their fixed internal frequency. Check that your buzzer is a **passive** type (usually has a bare metal disc visible on top, without a sealed plastic cap).
+* **Solution:** Active buzzers ignore frequency changes — they only beep at their fixed internal frequency. Check that your buzzer is a **passive** type (usually has a bare metal disc visible on top, without a sealed plastic cap).
 
 5. Summary
 -------------
@@ -298,8 +325,8 @@ Congratulations! You've made music — not just a single tone, but a melody that
 
 * How to store a melody in an **array** and play notes in sequence with a ``for`` loop (building on earlier array lessons)
 * How ``map()`` converts a potentiometer reading into a pitch percentage that shifts the entire melody
-* How PWM generates audio frequencies via the Robot Shield — the same technology behind dimmable LEDs
-* The relationship between **frequency** (pitch in Hz), **period** (microseconds per cycle), and **duty cycle**
+* How ``tone()`` generates audio frequencies — a square wave on a digital pin whose frequency sets the pitch
+* How the **frequency** (pitch in Hz) of each note is calculated from the melody array and the knob's pitch percentage
 * The difference between active buzzers and passive buzzers
 
 The combination of arrays, analog input, and PWM opens up a world of possibilities — from musical instruments to audio feedback. In the next lesson, you'll use an ultrasonic sensor to measure distance with sound waves — building a proximity alarm that beeps faster as obstacles get closer.

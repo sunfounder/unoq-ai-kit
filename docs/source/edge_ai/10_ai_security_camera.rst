@@ -97,7 +97,7 @@ Here are the connections to make:
     */
 
    #include <Arduino_RouterBridge.h>
-   #include <Servo.h>
+   #include <Arduino_HardwareServo.h>
    #include "camera.h"
    #include "microphone.h"
    #include "speaker.h"
@@ -105,7 +105,7 @@ Here are the connections to make:
    #include "edge_impulse.h"
 
    // Hardware
-   Servo panServo, tiltServo;
+   HardwareServo panServo, tiltServo;
    const int panPin = 9, tiltPin = 10;
    const int buzzerPin = 6, buttonPin = 3;
    #define DHTPIN 2

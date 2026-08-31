@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use calibration data to improve sensor accuracy
 * Monitor multi-sensor data in the Serial Monitor
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25
@@ -30,18 +30,24 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      - |list_imu|
 
+**Software Requirements**
+
+This project uses the following sketch libraries:
+
+* Libraries:
+
+  * ``SunFounder_IMU`` (reads the 10-axis IMU sensor data)
+
 **Wiring Diagram**
+
+Plug the 10-Axis IMU into the UNO Q's QWIIC connector — no breadboard wiring is needed; it shares the I2C bus with the Robot Shield, and I2C lets multiple devices share the bus without conflict.
 
 .. image:: /img/wiring/wiring_imu.png
    :width: 500
    :align: center
 
-.. warning::
-
-   The IMU communicates over the same I2C bus as the Robot Shield. Both can share the bus without conflict — I2C is designed for multiple devices.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Step 1: Calibrate the IMU**
 
@@ -91,7 +97,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 #. Click **Run** (▶). Open the **Serial Monitor** — you should see accelerometer, gyroscope, magnetometer, and barometer readings every second. Pick up the board and tilt it — the values change in real time, now with improved accuracy.
 
-   .. code-block:: cpp
+   .. code-block:: text
 
       Accel (m/s^2): -0.12, -0.25, 9.74
       Gyro (deg/s): 0.01, 0.03, -0.57

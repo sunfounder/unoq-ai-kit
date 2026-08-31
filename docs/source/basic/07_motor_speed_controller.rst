@@ -9,15 +9,15 @@ LEDs, buzzers, and sensors are all about light, sound, and data — but what abo
 
 In this lesson, you will learn to:
 
-* Control a DC motor with the RobotShield ``Motor`` class
-* Set motor **speed** with PWM power levels (0–100%)
-* Control motor **direction** with positive and negative power values
+* Control a DC motor with a direction pin and a PWM pin
+* Set motor **speed** with ``analogWrite()`` values (0–255)
+* Control motor **direction** with a HIGH/LOW digital pin
 * Understand why motors need a **separate power source** (battery) — USB alone isn't enough
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -32,15 +32,20 @@ In this lesson, you will learn to:
      - |list_fan|
      - |list_usb_cable|
 
+**Software Requirements**
+
+This project uses no external libraries — the sketch only uses the built-in Arduino framework.
+
 **Wiring Diagram**
 
+The motor connects to the Robot Shield's **M0** terminal — its direction pin goes to **D4** and its PWM speed pin to **D5**.
 
 .. image:: /img/wiring/wiring_motor.png
    :width: 600
    :align: center
 
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 
@@ -62,10 +67,6 @@ All code for this course is provided as ``.zip`` files that you can import direc
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 
-   .. note::      
-      
-      This project uses the **RobotShield** library. see :ref:`install_update_lib_c` for installation or updating.
-   
    .. image:: /img/app_run.png
       :width: 500
 
@@ -80,100 +81,111 @@ Now that you've seen the motor in action, let's look at the sketch file.
    :linenos:
 
    /*
-    * Drives a DC motor on M0: forward → brake → reverse → brake.
+    * Drives a DC motor on the Robot Shield's M0 terminal:
+    * forward → stop → reverse → stop.
+    *
+    * M0 direction pin -> D4
+    * M0 PWM pin       -> D5
     */
 
-   #include "RobotShield.h"
-
-   Motor motor("M0", 4, 5);  // Motor on port M0, direction pins 4 and 5
+   const int motorDirPin = 4;  // Motor direction control
+   const int motorPwmPin = 5;  // Motor speed control (PWM)
 
    void setup() {
        Serial.begin(115200);
-       I2cBus::i2c().begin();
-       motor.begin();
+
+       pinMode(motorDirPin, OUTPUT);
+       pinMode(motorPwmPin, OUTPUT);
+       analogWrite(motorPwmPin, 0);  // Motor starts stopped
 
        Serial.println("=== MotorTest Ready ===");
    }
 
    void loop() {
        Serial.println("M0: Forward 50%");
-       motor.setPower(50);      // Forward at 50% power
+       digitalWrite(motorDirPin, HIGH);   // Forward direction
+       analogWrite(motorPwmPin, 128);     // ~50% speed (0-255)
        delay(3000);
 
-       Serial.println("M0: Brake");
-       motor.setPower(0);       // Stop (brake)
+       Serial.println("M0: Stop");
+       analogWrite(motorPwmPin, 0);       // Stop the motor
        delay(1000);
 
        Serial.println("M0: Reverse 50%");
-       motor.setPower(-50);     // Reverse at 50% power
+       digitalWrite(motorDirPin, LOW);    // Reverse direction
+       analogWrite(motorPwmPin, 128);     // ~50% speed
        delay(3000);
 
-       Serial.println("M0: Brake");
-       motor.setPower(0);       // Stop (brake)
+       Serial.println("M0: Stop");
+       analogWrite(motorPwmPin, 0);       // Stop the motor
        delay(3000);
    }
 
 **How it Works**
 
-This lesson introduces the ``Motor`` class — a completely new kind of output. Motors convert electrical power into rotational motion, and the RobotShield's H-bridge gives you precise control over both speed and direction:
+This lesson drives the motor the direct way: two ordinary pins and the same ``digitalWrite()`` and ``analogWrite()`` functions you already know. One pin tells the Robot Shield's H-bridge which way current should flow, and the other sets how much power the motor gets. No library needed — just plain Arduino:
 
 .. code-block:: text
 
    setup() → runs once at startup:
        Start Serial Monitor
-       Initialize I2C bus (Robot Shield communication)
-       Initialize motor on port M0
+       Set direction pin D4 as OUTPUT
+       Set PWM pin D5 as OUTPUT
+       Motor starts stopped (PWM = 0)
 
    loop() → runs over and over forever:
-       Set motor forward at 50% → wait 3 seconds
-       Brake (stop motor)        → wait 1 second
-       Set motor reverse at 50%  → wait 3 seconds
-       Brake (stop motor)        → wait 3 seconds
+       Forward (direction HIGH, speed 128) → wait 3 seconds
+       Stop (PWM = 0)                      → wait 1 second
+       Reverse (direction LOW, speed 128)  → wait 3 seconds
+       Stop (PWM = 0)                      → wait 3 seconds
        (repeat)
 
-#. Library Include and Motor Object Declaration
+#. Direction and Speed Pin Constants
 
-   - The ``RobotShield.h`` library provides the ``Motor`` class for controlling DC motors
-   - ``Motor motor("M0", 4, 5)`` creates a motor object on port **M0** — the Robot Shield has two ports, M0 and M1
-   - The numbers ``4`` and ``5`` are direction control pins that tell the H-bridge which way current should flow
+   - Two ``const int`` names make the pin numbers easy to remember and change
+   - ``motorDirPin = 4`` is the **direction** pin — the H-bridge on the Robot Shield reads it to decide which way current flows through the motor
+   - ``motorPwmPin = 5`` is the **PWM** pin — it sets the motor's speed
 
    .. code-block:: arduino
 
-      #include "RobotShield.h"
-      Motor motor("M0", 4, 5);
+      const int motorDirPin = 4;  // Motor direction control
+      const int motorPwmPin = 5;  // Motor speed control (PWM)
 
-#. Setup: Initializing the Motor Driver
+#. Setup: Configuring the Pins
 
-   - After starting the Serial Monitor and I2C bus, ``motor.begin()`` initializes the motor driver
-   - This must be called in ``setup()`` before you can use ``setPower()``
-   - This follows the same initialization pattern used earlier with the ``Pwm`` class for PWM output
+   - Both pins are declared ``OUTPUT`` — the same ``pinMode()`` pattern you used with LEDs earlier
+   - ``analogWrite(motorPwmPin, 0)`` starts the motor stopped, so it doesn't spin the moment the app runs
+   - There is no library to initialize — a DC motor needs only these two lines
 
    .. code-block:: arduino
 
       void setup() {
           Serial.begin(115200);
-          I2cBus::i2c().begin();
-          motor.begin();
+          pinMode(motorDirPin, OUTPUT);
+          pinMode(motorPwmPin, OUTPUT);
+          analogWrite(motorPwmPin, 0);  // Motor starts stopped
       }
 
 #. Motor Speed and Direction in the Loop
 
-   - ``motor.setPower()`` accepts a percentage from -100 to 100
-   - Positive values spin the motor forward, zero applies the brake (shorting the terminals for a quick stop), and negative values spin it in reverse
+   - ``digitalWrite(motorDirPin, HIGH)`` spins the motor forward; ``LOW`` spins it in reverse — this is the digital signal that tells the H-bridge which way current should flow
+   - ``analogWrite(motorPwmPin, value)`` sets the speed from 0 to 255 — ``128`` is about 50%, and ``0`` stops the motor
    - The ``delay()`` calls keep each state active long enough for you to observe the motion
 
    .. code-block:: arduino
 
-      motor.setPower(50);      // Forward at 50% power
+      digitalWrite(motorDirPin, HIGH);   // Forward direction
+      analogWrite(motorPwmPin, 128);     // ~50% speed (0-255)
       delay(3000);
 
-      motor.setPower(0);       // Stop (brake)
+      analogWrite(motorPwmPin, 0);       // Stop the motor
       delay(1000);
 
-      motor.setPower(-50);     // Reverse at 50% power
+      digitalWrite(motorDirPin, LOW);    // Reverse direction
+      analogWrite(motorPwmPin, 128);     // ~50% speed
       delay(3000);
 
-      motor.setPower(0);       // Stop (brake)
+      analogWrite(motorPwmPin, 0);       // Stop the motor
       delay(3000);
 
 
@@ -182,28 +194,28 @@ This lesson introduces the ``Motor`` class — a completely new kind of output. 
 
 **Change Speed and Direction**
 
-Try different power levels and observe how the motor responds:
+Try different speed values and observe how the motor responds:
 
 .. list-table::
    :header-rows: 1
    :widths: 30 70
 
-   * - ``setPower()`` Value
+   * - ``analogWrite(motorPwmPin, value)``
      - Motor Behavior
-   * - ``motor.setPower(100)``
+   * - ``analogWrite(motorPwmPin, 255)``
      - Full speed forward — strongest airflow from the fan
-   * - ``motor.setPower(25)``
-     - Slow forward — gentle breeze
-   * - ``motor.setPower(-100)``
+   * - ``analogWrite(motorPwmPin, 64)``
+     - Slow forward — gentle breeze (~25% speed)
+   * - ``digitalWrite(motorDirPin, LOW)`` + ``analogWrite(motorPwmPin, 255)``
      - Full speed reverse — airflow direction flips
-   * - ``motor.setPower(10)``
-     - Barely spinning — the lowest power that overcomes friction
+   * - ``analogWrite(motorPwmPin, 26)``
+     - Barely spinning — the lowest speed that overcomes friction (~10%)
 
-Try values between 10 and 20 to find the **minimum starting power** — the point where the motor just begins to turn. This threshold exists because the motor must overcome static friction before it can spin.
+Try values between 26 and 51 (about 10–20% of 255) to find the **minimum starting speed** — the point where the motor just begins to turn. This threshold exists because the motor must overcome static friction before it can spin.
 
 **Challenge: Ramp Up and Down**
 
-Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to 100 and then **ramp down** from 100 to 0. This creates a smooth acceleration and deceleration — like a fan spinning up and winding down.
+Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to 255 and then **ramp down** from 255 to 0. This creates a smooth acceleration and deceleration — like a fan spinning up and winding down.
 
 .. dropdown:: Click to reveal solution
    :open:
@@ -211,26 +223,26 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
    .. code-block:: cpp
 
       void loop() {
-          // Ramp up: 0 → 100
-          for (int power = 0; power <= 100; power += 5) {
-              motor.setPower(power);
+          // Ramp up: 0 → 255
+          for (int speed = 0; speed <= 255; speed += 13) {
+              analogWrite(motorPwmPin, speed);
               Serial.print("Forward: ");
-              Serial.println(power);
+              Serial.println(speed);
               delay(100);
           }
           delay(1000);  // Hold at full speed
 
-          // Ramp down: 100 → 0
-          for (int power = 100; power >= 0; power -= 5) {
-              motor.setPower(power);
+          // Ramp down: 255 → 0
+          for (int speed = 255; speed >= 0; speed -= 13) {
+              analogWrite(motorPwmPin, speed);
               Serial.print("Slowing: ");
-              Serial.println(power);
+              Serial.println(speed);
               delay(100);
           }
           delay(2000);  // Pause before repeating
       }
 
-   The ``power += 5`` in each loop iteration increases the power by 5% every 100ms — it takes about 2 seconds to go from 0 to 100. Change the step size (``5`` → ``2``) for a smoother but slower ramp, or (``5`` → ``20``) for a faster, jumpier one.
+   The ``speed += 13`` in each loop iteration increases the speed by about 5% (13 out of 255) every 100ms — it takes about 2 seconds to go from 0 to 255. Change the step size (``13`` → ``5``) for a smoother but slower ramp, or (``13`` → ``25``) for a faster, jumpier one.
 
 
 4. Troubleshooting
@@ -243,13 +255,13 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
 **Motor hums but doesn't turn**
 
-* **Cause:** The power level is too low to overcome static friction, or something is blocking the shaft.
-* **Solution:** Increase the power to at least 30–40%. Every motor has a minimum starting threshold. Check that nothing is touching the motor shaft or fan blade.
+* **Cause:** The PWM value is too low to overcome static friction, or something is blocking the shaft.
+* **Solution:** Increase the PWM value to at least 77–102 (about 30–40% of 255). Every motor has a minimum starting threshold. Check that nothing is touching the motor shaft or fan blade.
 
 **Motor only spins in one direction**
 
-* **Cause:** The code only uses positive (or only negative) power values.
-* **Solution:** Make sure ``setPower()`` receives both positive and negative values. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
+* **Cause:** The code never changes the direction pin.
+* **Solution:** Make sure the code toggles ``digitalWrite(motorDirPin, ...)`` between HIGH and LOW. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
 
 
 * **Cause:** The board is not connected, or App Lab can't find it.
@@ -260,10 +272,10 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
 You just made something move — and that's a big deal. DC motors are the foundation of robotics, drones, electric vehicles, and industrial automation. In this lesson, you learned:
 
-* How to control a DC motor with the RobotShield ``Motor`` class
-* How ``setPower()`` controls both speed (0–100%) and direction (positive/negative)
+* How to control a DC motor with a direction pin (D4) and a PWM pin (D5)
+* How ``analogWrite()`` sets the speed (0–255) while a digital pin picks the direction
 * How an H-bridge reverses motor polarity to change direction
 * Why motors need a separate battery — logic power and motor power are independent
-* How to ramp speed smoothly with ``for`` loops and ``map()``
+* How to ramp speed smoothly with ``for`` loops and ``analogWrite()``
 
 In the next lesson, you'll control a different kind of motor — a **servo** that moves to precise angles instead of spinning continuously. Servos are how robots achieve precise positioning: steering, pan-tilt camera mounts, and robotic arms.

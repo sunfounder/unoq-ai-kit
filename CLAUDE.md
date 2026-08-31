@@ -47,7 +47,7 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 5. PIR Motion Alarm — digital sensor (motion) + active buzzer alarm
 6. Color Mixer — RGB PWM color mixing
 7. Motor Speed Controller — DC motor PWM
-8. Servo Sweep — servo library
+8. Servo Sweep — Arduino_HardwareServo library
 9. Variable Pitch Melody — analog input + PWM audio
 10. Ultrasonic Radar — timing-based sensor
 11. Temperature & Humidity Monitor — DHT11 sensor
@@ -65,6 +65,51 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 Each module has its own lesson template. These templates are NOT
 interchangeable — when writing a lesson for a module, follow that
 module's canonical reference exactly.
+
+---
+
+### Setup Section (all modules)
+
+The first numbered section of every lesson is the Setup section
+(**"1. Setup"** in basic, media, and edge AI; the iot module still uses
+the old **"Build the Circuit"** title — convert when convenient). Its
+structure is shared across all modules:
+
+```
+1. Setup / Build the Circuit
+    - What You Need / Components Needed: list-table
+      * :widths: 25 25 25 25 (4-col) or 25 25 (2-col), :header-rows: 0
+      * Row 1: quantity + name — Pan Tilt Kit plain, components as :ref:
+        links (e.g. `1 * :ref:`cpn_button``, `3 * :ref:`cpn_resistor` (220Ω)`)
+      * Row 2: |list_xxx| image substitutions (|list_pan_tilt|,
+        |list_button|, |list_220ohm|, ...)
+      * Empty cells use `-`
+      * NO .. note:: / .. tip:: / .. warning:: after the table — too many
+        callouts clutter the page; fold the facts (resistor required, LED
+        orientation, pull-up, built-in parts, servo power) into the Wiring
+        Diagram sentence instead
+        (exceptions: STT ZIP ~100 MB note, TTS first-run note — both live
+        in the Run/Code section anyway)
+    - Software Requirements (projects with Bricks/libraries): nested list
+      * Bricks: what app.yaml declares (sunfounder_stt, sunfounder_tts, ...)
+      * Libraries: ONLY real sketch.yaml libraries (Arduino_HardwareServo,
+        DHT sensor library, ...) — bricks are NOT libraries
+      * sketch.yaml libraries MUST include a version, e.g.
+        ``- Arduino_HardwareServo (0.0.1)`` — without a version App Lab
+        errors out
+      * Projects with no bricks state so in prose (e.g. "the camera is an
+        App Lab peripheral")
+    - Wiring Diagram (breadboard lessons):
+      * ONE concrete sentence describing the connections (pin names,
+        resistor placement, orientation), folding in the safety-critical
+        facts from any deleted tip/warning
+      * .. image:: /img/wiring/wiring_*.png (absolute path)
+      * If the image doesn't exist yet, keep the reference as a placeholder
+    - One-time board setup steps (e.g. enabling external carriers for the
+      camera) do NOT go in the lesson — they live in faq.rst with a
+      `.. _anchor:` and lessons link to them with :ref:. Only a one-line
+      pointer + :ref: link appears in the lesson.
+```
 
 ---
 
@@ -87,10 +132,18 @@ Introduction
     - Hook sentence connecting to prior lessons
     - 3–5 learning objectives (bullet list)
 
-1. Build the Circuit
-    - Components Needed: 4-col table, :header-rows: 0, 2 sub-rows per component
-    - .. tip:: for hints
-    - Wiring Diagram: Fritzing breadboard image. NO text steps.
+1. Setup
+    - What You Need: follows the shared Setup Section format (above)
+    - Software Requirements (sketch-only projects):
+      * With libraries: "This project uses the following sketch libraries:"
+        + nested ``Libraries`` list matching sketch.yaml
+      * Without libraries: "This project uses no external libraries — the
+        sketch only uses the built-in Arduino framework."
+    - NO .. tip:: / .. warning:: after the table — fold safety-critical
+      facts (resistor required, LED orientation) into the Wiring Diagram
+      sentence
+    - Wiring Diagram: ONE concrete sentence with pin names + Fritzing
+      breadboard image
     - NO Circuit Diagram — schematics were removed from all basic
       lessons (readers found them redundant with the Fritzing diagram)
 
@@ -171,20 +224,93 @@ The ``|list_pan_tilt|`` substitution is defined in ``conf.py``.
 
 **Library installation reminder:**
 
-For lessons using RobotShield, SunFounder_IMU, or DHT sensor library, add
-after the Run button step:
+For lessons using Arduino_HardwareServo, SunFounder_IMU, or DHT sensor
+library, add after the Run button step:
 
 .. code-block:: rst
 
    .. note::
 
-      This project uses the **RobotShield** library. see :ref:`install_update_lib_c`
+      This project uses the **Arduino_HardwareServo** library. see :ref:`install_update_lib_c`
       for installation or updating.
+
+Servos on the UNO Q always use **Arduino_HardwareServo** (hardware PWM) —
+the standard Servo library causes jitter on this board.
 
 **Removed from all basic lessons:**
 - Generic "Run button does nothing" troubleshooting — now in FAQ
 - Long battery warnings — Robot Shield implicitly requires battery
 - Functions described without parameters, e.g. write ``digitalWrite(ledPin, HIGH)`` not ``digitalWrite(HIGH)``
+
+---
+
+### Module B: Multimedia (media/)
+
+**Canonical reference:** `media/3_local_stt.rst`
+
+Python + Sketch App Lab projects using the Multimedia Carrier's speaker,
+microphone, and camera. Follows the IoT lesson structure — the **Run the
+App** section covers the run steps and How it Works only; full source code
+is NOT shown (media projects have both ``main.py`` and ``sketch.ino``,
+too long for the page).
+
+**Section checklist (follow `3_local_stt.rst` exactly):**
+
+```
+03 Local STT               <-- leading zero in title, no zero in filename
+===============
+
+.. include:: /index.rst
+
+Introduction
+    - Hook sentence connecting to prior lessons
+    - 3–5 learning objectives (bullet list)
+
+1. Setup
+    - Follows the shared Setup Section format (above), plus:
+    - STT lessons: .. note:: the ZIP is ~100 MB (bundles the Whisper
+      model) after Software Requirements
+
+2. Run the App
+    - NO "Import and Run the Code" sub-heading, NO "The Code" section
+    - #. steps go directly under the section title
+    - TTS lessons: .. note:: with the standard first-run text (below)
+    - **How it Works** sub-heading:
+        - .. code-block:: text flow for Python-only lessons (01, 03)
+        - .. mermaid:: sequenceDiagram for lessons with sketch interaction
+          (participants: Button/Sketch/Python)
+        - Component explanations: **Sketch (sketch.ino)** / **Python (main.py)**
+          with short snippets (5–10 lines) + description bullets
+
+3. Experiment
+    - Descriptive **bold sub-heading**
+    - Guided table (input → expected result)
+    - **Challenge:** — multi-step modification task, NO dropdown solution
+
+4. Troubleshooting
+    - **bold heading** per issue + * Cause: / * Solution: bullets
+    - Focus: carrier attachment, STT/TTS first run, wiring, battery power
+    - NO entries for bugs the shipped code already handles
+
+5. Summary
+    - Celebratory sentence + 3–5 bullet points
+    - Tease next lesson
+```
+
+**Key rules unique to Module B:**
+
+- No full source listings — only short How it Works snippets
+- Servos always on **D9** (pan) / **D10** (tilt)
+- Standard TTS first-run note (every TTS lesson): "The first time you run a
+  TTS example on this UNO Q, App Lab needs to download and prepare the TTS
+  runtime and audio dependencies. This may take half an hour or more ...
+  This setup only happens once — after it finishes, every TTS example
+  starts much faster."
+- Filenames have no leading zero (``1_local_tts.rst``), titles do
+  ("01 Local TTS")
+- No ``docker-img-make`` or other internal build commands in
+  Troubleshooting — students use App Lab, not the terminal
+- Wiring images: ``/img/wiring/wiring_*.png``
 
 ---
 
@@ -195,7 +321,8 @@ after the Run button step:
 Multi-file App Lab projects (Python + Sketch + HTML/JS/CSS + assets).
 The **Code** section replaces inline source code with a project structure
 breakdown and Mermaid sequence diagram. The **Build the Circuit** section
-remains identical to Module A.
+follows the shared Setup Section format (still titled "Build the Circuit"
+with "Components Needed" in this module).
 
 **Section checklist (follow `1_ui_led.rst` exactly):**
 
@@ -771,68 +898,66 @@ One-sentence description of what the project does.
 
 ### Bricks Used
 
-- `brick_name` — One-line description
+This example uses the following Bricks:
+
 - `brick_name` — One-line description
 
 ### Libraries Used
 
-- **LibraryName** library (install via Library Manager)
+- **LibraryName** library
+(Only if sketch.yaml declares libraries — Arduino_HardwareServo, DHT sensor library, ...)
 
 ## Hardware
 
+- Pan Tilt Kit ×1
 - Component ×1
-- Component ×1
+- ...
 
 ## Wiring
 
-[Brief wiring description. "No breadboard wiring needed" if built-in.]
+[Brief wiring description. "No breadboard wiring is needed" if built-in.]
 
 ![Wiring Diagram](assets/docs_assets/wiring_xxx.png)
 
 ## How to Use the Example
 
 1. Open **Arduino App Lab**.
-2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `NN Lesson Name.zip` from `unoq-ai-kit\media`.
+2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
+3. Import `NN Name.zip` from `unoq-ai-kit\media`.
 4. Click **Run**.
 5. [Expected result.]
 
+> **Note:** (TTS lessons only) The first time you run a TTS example on this
+UNO Q, App Lab needs to download and prepare the TTS runtime and audio
+dependencies. This may take half an hour or more, depending on your network
+connection. Keep the UNO Q connected to the Internet and wait for the setup
+to complete. This setup only happens once — after it finishes, every TTS
+example starts much faster.
+
 ## How it Works
 
-```text
-step 1 → description
-step 2 → description
-```
+- step 1 → description
+- step 2 → description
 
 - Explanation bullet
 - Explanation bullet
-
-## Code Overview
-
-### Python (and Sketch if non-trivial)
-
-`python/main.py` runs on the Linux MPU.
-
-```python
-[complete code]
-```
-
-- ``function()`` — What it does.
 ```
 
 **Format rules:**
 - **Software** (Bricks + Libraries) comes BEFORE Hardware — software defines what the project needs
-- Hardware is a simple bullet list (not a table unless wiring pins need mapping)
-- Wiring section includes the Fritzing diagram if applicable
-- Every function in Code Overview gets a ``- `` bullet explanation
+- **Libraries Used** lists ONLY real sketch.yaml libraries — bricks are declared in app.yaml, they are NOT libraries
+- Hardware is a simple bullet list (**Pan Tilt Kit ×1** first, kit components never listed individually)
+- Wiring section = one short sentence + one image; the image may stay a placeholder while waiting for the PNG
+- **No Code Overview section** — the code lives in the same folder; README describes behavior, not implementation
+- **How it Works** uses a plain-markdown arrow flow (NO fenced blocks), then explanation bullets
+- All fenced code blocks (```text / ```python / ```cpp) are forbidden — they freeze the App Lab README preview
 
 **Key differences from Module A:**
 
 - Section 1 is **"Wiring"** (not "Build the Circuit") — no breadboard, no resistor table. Just state that the hardware is built-in.
 - **"Bricks Used"** section lists each brick declared in `app.yaml` with a one-line description.
 - **"Libraries"** section lists installable libraries for the sketch side.
-- **How it Works** uses a simple text flow diagram, not code-block diagrams.
-- **Code Overview** shows the complete Python code with per-function explanations.
+- **How it Works** uses a plain-markdown arrow flow, not code-block diagrams.
 - Projects need both `app.yaml` with `python: entry: python/main.py` and `bricks:` declarations, plus a `sketch/` folder with minimal `sketch.ino` + `sketch.yaml`.
 
 **Brick reference for Media module:**

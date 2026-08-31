@@ -14,10 +14,10 @@ In this lesson, you will learn to:
 * Use ``millis()`` for **non-blocking timing** — checking the clock without freezing your program
 * Handle sensor errors gracefully with ``isnan()``
 
-1. Build the Circuit
+1. Setup
 ----------------------
 
-**Components Needed**
+**What You Need**
 
 .. list-table::
    :widths: 25 25 25 25
@@ -41,20 +41,25 @@ In this lesson, you will learn to:
      -
 
 
+**Software Requirements**
+
+This project uses the following sketch libraries:
+
+* Libraries:
+
+  * ``DHT sensor library`` (reads temperature and humidity from DHT11/DHT22 sensors)
+  * ``Adafruit Unified Sensor`` (common interface for Adafruit sensor libraries)
+
 **Wiring Diagram**
 
-Follow the diagram below to place each component on the breadboard and connect the wires. The DHT11 module has three pins — the labels on the PCB tell you exactly where each wire goes.
+The DHT11 module has three labeled pins — double-check them before powering on: **VCC → 3.3V**, **DATA → pin 2**, **GND → GND**.
 
 .. image:: /img/wiring/wiring_dht11.png
    :width: 500
    :align: center
 
-.. warning::
-
-   Double-check the DHT11's pin labels before powering on. **VCC → 3.3V**, **DATA → pin 2**, **GND → GND**. Also, the DHT11 needs about 1 second to stabilize after power-on — don't expect valid readings immediately.
-
-2. Code
-----------
+2. Run the App
+----------------
 
 **Import and Run the Code**
 
