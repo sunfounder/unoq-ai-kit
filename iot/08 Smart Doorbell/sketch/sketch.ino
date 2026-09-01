@@ -1,5 +1,5 @@
 /*
- * 07 Smart Doorbell
+ * 08 Smart Doorbell
  *
  * Push button    -> D2
  * Passive buzzer -> D5
@@ -10,6 +10,7 @@
 const int BUTTON_PIN = 2;
 const int BUZZER_PIN = 5;
 
+// Tracks the previous button reading to detect the press edge.
 bool lastButtonState = HIGH;
 
 void playDoorbellChime()
@@ -51,12 +52,14 @@ void loop()
 {
     bool buttonState = digitalRead(BUTTON_PIN);
 
+    // A press is a HIGH -> LOW edge on the pull-up button; fire once.
     if (lastButtonState == HIGH &&
         buttonState == LOW)
     {
         Serial.println("Doorbell pressed");
 
         playDoorbellChime();
+        // Tell Python a visitor arrived (it takes the photo and speaks).
         Bridge.notify("doorbell_pressed");
 
         delay(80);

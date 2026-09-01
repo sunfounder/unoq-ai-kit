@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
+# Web app that controls an RGB LED through the sketch.
+# Data flow: browser -> Python (WebUI) -> sketch (Bridge, RobotShield PWM).
+#
 from arduino.app_utils import *
 from arduino.app_bricks.web_ui import WebUI
 

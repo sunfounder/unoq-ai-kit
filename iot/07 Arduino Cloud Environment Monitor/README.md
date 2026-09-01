@@ -1,4 +1,4 @@
-# 06 Arduino Cloud Environment Monitor
+# 07 Arduino Cloud Environment Monitor
 
 Build an IoT environment monitoring system using Arduino Cloud. The sketch reads temperature and humidity from a DHT11 sensor every 5 seconds and uploads them to the Cloud, while a switch on the Cloud Dashboard remotely controls an external LED on D5 — Cloud monitoring and Cloud control in one project.
 
@@ -28,7 +28,7 @@ Connect the DHT11's VCC to 3.3V, DATA to D2, and GND to GND; connect the externa
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `06 Arduino Cloud Environment Monitor.zip` from `unoq-ai-kit\iot`.
+3. Import `07 Arduino Cloud Environment Monitor.zip` from `unoq-ai-kit\iot`.
 4. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
 5. In Arduino Cloud, create a Thing associated with your Device, with three variables: `temperature` and `humidity` (Floating Point Number, Read Only, On change) and `led` (Boolean, Read & Write, On change). Build a Dashboard with widgets linked to all three.
 6. Click **Run**.

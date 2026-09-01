@@ -1,3 +1,6 @@
+# IoT Voice Message: the Web UI drives a record / play / pause voice-message
+# workflow. Recording uses the STT brick's microphone API and playback uses
+# the TTS brick's speaker API — no recognition or synthesis models load.
 import threading
 import time
 
@@ -21,7 +24,8 @@ recording = False
 has_recording = False
 recording_started = 0.0
 recording_duration = 0.0
-RECORDING_FILE = "/app/audio_shared/stt_last.wav"
+# Shared WAV path written by the STT recording API and played by TTS.
+RECORDING_FILE = "/app/audio_output/stt_last.wav"
 
 
 def status_payload():
@@ -37,6 +41,7 @@ def status_payload():
 def start_recording(client, data):
     global recording, has_recording, recording_started, recording_duration
     try:
+        # Stop any playback so it doesn't mix with the new recording.
         tts.stop_audio()
         stt.start_recording()
         recording = True
@@ -66,6 +71,7 @@ def play_recording(client, data):
     if not has_recording:
         return
     try:
+        # Resume a paused track, otherwise play the recording from the start.
         state = tts.get_playback_state()
         if state == "paused":
             tts.resume_audio()
@@ -87,6 +93,7 @@ def pause_recording(client, data):
 
 
 def level_worker():
+    # Background thread: streams mic level or playback state to the UI.
     global recording_duration
     last_state = None
     while True:

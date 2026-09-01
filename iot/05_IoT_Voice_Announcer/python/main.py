@@ -1,3 +1,6 @@
+# Web app that speaks user-typed messages through the speaker.
+# Browser sends text over WebUI; Python speaks it with the TTS brick.
+#
 from arduino.app_utils import App
 from arduino.app_bricks.web_ui import WebUI
 from sunfounder_tts import EdgeTTS
@@ -5,6 +8,7 @@ from sunfounder_tts import EdgeTTS
 # Initialize Text-to-Speech.
 # gain=1.0 keeps the original playback level.
 tts = EdgeTTS(gain=1.0)
+# Use the English voice "Jenny".
 tts.set_voice("en-US-JennyNeural")
 
 # Initialize Web UI.

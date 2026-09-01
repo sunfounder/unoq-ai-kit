@@ -1,0 +1,10 @@
+name: 12 IoT Smart Room
+description: Build a smart room with environment and light sensing, security camera, automatic ventilation, RGB lighting, Web UI, STT, and TTS.
+python:
+  entry: python/main.py
+ports: []
+bricks:
+- arduino:web_ui: {}
+- sunfounder_stt: {}
+- sunfounder_tts: {}
+icon: 🏠

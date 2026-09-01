@@ -1,9 +1,0 @@
-name: IoT Control Center
-description: Monitor camera and sensor data, control a pan-tilt with a physical joystick, switch a motor from a local Web UI, and periodically announce system status.
-python:
-  entry: python/main.py
-ports: []
-bricks:
-- arduino:web_ui: {}
-- sunfounder_tts: {}
-icon: 🎛️

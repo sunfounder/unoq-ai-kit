@@ -1,3 +1,9 @@
+# Smart Doorbell: when the sketch reports a button press over Bridge, this
+# App saves a visitor photo from the camera, streams a live preview to the
+# Web UI, and announces the visitor through the speaker (EdgeTTS).
+#
+# The button (D2) and buzzer (D5) are handled by the sketch; the camera
+# and speaker are the Multimedia Carrier's built-in peripherals.
 import base64
 import time
 from datetime import datetime
@@ -8,17 +14,22 @@ import cv2
 from arduino.app_utils import App, Bridge
 from arduino.app_bricks.web_ui import WebUI
 from arduino.app_peripherals.camera import Camera
+from sunfounder_tts import EdgeTTS
 
 ui = WebUI()
 
 PHOTO_DIR = Path("/app/photos")
+AUDIO_OUTPUT_DIR = Path("/app/audio_output")
 PHOTO_DIR.mkdir(parents=True, exist_ok=True)
+AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Stream about 5 frames per second to the Web UI.
 STREAM_INTERVAL = 0.20
 JPEG_QUALITY = 70
 
 latest_frame = None
 snapshot_requested = False
+announcement_requested = False
 last_stream_time = 0.0
 
 
@@ -39,8 +50,15 @@ time.sleep(1)
 
 print("Camera ready.", flush=True)
 
+print("Initializing speaker...", flush=True)
+tts = EdgeTTS()
+tts.set_voice("en-US-JennyNeural")
+tts.set_volume(50)
+print("Speaker ready.", flush=True)
+
 
 def send_frame_to_web(frame):
+    # Encode the frame as a base64 JPEG for the browser.
     success, encoded = cv2.imencode(
         ".jpg",
         frame,
@@ -87,6 +105,7 @@ def save_visitor_photo(frame):
 
 def doorbell_pressed():
     global snapshot_requested
+    global announcement_requested
 
     timestamp = datetime.now().strftime("%H:%M:%S")
 
@@ -97,7 +116,9 @@ def doorbell_pressed():
         {"time": timestamp},
     )
 
+    # Defer the heavy work (photo + speech) to the App loop.
     snapshot_requested = True
+    announcement_requested = True
 
 
 Bridge.provide("doorbell_pressed", doorbell_pressed)
@@ -106,10 +127,12 @@ Bridge.provide("doorbell_pressed", doorbell_pressed)
 def loop():
     global latest_frame
     global snapshot_requested
+    global announcement_requested
     global last_stream_time
 
     now = time.monotonic()
 
+    # Keep the live preview flowing to the Web UI.
     if now - last_stream_time >= STREAM_INTERVAL:
         frame = camera.capture()
         frame = cv2.flip(frame, 0)
@@ -119,9 +142,20 @@ def loop():
 
         send_frame_to_web(frame)
 
+    # Save the latest frame as a timestamped visitor photo.
     if snapshot_requested and latest_frame is not None:
         snapshot_requested = False
         save_visitor_photo(latest_frame)
+
+    # Announce the visitor over the speaker.
+    if announcement_requested:
+        announcement_requested = False
+        print("Speaker: Someone is at the door.", flush=True)
+
+        try:
+            tts.say("Someone is at the door.")
+        except Exception as exc:
+            print(f"Speaker error: {exc}", flush=True)
 
     time.sleep(0.02)
 

@@ -2,6 +2,9 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
+// Controls an RGB LED via RPC calls from the Python app.
+// Colors on RobotShield PWM channels: red P6, green P5, blue P4.
+//
 #include <Arduino_RouterBridge.h>
 #include "RobotShield.h"
 

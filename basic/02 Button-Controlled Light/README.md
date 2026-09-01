@@ -38,7 +38,7 @@ Connect the push button to digital pin D2 and the LED through a 220 Ω resistor 
 
 **Reading a button**
 
-`pinMode(buttonPin, INPUT_PULLUP)` enables the board's built-in pull-up resistor, so an unpressed button reads `HIGH` (5 V). Pressing the button connects the pin to GND, making it read `LOW` — that's why the code checks for `LOW` instead of `HIGH`.
+`pinMode(buttonPin, INPUT_PULLUP)` enables the board's built-in pull-up resistor, so an unpressed button reads `HIGH` (3.3 V). Pressing the button connects the pin to GND, making it read `LOW` — that's why the code checks for `LOW` instead of `HIGH`.
 
 **Making a decision**
 

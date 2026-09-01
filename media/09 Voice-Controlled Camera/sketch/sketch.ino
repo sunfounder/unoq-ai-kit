@@ -10,12 +10,12 @@
 #include <Arduino_RouterBridge.h>
 #include <Arduino_HardwareServo.h>
 
-// Servo offsets from the 90° center position
-const int LEFT_ANGLE = -45;
+// Servo angles
+const int LEFT_ANGLE = 135;
 const int RIGHT_ANGLE = 45;
-const int UP_ANGLE = -45;
-const int DOWN_ANGLE = 45;
-const int CENTER_ANGLE = 0;
+const int UP_ANGLE = 45;
+const int DOWN_ANGLE = 115;
+const int CENTER_ANGLE = 90;
 
 HardwareServo panServo;
 HardwareServo tiltServo;
@@ -23,36 +23,36 @@ HardwareServo tiltServo;
 int panLeft(String dummy)
 {
     (void)dummy;
-    panServo.write(90 + LEFT_ANGLE);
+    panServo.write(LEFT_ANGLE);
     return LEFT_ANGLE;
 }
 
 int panRight(String dummy)
 {
     (void)dummy;
-    panServo.write(90 + RIGHT_ANGLE);
+    panServo.write(RIGHT_ANGLE);
     return RIGHT_ANGLE;
 }
 
 int tiltUp(String dummy)
 {
     (void)dummy;
-    tiltServo.write(90 + UP_ANGLE);
+    tiltServo.write(UP_ANGLE);
     return UP_ANGLE;
 }
 
 int tiltDown(String dummy)
 {
     (void)dummy;
-    tiltServo.write(90 + DOWN_ANGLE);
+    tiltServo.write(DOWN_ANGLE);
     return DOWN_ANGLE;
 }
 
 int centerPanTilt(String dummy)
 {
     (void)dummy;
-    panServo.write(90 + CENTER_ANGLE);
-    tiltServo.write(90 + CENTER_ANGLE);
+    panServo.write(CENTER_ANGLE);
+    tiltServo.write(CENTER_ANGLE);
     return CENTER_ANGLE;
 }
 
@@ -61,8 +61,9 @@ void setup()
     panServo.attach(9);
     tiltServo.attach(10);
 
-    panServo.write(90 + CENTER_ANGLE);
-    tiltServo.write(90 + CENTER_ANGLE);
+    panServo.write(CENTER_ANGLE);
+    tiltServo.write(CENTER_ANGLE);
+    delay(500);
 
     Bridge.begin();
     Bridge.provide("pan_left", panLeft);

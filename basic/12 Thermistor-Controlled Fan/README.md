@@ -46,7 +46,7 @@ Connect the NTC thermistor with a 10 kΩ resistor to analog pin A0 and the DC mo
 
 **Step 3 — mapping temperature to power**
 
-Below 25 °C the fan stays off (`power = 0`), above 50 °C it runs at maximum (`power = 100`), and in between `map()` — the same function used in earlier lessons — spreads the 25–50 °C range across 0–100% so the fan ramps smoothly instead of clicking on.
+Below 25 °C the fan stays off (`power = 0`), above 50 °C it runs at maximum (`power = 100`), and in between `map()` — the same function used in earlier lessons — spreads the 25–50 °C range across 20–100% so the fan ramps smoothly instead of clicking on.
 
 **Driving the motor**
 

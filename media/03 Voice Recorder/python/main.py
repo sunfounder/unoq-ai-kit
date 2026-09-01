@@ -13,7 +13,7 @@ from sunfounder_tts import EdgeTTS
 RECORD_BUTTON_RPC = "record_button_read"
 PLAY_BUTTON_RPC = "play_button_read"
 POLL_INTERVAL = 0.05
-AUDIO_FILE = "/app/audio_shared/stt_last.wav"
+AUDIO_FILE = "/app/audio_output/stt_last.wav"
 
 print("=== Voice Recorder ===", flush=True)
 print("D2: Record / Stop Recording", flush=True)

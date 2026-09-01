@@ -21,6 +21,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 const int LED_PIN = 5;
 
+// Read the DHT11 every 5 seconds.
 const unsigned long SENSOR_INTERVAL = 5000;
 unsigned long previousSensorMillis = 0;
 
@@ -52,6 +53,7 @@ void loop()
 {
     unsigned long currentMillis = millis();
 
+    // Non-blocking delay: skip until the next 5-second reading.
     if (currentMillis - previousSensorMillis < SENSOR_INTERVAL)
     {
         return;
@@ -74,6 +76,7 @@ void loop()
     Serial.print(humidity, 1);
     Serial.println(" %");
 
+    // Send the new readings to Python, which uploads them to Arduino Cloud.
     Bridge.notify(
         "update_environment_cloud",
         temperature,

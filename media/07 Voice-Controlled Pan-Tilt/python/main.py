@@ -20,11 +20,11 @@ AUDIO_OUTPUT_DIR = "/app/audio_output"
 
 # Each entry is: phrases, Bridge RPC, spoken feedback, console action.
 COMMANDS = (
-    (("turn left", "look left", "left"), "pan_left", "Turning left.", "Pan: -45°"),
-    (("turn right", "look right", "right"), "pan_right", "Turning right.", "Pan: 45°"),
-    (("look up", "turn up", "up"), "tilt_up", "Looking up.", "Tilt: -45°"),
-    (("look down", "turn down", "down"), "tilt_down", "Looking down.", "Tilt: 45°"),
-    (("center", "centre", "look forward", "return to center"), "center", "Returning to center.", "Pan: 0°, Tilt: 0°"),
+    (("turn left", "look left", "left"), "pan_left", "Turning left.", "Turning left."),
+    (("turn right", "look right", "right"), "pan_right", "Turning right.", "Turning right."),
+    (("look up", "turn up", "up"), "tilt_up", "Looking up.", "Looking up."),
+    (("look down", "turn down", "down"), "tilt_down", "Looking down.", "Looking down."),
+    (("center", "centre", "look forward", "return to center"), "center", "Returning to center.", "Returning to center."),
 )
 
 

@@ -52,8 +52,8 @@ Supported commands: `Turn left`, `Turn right`, `Look up`, `Look down`, and `Cent
 
 - Button pressed → starts recording
 - Button released → stops recording and recognizes
-- `match_command(text)` → "turn left" → ("pan_left", "Turning left.", "Pan: -45°")
-- `Bridge.call("pan_left", "")` → the pan servo moves to -45°
+- `match_command(text)` → "turn left" → ("pan_left", "Turning left.", "Turning left.")
+- `Bridge.call("pan_left", "")` → the pan servo moves to 135°
 - `tts.say("Turning left.")` → spoken feedback
 
 - The `COMMANDS` table maps voice phrases to three things: the Bridge RPC to call, the spoken feedback, and the console message.

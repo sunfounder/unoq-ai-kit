@@ -1,6 +1,10 @@
+# Bridges the sketch and the browser maze game.
+# Data flow: sketch (joystick) -> Python (Bridge) -> browser (WebUI).
+#
 from arduino.app_utils import App, Bridge
 from arduino.app_bricks.web_ui import WebUI
 
+# Initialize the web UI.
 ui = WebUI()
 
 
@@ -17,7 +21,9 @@ def reset_game():
     ui.send_message("reset_game", {})
 
 
+# Register the callbacks so the sketch can invoke them by name.
 Bridge.provide("joystick_move", joystick_move)
 Bridge.provide("reset_game", reset_game)
 
+# Start the application.
 App.run()

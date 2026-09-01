@@ -37,7 +37,7 @@ Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
 
 **Digital output**
 
-`digitalWrite(ledPin, HIGH)` sends 5 V to pin 5, lighting the LED; `digitalWrite(ledPin, LOW)` sends 0 V, turning it off. That's the "Hello World" of Arduino — writing a `HIGH` or `LOW` value to a digital pin.
+`digitalWrite(ledPin, HIGH)` sends 3.3 V to pin 5, lighting the LED; `digitalWrite(ledPin, LOW)` sends 0 V, turning it off. That's the "Hello World" of Arduino — writing a `HIGH` or `LOW` value to a digital pin.
 
 **The blink cycle**
 

@@ -25,7 +25,7 @@ No breadboard wiring is needed. The microphone is built into the Multimedia Carr
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
 3. Import `04 Local STT.zip` from `unoq-ai-kit\media`.
 4. Click **Run**.
-5. Wait for `Local STT is ready.` in the **Output** window, then speak toward the UNO Q. After about 5 seconds the recognized sentence appears after `You said:`, and the program listens again automatically. The first run takes longer while the Whisper model is downloaded.
+5. Wait for `Local STT is ready.` in the **Output** window, then speak toward the UNO Q. After about 5 seconds the recognized sentence appears after `You said:`, and the program listens again automatically. The first run takes longer while the Whisper model is loaded.
 
 ## How it Works
 

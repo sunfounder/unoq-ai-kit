@@ -1,3 +1,5 @@
+# Bridges Arduino Cloud and the sketch: the Cloud LED switch controls the
+# external LED on D5, while DHT11 readings (D2) flow up to the dashboard.
 from arduino.app_bricks.arduino_cloud import ArduinoCloud
 from arduino.app_utils import App, Bridge
 

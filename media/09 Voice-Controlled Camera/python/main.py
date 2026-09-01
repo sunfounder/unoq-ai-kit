@@ -54,31 +54,31 @@ def next_photo_path() -> Path:
 
 def move_left() -> None:
     Bridge.call("pan_left", "")
-    print("Pan: -45°", flush=True)
+    print("Turning left.", flush=True)
     tts.say("Turning left.")
 
 
 def move_right() -> None:
     Bridge.call("pan_right", "")
-    print("Pan: 45°", flush=True)
+    print("Turning right.", flush=True)
     tts.say("Turning right.")
 
 
 def move_up() -> None:
     Bridge.call("tilt_up", "")
-    print("Tilt: -45°", flush=True)
+    print("Looking up.", flush=True)
     tts.say("Looking up.")
 
 
 def move_down() -> None:
     Bridge.call("tilt_down", "")
-    print("Tilt: 45°", flush=True)
+    print("Looking down.", flush=True)
     tts.say("Looking down.")
 
 
 def move_center() -> None:
     Bridge.call("center", "")
-    print("Pan: 0°, Tilt: 0°", flush=True)
+    print("Returning to center.", flush=True)
     tts.say("Returning to center.")
 
 

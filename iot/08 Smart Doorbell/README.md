@@ -1,12 +1,13 @@
-# 07 Smart Doorbell
+# 08 Smart Doorbell
 
-Build a smart doorbell with a push button, passive buzzer, live camera preview, automatic visitor photo, and browser notification. Press the button — the buzzer plays a "ding-dong" chime, the Web UI shows "Someone is at the door!", a visitor photo is saved, and the event is added to the Recent Visitors list.
+Build a smart doorbell with a push button, passive buzzer, live camera preview, automatic visitor photo, browser notification, and spoken visitor alert. Press the button — the buzzer plays a "ding-dong" chime, the Web UI shows "Someone is at the door!", a visitor photo is saved, and the UNO Q speaker says "Someone is at the door."
 
 ## Software
 
 ### Bricks Used
 
 - `web_ui` — Creates the web interface and provides real-time communication between the browser and the Python backend
+- `sunfounder_tts` — Plays the spoken visitor alert through the UNO Q speaker
 
 ## Hardware
 
@@ -27,16 +28,16 @@ Connect the push button between D2 and GND (uses `INPUT_PULLUP`), and the passiv
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `07 Smart Doorbell.zip` from `unoq-ai-kit\iot`.
+3. Import `08 Smart Doorbell.zip` from `unoq-ai-kit\iot`.
 4. Click **Run**.
-5. Open the Web UI and press the doorbell button. The buzzer plays the chime, the page shows **Someone is at the door!**, a visitor photo is saved, and the event appears in **Recent Visitors**.
+5. Open the Web UI and press the doorbell button. The buzzer plays the chime, the page shows **Someone is at the door!**, a visitor photo is saved, and the speaker says **"Someone is at the door."**
 
 ## How it Works
 
 **Flow**
 
 - Sketch (`sketch.ino`) — waits for a HIGH→LOW transition on the button (debounced by edge detection), plays the chime with `tone()`, and calls `Bridge.notify("doorbell_pressed")`
-- Python (`main.py`) — receives the event, updates the Web UI, and requests a snapshot of the current camera frame
+- Python (`main.py`) — receives the event, updates the Web UI, requests a snapshot of the current camera frame, and uses TTS to announce the visitor
 - The App loop streams the camera preview at about 5 FPS and saves visitor photos as `photos/visitor_001.jpg`, `visitor_002.jpg`, and so on
 
 **The ding-dong chime**

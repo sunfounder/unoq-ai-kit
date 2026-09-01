@@ -19,18 +19,22 @@ const int SW_PIN = 2;
 const int X_PIN = A3;
 const int Y_PIN = A2;
 
+// Joystick center values; 512 is the midpoint of the 0-1023 ADC range.
 int xCenter = 512;
 int yCenter = 512;
 
+// Ignore small joystick movements near the center.
 const int DEAD_ZONE = 150;
 
 bool joystickReady = true;
+// HIGH because the button uses INPUT_PULLUP (pressed = LOW).
 bool lastButtonState = HIGH;
 
 void calibrateJoystick() {
     long xTotal = 0;
     long yTotal = 0;
 
+    // Average 20 samples to reduce noise.
     for (int i = 0; i < 20; i++) {
         xTotal += analogRead(X_PIN);
         yTotal += analogRead(Y_PIN);
@@ -56,6 +60,7 @@ void setup() {
     Bridge.begin();
 
     delay(500);
+    // Measure the resting position of the joystick.
     calibrateJoystick();
 
     Serial.println("=== Joystick Maze Ready ===");

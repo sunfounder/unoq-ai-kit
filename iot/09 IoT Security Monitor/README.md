@@ -1,4 +1,4 @@
-# 08 IoT Security Monitor
+# 09 IoT Security Monitor
 
 Build an IoT security monitor with a live camera stream, PIR motion detection, a two-tone buzzer alarm, automatic snapshots, and a browser event log. This project does **not** use Edge AI or the Video Object Detection Brick — the CSI camera is used as a normal camera.
 
@@ -27,7 +27,7 @@ Connect the PIR sensor's VCC to 3.3V, GND to GND, and OUT to D2; connect the pas
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `08 IoT Security Monitor.zip` from `unoq-ai-kit\iot`.
+3. Import `09 IoT Security Monitor.zip` from `unoq-ai-kit\iot`.
 4. Click **Run**.
 5. Open the Web UI — you'll see the live camera preview, motion status, and event log. Walk in front of the PIR sensor: the status changes to **MOTION DETECTED**, the buzzer sounds a two-tone siren, and a snapshot is saved. Stand still for 10 seconds and the status returns to **AREA CLEAR**.
 

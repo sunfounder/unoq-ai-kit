@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
+# Web app that toggles an LED through the sketch.
+# Data flow: browser -> Python (WebUI) -> sketch (Bridge, LED on D5).
+#
 from arduino.app_utils import *
 from arduino.app_bricks.web_ui import WebUI
 

@@ -30,6 +30,7 @@ const uint16_t MELODY[] = {
 const int MELODY_LENGTH =
     sizeof(MELODY) / sizeof(MELODY[0]);
 
+// Written by the Bridge callback, read by loop(): must be volatile.
 volatile int pitchLevel = 25;
 
 int currentNote = 0;
@@ -68,6 +69,7 @@ void loop()
 {
     unsigned long now = millis();
 
+    // Start the next note when the previous one has finished.
     if (!notePlaying)
     {
         int pitchPercent = map(
@@ -91,6 +93,7 @@ void loop()
         notePlaying = true;
     }
 
+    // Note finished: silence, then advance to the next note.
     if (
         notePlaying &&
         now - noteStartTime >= NOTE_DURATION

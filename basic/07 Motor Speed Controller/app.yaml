@@ -1,5 +1,5 @@
 name: 07 Motor Speed Controller
-description: Drive a DC motor with speed ramping and direction control
+description: Drive a DC motor with speed and direction control
 ports: []
 bricks: []
 icon: ⚡

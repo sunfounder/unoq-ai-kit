@@ -10,8 +10,10 @@
 const int PIR_PIN = 2;
 const int BUZZER_PIN = 5;
 
+// Keep the alarm latched for 10 s after the last motion trigger.
 const unsigned long MOTION_HOLD_TIME = 10000;
 
+// Two-tone siren: alternate between 800 Hz and 1200 Hz every 300 ms.
 const int ALARM_LOW_FREQ = 800;
 const int ALARM_HIGH_FREQ = 1200;
 const unsigned long ALARM_TONE_TIME = 300;
@@ -37,6 +39,7 @@ void setMotionState(bool active)
         noTone(BUZZER_PIN);
     }
 
+    // Notify Python so it can take snapshots while motion is active.
     Bridge.notify("motion_state", active);
 
     Serial.print("Security state: ");
@@ -57,6 +60,7 @@ void updateAlarm()
 
     if (now - lastToneChange >= ALARM_TONE_TIME)
     {
+        // Swap between the high and low siren tones.
         highTone = !highTone;
 
         tone(
@@ -91,6 +95,7 @@ void loop()
     unsigned long now = millis();
     bool pirDetected = digitalRead(PIR_PIN) == HIGH;
 
+    // Any motion restarts the hold timer and raises the alarm.
     if (pirDetected)
     {
         lastMotionTime = now;
@@ -101,6 +106,7 @@ void loop()
         }
     }
 
+    // No motion for the hold time -> clear the alarm.
     if (
         motionActive &&
         !pirDetected &&

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Smart Room</title>
+  <link rel="icon" type="image/png" href="./img/sf_logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>IoT Smart Room</h1>
+  <img src="./img/sf_logo.png" alt="SunFounder Logo">
+</header>
+
+<main>
+  <div class="dashboard">
+    <section class="camera card">
+      <div class="section-title"><span>Security Camera</span><span class="live">● LIVE</span></div>
+      <div class="camera-frame"><img id="cameraImage" alt="Live camera"></div>
+
+      <div class="voice-inline">
+        <div><strong>Voice Assistant</strong><div id="voiceText">Press SPEAK, then say a room command.</div></div>
+        <button id="voiceButton" class="speak-button">🎤 SPEAK</button>
+      </div>
+    </section>
+
+    <div class="right-column">
+      <section class="card">
+        <div class="section-title">Environment</div>
+        <div class="metrics">
+          <div><span>Temperature</span><strong id="temperature">--°C</strong></div>
+          <div><span>Humidity</span><strong id="humidity">--%</strong></div>
+        </div>
+        <div class="light-sensor">
+          <div class="sun-icon">☀</div>
+          <div class="light-info">
+            <span>Ambient Light</span>
+            <strong id="ambientLight">--%</strong>
+            <small id="lightLabel">Waiting</small>
+          </div>
+          <div class="light-bar"><div id="lightBar"></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Security</div>
+        <div class="row"><span>Motion</span><strong id="motion">CLEAR</strong></div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Ventilation Fan</div>
+        <div class="mode-row">
+          <button id="autoMode" class="mode active">AUTO</button>
+          <button id="manualMode" class="mode">MANUAL</button>
+        </div>
+        <div class="row">
+          <span>Fan <small>30% power</small></span>
+          <label class="switch"><input id="fanToggle" type="checkbox"><span></span></label>
+        </div>
+        <p class="note">Auto mode turns the fan on at 28°C.</p>
+      </section>
+    </div>
+
+    <section class="card controls-card">
+      <div class="lighting-panel">
+        <div class="section-title">Smart Lighting</div>
+        <div class="rgb-layout">
+          <div class="wheel-container">
+            <canvas id="color-wheel" width="180" height="180"></canvas>
+            <div class="wheel-indicator" id="wheel-indicator"></div>
+          </div>
+          <div class="rgb-controls">
+            <div class="row"><span>Room Light</span><label class="switch"><input id="lightToggle" type="checkbox"><span></span></label></div>
+            <div class="slider-row"><span>☀</span><input type="range" id="brightness-slider" min="0" max="100" value="100"></div>
+            <div id="rgb-values">R: 0 &nbsp; G: 0 &nbsp; B: 0</div>
+            <div id="hex-value">#000000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pan-panel">
+        <div class="section-title">Camera Pan-Tilt</div>
+        <div class="pan-layout">
+          <div class="joystick-live">
+            <div class="axis vertical"></div><div class="axis horizontal"></div>
+            <span class="dir up">UP</span><span class="dir down">DOWN</span>
+            <span class="dir left">LEFT</span><span class="dir right">RIGHT</span>
+            <div id="joystickDot" class="joystick-dot"></div>
+          </div>
+          <div class="servo-values">
+            <div><span>Pan</span><strong id="panValue">90°</strong></div>
+            <div><span>Tilt</span><strong id="tiltValue">90°</strong></div>
+            <div class="wide"><span>Joystick X / Y</span><strong id="joystickValue">512, 512</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="libs/socket.io.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

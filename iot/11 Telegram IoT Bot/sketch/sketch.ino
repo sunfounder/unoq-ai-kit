@@ -87,6 +87,7 @@ void setup()
 
     Bridge.begin();
 
+    // Expose sensor and LED functions so Python can call them on demand.
     Bridge.provide(
         "get_temperature",
         getTemperature
@@ -116,5 +117,6 @@ void setup()
 
 void loop()
 {
+    // Everything runs on demand when a Telegram command arrives.
     delay(100);
 }

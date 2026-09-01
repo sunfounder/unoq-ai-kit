@@ -5,3 +5,8 @@ __pycache__/
 *.mp3
 *.bin
 bricks/
+
+audio_output/
+photos/*
+!photos/.gitkeep
+BRICK_RELEASE_CANDIDATE.md

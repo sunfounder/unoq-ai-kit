@@ -1,4 +1,4 @@
-name: 09 Telegram IoT Bot
+name: 11 Telegram IoT Bot
 description: Check temperature and humidity and control an external LED remotely through a Telegram bot.
 ports: []
 bricks:

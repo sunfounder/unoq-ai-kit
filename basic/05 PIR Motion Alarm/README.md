@@ -23,7 +23,7 @@ Connect the PIR sensor's VCC to 3.3V, OUT to D2, GND to GND, and the passive buz
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
 3. Import `05 PIR Motion Alarm.zip` from `unoq-ai-kit\basic`.
 4. Click **Run**.
-5. Wait 30 seconds for the PIR sensor to warm up (the Serial Monitor shows "Warming up..."). Once it says "Ready!", wave your hand or walk in front of the sensor — the buzzer sounds a two-tone siren (alternating 800 Hz and 1200 Hz). Stay still and the alarm stops.
+5. Wait 30 seconds for the PIR sensor to warm up (the Serial Monitor shows "PIR Motion Alarm — warming up (30 seconds)..."). Once it says "Ready!", wave your hand or walk in front of the sensor — the buzzer sounds a two-tone siren (alternating 800 Hz and 1200 Hz). Stay still and the alarm stops.
 
 ## How it Works
 
