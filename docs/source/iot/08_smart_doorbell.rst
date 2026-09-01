@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-07 Smart Doorbell
+08 Smart Doorbell
 =====================
 
 You've built dashboards and remote controls — but all of them waited for a human to look at a screen. Now you'll build a system that **announces events on its own**. Press a button at the "door" and the UNO Q plays a "ding-dong" chime, shows "Someone is at the door!" in the browser, snaps a photo of your visitor, and logs the visit — a complete smart doorbell with camera, sound, and browser notification.
@@ -62,7 +62,7 @@ Connect the push button between **D2** and **GND** (uses ``INPUT_PULLUP``), and 
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``07 Smart Doorbell.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``08 Smart Doorbell.zip``. Open it.
 
 #. Click the **Run** button (▶). The Web UI opens with a live camera preview and an empty **Recent Visitors** list.
 
@@ -76,7 +76,7 @@ Connect the push button between **D2** and **GND** (uses ``INPUT_PULLUP``), and 
 
 One button press triggers a chain that spans three processors — the MCU plays the chime, the MPU saves a photo, and the browser shows the announcement:
 
-* ``07 Smart Doorbell/`` — the app folder
+* ``08 Smart Doorbell/`` — the app folder
 
   * Files
 

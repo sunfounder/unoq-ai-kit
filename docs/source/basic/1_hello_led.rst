@@ -104,9 +104,9 @@ Now that you've seen the LED blink, let's look at the sketch file that makes it 
    }
 
    void loop() {
-       digitalWrite(ledPin, HIGH);  // Turn the LED on (3.3V)
+       digitalWrite(ledPin, HIGH);  // Turn the LED on
        delay(500);                  // Wait half a second
-       digitalWrite(ledPin, LOW);   // Turn the LED off (0V)
+       digitalWrite(ledPin, LOW);   // Turn the LED off
        delay(500);                  // Wait half a second
    }
 
@@ -230,17 +230,13 @@ SOS in Morse code is three short, three long, three short (··· −−− ··
 * **Cause:** The LED was connected without a resistor and burned out.
 * **Solution:** Replace the LED with a new one. Double-check that the 220Ω resistor is correctly in the circuit before running again.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 
 Congratulations! You've built your first circuit and controlled it with code. In this lesson, you learned:
 
 * How to wire an LED, a resistor, and jumper wires on a breadboard
-* How to read a wiring diagram and a circuit schematic
+* How to read a wiring diagram
 * How to import and run a sketch in App Lab
 * How ``pinMode()``, ``digitalWrite()``, and ``delay()`` work together
 * That ``setup()`` runs once, and ``loop()`` runs forever

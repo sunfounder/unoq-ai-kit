@@ -246,7 +246,7 @@ You've used both types now — let's compare them:
 
 **tone() with a Frequency You Compute**
 
-In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5** with ``tone(buzzerPin, 800)`` — a fixed siren pitch. This lesson uses the same function and the same pin, but now the frequency changes with every note:
+In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5**, alternating between ``tone(buzzerPin, 800)`` and ``tone(buzzerPin, 1200)`` — a two-tone siren. This lesson uses the same function and the same pin, but now the frequency changes with every note:
 
   * **``tone(BUZZER_PIN, frequency)``** — Arduino generates the square wave in **software** on the main MCU: it toggles pin D5 at the frequency you pass in. One line of code, no library, no extra hardware.
 

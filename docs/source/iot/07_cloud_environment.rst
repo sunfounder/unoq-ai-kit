@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-06 Arduino Cloud Environment Monitor
+07 Arduino Cloud Environment Monitor
 ======================================
 
 In the previous lesson, commands flowed **from** the cloud **to** your device. Now you'll reverse the flow — uploading temperature and humidity data **from** your UNO Q **up to** Arduino Cloud, where you can view it as live gauges. You'll also add a cloud switch that controls an LED on your desk from anywhere in the world. This is the core pattern of IoT: devices report, cloud stores and visualizes.
@@ -153,7 +153,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND. Connect the LED throu
 
 #. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``06 Arduino Cloud Environment Monitor.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``07 Arduino Cloud Environment Monitor.zip``. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 
@@ -173,7 +173,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND. Connect the LED throu
 
 The environment monitor is a multi-file app — the sketch reads the DHT11, and Python carries data between the sketch and the cloud:
 
-* ``06 Arduino Cloud Environment Monitor/`` — the app folder
+* ``07 Arduino Cloud Environment Monitor/`` — the app folder
 
   * Bricks
 

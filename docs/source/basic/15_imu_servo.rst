@@ -92,7 +92,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 #. Open ``15 IMU Servo.zip`` in App Lab and navigate to ``sketch/calibration_data.h``.
 
-#. Replace the default calibration values with the ones you copied from the calibration step.
+#. Replace the calibration values in ``calibration_data.h`` with the ones you copied from the calibration step.
 
    .. image:: img/11_replace_value.png
 

@@ -124,7 +124,7 @@ The sketch is the same five servo RPCs from the pan-tilt lesson: ``pan_left``, `
    * - "Look up"
      - Tilt looks up; speaker says *"Looking up."*
    * - "Center"
-     - Both servos return to 0°; speaker says *"Returning to center."*
+     - Both servos return to the **90°** center; speaker says *"Returning to center."*
    * - "Play music"
      - Nothing happens; speaker says *"Command not recognized."*
 

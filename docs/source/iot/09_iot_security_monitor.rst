@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-08 IoT Security Monitor
+09 IoT Security Monitor
 ==========================
 
 A doorbell waits for a visitor. A security system **watches** — continuously. In this lesson, you'll build the most complex project in this module: a PIR motion sensor watches the room, a live camera preview streams to your browser, a two-tone siren sounds when motion is detected, snapshots are saved automatically, and every event is logged with a timestamp. Motion, camera, alarm, and event log — all working together.
@@ -62,7 +62,7 @@ Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → *
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``08 IoT Security Monitor.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``09 IoT Security Monitor.zip``. Open it.
 
 #. Click the **Run** button (▶). The Web UI opens with the live camera preview, a motion status, an alarm status, and an event log.
 
@@ -76,7 +76,7 @@ Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → *
 
 The sketch watches the PIR sensor and owns the security state; Python handles the camera; the browser displays everything:
 
-* ``08 IoT Security Monitor/`` — the app folder
+* ``09 IoT Security Monitor/`` — the app folder
 
   * Files
 

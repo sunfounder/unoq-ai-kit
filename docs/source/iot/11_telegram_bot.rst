@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-09 Telegram IoT Bot
+11 Telegram IoT Bot
 =====================
 
 In this final lesson of Module C, you'll connect your UNO Q to **Telegram**. You'll create a bot that responds to chat commands — send ``/led_on`` and the LED lights up; send ``/status`` and the bot replies with the current temperature and humidity. Your hardware becomes a chat contact you can message from anywhere.
@@ -62,7 +62,7 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **pin 2**, **GND** → **G
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``09 Telegram IoT Bot.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``11 Telegram IoT Bot.zip``. Open it.
 
 #. On the App page, locate the **Telegram Bot** Brick, click **Brick Configuration**, and paste the API token from BotFather.
 
@@ -86,7 +86,7 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **pin 2**, **GND** → **G
 
 A chat message replaces the browser click — but the pipeline below the surface is the same:
 
-* ``09 Telegram IoT Bot/`` — the app folder
+* ``11 Telegram IoT Bot/`` — the app folder
 
   * Bricks
 

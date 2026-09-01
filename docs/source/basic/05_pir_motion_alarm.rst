@@ -55,7 +55,7 @@ Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT
 2. Run the App
 ----------------
 
-**Step 1: Import and Run**
+**Import and Run the Code**
 
 #. Open **Arduino App Lab** and import ``05 PIR Motion Alarm.zip`` from the ``unoq-ai-kit/basic/`` folder.
 
@@ -67,7 +67,7 @@ Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT
    .. image:: /img/app_run.png
       :width: 500
 
-#. The Serial Monitor opens. The PIR sensor needs **30 seconds** to warm up — you'll see "Warming up…" followed by "Ready!" Once ready, wave your hand or walk in front of the sensor. The buzzer sounds a two-tone siren — alternating 800 Hz and 1200 Hz.
+#. The Serial Monitor opens. The PIR sensor needs **30 seconds** to warm up — you'll see "PIR Motion Alarm — warming up (30 seconds)..." followed by "Ready!" Once ready, wave your hand or walk in front of the sensor. The buzzer sounds a two-tone siren — alternating 800 Hz and 1200 Hz.
 
 **The Sketch (sketch.ino)**
 
@@ -300,4 +300,4 @@ You've built a motion-activated alarm with a two-tone siren — the same princip
 * How ``tone()`` generates a square wave at a specific frequency to drive a passive buzzer
 * The difference between active buzzers (simple on/off with ``digitalWrite()``) and passive buzzers (frequency control with ``tone()``)
 
-This is the last lesson in the Basic Interaction module. You've come a long way — from blinking a single LED to building a motion-detecting alarm system. You understand digital and analog I/O, PWM, sensors, actuators, I2C, arrays, functions, game logic, and now infrared motion detection. Everything you've learned here is a foundation for the IoT, AI, and multimedia projects ahead.
+You've come a long way — from blinking a single LED to building a motion-detecting alarm system. You understand digital output and input, the tilt switch, analog input, and now infrared motion detection. Everything you've learned here is a foundation for the IoT, AI, and multimedia projects ahead.

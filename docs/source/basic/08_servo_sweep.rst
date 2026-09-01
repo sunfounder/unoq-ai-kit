@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 08 Servo Sweep
-===========
+==============
 
 In the last lesson, you controlled a DC motor — it spins continuously, great for fans and wheels. Now you'll meet the **servo motor**: a motor that doesn't just spin, but moves to a precise angle and holds it. Servos are how robots point cameras, steer cars, and move joints. In this lesson, you'll make a servo sweep back and forth in a smooth, controlled motion.
 
@@ -320,10 +320,6 @@ Connect a potentiometer (used in the Analog Input lesson) to A2 and use it to co
 
 * **Cause:** The battery is low or there's a loose connection.
 * **Solution:** Replace with fresh batteries and check all wiring.
-
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
 
 5. Summary
 -------------

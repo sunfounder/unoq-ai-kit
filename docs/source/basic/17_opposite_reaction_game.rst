@@ -5,7 +5,7 @@
 17 Opposite Reaction Game
 =========================
 
-Your UNO Q has been reading sensors and controlling outputs — now it's going to **play against you**. In this lesson, you'll build a reaction game: the LED matrix shows a left or right arrow at random, and you must press the **opposite** button to score. A correct answer earns a check mark and a happy chirp. A wrong answer shows an X and sounds a continuous alarm until you restart. It's your first program with game logic — random events, timed responses, score tracking, and win/lose states.
+Your UNO Q has been reading sensors and controlling outputs — now it's going to **play against you**. In this lesson, you'll build a reaction game: the LED matrix shows a left or right arrow at random, and you must press the **opposite** button to score. A correct answer earns a check mark and a happy chirp. A wrong answer shows an X and sounds a continuous alarm until you restart. It's your first program with game logic — random events, timed responses, and win/lose states.
 
 In this lesson, you will learn to:
 
@@ -215,7 +215,7 @@ Now that you've played the game, let's look at the sketch file.
 
 **The Patterns File (matrix_patterns.h)**
 
-This game uses six patterns, all defined in ``matrix_patterns.h`` — the same header-file approach used in the previous lesson:
+This game uses five patterns, all defined in ``matrix_patterns.h`` — the same header-file approach used in the previous lesson:
 
 .. code-block:: cpp
 

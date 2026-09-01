@@ -2,8 +2,8 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-02 Dynamic TTS
-=================
+02 Dynamic TTS Weather Reporter
+=================================
 
 In the previous lesson, you made the speaker say a fixed sentence. Now you'll make it speak **dynamic content** — sensor readings that change in real time. A DHT11 sensor measures temperature and humidity, and the speaker announces the values aloud every 30 seconds, like a talking weather station.
 

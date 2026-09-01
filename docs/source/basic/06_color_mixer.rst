@@ -356,10 +356,6 @@ Pick a color that's not in the basic eight. Use values between 0 and 255 for eac
 * **Cause:** A channel was connected without a resistor and burned out.
 * **Solution:** The RGB LED needs a resistor on **each** of the three color pins. Replace the LED with a new one and double-check all three 220Ω resistors are in place before running again.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 
@@ -369,6 +365,6 @@ You just painted with light! In this lesson, you learned:
 * How to control three PWM channels simultaneously — the foundation of color displays
 * How to write and call your own **functions** with parameters — one of the most important skills in programming
 * How **additive color mixing** works: red + green = yellow, green + blue = cyan, red + blue = magenta, all three = white
-* How to create smooth color transitions by gradually changing PWM values in ``for`` loops
+* How to cycle through eight colors with one ``setColor()`` call per second
 
 Functions are a game-changer — from now on, you can package complex logic into named, reusable blocks. In the next lesson, you'll control a DC motor — spinning a fan with speed and direction control using the Robot Shield's H-bridge.

@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 07 Motor Speed Controller
-==============
+=========================
 
 LEDs, buzzers, and sensors are all about light, sound, and data — but what about **motion**? In this lesson, you'll control your first actuator that physically moves: a **DC motor**. Spin it forward to blow air with a fan blade, reverse it to change direction, and vary the speed from a gentle breeze to full blast. Motors are the muscles of robotics — and you're about to make something move.
 
@@ -262,10 +262,6 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
 * **Cause:** The code never changes the direction pin.
 * **Solution:** Make sure the code toggles ``digitalWrite(motorDirPin, ...)`` between HIGH and LOW. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
-
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
 
 5. Summary
 -------------

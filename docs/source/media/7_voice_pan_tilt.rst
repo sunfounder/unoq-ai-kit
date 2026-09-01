@@ -79,7 +79,7 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
 
    *"Voice-controlled pan-tilt is ready."*
 
-#. Hold the button, say a command — for example, "Turn left" — then release the button. The pan-tilt turns left, the Output window shows **Pan: -45°**, and the speaker confirms: *"Turning left."*
+#. Hold the button, say a command — for example, "Turn left" — then release the button. The pan-tilt turns left, the Output window shows **Turning left.**, and the speaker confirms: *"Turning left."*
 
 .. note::
 
@@ -98,10 +98,10 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
        Note over P: release edge → stt.stop_listening()
        P->>P: stt.get_result() → "turn left"
        P->>P: match_command() looks up COMMANDS
-       P->>P: ("pan_left", "Turning left.", "Pan: -45°")
+       P->>P: ("pan_left", "Turning left.", "Turning left.")
        P->>S: Bridge.call("pan_left", "")
-       S->>S: panServo.write(90 + (-45))
-       P->>P: print("Pan: -45°")
+       S->>S: panServo.write(135)
+       P->>P: print("Turning left.")
        P->>P: tts.say("Turning left.")
 
 **Python (main.py)** — runs on the Linux MPU
@@ -113,20 +113,20 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
 
-The sketch owns the servo angles. Each Bridge function moves a servo to a fixed offset from the 90° center position:
+The sketch owns the servo angles. Each Bridge function moves a servo to a fixed absolute angle:
 
 .. code-block:: cpp
 
    int panLeft(String dummy)
    {
        (void)dummy;
-       panServo.write(90 + LEFT_ANGLE);   // 90 + (-45) = 45
+       panServo.write(LEFT_ANGLE);   // 135
        return LEFT_ANGLE;
    }
 
 * ``panServo.attach(9)`` and ``tiltServo.attach(10)`` connect the two servos to D9 and D10 on the Robot Shield.
 * The sketch uses the ``Arduino_HardwareServo`` library — the UNO Q drives the servos with the STM32's hardware PWM, because the standard Servo library causes jitter on this board.
-* ``LEFT_ANGLE = -45`` is an **offset** from the 90° center — the servo actually receives ``90 + (-45) = 45``. Keeping the center at 90° in the sketch makes every angle easy to read.
+* ``LEFT_ANGLE = 135`` is the **absolute** servo angle — no offset math, the value goes straight into ``write()``. The center is ``CENTER_ANGLE = 90``.
 * Five RPCs are registered: ``pan_left``, ``pan_right``, ``tilt_up``, ``tilt_down``, and ``center`` — plus ``button_read`` from the earlier lessons.
 
 3. Experiment
@@ -141,11 +141,11 @@ The sketch owns the servo angles. Each Bridge function moves a servo to a fixed 
    * - You say
      - Expected result
    * - "Turn left"
-     - Pan turns left; Output shows ``Pan: -45°``; speaker says *"Turning left."*
+     - Pan turns left; Output shows ``Turning left.``; speaker says *"Turning left."*
    * - "Look up"
-     - Tilt looks up; Output shows ``Tilt: -45°``; speaker says *"Looking up."*
+     - Tilt looks up; Output shows ``Looking up.``; speaker says *"Looking up."*
    * - "Center" (or "return to center")
-     - Both servos return to 0°; speaker says *"Returning to center."*
+     - Both servos return to the 90° center; speaker says *"Returning to center."*
    * - "Go sideways"
      - Nothing moves; speaker says *"Command not recognized."*
 
@@ -155,8 +155,8 @@ In ``sketch.ino``, make the turns smaller and gentler:
 
 .. code-block:: cpp
 
-   const int LEFT_ANGLE = -30;
-   const int RIGHT_ANGLE = 30;
+   const int LEFT_ANGLE = 120;
+   const int RIGHT_ANGLE = 60;
 
 The same voice commands now move the pan-tilt through a narrower sweep.
 
@@ -175,7 +175,7 @@ The sketch angles and the spoken feedback live in different places — the feedb
 **The servo moves in the wrong direction**
 
 * **Cause:** The servo plug is reversed, or the pan and tilt servos are swapped.
-* **Solution:** Swap the two servo plugs on the Robot Shield. The angles are offsets from 90°, so a reversed plug flips every direction.
+* **Solution:** Swap the two servo plugs on the Robot Shield. The angles are absolute, so a reversed plug flips every direction.
 
 **The board always says "Command not recognized."**
 
@@ -189,7 +189,7 @@ Your voice aims the pan-tilt! In this lesson, you learned:
 
 * How a ``COMMANDS`` table maps phrases to RPCs, feedback, and console messages
 * How ``match_command()`` finds the right row for the recognized text
-* How the sketch moves two servos to fixed angle offsets from 90°
+* How the sketch moves two servos to fixed absolute angles
 * How spoken feedback confirms each action
 
 In the next lesson, the camera gets its turn — one button press, one photo.

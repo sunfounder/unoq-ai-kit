@@ -253,10 +253,6 @@ What if you want the button to act like a toggle — press once to turn the LED 
 * **Cause:** Loose connection or breadboard wear.
 * **Solution:** Push the button firmly into the breadboard. Check that jumper wires are fully inserted at both ends. Try a different row on the breadboard if the contacts feel loose.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 

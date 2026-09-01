@@ -49,10 +49,6 @@ This project uses the following App Lab Bricks:
   * ``sunfounder_stt`` (microphone recording — only the recording API, no speech recognition in this lesson)
   * ``sunfounder_tts`` (speaker playback — only the playback API, no text synthesis in this lesson)
 
-.. note::
-
-   The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
-
 **Wiring Diagram**
 
 Connect the two push buttons between D2 / D3 and GND — no external resistors are needed, the sketch uses the internal pull-up resistors. The microphone and speaker are built into the Multimedia Carrier.
@@ -69,9 +65,12 @@ Connect the two push buttons between D2 / D3 and GND — no external resistors a
 
 #. Open **Arduino App Lab**, import ``03 Voice Recorder.zip`` from the ``unoq-ai-kit/media/`` folder.
 
-#. Click **Run** (▶). The Output window shows:
+#. Click **Run** (▶). The Output window shows::
 
-   *"=== Voice Recorder ===  Ready."*
+      === Voice Recorder ===
+      D2: Record / Stop Recording
+      D3: Play / Stop Playback
+      Ready.
 
 #. Press the **D2 button** once — **Recording...** appears in the Output window. Say something into the microphone.
 
@@ -161,7 +160,7 @@ Press D3 to play a clip, then press D2 while it plays — the playback stops and
 
 **Challenge: Change the Audio File Name**
 
-The recording is always saved to the same file, ``stt_last.wav`` — each new recording replaces the previous one. Change the ``AUDIO_FILE`` path in ``main.py`` to a new name such as ``/app/audio_shared/stt_note.wav`` and run again — recordings now save under the new name.
+The recording is always saved to the same file, ``stt_last.wav`` — each new recording replaces the previous one. Change the ``AUDIO_FILE`` path in ``main.py`` to a new name such as ``/app/audio_output/stt_note.wav`` and run again — recordings now save under the new name.
 
 4. Troubleshooting
 --------------------
@@ -181,7 +180,7 @@ The recording is always saved to the same file, ``stt_last.wav`` — each new re
 * **Cause:** The buttons are wired to the wrong pins.
 * **Solution:** Check the Record button connects D2 to GND and the Play button connects D3 to GND — one pin of each button on the digital pin, the other on GND.
 
-**Pressing D3 prints "No recording yet."**
+**Pressing D3 prints "No recording yet. Press D2 to record first."**
 
 * **Cause:** No recording has been saved in this run.
 * **Solution:** Press D2 to record first — the playback button only works after a recording is saved.

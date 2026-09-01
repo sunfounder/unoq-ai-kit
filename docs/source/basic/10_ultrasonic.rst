@@ -286,10 +286,6 @@ Try changing the distance thresholds and observe how the radar responds:
 * **Cause:** This is normal — the HC-SR04 has a minimum sensing range of about 2 cm. Below that, the outgoing pulse hasn't finished transmitting before the echo returns.
 * **Solution:** For detecting objects closer than 2 cm, use an infrared proximity sensor (covered in a later lesson). The 2 cm minimum is a physical limitation of ultrasonic technology, not a bug in your code.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 

@@ -2,7 +2,7 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-05 Arduino Cloud Melody Pitch
+06 Arduino Cloud Melody Pitch
 ===================================
 
 So far, your web controls worked over a local connection — your browser and UNO Q were on the same network. Now you'll use **Arduino Cloud** to control your hardware from **anywhere with internet access**. A cloud slider lets you raise or lower the pitch of a repeating four-note melody (C4 → E4 → G4 → C5) — move the slider on your phone and the melody shifts in real time.
@@ -126,7 +126,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
 
 #. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``05 Arduino Cloud Melody Pitch.zip``. Open it.
+#. Navigate to ``unoq-ai-kit/iot/`` and select ``06 Arduino Cloud Melody Pitch.zip``. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 
@@ -147,7 +147,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
 
 The cloud melody project is a multi-file app — the sketch plays the melody on the MCU, and Python handles the cloud connection:
 
-* ``05 Arduino Cloud Melody Pitch/`` — the app folder
+* ``06 Arduino Cloud Melody Pitch/`` — the app folder
 
   * Bricks
 

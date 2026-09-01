@@ -704,3 +704,42 @@ chmod +x docker-img-make
 然后运行：
 
 ./docker-img-make
+
+
+Lesson	课程	核心内容	项目
+01	AI Camera Basics	Camera Brick、Image Stream、Vision Pipeline	Live AI Camera
+02	Object Detection	Object、Bounding Box、Label、Confidence	Common Object Detector
+03	AI Vision Alarm	Person Detection + RGB + Buzzer + OLED	AI Security Alarm
+04	Face Tracking Camera	Face Position → PID → Pan/Tilt	AI Tracking Camera
+05	AI Color Light	Vision Result → Hardware Mapping	Object-Controlled RGB
+06	Image Classification	Detection vs Classification、Class、Confidence	Image Classifier
+07	Custom AI Model	Edge Impulse、Dataset、Training、Deployment	Rock/Paper/Scissors
+08	Smart Vision Project	Camera + Vision + Servo + OLED + RGB + Buzzer
+
+
+例如可以做成 7～8 课：
+
+Lesson	课程	核心内容	项目
+01	Hello LLM	API / Model / Prompt / Response	AI Chat
+02	Prompt Engineering	System Prompt、Context、Role	AI Character
+03	Voice AI Assistant	STT → LLM → TTS	Voice Chatbot
+04	Vision LLM	Camera Image → Multimodal LLM	Ask AI About the Camera
+05	Structured AI Output	JSON / Intent / Parameters	AI Command Parser
+06	LLM Controls Hardware	Natural Language → Tool/Action	“Turn the light blue”
+07	AI with Sensor Context	Sensor Data → Context → LLM	Smart Room Assistant
+08	Personal AI Assistant	STT + Camera + Sensors + LLM + TTS	AI Assistant
+
+
+	Edge AI — AI Vision	让设备“看见”
+E	AI Interaction	和 AI 对话、让 AI 理解意图
+F	AI Agent Projects	AI 自己获取信息、判断并控制硬件
+
+
+	AI Vision Hunt	Object Detection	TTS + RGB + Buzzer	AI 说出要找的物品，找到后灯光/声音反馈
+02	AI Vision Recognition	Detection、Box、Label、Confidence	TTS	AI 不只画框，还可以说出看到的物体
+03	Face Alarm	Face Detection	RGB + Buzzer	检测到人脸触发警报
+04	Face Tracking Camera	Face Position / Tracking	Pan-Tilt Servo	摄像头自动跟随人脸
+05	AI Color Light	Object Recognition	STT + RGB	“Find something red”之类的视觉互动
+06	AI Smart Guard	Person Recognition	PIR + Camera + RGB + Buzzer + TTS	AI 安防系统
+07	Custom Image Classifier	Custom Model	RGB + TTS	自己训练模型并让 AI 报出结果
+08	AI Vision Challenge	Custom Model / Detection	STT + TTS + Servo + RGB + Buzzer

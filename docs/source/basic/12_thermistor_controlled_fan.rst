@@ -252,8 +252,8 @@ If the formula seems complicated, here is the simplified version of what happens
      - Convert resistance to temperature using the Beta equation
      - ``T = 1 / (ln(R/10kΩ) / 3950 + 1/298.15) − 273.15``
    * - 4
-     - Map temperature to motor power (25–50°C → 0–100%)
-     - ``map(temp, 25, 50, 0, 100)``
+     - Map temperature to motor power (25–50°C → 20–100%)
+     - ``map(temp, 25, 50, 20, 100)``
 
 Every NTC thermistor application follows these same four steps. The parameters (beta, nominal resistance, series resistor) change based on the specific components, but the pattern is universal.
 
@@ -276,7 +276,7 @@ Try changing the temperature range and observe how the fan responds:
      - Fan activates at a higher temperature — lets the room get warmer before cooling
    * - ``if (tempC < 25) power = 0`` → ``power = 20``
      - Fan never fully stops — always runs at minimum 20% (like a PC's always-on fan)
-   * - ``map((int)tempC, 25, 50, 0, 100)`` → ``map((int)tempC, 25, 50, 100, 0)``
+   * - ``map((int)tempC, 25, 50, 20, 100)`` → ``map((int)tempC, 25, 50, 100, 20)``
      - Reversed: fan slows down as temperature rises (not useful, but shows how ``map()`` direction works)
 
 
@@ -327,10 +327,6 @@ Reverse the system: make the motor spin when the temperature is **below** a thre
 
 * **Cause:** The ``map()`` range doesn't match the actual temperature range, or the threshold logic is incorrect.
 * **Solution:** Check the Serial Monitor for the actual temperature values. If room temperature is already reading above 50°C, there's a wiring or calculation error — see the previous troubleshooting item. If temperatures look correct, verify the ``if/else if`` thresholds are in the right order.
-
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
 
 5. Summary
 -------------

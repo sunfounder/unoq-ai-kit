@@ -111,9 +111,10 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
    HardwareServo panServo;   // Pan servo on pin 9
    HardwareServo tiltServo;  // Tilt servo on pin 10
 
-   int panAngle = 0, tiltAngle = 0;  // Offset from center (90°), -45..+45
+   int panAngle = 90, tiltAngle = 90;  // Servo angles, 45°..135°
    int xCenter = 512, yCenter = 512;
-   const int minAngle = -45, maxAngle = 45;
+   const int panMinAngle = 45, panMaxAngle = 135;
+   const int tiltMinAngle = 45, tiltMaxAngle = 115;
    const int deadZone = 100, stepSize = 1;
 
    void setup() {
@@ -144,7 +145,7 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
    void loop() {
        // Button press → reset to center
        if (digitalRead(swPin) == LOW) {
-           panAngle = 0; tiltAngle = 0;
+           panAngle = 90; tiltAngle = 90;
            panServo.write(90); tiltServo.write(90);
            delay(300); return;
        }
@@ -153,16 +154,19 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
        int yValue = analogRead(yPin);
 
        // Incremental control with dead zone
-       if (yValue > yCenter + deadZone)       panAngle += stepSize;
-       else if (yValue < yCenter - deadZone)  panAngle -= stepSize;
-       if (xValue > xCenter + deadZone)       tiltAngle += stepSize;
-       else if (xValue < xCenter - deadZone)  tiltAngle -= stepSize;
+       // X controls pan; Y controls tilt.
+       // X follows the pan direction.
+       // Push Y up to tilt the camera down; push Y down to tilt it up.
+       if (xValue > xCenter + deadZone)       panAngle -= stepSize;
+       else if (xValue < xCenter - deadZone)  panAngle += stepSize;
+       if (yValue > yCenter + deadZone)       tiltAngle -= stepSize;
+       else if (yValue < yCenter - deadZone)  tiltAngle += stepSize;
 
-       panAngle  = constrain(panAngle, minAngle, maxAngle);
-       tiltAngle = constrain(tiltAngle, minAngle, maxAngle);
+       panAngle  = constrain(panAngle, panMinAngle, panMaxAngle);
+       tiltAngle = constrain(tiltAngle, tiltMinAngle, tiltMaxAngle);
 
-       panServo.write(90 + panAngle);
-       tiltServo.write(90 + tiltAngle);
+       panServo.write(panAngle);
+       tiltServo.write(tiltAngle);
 
        Serial.print("X: "); Serial.print(xValue);
        Serial.print("  Y: "); Serial.print(yValue);
@@ -182,18 +186,18 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
        Attach pan servo to pin 9 (D9), tilt servo to pin 10 (D10)
        Center both servos at 90°
        Auto-calibrate: read X and Y 20 times, average to find center
-       Print ready message with calibration values
+       Print ready message
 
    loop() → runs over and over forever:
        Button pressed? → reset both servos to 90° (center), skip rest
        Read X and Y axis values
        Outside dead zone?
-           Y > center + 100 → pan right (step +1°)
-           Y < center - 100 → pan left  (step -1°)
-           X > center + 100 → tilt right (step +1°)
-           X < center - 100 → tilt left  (step -1°)
-       Constrain offsets to ±45°
-       Write 90° + offset to both servos
+           X > center + 100 → pan step -1°
+           X < center - 100 → pan step +1°
+           Y > center + 100 → tilt step -1°
+           Y < center - 100 → tilt step +1°
+       Constrain angles: pan 45°–135°, tilt 45°–115°
+       Write the angles to both servos
        Wait 30ms, repeat
 
 1. **Pin Declarations, Servo Objects, and Variables**
@@ -201,7 +205,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
    - The joystick provides three inputs: X position on A3, Y position on A2, and a button on pin 2
    - Two ``HardwareServo`` objects are declared — ``panServo`` attaches to pin 9 (D9), ``tiltServo`` to pin 10 (D10)
    - The UNO Q uses ``Arduino_HardwareServo`` because it drives the servo with the STM32's hardware PWM — the standard Servo library causes jitter on this board
-   - ``panAngle`` and ``tiltAngle`` store the offset from the 90° center (from -45° to +45°), not the final angle
+   - ``panAngle`` and ``tiltAngle`` store the absolute servo angles and start at 90° (center) — the pan moves between 45° and 135°, the tilt between 45° and 115°
    - ``deadZone`` and ``stepSize`` constants control sensitivity and movement granularity
 
    .. code-block:: arduino
@@ -209,9 +213,10 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
       const int swPin = 2, xPin = A3, yPin = A2;
       HardwareServo panServo, tiltServo;
 
-      int panAngle = 0, tiltAngle = 0;
+      int panAngle = 90, tiltAngle = 90;
       int xCenter = 512, yCenter = 512;
-      const int minAngle = -45, maxAngle = 45;
+      const int panMinAngle = 45, panMaxAngle = 135;
+      const int tiltMinAngle = 45, tiltMaxAngle = 115;
       const int deadZone = 100, stepSize = 1;
 
 2. **Auto-Calibration in Setup**
@@ -239,28 +244,28 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
 
    .. code-block:: arduino
 
-      if (yValue > yCenter + deadZone)       panAngle += stepSize;
-      else if (yValue < yCenter - deadZone)  panAngle -= stepSize;
-      if (xValue > xCenter + deadZone)       tiltAngle += stepSize;
-      else if (xValue < xCenter - deadZone)  tiltAngle -= stepSize;
+      if (xValue > xCenter + deadZone)       panAngle -= stepSize;
+      else if (xValue < xCenter - deadZone)  panAngle += stepSize;
+      if (yValue > yCenter + deadZone)       tiltAngle -= stepSize;
+      else if (yValue < yCenter - deadZone)  tiltAngle += stepSize;
 
 4. **Constraining Angles and Updating Servos**
 
-   - ``constrain()`` clamps both offsets to the ±45° range, keeping the final angles between 45° and 135°
+   - ``constrain()`` clamps both angles to their safe ranges — 45° to 135° for the pan and 45° to 115° for the tilt
    - Even if the stick is held at the extreme edge, the servos stay within their safe range
-   - ``panServo.write(90 + panAngle)`` and ``tiltServo.write(90 + tiltAngle)`` add the offset to the 90° center and command both servos to their absolute positions
+   - ``panServo.write(panAngle)`` and ``tiltServo.write(tiltAngle)`` command both servos to their absolute angles — no offset math needed, the values are already the final angles
 
    .. code-block:: arduino
 
-      panAngle  = constrain(panAngle, minAngle, maxAngle);
-      tiltAngle = constrain(tiltAngle, minAngle, maxAngle);
+      panAngle  = constrain(panAngle, panMinAngle, panMaxAngle);
+      tiltAngle = constrain(tiltAngle, tiltMinAngle, tiltMaxAngle);
 
-      panServo.write(90 + panAngle);
-      tiltServo.write(90 + tiltAngle);
+      panServo.write(panAngle);
+      tiltServo.write(tiltAngle);
 
 5. **Why Incremental Instead of Direct Mapping?**
 
-   - Direct mapping (``panAngle = map(yValue, 0, 1023, -45, 45)``) works for LEDs but not for servos
+   - Direct mapping (``panAngle = map(yValue, 0, 1023, 45, 135)``) works for LEDs but not for servos
    - A joystick returns to center when released, so direct mapping would snap the servo back immediately
    - Incremental control holds the last position when the stick centers, giving precise, deliberate positioning like a real pan-tilt controller
 
@@ -302,7 +307,7 @@ Larger stepSize = faster movement but choppier motion.
 **Servos don't move at all**
 
 * **Cause:** The battery is not connected, or the servos aren't attached to the right pins.
-* **Solution:** Connect the battery pack to the Robot Shield. Verify ``panServo.attach(9)`` and ``tiltServo.attach(10)`` appear in ``setup()``. Also check that ``servo.write()`` is being called — uncomment the Serial prints to verify.
+* **Solution:** Connect the battery pack to the Robot Shield. Verify ``panServo.attach(9)`` and ``tiltServo.attach(10)`` appear in ``setup()``. Also check that ``servo.write()`` is being called — the Serial Monitor prints the Pan/Tilt values every loop, so you can see whether the loop is running.
 
 **Servos jitter or twitch at rest**
 
@@ -317,7 +322,7 @@ Larger stepSize = faster movement but choppier motion.
 **Servo hits the mechanical limit and buzzes**
 
 * **Cause:** The ``constrain()`` range is too wide for your servo.
-* **Solution:** Some servos have a narrower range than ±45°. Reduce ``maxAngle`` and ``minAngle`` to ±30° and test. If the buzzing stops, your servo's physical range is smaller.
+* **Solution:** Some servos have a narrower range than 45°–135°. Narrow ``panMaxAngle`` and ``panMinAngle`` to a smaller window such as 60°–120° and test. If the buzzing stops, your servo's physical range is smaller.
 
 **Joystick button doesn't reset servos**
 

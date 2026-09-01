@@ -269,10 +269,6 @@ A real night light should turn **off** during the day and only activate at night
 * **Cause:** A specific LED is burned out, connected backwards, or on the wrong breadboard row.
 * **Solution:** Swap the suspect LED with a known working one to test. Check polarity — the long leg goes toward the digital pin. Verify the jumper wire from the digital pin to the LED's row is fully inserted.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 
@@ -284,4 +280,4 @@ Congratulations! Your circuit now senses the world on its own — no knobs, no b
 * How the **ternary operator** (``? :``) makes simple decisions compact
 * How to reuse ``map()`` in a new context — adapting sensor ranges to your application
 
-Arrays and loops are fundamental programming patterns you'll use in nearly every future lesson. In the next lesson, you'll use a potentiometer to control a passive buzzer's pitch — combining analog input with PWM audio to create variable-frequency sound.
+Arrays and loops are fundamental programming patterns you'll use in nearly every future lesson. In the next lesson, you'll meet a new kind of sensor — a PIR motion sensor that detects movement and triggers a buzzer alarm.

@@ -101,7 +101,7 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
       Accel (m/s^2): -0.12, -0.25, 9.74
       Gyro (deg/s): 0.01, 0.03, -0.57
-      Mag ((Gauss)): -1.23, -0.05, -0.72
+      Mag (Gauss): -1.23, -0.05, -0.72
       Azimuth: 357.44 degrees
       Temperature: 28.89 °C
       Pressure: 1006.33 hPa
@@ -114,6 +114,16 @@ Now that you've seen the IMU output all four sensor streams, let's look at the s
 
 .. code-block:: cpp
    :linenos:
+
+   /*
+    * Reads 10-axis IMU sensor data via I2C on the Multimedia Carrier.
+    * Outputs accelerometer, gyroscope, magnetometer, and barometer readings
+    * to the Serial Monitor every second.
+    *
+    * Uses the SunFounder_IMU library and calibration data from calibration_data.h.
+    * To calibrate your IMU, run calibrate.ino first and copy the results into
+    * calibration_data.h before running this sketch.
+    */
 
    #include "SunFounder_IMU.hpp"
    #include "calibration_data.h"
@@ -136,6 +146,7 @@ Now that you've seen the IMU output all four sensor streams, let's look at the s
        imu.set_magnetometer_scale(MAG_SCALE);
 
        Serial.println("=== IMU Attitude Sensor ===");
+       Serial.println("Reading accelerometer, gyroscope, magnetometer & barometer...");
    }
 
    void loop() {
@@ -175,7 +186,7 @@ Now that you've seen the IMU output all four sensor streams, let's look at the s
            float altitude = imu.get_altitude();
 
            Serial.print("Temperature: "); Serial.print(temperature);
-           Serial.println(" *C");
+           Serial.println(" °C");
            Serial.print("Pressure: "); Serial.print(pressure);
            Serial.println(" hPa");
            Serial.print("Altitude: "); Serial.print(altitude);
@@ -353,10 +364,6 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
 
 * **Cause:** Another I2C device is conflicting, or the bus is in a stuck state.
 * **Solution:** Power-cycle the board (unplug USB, wait 5 seconds, reconnect). I2C buses rarely conflict on the UNO Q because the IMU and Robot Shield use different addresses.
-
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it.
 
 5. Summary
 -------------

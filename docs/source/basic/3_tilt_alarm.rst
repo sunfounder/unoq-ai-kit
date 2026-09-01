@@ -254,10 +254,6 @@ What happens if you increase the debounce delay from 30ms to 100ms? Or decrease 
 * **Cause:** The active buzzer may require more current than a digital pin can supply comfortably.
 * **Solution:** Most active buzzers in this kit work fine directly from a pin. If yours is quiet, a transistor driver circuit can provide more current — this is covered in a later lesson.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 
@@ -267,6 +263,6 @@ Congratulations! You've built a working alarm system — your most practical pro
 * How to control an active buzzer as a simple on/off sound output
 * What switch "bounce" is and how a small delay filters it out for reliable readings
 * How to combine timing delays into rhythmic patterns for more expressive output
-* How to synchronize multiple outputs (buzzer + LED) in a single program
+* How a tilt switch reports its state through digital input
 
-You now know how to read digital sensors, control digital actuators, and link them with decision logic. In the next lesson, you'll move beyond digital on/off signals and enter the world of **analog** input — using a potentiometer to smoothly control LED brightness.
+You now know how to read digital sensors, control digital actuators, and link them with decision logic. In the next lesson, you'll move beyond digital on/off signals and enter the world of **analog** input — a photoresistor that measures light and drives a 4-level LED bar graph.

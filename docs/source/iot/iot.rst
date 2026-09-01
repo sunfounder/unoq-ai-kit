@@ -36,8 +36,11 @@ Let's take your projects online.
    02_ui_rgb_led
    03_sensor_data_dashboard
    04_ui_joystick_maze
-   05_cloud_melody_pitch
-   06_cloud_environment
-   07_smart_doorbell
-   08_iot_security_monitor
-   09_telegram_bot
+   05_voice_announcer
+   06_cloud_melody_pitch
+   07_cloud_environment
+   08_smart_doorbell
+   09_iot_security_monitor
+   10_voice_message
+   11_telegram_bot
+   12_iot_smart_room

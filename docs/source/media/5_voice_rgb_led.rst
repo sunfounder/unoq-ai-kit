@@ -112,19 +112,22 @@ The sketch receives a color name and converts it into three PWM values:
 
    void setColor(String color)
    {
-       if (color == "red") {
+       String selectedColor = color;
+       selectedColor.toLowerCase();
+
+       if (selectedColor == "red") {
            setRgb(255, 0, 0);
-       } else if (color == "green") {
+       } else if (selectedColor == "green") {
            setRgb(0, 255, 0);
-       } else if (color == "blue") {
+       } else if (selectedColor == "blue") {
            setRgb(0, 0, 255);
-       } else if (color == "yellow") {
+       } else if (selectedColor == "yellow") {
            setRgb(255, 180, 0);
-       } else if (color == "cyan") {
+       } else if (selectedColor == "cyan") {
            setRgb(0, 255, 255);
-       } else if (color == "purple") {
+       } else if (selectedColor == "purple") {
            setRgb(128, 0, 180);
-       } else if (color == "white") {
+       } else if (selectedColor == "white") {
            setRgb(255, 255, 255);
        } else {
            setRgb(0, 0, 0);   // off

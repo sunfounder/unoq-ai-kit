@@ -137,7 +137,7 @@ Now that you've seen live climate data streaming in, let's look at the sketch fi
 
            Serial.print("Temperature: ");
            Serial.print(temperature);
-           Serial.print(" °C   ");
+           Serial.print(" *C   ");
 
            Serial.print("Humidity: ");
            Serial.print(humidity);
@@ -283,7 +283,7 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 **Serial Monitor shows "Failed to read from DHT11!" repeatedly**
 
 * **Cause:** The DHT11 is wired incorrectly, the library is not installed, or the sensor needs time to stabilize.
-* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. In the Library Manager, verify the **DHT sensor library** is installed. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
+* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. In App Lab, check the **Sketch Libraries** panel to confirm the **DHT sensor library** is installed — App Lab auto-installs libraries declared in the project's ``sketch.yaml``. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
 
 **Readings are all zeros or negative values**
 
@@ -295,10 +295,6 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 * **Cause:** The DHT11's humidity sensing element may be contaminated, or the environment is extremely dry.
 * **Solution:** Breathe gently on the sensor — humidity should rise within seconds. If it doesn't change at all, the sensor may be damaged. Some DHT11 clones have very slow humidity response — wait 10–15 seconds after breathing on it before concluding it's broken.
 
-
-* **Cause:** The board is not connected, or App Lab can't find it.
-* **Solution:** Check the USB-C cable is firmly connected at both ends. Try unplugging and re-plugging it. In App Lab, make sure your UNO Q is detected.
-
 5. Summary
 -------------
 
@@ -308,6 +304,6 @@ You've moved beyond simple analog and digital sensors to a device that reports r
 * How the DHT11 measures temperature (±2°C) and humidity (±5%) and reports them digitally
 * How ``millis()`` enables **non-blocking timing** — your program can do multiple things at once without ``delay()`` freezing everything
 * How to validate sensor readings with ``isnan()`` and handle failures gracefully
-* How to format sensor data for logging — CSV output turns your Serial Monitor into a data acquisition tool
+* How to format sensor data for logging — labeled sensor output makes the Serial Monitor a live data readout
 
 The ``millis()`` pattern is one of the most valuable skills in Arduino programming — it transforms your projects from "one thing at a time" to true multitasking. In the next lesson, you'll combine a thermistor (analog temperature sensor) with a DC motor and fan to build a **temperature-controlled cooling system** — the sensor reads the temperature, and the fan spins up automatically when it gets too warm.
