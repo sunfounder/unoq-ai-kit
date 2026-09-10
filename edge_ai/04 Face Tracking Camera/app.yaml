@@ -1,8 +1,0 @@
-name: 04 Face Tracking Camera
-description: Camera scans for a face — stops and tracks when one is found
-ports: []
-bricks:
-- arduino:video_object_detection:
-    model: face-detection
-- arduino:web_ui: {}
-icon: 🤖

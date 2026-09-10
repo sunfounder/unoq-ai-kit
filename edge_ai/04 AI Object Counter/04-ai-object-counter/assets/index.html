@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Object Counter</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Object Counter</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="connection-dot"></span>
+                <span class="status-label" id="connection-label">Connecting</span>
+            </div>
+
+            <div class="camera-container">
+                <iframe
+                    id="camera-stream"
+                    class="camera-stream"
+                    title="AI Camera"
+                    allow="autoplay">
+                </iframe>
+            </div>
+
+            <section class="detection-status" id="detection-status">
+                <span class="detection-caption">LAST COUNTED OBJECT</span>
+                <strong id="detection-text">Show one object to the camera</strong>
+                <span id="confidence-text">Mouse, keyboard, or cell phone</span>
+            </section>
+
+            <section class="counter-grid">
+                <article class="counter-card" data-object="mouse">
+                    <div class="object-icon">🖱️</div>
+                    <span class="object-name">MOUSE</span>
+                    <strong class="object-count" id="mouse-count">0</strong>
+                    <span class="plus-one">+1</span>
+                </article>
+
+                <article class="counter-card" data-object="keyboard">
+                    <div class="object-icon">⌨️</div>
+                    <span class="object-name">KEYBOARD</span>
+                    <strong class="object-count" id="keyboard-count">0</strong>
+                    <span class="plus-one">+1</span>
+                </article>
+
+                <article class="counter-card" data-object="cell phone">
+                    <div class="object-icon">📱</div>
+                    <span class="object-name">PHONE</span>
+                    <strong class="object-count" id="phone-count">0</strong>
+                    <span class="plus-one">+1</span>
+                </article>
+            </section>
+
+            <div class="counter-footer">
+                <div>
+                    <span class="total-caption">TOTAL OBJECTS</span>
+                    <strong id="total-count">0</strong>
+                </div>
+                <button id="reset-counts" type="button">RESET COUNTS</button>
+            </div>
+
+            <p class="instruction">
+                Remove the object from view before counting another one.
+            </p>
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -27,7 +27,6 @@ from arduino.app_utils import App
 from arduino.app_bricks.web_ui import WebUI
 from arduino.app_bricks.cloud_llm import CloudLLM
 
-from robot_shield import setup_audio_output
 from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
@@ -37,10 +36,8 @@ from sunfounder_tts import EdgeTTS
 # ---------------------------------------------------------------------------
 
 STT_LANGUAGE = "en"
-STT_MODEL = "tiny"
 
 TTS_VOICE = "en-US-JennyNeural"
-TTS_GAIN = 0.40
 
 SYSTEM_PROMPT = (
     "You are a friendly voice assistant. "
@@ -57,15 +54,11 @@ SYSTEM_PROMPT = (
 os.makedirs("/app/audio_output", exist_ok=True)
 os.makedirs("./audio_output", exist_ok=True)
 
-# Configure RobotShield microphone and speaker mixer paths.
-setup_audio_output()
-
 ui = WebUI()
 
 # Local Whisper STT does not consume the CloudLLM API key.
 stt = STT(
     type="local_fast",
-    model=STT_MODEL,
     language=STT_LANGUAGE,
 )
 
@@ -74,10 +67,9 @@ llm = CloudLLM(
     system_prompt=SYSTEM_PROMPT,
 )
 
-tts = EdgeTTS(
-    voice=TTS_VOICE,
-    gain=TTS_GAIN,
-)
+tts = EdgeTTS()
+tts.set_voice(TTS_VOICE)
+tts.set_volume(50)
 
 
 # ---------------------------------------------------------------------------
@@ -142,7 +134,10 @@ def process_voice():
         stt.stop_listening()
         send_status("recognizing", "Recognizing your speech...")
 
-        heard = stt.get_result(timeout=60).strip()
+        result = stt.get_result(timeout=60)
+        if isinstance(result, dict):
+            result = result.get("text", "")
+        heard = result.strip() if result else ""
 
         if not heard:
             send_status(

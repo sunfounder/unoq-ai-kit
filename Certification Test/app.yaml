@@ -1,0 +1,6 @@
+name: Certification Test
+description: "Verify all peripherals: servos, motor, ultrasonic, joystick, IMU, PIR, speaker, camera"
+ports: []
+bricks:
+- sunfounder_tts: {}
+icon: 🛠️

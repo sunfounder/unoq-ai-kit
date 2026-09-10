@@ -1,0 +1,9 @@
+name: 07 Gesture Control
+description: Recognize hand gestures and control the RGB LED, camera, and pan-tilt
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: hand-gestures
+- arduino:web_ui: {}
+- sunfounder_tts: {}
+icon: ✌️

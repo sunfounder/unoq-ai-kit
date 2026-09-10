@@ -1,0 +1,8 @@
+name: 04 AI Object Counter
+description: Detect and count mice, keyboards, and cell phones with spoken feedback
+ports: []
+bricks:
+- arduino:video_object_detection: {}
+- arduino:web_ui: {}
+- sunfounder_tts: {}
+icon: 🔢
