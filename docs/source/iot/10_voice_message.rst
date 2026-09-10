@@ -8,7 +8,8 @@
 Earlier in this module, you typed messages and the board spoke them. Now the flow reverses: **record your real voice** with the UNO Q's microphone, watch the live audio level in the Web UI, and play the recording back through the speaker — a voice memo app, controlled entirely from the browser.
 
 .. image:: img/10_voice_message.png
-   :width: 90%
+   :width: 80%
+   :align: center
 
 In this lesson, you will learn to:
 
@@ -47,6 +48,10 @@ No breadboard wiring is needed — the microphone and speaker are built into the
    * Click **Record** and speak into the microphone — the audio level bar moves with your voice.
    * Click **Stop** to save the recording.
    * Click **Play** — the speaker plays your recording; **Pause** pauses it, and **Play** resumes it.
+
+   .. image:: img/10_voice_message.png
+      :width: 80%
+      :align: center
 
 **How it Works**
 

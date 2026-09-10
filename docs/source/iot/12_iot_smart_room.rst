@@ -81,9 +81,10 @@ In this lesson, you will learn to:
    * Set the fan to **MANUAL** and toggle it on — the fan spins at 30% power.
    * Click the **voice** button and say a command, for example *"Set light blue"* or *"System status"* — the board confirms aloud.
 
-.. note::
 
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+   .. image:: img/iot_smart_room.png
+     :width: 600
+     :align: center
 
 **How it Works**
 

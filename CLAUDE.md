@@ -793,6 +793,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
+### Camera Preview Standard (all modules)
+
+Every Web UI that shows the live camera feed uses the same frame size —
+canonical reference: `iot/08 Smart Doorbell` and
+`iot/09 IoT Security Monitor` (both identical). Edge AI lessons follow
+the same standard.
+
+```css
+.camera-container {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    aspect-ratio: 4 / 3;
+    background: #1a1a2e;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.camera-stream {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 0;
+    border-radius: 10px;
+    background: #000;
+}
+```
+
+Key facts: container max-width **640px** with **4:3** aspect ratio,
+centered with `margin: 0 auto`, dark background (`#1a1a2e`), and the
+frame uses `object-fit: contain` (never crops). The surrounding card is
+`max-width: 820px`. Placeholder states (camera icon + "Starting
+camera...") fill the same container.
+
 ### Rules for Future IoT UIs
 
 1. **Same layout**: header (logo left, title center) + main card — do not restructure

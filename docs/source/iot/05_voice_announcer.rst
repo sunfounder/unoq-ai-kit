@@ -8,7 +8,8 @@
 You've built web controls that make LEDs blink, colors change, and games move. Now the UNO Q will **speak**: type a message in a Web UI, click **Speak**, and the board reads your text aloud through the speaker. The browser becomes a keyboard for the board's voice.
 
 .. image:: img/5_voice_announcer.png
-   :width: 90%
+   :width: 80%
+   :align: center
 
 In this lesson, you will learn to:
 
@@ -47,6 +48,10 @@ No breadboard wiring is needed — the speaker is built into the Multimedia Carr
 .. note::
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
+   .. image:: img/5_voice_announcer.png
+      :width: 80%
+      :align: center
 
 **How it Works**
 

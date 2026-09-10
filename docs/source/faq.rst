@@ -85,18 +85,18 @@ Flashing a New Image to the UNO Q
 
 <此处需要配张图>
 
-.. https://docs.arduino.cc/tutorials/uno-q/update-image/
+https://docs.arduino.cc/tutorials/uno-q/update-image/
 
-.. Download the Arduino Flasher CLI for your OS (MacOS / Linux / Windows)：https://www.arduino.cc/en/software/#flasher-tool
-
-
-.. Unzip the downloaded file, (you will receive an executable binary named arduino-flasher-cli)
+Download the Arduino Flasher CLI for your OS (MacOS / Linux / Windows)：https://www.arduino.cc/en/software/#flasher-tool
 
 
-.. Navigate to the unzipped folder (e.g. arduino-flasher-cli-x.x.x-windows-amd64), and run the following command:
-
-.. windows运行下面的命令
+Unzip the downloaded file, (you will receive an executable binary named arduino-flasher-cli)
 
 
-.. ./arduino-flasher-cli.exe flash latest
+Navigate to the unzipped folder (e.g. arduino-flasher-cli-x.x.x-windows-amd64), and run the following command:
+
+windows运行下面的命令
+
+
+./arduino-flasher-cli.exe flash latest
 

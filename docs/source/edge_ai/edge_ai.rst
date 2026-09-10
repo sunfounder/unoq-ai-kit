@@ -5,15 +5,16 @@
 Module D: Edge AI
 =====================
 
-In this module, you'll give your UNO Q the ability to **see and respond**. Using the Multimedia Carrier's camera and pre-trained AI models, you'll build projects that recognize faces, track objects, and trigger physical actions — all running directly on the device.
+In this module, you'll give your UNO Q the ability to **see and respond**. Using the Multimedia Carrier's camera and pre-trained AI models, you'll build projects that recognize objects, detect faces, and trigger physical actions — all running directly on the device.
 
 Each lesson builds on the previous one, adding one new concept at a time:
 
-* **Camera Check** (Lesson 0): Make sure the camera works — no AI yet, just the live feed
-* **Detection → Screen** (Lesson 1): The camera sees, the AI identifies, results appear on screen
-* **Detection → Buzzer** (Lesson 2): AI triggers physical hardware — face detected, alarm sounds
-* **Detection → Servo** (Lesson 3): AI controls continuous motion — face tracking with a pan-tilt
-* **Detection → Color** (Lesson 4): AI classification maps to hardware states — object type sets LED color
+* **Detection → Screen** (01): The camera sees, the AI identifies, results appear on screen
+* **Detection → Buzzer** (02): AI triggers physical hardware — face detected, alarm sounds
+* **Detection → Color** (03): AI classification maps to hardware states — object type sets LED color
+* **Detection → Count** (04): AI counts appearances — objects tallied and announced
+* **Detection → Tracking** (05): AI controls continuous motion — face tracking with a pan-tilt
+* **Capstone** (06): Everything combined — a smart security guard
 
 By the end of this module, you will be able to:
 
@@ -26,6 +27,9 @@ Let's give your UNO Q vision.
 .. toctree::
    :maxdepth: 1
 
-   camera_preview
-   1_ai_vision_intro
-   camera_troubleshooting
+   1_ai_vision_recognition
+   2_face_alarm
+   3_ai_color_light
+   4_ai_object_counter
+   5_face_tracking_camera
+   6_ai_smart_guard
