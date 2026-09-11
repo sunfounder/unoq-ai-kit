@@ -9,7 +9,7 @@ The CSI camera is used as a normal camera:
 - save security snapshots
 
 The MCU handles:
-- PIR motion detection on D2
+- PIR motion detection on D4
 - 10-second motion hold time
 - passive buzzer on D5 (tone alarm)
 """

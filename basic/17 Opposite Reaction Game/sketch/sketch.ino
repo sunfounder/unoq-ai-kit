@@ -12,8 +12,8 @@
 #include <Arduino_LED_Matrix.h>
 #include "matrix_patterns.h"
 
-const int LEFT_BUTTON_PIN = 3;
-const int RIGHT_BUTTON_PIN = 2;
+const int LEFT_BUTTON_PIN = 7;
+const int RIGHT_BUTTON_PIN = 6;
 const int BUZZER_PIN = 5;
 
 const int CORRECT_TONE = 1200;

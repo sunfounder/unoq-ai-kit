@@ -1,4 +1,4 @@
-const int pirPin = 2;     // PIR sensor OUT connected to D2
+const int pirPin = 4;     // PIR sensor OUT connected to D4
 const int buzzerPin = 5;  // Passive buzzer connected to D5
 
 void setup() {

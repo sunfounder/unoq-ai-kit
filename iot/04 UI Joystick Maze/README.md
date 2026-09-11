@@ -17,7 +17,7 @@ Use a physical joystick to guide an explorer through a maze in your browser. Pus
 
 ## Wiring
 
-Connect the joystick's VRX to A3, VRY to A2, SW to D2, VCC to 3.3V (the UNO Q's analog inputs measure 0–3.3V), and GND to GND.
+Connect the joystick's VRX to A3, VRY to A2, SW to D4, VCC to 3.3V (the UNO Q's analog inputs measure 0–3.3V), and GND to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_joystick.png)
 

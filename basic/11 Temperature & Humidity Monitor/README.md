@@ -19,7 +19,7 @@ Read temperature and humidity from a DHT11 sensor every 2 seconds using a **non-
 
 ## Wiring
 
-Connect the DHT11 module to the UNO Q.
+Connect the DHT11 module's VCC to 3.3V, DATA to D4, and GND to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_dht11.png)
 

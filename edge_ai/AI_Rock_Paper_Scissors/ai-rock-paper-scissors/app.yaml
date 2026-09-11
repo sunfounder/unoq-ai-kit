@@ -1,0 +1,8 @@
+name: AI Rock Paper Scissors
+description: Play rock-paper-scissors using real-time AI hand gesture detection
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: hand-gestures
+- arduino:web_ui: {}
+icon: ✊

@@ -1,7 +1,7 @@
 """03 Voice Recorder
 
-D2: press once to start recording, press again to stop and save.
-D3: press once to play the latest recording, press again to stop playback.
+D7: press once to start recording, press again to stop and save.
+D6: press once to play the latest recording, press again to stop playback.
 """
 
 import time
@@ -16,8 +16,8 @@ POLL_INTERVAL = 0.05
 AUDIO_FILE = "/app/audio_output/stt_last.wav"
 
 print("=== Voice Recorder ===", flush=True)
-print("D2: Record / Stop Recording", flush=True)
-print("D3: Play / Stop Playback", flush=True)
+print("D7: Record / Stop Recording", flush=True)
+print("D6: Play / Stop Playback", flush=True)
 
 # STT brick is used only for microphone recording in this lesson.
 stt = STT(type="online", language="en")
@@ -39,7 +39,7 @@ try:
         record_button = int(Bridge.call(RECORD_BUTTON_RPC, ""))
         play_button = int(Bridge.call(PLAY_BUTTON_RPC, ""))
 
-        # D2: toggle Record / Stop Recording on each new press.
+        # D7: toggle Record / Stop Recording on each new press.
         if record_button == 1 and last_record_button == 0:
             if not recording:
                 # Do not record while the speaker is playing.
@@ -65,13 +65,13 @@ try:
                     recording = False
                     print(f"Record stop error: {error}", flush=True)
 
-        # D3: toggle Play / Stop Playback on each new press.
+        # D6: toggle Play / Stop Playback on each new press.
         if play_button == 1 and last_play_button == 0:
             if recording:
                 print("Stop recording before playback.", flush=True)
 
             elif not has_recording:
-                print("No recording yet. Press D2 to record first.", flush=True)
+                print("No recording yet. Press D7 to record first.", flush=True)
 
             else:
                 try:

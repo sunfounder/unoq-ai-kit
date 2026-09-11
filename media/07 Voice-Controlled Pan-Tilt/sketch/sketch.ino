@@ -1,18 +1,18 @@
 /*
  * Voice-Controlled Pan-Tilt
  *
- * Hold the button connected to D2 and speak a command. Python performs
+ * Hold the button connected to D4 and speak a command. Python performs
  * speech recognition and calls one of the Bridge functions below.
  *
  * Pan servo:  D9
  * Tilt servo: D10
- * Button:     D2 to GND
+ * Button:     D4 to GND
  */
 
 #include <Arduino_RouterBridge.h>
 #include <Arduino_HardwareServo.h>
 
-const int BUTTON_PIN = 2;
+const int BUTTON_PIN = 4;
 
 // Servo angles
 const int LEFT_ANGLE = 135;

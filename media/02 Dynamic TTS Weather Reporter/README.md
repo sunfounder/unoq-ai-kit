@@ -28,7 +28,7 @@ This example uses the following Bricks:
 Connect the DHT11 module as follows:
 
 - DHT11 **VCC** → **3.3V**
-- DHT11 **DATA** → **D2**
+- DHT11 **DATA** → **D4**
 - DHT11 **GND** → **GND**
 
 ![Wiring Diagram](assets/docs_assets/wiring_dht11.png)

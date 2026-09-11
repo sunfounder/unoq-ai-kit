@@ -2,8 +2,8 @@
  * Measures distance and beeps faster as obstacles get closer.
  */
 
-const int trigPin = 3;     // Trigger pin
-const int echoPin = 2;     // Echo pin
+const int trigPin = 11;    // Trigger pin
+const int echoPin = 12;    // Echo pin
 const int buzzerPin = 5;   // Active buzzer
 
 long duration;

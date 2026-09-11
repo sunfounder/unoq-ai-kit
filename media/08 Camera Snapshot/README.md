@@ -12,9 +12,9 @@ The **Camera Snapshot** example captures a photo with the camera whenever you pr
 
 ## Wiring
 
-Connect the push button between **D2** and **GND**:
+Connect the push button between **D4** and **GND**:
 
-- Button pin 1 → **D2**
+- Button pin 1 → **D4**
 - Button pin 2 → **GND**
 
 ![Wiring Diagram](assets/docs_assets/wiring_button.png)

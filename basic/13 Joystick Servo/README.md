@@ -18,7 +18,7 @@ Control two servos (pan and tilt) with a joystick — push up/down to tilt, left
 
 ## Wiring
 
-Connect the joystick's VCC to 3.3V, VRx to A3, VRy to A2, SW to D2, and GND to GND; connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
+Connect the joystick's VCC to 3.3V, VRx to A3, VRy to A2, SW to D4, and GND to GND; connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
 
 ![Wiring Diagram](assets/docs_assets/wiring_joystick_servo.png)
 

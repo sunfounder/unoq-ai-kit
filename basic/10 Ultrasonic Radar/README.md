@@ -15,7 +15,7 @@ Measure distance with ultrasonic sound waves — just like a bat or a parking se
 
 ## Wiring
 
-Connect the HC-SR04 ultrasonic sensor and active buzzer to the UNO Q.
+Connect the HC-SR04's VCC to 3.3V, Trig to D11, Echo to D12, and GND to GND, and the active buzzer to D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_ultrasonic.png)
 

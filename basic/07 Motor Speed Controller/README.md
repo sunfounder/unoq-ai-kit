@@ -28,13 +28,13 @@ Connect the DC motor to the Robot Shield's M0 terminal and the battery pack to t
 
 **Flow**
 
-- `setup()` — starts the Serial Monitor and configures the M0 direction pin (D4) and PWM pin (D5) as outputs
+- `setup()` — starts the Serial Monitor and configures the M0 control inputs (IN1 on D2, IN2 on D3) as outputs
 - `loop()` — runs the sequence forward 3 s, stop 1 s, reverse 3 s, stop 3 s, then repeats
 
-**Direction through the H-bridge**
+**Direction and speed through the H-bridge**
 
-`digitalWrite(motorDirPin, HIGH)` sets the M0 direction, and `analogWrite(motorPwmPin, 128)` spins the motor at ~50% speed (128 out of 255). Reversing is just flipping the direction pin to LOW — the Robot Shield's H-bridge swaps the voltage polarity, spinning the motor backward.
+The M0 terminal has two PWM inputs. `analogWrite(MOTOR_IN1_PIN, 128)` with `MOTOR_IN2_PIN` held at 0 spins the motor forward at ~50% speed (128 out of 255). Reversing is just swapping the pair — drive `MOTOR_IN2_PIN` and hold `MOTOR_IN1_PIN` at 0 — and the Robot Shield's H-bridge swaps the voltage polarity, spinning the motor backward. Which input you drive picks the direction; the value you write picks the speed.
 
 **Stopping**
 
-`analogWrite(motorPwmPin, 0)` removes the drive signal and the motor stops.
+`analogWrite()` of 0 on both inputs removes the drive signal and the motor stops.

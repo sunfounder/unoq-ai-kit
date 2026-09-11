@@ -1,7 +1,7 @@
 /*
- * 09 Telegram IoT Bot
+ * 11 Telegram IoT Bot
  *
- * DHT11 data pin -> D2
+ * DHT11 data pin -> D4
  * External LED   -> D5
  *
  * Python uses Bridge.call() when Telegram commands arrive.
@@ -10,7 +10,7 @@
 #include <Arduino_RouterBridge.h>
 #include <DHT.h>
 
-const int DHT_PIN = 2;
+const int DHT_PIN = 4;
 const int LED_PIN = 5;
 
 #define DHT_TYPE DHT11
@@ -109,7 +109,7 @@ void setup()
     );
 
     Serial.println("=== Telegram IoT Bot ===");
-    Serial.println("DHT11: D2");
+    Serial.println("DHT11: D4");
     Serial.println("External LED: D5");
     Serial.println("Ready.");
 }

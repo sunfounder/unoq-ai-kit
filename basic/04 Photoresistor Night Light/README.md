@@ -18,7 +18,7 @@ A 4-level LED bar graph that responds to ambient light — the darker it gets, t
 
 ## Wiring
 
-Connect the photoresistor with a 10 kΩ resistor to analog pin A0, and four LEDs to pins D2–D5.
+Connect the photoresistor with a 10 kΩ resistor to analog pin A0, and four LEDs to pins D4–D7.
 
 ![Wiring Diagram](assets/docs_assets/wiring_photoresistor_led.png)
 

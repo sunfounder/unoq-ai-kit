@@ -10,12 +10,12 @@
  * Joystick:
  *   X  -> A3
  *   Y  -> A2
- *   SW -> D2
+ *   SW -> D4
  */
 
 #include <Arduino_RouterBridge.h>
 
-const int SW_PIN = 2;
+const int SW_PIN = 4;
 const int X_PIN = A3;
 const int Y_PIN = A2;
 

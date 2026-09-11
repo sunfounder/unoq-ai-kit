@@ -2,11 +2,11 @@
  * Press the button to turn on the LED.
  */
 
-const int buttonPin = 2;  // Button connected to pin 2
+const int buttonPin = 4;  // Button connected to pin 4
 const int ledPin = 5;     // LED connected to pin 5
 
 void setup() {
-    pinMode(buttonPin, INPUT_PULLUP);  // Pin 2 reads input with pull-up
+    pinMode(buttonPin, INPUT_PULLUP);  // Pin 4 reads input with pull-up
     pinMode(ledPin, OUTPUT);           // Pin 5 controls the LED
 }
 

@@ -3,7 +3,7 @@
  *
  * Wiring:
  *   DHT11 VCC  -> 3.3V
- *   DHT11 DATA -> D2
+ *   DHT11 DATA -> D4
  *   DHT11 GND  -> GND
  *
  * Python requests the current sensor values through Bridge.
@@ -12,7 +12,7 @@
     #include "DHT.h"
     #include <Arduino_RouterBridge.h>
 
-    #define DHTPIN 2
+    #define DHTPIN 4
     #define DHTTYPE DHT11
 
     DHT dht(DHTPIN, DHTTYPE);

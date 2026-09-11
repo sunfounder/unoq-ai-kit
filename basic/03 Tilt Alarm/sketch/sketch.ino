@@ -2,7 +2,7 @@
  * Sounds a rhythmic alarm when the device is tilted.
  */
 
-const int tiltPin = 2;    // Tilt switch connected to pin 2
+const int tiltPin = 4;    // Tilt switch connected to pin 4
 const int buzzerPin = 5;  // Active buzzer connected to pin 5
 
 void setup() {

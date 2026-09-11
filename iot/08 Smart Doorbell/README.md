@@ -20,7 +20,7 @@ Build a smart doorbell with a push button, passive buzzer, live camera preview, 
 
 ## Wiring
 
-Connect the push button between D2 and GND (uses `INPUT_PULLUP`), and the passive buzzer between D5 and GND.
+Connect the push button between D4 and GND (uses `INPUT_PULLUP`), and the passive buzzer between D5 and GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_pc_buzzer_button.png)
 

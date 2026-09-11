@@ -29,7 +29,7 @@ Connect the servos to the Robot Shield and the push button to the UNO Q:
 
 - Pan servo → **D9**
 - Tilt servo → **D10**
-- Button pin 1 → **D2**
+- Button pin 1 → **D4**
 - Button pin 2 → **GND**
 
 ![Wiring Diagram](assets/docs_assets/wiring_pan_tilt_button.png)

@@ -17,7 +17,7 @@ Press a button to turn on an LED — your first interactive circuit. This lesson
 
 ## Wiring
 
-Connect the push button to digital pin D2 and the LED through a 220 Ω resistor to pin D5.
+Connect the push button to digital pin D4 and the LED through a 220 Ω resistor to pin D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_button.png)
 
@@ -33,7 +33,7 @@ Connect the push button to digital pin D2 and the LED through a 220 Ω resistor 
 
 **Flow**
 
-- `setup()` — configures pin 2 (`buttonPin`) as `INPUT_PULLUP` and pin 5 (`ledPin`) as an `OUTPUT`
+- `setup()` — configures pin 4 (`buttonPin`) as `INPUT_PULLUP` and pin 5 (`ledPin`) as an `OUTPUT`
 - `loop()` — reads the button with `digitalRead()`, then turns the LED on or off based on the result
 
 **Reading a button**

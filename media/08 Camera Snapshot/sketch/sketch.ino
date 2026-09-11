@@ -2,16 +2,16 @@
  * Camera Snapshot
  *
  * Wiring:
- *   Button pin 1 -> D2
+ *   Button pin 1 -> D4
  *   Button pin 2 -> GND
  *
- * INPUT_PULLUP keeps D2 HIGH while released.
- * Pressing the button connects D2 to GND, so the input becomes LOW.
+ * INPUT_PULLUP keeps D4 HIGH while released.
+ * Pressing the button connects D4 to GND, so the input becomes LOW.
  */
 
 #include <Arduino_RouterBridge.h>
 
-const int BUTTON_PIN = 2;
+const int BUTTON_PIN = 4;
 
 int buttonRead(String dummy)
 {

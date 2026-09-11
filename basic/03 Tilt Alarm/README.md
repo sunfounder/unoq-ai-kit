@@ -16,7 +16,7 @@ Sound a rhythmic alarm when the device is tilted. Uses a tilt switch as a digita
 
 ## Wiring
 
-Connect the tilt switch to digital pin D2 and the active buzzer to pin D5.
+Connect the tilt switch to digital pin D4 and the active buzzer to pin D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_tilt_buzzer.png)
 
@@ -32,7 +32,7 @@ Connect the tilt switch to digital pin D2 and the active buzzer to pin D5.
 
 **Flow**
 
-- `setup()` — configures pin 2 (`tiltPin`) as `INPUT_PULLUP`, pin 5 (`buzzerPin`) as an `OUTPUT`, and starts with the buzzer off
+- `setup()` — configures pin 4 (`tiltPin`) as `INPUT_PULLUP`, pin 5 (`buzzerPin`) as an `OUTPUT`, and starts with the buzzer off
 - `loop()` — checks the tilt switch; if tilted, confirms the reading with a debounce check and sounds the alarm pattern
 
 **The debounce check**

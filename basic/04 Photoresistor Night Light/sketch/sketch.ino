@@ -3,7 +3,7 @@
  */
 
 const int lightPin = A0;               // Photoresistor on analog pin A0
-const int ledPins[] = {2, 3, 4, 5};   // LEDs on digital pins D2–D5
+const int ledPins[] = {4, 5, 6, 7};   // LEDs on digital pins D4–D7
 
 void setup() {
     Serial.begin(115200);

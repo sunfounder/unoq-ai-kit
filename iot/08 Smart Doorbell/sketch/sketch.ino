@@ -1,13 +1,13 @@
 /*
  * 08 Smart Doorbell
  *
- * Push button    -> D2
+ * Push button    -> D4
  * Passive buzzer -> D5
  */
 
 #include <Arduino_RouterBridge.h>
 
-const int BUTTON_PIN = 2;
+const int BUTTON_PIN = 4;
 const int BUZZER_PIN = 5;
 
 // Tracks the previous button reading to detect the press edge.
@@ -43,7 +43,7 @@ void setup()
     Bridge.begin();
 
     Serial.println("=== Smart Doorbell ===");
-    Serial.println("Button: D2");
+    Serial.println("Button: D4");
     Serial.println("Passive buzzer: D5");
     Serial.println("Waiting for visitors...");
 }

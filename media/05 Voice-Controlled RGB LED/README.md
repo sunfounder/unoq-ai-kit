@@ -24,7 +24,7 @@ This example uses the following Bricks:
 
 ### Push Button
 
-- Button pin 1 → **D2**
+- Button pin 1 → **D4**
 - Button pin 2 → **GND**
 
 ### RGB LED

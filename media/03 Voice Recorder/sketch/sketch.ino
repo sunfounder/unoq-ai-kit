@@ -2,8 +2,8 @@
  * 03 Voice Recorder
  *
  * Wiring:
- *   Record button: D2 -> button -> GND
- *   Play button:   D3 -> button -> GND
+ *   Record button: D7 -> button -> GND
+ *   Play button:   D6 -> button -> GND
  *
  * Both pins use INPUT_PULLUP:
  *   released = HIGH
@@ -12,8 +12,8 @@
 
 #include <Arduino_RouterBridge.h>
 
-const int RECORD_BUTTON_PIN = 2;
-const int PLAY_BUTTON_PIN = 3;
+const int RECORD_BUTTON_PIN = 7;
+const int PLAY_BUTTON_PIN = 6;
 
 int recordButtonRead(String dummy)
 {

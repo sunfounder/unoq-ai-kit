@@ -19,7 +19,7 @@ Build an IoT security monitor with a live camera stream, PIR motion detection, a
 
 ## Wiring
 
-Connect the PIR sensor's VCC to 3.3V, GND to GND, and OUT to D2; connect the passive buzzer between D5 and GND.
+Connect the PIR sensor's VCC to 3.3V, GND to GND, and OUT to D4; connect the passive buzzer between D5 and GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_pc_buzzer_pir.png)
 
@@ -35,7 +35,7 @@ Connect the PIR sensor's VCC to 3.3V, GND to GND, and OUT to D2; connect the pas
 
 **Flow**
 
-- Sketch (`sketch.ino`) — polls the PIR sensor on D2. On motion, it latches **MOTION DETECTED** and alternates `tone()` between 800 Hz and 1200 Hz every 300 ms using `millis()` (no blocking delays). It only returns to **AREA CLEAR** after 10 continuous seconds without motion, then calls `Bridge.notify("motion_state", ...)`
+- Sketch (`sketch.ino`) — polls the PIR sensor on D4. On motion, it latches **MOTION DETECTED** and alternates `tone()` between 800 Hz and 1200 Hz every 300 ms using `millis()` (no blocking delays). It only returns to **AREA CLEAR** after 10 continuous seconds without motion, then calls `Bridge.notify("motion_state", ...)`
 - Python (`main.py`) — streams the camera preview at about 5 FPS (JPEG quality 70), saves a snapshot on the first motion event, and keeps saving one every 2 minutes while motion continues
 - Browser — shows the live preview, motion/alarm status, latest snapshot, and an event log
 

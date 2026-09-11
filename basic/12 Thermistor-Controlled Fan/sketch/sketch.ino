@@ -1,17 +1,17 @@
 /*
  * Reads an NTC thermistor and adjusts motor speed based on temperature.
  *
- * Thermistor: A0
+ * Thermistor: A1
  * Motor on the Robot Shield's M0 terminal:
- *   direction pin -> D4
- *   PWM pin       -> D5
+ *   IN1 -> D2 (PWM)
+ *   IN2 -> D3 (PWM)
  */
 
 #include <math.h>
 
-const int tempPin = A0;                  // Thermistor on analog pin A0
-const int motorDirPin = 4;               // Motor direction control
-const int motorPwmPin = 5;               // Motor speed control (PWM)
+const int tempPin = A1;                  // Thermistor on analog pin A1
+const int MOTOR_IN1_PIN = 2;             // Motor input 1 (PWM)
+const int MOTOR_IN2_PIN = 3;             // Motor input 2 (PWM)
 
 // NTC thermistor parameters (Beta model)
 const float beta = 3950.0;              // Beta coefficient for this thermistor
@@ -22,10 +22,10 @@ const float nominalTemp = 25.0 + 273.15; // 25°C in Kelvin
 void setup() {
     Serial.begin(115200);
 
-    pinMode(motorDirPin, OUTPUT);
-    pinMode(motorPwmPin, OUTPUT);
-    digitalWrite(motorDirPin, HIGH);     // Fan blows forward
-    analogWrite(motorPwmPin, 0);         // Motor starts OFF
+    pinMode(MOTOR_IN1_PIN, OUTPUT);
+    pinMode(MOTOR_IN2_PIN, OUTPUT);
+    analogWrite(MOTOR_IN1_PIN, 0);       // Motor starts OFF
+    analogWrite(MOTOR_IN2_PIN, 0);       // IN2 stays low → fan blows forward
 
     Serial.println("=== Temperature Controlled Motor ===");
 }
@@ -50,8 +50,9 @@ void loop() {
         power = map((int)tempC, 25, 50, 20, 100);  // Smooth range
     }
 
-    // Convert 0-100% to the 0-255 PWM range
-    analogWrite(motorPwmPin, map(power, 0, 100, 0, 255));
+    // Convert 0-100% to the 0-255 PWM range (IN2 stays 0 → forward)
+    analogWrite(MOTOR_IN1_PIN, map(power, 0, 100, 0, 255));
+    analogWrite(MOTOR_IN2_PIN, 0);
 
     Serial.print("Temperature: ");
     Serial.print(tempC, 1);              // Print with 1 decimal place

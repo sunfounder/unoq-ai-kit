@@ -16,7 +16,7 @@ Read temperature with an NTC thermistor and automatically adjust a DC motor (fan
 
 ## Wiring
 
-Connect the NTC thermistor with a 10 kΩ resistor to analog pin A0 and the DC motor to the Robot Shield's M0 terminal.
+Connect the NTC thermistor with a 10 kΩ resistor to analog pin A1 and the DC motor to the Robot Shield's M0 terminal.
 
 ![Wiring Diagram](assets/docs_assets/wiring_thermistor_fan.png)
 
@@ -33,8 +33,8 @@ Connect the NTC thermistor with a 10 kΩ resistor to analog pin A0 and the DC mo
 
 **Flow**
 
-- `setup()` — starts the Serial Monitor, configures the M0 direction pin (D4) and PWM pin (D5), and starts with the fan off
-- `loop()` — reads the thermistor on A0, converts resistance to temperature, maps temperature to motor power, and updates the fan
+- `setup()` — starts the Serial Monitor, configures the M0 control inputs (IN1 on D2, IN2 on D3), and starts with the fan off
+- `loop()` — reads the thermistor on A1, converts resistance to temperature, maps temperature to motor power, and updates the fan
 
 **Step 1 — the voltage divider**
 
@@ -50,5 +50,5 @@ Below 25 °C the fan stays off (`power = 0`), above 50 °C it runs at maximum (`
 
 **Driving the motor**
 
-`analogWrite(motorPwmPin, map(power, 0, 100, 0, 255))` converts the 0–100% power into the 0–255 PWM range and drives the fan — exactly like the motor lesson, the only new thing here is where the number comes from.
+`analogWrite(MOTOR_IN1_PIN, map(power, 0, 100, 0, 255))` converts the 0–100% power into the 0–255 PWM range and drives the fan, with `MOTOR_IN2_PIN` held at 0 so it always blows forward — exactly like the motor lesson, the only new thing here is where the number comes from.
 

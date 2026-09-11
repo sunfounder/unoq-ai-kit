@@ -2,7 +2,7 @@
  * Voice-Controlled RGB LED
  *
  * Wiring:
- *   Push button: D2 -> GND
+ *   Push button: D4 -> GND
  *   RGB LED R:   220Ω -> D8
  *   RGB LED G:   220Ω -> D7
  *   RGB LED B:   220Ω -> D6
@@ -10,7 +10,7 @@
 
 #include <Arduino_RouterBridge.h>
 
-const int BUTTON_PIN = 2;
+const int BUTTON_PIN = 4;
 
 const int RED_PIN = 8;
 const int GREEN_PIN = 7;

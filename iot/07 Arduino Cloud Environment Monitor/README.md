@@ -20,7 +20,7 @@ Build an IoT environment monitoring system using Arduino Cloud. The sketch reads
 
 ## Wiring
 
-Connect the DHT11's VCC to 3.3V, DATA to D2, and GND to GND; connect the external LED's anode to D5 and its cathode through a 220 Ω resistor to GND.
+Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the external LED's anode to D5 and its cathode through a 220 Ω resistor to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_dht11.png)
 

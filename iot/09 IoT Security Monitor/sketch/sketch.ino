@@ -1,13 +1,13 @@
 /*
- * 08 IoT Security Monitor
+ * 09 IoT Security Monitor
  *
- * PIR motion sensor -> D2
+ * PIR motion sensor -> D4
  * Passive buzzer    -> D5
  */
 
 #include <Arduino_RouterBridge.h>
 
-const int PIR_PIN = 2;
+const int PIR_PIN = 4;
 const int BUZZER_PIN = 5;
 
 // Keep the alarm latched for 10 s after the last motion trigger.
@@ -84,7 +84,7 @@ void setup()
     Bridge.begin();
 
     Serial.println("=== IoT Security Monitor ===");
-    Serial.println("PIR: D2");
+    Serial.println("PIR: D4");
     Serial.println("Passive buzzer: D5");
     Serial.println("Motion hold: 10 seconds");
     Serial.println("Monitoring...");

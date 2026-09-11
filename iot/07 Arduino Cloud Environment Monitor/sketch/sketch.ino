@@ -7,14 +7,14 @@
  *
  * The Arduino Cloud switch controls an external LED connected to D5.
  *
- * DHT11 DATA -> D2
+ * DHT11 DATA -> D4
  * External LED -> D5
  */
 
 #include <Arduino_RouterBridge.h>
 #include "DHT.h"
 
-#define DHTPIN 2
+#define DHTPIN 4
 #define DHTTYPE DHT11
 
 DHT dht(DHTPIN, DHTTYPE);

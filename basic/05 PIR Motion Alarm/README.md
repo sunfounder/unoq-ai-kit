@@ -13,7 +13,7 @@ Detect motion with a PIR (Passive Infrared) sensor and sound a passive buzzer al
 
 ## Wiring
 
-Connect the PIR sensor's VCC to 3.3V, OUT to D2, GND to GND, and the passive buzzer to D5.
+Connect the PIR sensor's VCC to 3.3V, OUT to D4, GND to GND, and the passive buzzer to D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_pc_buzzer_pir.png)
 

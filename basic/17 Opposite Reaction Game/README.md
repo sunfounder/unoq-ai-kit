@@ -13,7 +13,7 @@ Test your reaction skills! The LED matrix shows a left or right arrow at random 
 
 ## Wiring
 
-Connect the two buttons to D2 and D3, and the passive buzzer to D5.
+Connect the left button to D7 and the right button to D6, and the passive buzzer to D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_buzzer_button.png)
 

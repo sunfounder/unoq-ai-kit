@@ -3,12 +3,12 @@
  *
  * Joystick X (A3) -> pan servo (pin 9)
  * Joystick Y (A2) -> tilt servo (pin 10)
- * Joystick SW (D2) -> press to reset both servos to center
+ * Joystick SW (D4) -> press to reset both servos to center
  */
 
 #include <Arduino_HardwareServo.h>
 
-const int swPin = 2, xPin = A3, yPin = A2;
+const int swPin = 4, xPin = A3, yPin = A2;
 
 HardwareServo panServo;   // Pan servo on pin 9
 HardwareServo tiltServo;  // Tilt servo on pin 10

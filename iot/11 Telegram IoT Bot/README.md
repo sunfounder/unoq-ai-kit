@@ -20,7 +20,7 @@ Turn your Arduino UNO Q into an Internet-connected Telegram bot. Send `/status` 
 
 ## Wiring
 
-Connect the DHT11's VCC to 3.3V, DATA to D2, and GND to GND; connect the external LED's anode through a 220 Ω resistor to D5 and its cathode to GND.
+Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the external LED's anode through a 220 Ω resistor to D5 and its cathode to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_dht11_led.png)
 
@@ -41,7 +41,7 @@ Connect the DHT11's VCC to 3.3V, DATA to D2, and GND to GND; connect the externa
 - Telegram — a user sends a command (e.g., `/status`) to the bot
 - Telegram Bot Brick — routes the message to the matching Python command handler registered with `bot.add_command("status", status_cmd, ...)`
 - Python (`main.py`) — `status_cmd` calls `Bridge.call("get_temperature")` and `Bridge.call("get_humidity")` to read the DHT11, and `Bridge.call("get_led_state")` for the LED; then `sender.reply(...)` sends the formatted answer back to Telegram
-- Sketch (`sketch.ino`) — provides `get_temperature()`, `get_humidity()`, `set_led()`, and `get_led_state()` through `Bridge.provide()`; the DHT11 is on D2 and the LED on D5
+- Sketch (`sketch.ino`) — provides `get_temperature()`, `get_humidity()`, `set_led()`, and `get_led_state()` through `Bridge.provide()`; the DHT11 is on D4 and the LED on D5
 
 **Commands**
 
