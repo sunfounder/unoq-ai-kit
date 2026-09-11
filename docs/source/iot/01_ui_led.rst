@@ -27,11 +27,11 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_led` (Red)
      - 1 * :ref:`cpn_resistor` (220Ω)
      - Several :ref:`cpn_wires`
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_red_led|
      - |list_220ohm|
      - |list_wire|

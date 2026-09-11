@@ -52,7 +52,7 @@ This project uses the following sketch libraries:
 
 **Wiring Diagram**
 
-The DHT11 module has three labeled pins — double-check them before powering on: **VCC → 3.3V**, **DATA → pin 2**, **GND → GND**.
+The DHT11 module has three labeled pins — double-check them before powering on: **VCC → 3.3V**, **DATA → D4**, **GND → GND**.
 
 .. image:: /img/wiring/wiring_dht11.png
    :width: 500
@@ -104,7 +104,7 @@ Now that you've seen live climate data streaming in, let's look at the sketch fi
 
    #include "DHT.h"
 
-   #define DHTPIN 2        // DHT11 data pin connected to pin 2
+   #define DHTPIN 4        // DHT11 data pin connected to pin 4
    #define DHTTYPE DHT11   // DHT11 sensor type
 
    DHT dht(DHTPIN, DHTTYPE);
@@ -170,14 +170,14 @@ This lesson introduces the ``millis()`` non-blocking timer — one of the most i
 #. **Library Include, Macros, and DHT Object**
 
    - The ``DHT.h`` library provides the ``DHT`` class, handling the DHT11's single-wire protocol automatically
-   - ``#define`` creates preprocessor macros: ``DHTPIN`` becomes ``2`` and ``DHTTYPE`` becomes ``DHT11`` before compilation
-   - ``DHT dht(DHTPIN, DHTTYPE)`` creates the sensor object configured for pin 2 and the DHT11 variant
+   - ``#define`` creates preprocessor macros: ``DHTPIN`` becomes ``4`` and ``DHTTYPE`` becomes ``DHT11`` before compilation
+   - ``DHT dht(DHTPIN, DHTTYPE)`` creates the sensor object configured for pin 4 and the DHT11 variant
 
    .. code-block:: arduino
 
       #include "DHT.h"
 
-      #define DHTPIN 2
+      #define DHTPIN 4
       #define DHTTYPE DHT11
 
       DHT dht(DHTPIN, DHTTYPE);
@@ -283,7 +283,7 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 **Serial Monitor shows "Failed to read from DHT11!" repeatedly**
 
 * **Cause:** The DHT11 is wired incorrectly, the library is not installed, or the sensor needs time to stabilize.
-* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. In App Lab, check the **Sketch Libraries** panel to confirm the **DHT sensor library** is installed — App Lab auto-installs libraries declared in the project's ``sketch.yaml``. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
+* **Solution:** Check VCC → 3.3V, DATA → D4, GND → GND. In App Lab, check the **Sketch Libraries** panel to confirm the **DHT sensor library** is installed — App Lab auto-installs libraries declared in the project's ``sketch.yaml``. After power-on, wait a few seconds — the DHT11 needs about 1 second before it can respond reliably.
 
 **Readings are all zeros or negative values**
 

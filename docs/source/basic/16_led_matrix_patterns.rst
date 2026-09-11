@@ -25,7 +25,7 @@ In this lesson, you will learn to:
 
    * - 1 * UNO Q
      - 1 * USB Cable
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_usb_cable|
 
 **Software Requirements**

@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the motor to the Robot Shield's **M0** terminal (direction pin **D4**, PWM speed pin **D5**); place the thermistor — the small black bead with two leads, which has **no polarity** — between **A0** and GND, with the 10kΩ resistor (color bands Brown–Black–Orange–Gold) between **A0** and 3.3V; and avoid bending the thermistor's leads repeatedly at the body, as the bead is fragile.
+Connect the motor to the Robot Shield's **M0** terminal (inputs **IN1 on D2**, **IN2 on D3**); place the thermistor — the small black bead with two leads, which has **no polarity** — between **A1** and GND, with the 10kΩ resistor (color bands Brown–Black–Orange–Gold) between **A1** and 3.3V; and avoid bending the thermistor's leads repeatedly at the body, as the bead is fragile.
 
 .. image:: /img/wiring/wiring_thermistor_fan.png
    :width: 600
@@ -91,17 +91,17 @@ Now that you've seen the automatic cooling system respond to your body heat, let
    /*
     * Reads an NTC thermistor and adjusts motor speed based on temperature.
     *
-    * Thermistor: A0
+    * Thermistor: A1
     * Motor on the Robot Shield's M0 terminal:
-    *   direction pin -> D4
-    *   PWM pin       -> D5
+    *   IN1 -> D2 (PWM)
+    *   IN2 -> D3 (PWM)
     */
 
    #include <math.h>
 
-   const int tempPin = A0;                  // Thermistor on analog pin A0
-   const int motorDirPin = 4;               // Motor direction control
-   const int motorPwmPin = 5;               // Motor speed control (PWM)
+   const int tempPin = A1;                  // Thermistor on analog pin A1
+   const int MOTOR_IN1_PIN = 2;             // Motor input 1 (PWM)
+   const int MOTOR_IN2_PIN = 3;             // Motor input 2 (PWM)
 
    // NTC thermistor parameters (Beta model)
    const float beta = 3950.0;              // Beta coefficient for this thermistor
@@ -112,10 +112,10 @@ Now that you've seen the automatic cooling system respond to your body heat, let
    void setup() {
        Serial.begin(115200);
 
-       pinMode(motorDirPin, OUTPUT);
-       pinMode(motorPwmPin, OUTPUT);
-       digitalWrite(motorDirPin, HIGH);     // Fan blows forward
-       analogWrite(motorPwmPin, 0);         // Motor starts OFF
+       pinMode(MOTOR_IN1_PIN, OUTPUT);
+       pinMode(MOTOR_IN2_PIN, OUTPUT);
+       analogWrite(MOTOR_IN1_PIN, 0);       // Motor starts OFF
+       analogWrite(MOTOR_IN2_PIN, 0);       // IN2 stays low → fan blows forward
 
        Serial.println("=== Temperature Controlled Motor ===");
    }
@@ -140,8 +140,9 @@ Now that you've seen the automatic cooling system respond to your body heat, let
            power = map((int)tempC, 25, 50, 20, 100);  // Smooth range
        }
 
-       // Convert 0-100% to the 0-255 PWM range
-       analogWrite(motorPwmPin, map(power, 0, 100, 0, 255));
+       // Convert 0-100% to the 0-255 PWM range (IN2 stays 0 → forward)
+       analogWrite(MOTOR_IN1_PIN, map(power, 0, 100, 0, 255));
+       analogWrite(MOTOR_IN2_PIN, 0);
 
        Serial.print("Temperature: ");
        Serial.print(tempC, 1);              // Print with 1 decimal place
@@ -160,16 +161,15 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
 
    setup() → runs once at startup:
        Start Serial Monitor
-       Set motor direction pin D4 HIGH (fan blows forward)
-       Set motor PWM pin D5 to 0 (fan starts off)
+       Set motor inputs IN1 (D2) and IN2 (D3) to 0 (fan starts off)
        Print startup message
 
    loop() → runs over and over forever:
-       Read thermistor voltage on A0 (0–1023)
+       Read thermistor voltage on A1 (0–1023)
        Step 1: Convert ADC value → resistance (ohms)
        Step 2: Convert resistance → temperature (°C) using Beta equation
        Step 3: Convert temperature → motor power (0–100%)
-       Convert power percentage → PWM value (0–255), write to D5
+       Convert power percentage → PWM value (0–255), write to IN1 (D2)
        Print temperature and power to Serial Monitor
        Wait 500ms, then repeat
 
@@ -215,7 +215,7 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
    - Three temperature zones control the fan: below 25°C the fan stays off, above 50°C it runs at maximum
    - Between 25°C and 50°C, ``map()`` scales the power smoothly — the warmer it gets, the faster the fan spins
    - This three-zone approach gives a natural feel: silent when cool, proportional response in the active range, and full blast when hot
-   - The motor's **direction pin D4** was set ``HIGH`` in ``setup()`` so the fan blows forward; the **PWM pin D5** carries the speed
+   - The motor's **IN2 (D3)** is held at 0 in ``setup()`` so the fan always blows forward; the **IN1 (D2)** pin carries the speed
 
    .. code-block:: arduino
 
@@ -243,8 +243,8 @@ If the formula seems complicated, here is the simplified version of what happens
      - What Happens
      - Formula (simplified)
    * - 1
-     - Read the voltage at A0
-     - ``analogRead(A0)`` → 0–1023
+     - Read the voltage at A1
+     - ``analogRead(A1)`` → 0–1023
    * - 2
      - Calculate thermistor resistance from the voltage
      - ``R = 10kΩ × (1023 / reading − 1)``
@@ -311,12 +311,12 @@ Reverse the system: make the motor spin when the temperature is **below** a thre
 **Motor does not spin, even when the thermistor feels warm**
 
 * **Cause:** The temperature isn't exceeding 25°C, or the thermistor circuit is wired incorrectly.
-* **Solution:** Check the battery connection. Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and A0, 10kΩ resistor between A0 and 3.3V. Verify the motor is connected to the M0 terminal on the Robot Shield, with its direction wire on D4 and PWM wire on D5.
+* **Solution:** Check the battery connection. Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and A1, 10kΩ resistor between A1 and 3.3V. Verify the motor is connected to the M0 terminal on the Robot Shield, with its IN1 wire on D2 and IN2 wire on D3.
 
 **Temperature readings are way off (0°C, 100°C, or negative)**
 
 * **Cause:** The thermistor and resistor are swapped in the voltage divider, or the wrong resistor value is used.
-* **Solution:** The thermistor should connect GND → A0, and the 10kΩ resistor should connect A0 → 3.3V. Swapping them inverts the voltage divider behavior. Double-check the resistor is 10kΩ (Brown-Black-Orange), not 220Ω (Red-Red-Brown).
+* **Solution:** The thermistor should connect GND → A1, and the 10kΩ resistor should connect A1 → 3.3V. Swapping them inverts the voltage divider behavior. Double-check the resistor is 10kΩ (Brown-Black-Orange), not 220Ω (Red-Red-Brown).
 
 **Temperature changes very slowly or not at all**
 

@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so either leg works — and the **10kΩ fixed resistor** (bands **Brown → Black → Orange**) between **A0** and **GND**; the two resistors form a voltage divider that turns light into a readable voltage. The four LEDs go to **D2, D3, D4, D5**, each with its **own** 220Ω resistor (bands **Red → Red → Brown → Gold**) and a shared GND rail: the long leg (anode) goes toward the digital pin, the short leg (cathode) toward GND. Never connect multiple LEDs to a single resistor — they share current unevenly and may burn out.
+Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so either leg works — and the **10kΩ fixed resistor** (bands **Brown → Black → Orange**) between **A0** and **GND**; the two resistors form a voltage divider that turns light into a readable voltage. The four LEDs go to **D4, D5, D6, D7**, each with its **own** 220Ω resistor (bands **Red → Red → Brown → Gold**) and a shared GND rail: the long leg (anode) goes toward the digital pin, the short leg (cathode) toward GND. Never connect multiple LEDs to a single resistor — they share current unevenly and may burn out.
 
 .. image:: /img/wiring/wiring_photoresistor_led.png
    :width: 500
@@ -98,7 +98,7 @@ Now that you've seen the circuit respond to light, let's look at the sketch file
     */
 
    const int lightPin = A0;               // Photoresistor on analog pin A0
-   const int ledPins[] = {2, 3, 4, 5};   // LEDs on digital pins D2–D5
+   const int ledPins[] = {4, 5, 6, 7};   // LEDs on digital pins D4–D7
 
    void setup() {
        Serial.begin(115200);
@@ -153,12 +153,12 @@ This lesson introduces two powerful programming tools — arrays and ``for`` loo
 #. Storing Multiple Pins in an Array
 
    - An **array** is a single variable that stores multiple values instead of declaring separate variables for each pin
-   - Arrays use zero-based indexing: ``ledPins[0]`` is pin 2, ``ledPins[1]`` is pin 3, and so on
+   - Arrays use zero-based indexing: ``ledPins[0]`` is pin 4, ``ledPins[1]`` is pin 5, and so on
    - This structure lets you loop through every pin automatically
 
    .. code-block:: arduino
 
-      const int ledPins[] = {2, 3, 4, 5};
+      const int ledPins[] = {4, 5, 6, 7};
 
 #. Reading an Analog Sensor and Mapping to Levels
 
@@ -189,10 +189,10 @@ Without arrays or loops, controlling four LEDs would take many repetitive lines:
 
 .. code-block:: arduino
 
-   pinMode(2, OUTPUT); digitalWrite(2, LOW);
-   pinMode(3, OUTPUT); digitalWrite(3, LOW);
    pinMode(4, OUTPUT); digitalWrite(4, LOW);
    pinMode(5, OUTPUT); digitalWrite(5, LOW);
+   pinMode(6, OUTPUT); digitalWrite(6, LOW);
+   pinMode(7, OUTPUT); digitalWrite(7, LOW);
 
 With an array and a loop, the same work is done in just three lines inside ``loop()``. If you later add a fifth LED, you change one number (``4`` to ``5``) and add one pin to the array — the loop handles everything automatically. This pattern scales to dozens of components.
 

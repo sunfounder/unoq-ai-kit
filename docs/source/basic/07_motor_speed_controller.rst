@@ -9,9 +9,9 @@ LEDs, buzzers, and sensors are all about light, sound, and data — but what abo
 
 In this lesson, you will learn to:
 
-* Control a DC motor with a direction pin and a PWM pin
+* Control a DC motor with two PWM input pins — **IN1** and **IN2**
 * Set motor **speed** with ``analogWrite()`` values (0–255)
-* Control motor **direction** with a HIGH/LOW digital pin
+* Control motor **direction** by swapping which of the two inputs you drive
 * Understand why motors need a **separate power source** (battery) — USB alone isn't enough
 
 1. Setup
@@ -38,7 +38,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-The motor connects to the Robot Shield's **M0** terminal — its direction pin goes to **D4** and its PWM speed pin to **D5**.
+The motor connects to the Robot Shield's **M0** terminal — its two control inputs are **IN1 on D2** and **IN2 on D3**, both PWM-capable.
 
 .. image:: /img/wiring/wiring_motor.png
    :width: 600
@@ -71,7 +71,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 500
 
 
-#. Wait a few seconds for the upload to finish. The motor should spin **forward for 3 seconds**, brake for 1 second, spin **backward for 3 seconds**, then brake for 3 seconds — repeating this cycle indefinitely. If you attached the fan blade, you'll feel the airflow change direction.
+#. Wait a few seconds for the upload to finish. The motor should spin **forward for 3 seconds**, stop for 1 second, spin **backward for 3 seconds**, then stop for 3 seconds — repeating this cycle indefinitely. If you attached the fan blade, you'll feel the airflow change direction.
 
 **The Sketch (sketch.ino)**
 
@@ -84,108 +84,114 @@ Now that you've seen the motor in action, let's look at the sketch file.
     * Drives a DC motor on the Robot Shield's M0 terminal:
     * forward → stop → reverse → stop.
     *
-    * M0 direction pin -> D4
-    * M0 PWM pin       -> D5
+    * M0 IN1 -> D2 (PWM)
+    * M0 IN2 -> D3 (PWM)
     */
 
-   const int motorDirPin = 4;  // Motor direction control
-   const int motorPwmPin = 5;  // Motor speed control (PWM)
+   const int MOTOR_IN1_PIN = 2;  // Motor input 1 (PWM)
+   const int MOTOR_IN2_PIN = 3;  // Motor input 2 (PWM)
 
    void setup() {
        Serial.begin(115200);
 
-       pinMode(motorDirPin, OUTPUT);
-       pinMode(motorPwmPin, OUTPUT);
-       analogWrite(motorPwmPin, 0);  // Motor starts stopped
+       pinMode(MOTOR_IN1_PIN, OUTPUT);
+       pinMode(MOTOR_IN2_PIN, OUTPUT);
+       analogWrite(MOTOR_IN1_PIN, 0);  // Motor starts stopped
+       analogWrite(MOTOR_IN2_PIN, 0);
 
        Serial.println("=== MotorTest Ready ===");
    }
 
    void loop() {
        Serial.println("M0: Forward 50%");
-       digitalWrite(motorDirPin, HIGH);   // Forward direction
-       analogWrite(motorPwmPin, 128);     // ~50% speed (0-255)
+       analogWrite(MOTOR_IN1_PIN, 128);   // IN1 driven, IN2 low → forward
+       analogWrite(MOTOR_IN2_PIN, 0);
        delay(3000);
 
        Serial.println("M0: Stop");
-       analogWrite(motorPwmPin, 0);       // Stop the motor
+       analogWrite(MOTOR_IN1_PIN, 0);     // Both inputs 0 → motor stops
+       analogWrite(MOTOR_IN2_PIN, 0);
        delay(1000);
 
        Serial.println("M0: Reverse 50%");
-       digitalWrite(motorDirPin, LOW);    // Reverse direction
-       analogWrite(motorPwmPin, 128);     // ~50% speed
+       analogWrite(MOTOR_IN1_PIN, 0);     // Swapped: IN2 driven, IN1 low
+       analogWrite(MOTOR_IN2_PIN, 128);
        delay(3000);
 
        Serial.println("M0: Stop");
-       analogWrite(motorPwmPin, 0);       // Stop the motor
+       analogWrite(MOTOR_IN1_PIN, 0);
+       analogWrite(MOTOR_IN2_PIN, 0);
        delay(3000);
    }
 
 **How it Works**
 
-This lesson drives the motor the direct way: two ordinary pins and the same ``digitalWrite()`` and ``analogWrite()`` functions you already know. One pin tells the Robot Shield's H-bridge which way current should flow, and the other sets how much power the motor gets. No library needed — just plain Arduino:
+This lesson drives the motor the direct way: two PWM-capable pins and the same ``analogWrite()`` function you already know. Which of the two inputs you drive tells the Robot Shield's H-bridge which way current should flow, and the value you write sets how much power the motor gets. No library needed — just plain Arduino:
 
 .. code-block:: text
 
    setup() → runs once at startup:
        Start Serial Monitor
-       Set direction pin D4 as OUTPUT
-       Set PWM pin D5 as OUTPUT
-       Motor starts stopped (PWM = 0)
+       Set IN1 pin D2 as OUTPUT
+       Set IN2 pin D3 as OUTPUT
+       Motor starts stopped (both inputs = 0)
 
    loop() → runs over and over forever:
-       Forward (direction HIGH, speed 128) → wait 3 seconds
-       Stop (PWM = 0)                      → wait 1 second
-       Reverse (direction LOW, speed 128)  → wait 3 seconds
-       Stop (PWM = 0)                      → wait 3 seconds
+       Forward (IN1 = 128, IN2 = 0) → wait 3 seconds
+       Stop (both inputs = 0)       → wait 1 second
+       Reverse (IN1 = 0, IN2 = 128) → wait 3 seconds
+       Stop (both inputs = 0)       → wait 3 seconds
        (repeat)
 
-#. Direction and Speed Pin Constants
+#. Motor Input Pin Constants
 
    - Two ``const int`` names make the pin numbers easy to remember and change
-   - ``motorDirPin = 4`` is the **direction** pin — the H-bridge on the Robot Shield reads it to decide which way current flows through the motor
-   - ``motorPwmPin = 5`` is the **PWM** pin — it sets the motor's speed
+   - ``MOTOR_IN1_PIN = 2`` and ``MOTOR_IN2_PIN = 3`` are the two **control inputs** of the M0 terminal — both are PWM-capable, so each one can carry a speed signal
+   - Driving one input while holding the other at 0 is what tells the H-bridge which way current flows through the motor
 
    .. code-block:: arduino
 
-      const int motorDirPin = 4;  // Motor direction control
-      const int motorPwmPin = 5;  // Motor speed control (PWM)
+      const int MOTOR_IN1_PIN = 2;  // Motor input 1 (PWM)
+      const int MOTOR_IN2_PIN = 3;  // Motor input 2 (PWM)
 
 #. Setup: Configuring the Pins
 
    - Both pins are declared ``OUTPUT`` — the same ``pinMode()`` pattern you used with LEDs earlier
-   - ``analogWrite(motorPwmPin, 0)`` starts the motor stopped, so it doesn't spin the moment the app runs
+   - Writing 0 to both inputs starts the motor stopped, so it doesn't spin the moment the app runs
    - There is no library to initialize — a DC motor needs only these two lines
 
    .. code-block:: arduino
 
       void setup() {
           Serial.begin(115200);
-          pinMode(motorDirPin, OUTPUT);
-          pinMode(motorPwmPin, OUTPUT);
-          analogWrite(motorPwmPin, 0);  // Motor starts stopped
+          pinMode(MOTOR_IN1_PIN, OUTPUT);
+          pinMode(MOTOR_IN2_PIN, OUTPUT);
+          analogWrite(MOTOR_IN1_PIN, 0);  // Motor starts stopped
+          analogWrite(MOTOR_IN2_PIN, 0);
       }
 
 #. Motor Speed and Direction in the Loop
 
-   - ``digitalWrite(motorDirPin, HIGH)`` spins the motor forward; ``LOW`` spins it in reverse — this is the digital signal that tells the H-bridge which way current should flow
-   - ``analogWrite(motorPwmPin, value)`` sets the speed from 0 to 255 — ``128`` is about 50%, and ``0`` stops the motor
+   - ``analogWrite(MOTOR_IN1_PIN, 128)`` with ``MOTOR_IN2_PIN`` at 0 spins the motor forward at about half speed — swapping the pair drives it in reverse, because the H-bridge now sends current the other way
+   - ``analogWrite(pin, value)`` sets the speed from 0 to 255 — ``128`` is about 50%, and ``0`` stops the motor
    - The ``delay()`` calls keep each state active long enough for you to observe the motion
 
    .. code-block:: arduino
 
-      digitalWrite(motorDirPin, HIGH);   // Forward direction
-      analogWrite(motorPwmPin, 128);     // ~50% speed (0-255)
+      analogWrite(MOTOR_IN1_PIN, 128);   // IN1 driven, IN2 low → forward
+      analogWrite(MOTOR_IN2_PIN, 0);
       delay(3000);
 
-      analogWrite(motorPwmPin, 0);       // Stop the motor
+      analogWrite(MOTOR_IN1_PIN, 0);     // Both inputs 0 → motor stops
+      analogWrite(MOTOR_IN2_PIN, 0);
       delay(1000);
 
-      digitalWrite(motorDirPin, LOW);    // Reverse direction
-      analogWrite(motorPwmPin, 128);     // ~50% speed
+      analogWrite(MOTOR_IN1_PIN, 0);     // Swapped: IN2 driven, IN1 low
+      analogWrite(MOTOR_IN2_PIN, 128);
       delay(3000);
 
-      analogWrite(motorPwmPin, 0);       // Stop the motor
+      analogWrite(MOTOR_IN1_PIN, 0);
+      analogWrite(MOTOR_IN2_PIN, 0);
       delay(3000);
 
 
@@ -200,15 +206,15 @@ Try different speed values and observe how the motor responds:
    :header-rows: 1
    :widths: 30 70
 
-   * - ``analogWrite(motorPwmPin, value)``
+   * - ``analogWrite(MOTOR_IN1_PIN, value)``
      - Motor Behavior
-   * - ``analogWrite(motorPwmPin, 255)``
+   * - ``analogWrite(MOTOR_IN1_PIN, 255)``
      - Full speed forward — strongest airflow from the fan
-   * - ``analogWrite(motorPwmPin, 64)``
+   * - ``analogWrite(MOTOR_IN1_PIN, 64)``
      - Slow forward — gentle breeze (~25% speed)
-   * - ``digitalWrite(motorDirPin, LOW)`` + ``analogWrite(motorPwmPin, 255)``
+   * - ``analogWrite(MOTOR_IN1_PIN, 0)`` + ``analogWrite(MOTOR_IN2_PIN, 255)``
      - Full speed reverse — airflow direction flips
-   * - ``analogWrite(motorPwmPin, 26)``
+   * - ``analogWrite(MOTOR_IN1_PIN, 26)``
      - Barely spinning — the lowest speed that overcomes friction (~10%)
 
 Try values between 26 and 51 (about 10–20% of 255) to find the **minimum starting speed** — the point where the motor just begins to turn. This threshold exists because the motor must overcome static friction before it can spin.
@@ -225,7 +231,7 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
       void loop() {
           // Ramp up: 0 → 255
           for (int speed = 0; speed <= 255; speed += 13) {
-              analogWrite(motorPwmPin, speed);
+              analogWrite(MOTOR_IN1_PIN, speed);
               Serial.print("Forward: ");
               Serial.println(speed);
               delay(100);
@@ -234,7 +240,7 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
           // Ramp down: 255 → 0
           for (int speed = 255; speed >= 0; speed -= 13) {
-              analogWrite(motorPwmPin, speed);
+              analogWrite(MOTOR_IN1_PIN, speed);
               Serial.print("Slowing: ");
               Serial.println(speed);
               delay(100);
@@ -260,16 +266,16 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
 **Motor only spins in one direction**
 
-* **Cause:** The code never changes the direction pin.
-* **Solution:** Make sure the code toggles ``digitalWrite(motorDirPin, ...)`` between HIGH and LOW. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
+* **Cause:** The code never swaps which of the two inputs is driven — the H-bridge keeps sending current the same way.
+* **Solution:** Make sure the code swaps the two ``analogWrite()`` calls: driving ``MOTOR_IN1_PIN`` while ``MOTOR_IN2_PIN`` is 0 spins one way, and driving ``MOTOR_IN2_PIN`` while ``MOTOR_IN1_PIN`` is 0 spins the other. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
 
 5. Summary
 -------------
 
 You just made something move — and that's a big deal. DC motors are the foundation of robotics, drones, electric vehicles, and industrial automation. In this lesson, you learned:
 
-* How to control a DC motor with a direction pin (D4) and a PWM pin (D5)
-* How ``analogWrite()`` sets the speed (0–255) while a digital pin picks the direction
+* How to control a DC motor with two PWM inputs — **D2 (IN1)** and **D3 (IN2)**
+* How ``analogWrite()`` sets the speed (0–255) while swapping which input you drive picks the direction
 * How an H-bridge reverses motor polarity to change direction
 * Why motors need a separate battery — logic power and motor power are independent
 * How to ramp speed smoothly with ``for`` loops and ``analogWrite()``

@@ -27,12 +27,12 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * Multimedia Carrier (with camera)
      - 1 * :ref:`cpn_pir`
      - 1 * Passive :ref:`cpn_buzzer`
-   * - |list_uno_q|
-     - |list_uno_q|
+   * - |list_pan_tilt|
+     - |list_pan_tilt|
      - |list_pir|
      - |list_passive_buzzer|
    * - 1 * :ref:`cpn_breadboard`
@@ -50,7 +50,7 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → **D2**. Connect the passive buzzer between **D5** and **GND**.
+Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → **D4**. Connect the passive buzzer between **D5** and **GND**.
 
 .. image:: /img/wiring/wiring_pc_buzzer_pir.png
    :width: 500

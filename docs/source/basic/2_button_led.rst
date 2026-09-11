@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the button to **D2** and the LED to **D5** through a 220Ω resistor (bands **Red → Red → Brown → Gold**): the button's two wires go to opposite sides of the center gap (one side to D2, the other to GND), and the LED's long leg (anode) goes to D5, short leg (cathode) to the resistor and GND.
+Connect the button to **D4** and the LED to **D5** through a 220Ω resistor (bands **Red → Red → Brown → Gold**): the button's two wires go to opposite sides of the center gap (one side to D4, the other to GND), and the LED's long leg (anode) goes to D5, short leg (cathode) to the resistor and GND.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
@@ -92,11 +92,11 @@ Now that you've seen the button control the LED, let's look at the sketch file t
     * Press the button to turn on the LED.
     */
 
-   const int buttonPin = 2;  // Button connected to pin 2
+   const int buttonPin = 4;  // Button connected to pin 4
    const int ledPin = 5;     // LED connected to pin 5
 
    void setup() {
-       pinMode(buttonPin, INPUT_PULLUP);  // Pin 2 reads input with pull-up
+       pinMode(buttonPin, INPUT_PULLUP);  // Pin 4 reads input with pull-up
        pinMode(ledPin, OUTPUT);           // Pin 5 controls the LED
    }
 
@@ -118,7 +118,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
 .. code-block:: text
 
    setup() → runs once at startup:
-       Configure pin 2 as INPUT_PULLUP (button input, default HIGH)
+       Configure pin 4 as INPUT_PULLUP (button input, default HIGH)
        Configure pin 5 as OUTPUT (LED control)
 
    loop() → runs over and over forever:
@@ -135,7 +135,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
 
    .. code-block:: arduino
 
-      const int buttonPin = 2;
+      const int buttonPin = 4;
       const int ledPin = 5;
 
       void setup() {
@@ -163,7 +163,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
 
 #. Why ``INPUT_PULLUP`` Reads ``LOW`` When Pressed
 
-   - The internal pull-up resistor weakly connects pin 2 to 3.3V, so it reads HIGH when nothing is connected
+   - The internal pull-up resistor weakly connects pin 4 to 3.3V, so it reads HIGH when nothing is connected
    - Pressing the button creates a direct path to GND (0V) — much stronger than the weak pull-up — so the voltage drops to LOW immediately
    - Without ``INPUT_PULLUP``, the pin would be "floating" when released, giving random HIGH/LOW readings
 
@@ -205,7 +205,7 @@ What if you want the button to act like a toggle — press once to turn the LED 
 
    .. code-block:: cpp
 
-      const int buttonPin = 2;
+      const int buttonPin = 4;
       const int ledPin = 5;
       bool ledOn = false;            // Remember whether LED is on
       bool lastButtonState = HIGH;   // Previous button reading

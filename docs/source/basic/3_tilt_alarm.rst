@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the tilt switch to **D2** and the active buzzer to **D5**: the buzzer is polarized, so its **+** pin (or longer leg) goes to D5 and its **−** pin (or shorter leg) to GND.
+Connect the tilt switch to **D4** and the active buzzer to **D5**: the buzzer is polarized, so its **+** pin (or longer leg) goes to D5 and its **−** pin (or shorter leg) to GND.
 
 .. image:: /img/wiring/wiring_tilt_buzzer.png
    :width: 500
@@ -92,7 +92,7 @@ Now that you've heard the alarm in action, let's look at the sketch file that ma
     * Sounds a rhythmic alarm when the device is tilted.
     */
 
-   const int tiltPin = 2;    // Tilt switch connected to pin 2
+   const int tiltPin = 4;    // Tilt switch connected to pin 4
    const int buzzerPin = 5;  // Active buzzer connected to pin 5
 
    void setup() {
@@ -132,7 +132,7 @@ This lesson introduces debounce — a technique for handling the noisy, bouncy b
 .. code-block:: text
 
    setup() → runs once at startup:
-       Configure pin 2 as INPUT_PULLUP (tilt switch input)
+       Configure pin 4 as INPUT_PULLUP (tilt switch input)
        Configure pin 5 as OUTPUT (buzzer control)
        Set buzzer to LOW (silent on startup)
 
@@ -151,7 +151,7 @@ This lesson introduces debounce — a technique for handling the noisy, bouncy b
 
    .. code-block:: arduino
 
-      const int tiltPin = 2;
+      const int tiltPin = 4;
       const int buzzerPin = 5;
 
       void setup() {

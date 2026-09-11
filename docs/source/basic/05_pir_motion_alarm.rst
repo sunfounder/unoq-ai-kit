@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT → D2** — and the passive buzzer to **D5**.
+Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT → D4** — and the passive buzzer to **D5**.
 
 .. image:: /img/wiring/wiring_pc_buzzer_pir.png
    :width: 600
@@ -76,7 +76,7 @@ Now that you've seen the alarm in action, let's look at the sketch.
 .. code-block:: cpp
    :linenos:
 
-   const int pirPin = 2;     // PIR sensor OUT connected to D2
+   const int pirPin = 4;     // PIR sensor OUT connected to D4
    const int buzzerPin = 5;  // Passive buzzer connected to D5
 
    void setup() {
@@ -150,7 +150,7 @@ This lesson combines a PIR sensor with a passive buzzer — you've used active b
 
    .. code-block:: arduino
 
-      const int pirPin = 2;
+      const int pirPin = 4;
       const int buzzerPin = 5;
 
       pinMode(pirPin, INPUT);
@@ -288,7 +288,7 @@ Add a counter variable that increments each time motion is detected. Print the c
 **"Buzzer makes a faint, distorted, or clicking sound instead of a clean tone"**
 
 * **Cause:** The buzzer pin may not support ``tone()`` on this board, or the connections are loose.
-* **Solution:** Check that the passive buzzer's leads are firmly inserted into the breadboard. Verify the buzzer is on pin D5 — if the pin was accidentally changed in code, update ``buzzerPin`` to match the physical connection. If the sound is still weak, try a different digital pin (D3, D4, or D6) and update the code accordingly.
+* **Solution:** Check that the passive buzzer's leads are firmly inserted into the breadboard. Verify the buzzer is on pin D5 — if the pin was accidentally changed in code, update ``buzzerPin`` to match the physical connection. If the sound is still weak, try a different digital pin (D2, D3, or D6) and update the code accordingly.
 
 5. Summary
 -------------

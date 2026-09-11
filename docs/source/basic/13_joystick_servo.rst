@@ -50,7 +50,7 @@ This project uses the following sketch libraries:
 
 **Wiring Diagram**
 
-Connect the joystick's VCC to the UNO Q's 3.3V pin (not 5V — its analog inputs measure 0–3.3V), GND to GND, VRx to A3, VRy to A2, and SW to D2; then plug the pan servo into pin 9 and the tilt servo into pin 10 on the Robot Shield's servo headers.
+Connect the joystick's VCC to the UNO Q's 3.3V pin (not 5V — its analog inputs measure 0–3.3V), GND to GND, VRx to A3, VRy to A2, and SW to D4; then plug the pan servo into pin 9 and the tilt servo into pin 10 on the Robot Shield's servo headers.
 
 .. image:: /img/wiring/wiring_joystick_servo.png
    :width: 600
@@ -101,12 +101,12 @@ Now that you've seen the joystick control both servos, let's look at the sketch 
     *
     * Joystick X (A3) -> pan servo (pin 9)
     * Joystick Y (A2) -> tilt servo (pin 10)
-    * Joystick SW (D2) -> press to reset both servos to center
+    * Joystick SW (D4) -> press to reset both servos to center
     */
 
    #include <Arduino_HardwareServo.h>
 
-   const int swPin = 2, xPin = A3, yPin = A2;
+   const int swPin = 4, xPin = A3, yPin = A2;
 
    HardwareServo panServo;   // Pan servo on pin 9
    HardwareServo tiltServo;  // Tilt servo on pin 10
@@ -202,7 +202,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
 
 1. **Pin Declarations, Servo Objects, and Variables**
 
-   - The joystick provides three inputs: X position on A3, Y position on A2, and a button on pin 2
+   - The joystick provides three inputs: X position on A3, Y position on A2, and a button on pin 4 (D4)
    - Two ``HardwareServo`` objects are declared — ``panServo`` attaches to pin 9 (D9), ``tiltServo`` to pin 10 (D10)
    - The UNO Q uses ``Arduino_HardwareServo`` because it drives the servo with the STM32's hardware PWM — the standard Servo library causes jitter on this board
    - ``panAngle`` and ``tiltAngle`` store the absolute servo angles and start at 90° (center) — the pan moves between 45° and 135°, the tilt between 45° and 115°
@@ -210,7 +210,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
 
    .. code-block:: arduino
 
-      const int swPin = 2, xPin = A3, yPin = A2;
+      const int swPin = 4, xPin = A3, yPin = A2;
       HardwareServo panServo, tiltServo;
 
       int panAngle = 90, tiltAngle = 90;
@@ -327,7 +327,7 @@ Larger stepSize = faster movement but choppier motion.
 **Joystick button doesn't reset servos**
 
 * **Cause:** The button pin isn't using INPUT_PULLUP, or the switch pin is miswired.
-* **Solution:** Verify the SW pin of the joystick connects to D2, and the code uses ``pinMode(swPin, INPUT_PULLUP)``. Without INPUT_PULLUP, the pin floats and gives random readings.
+* **Solution:** Verify the SW pin of the joystick connects to D4, and the code uses ``pinMode(swPin, INPUT_PULLUP)``. Without INPUT_PULLUP, the pin floats and gives random readings.
 
 5. Summary
 -------------

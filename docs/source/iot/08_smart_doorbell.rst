@@ -27,12 +27,12 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * Multimedia Carrier (with camera)
      - 1 * :ref:`cpn_button`
      - 1 * Passive :ref:`cpn_buzzer`
-   * - |list_uno_q|
-     - |list_uno_q|
+   * - |list_pan_tilt|
+     - |list_pan_tilt|
      - |list_button|
      - |list_passive_buzzer|
    * - 1 * :ref:`cpn_breadboard`
@@ -50,7 +50,7 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-Connect the push button between **D2** and **GND** (uses ``INPUT_PULLUP``), and the passive buzzer between **D5** and **GND**.
+Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and the passive buzzer between **D5** and **GND**.
 
 .. image:: /img/wiring/wiring_pc_buzzer_button.png
    :width: 500

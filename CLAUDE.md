@@ -20,6 +20,32 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 - **Input**: Joystick, potentiometer, tilt switch, buttons
 - **Components**: Breadboard, resistors (10Ω–1MΩ), transistors (NPN/PNP), capacitors, jumper wires
 
+## Hardware Pin Assignments
+
+The authoritative pin table for all lessons (updated 2026-09 for the new
+RobotShield layout). Components may share pins because each lesson uses
+only a subset:
+
+| Component | Pin |
+|-----------|-----|
+| LED | D5 |
+| 4-LED group | D4, D5, D6, D7 |
+| Active / passive buzzer | D5 |
+| Push button | D4 |
+| Tilt switch | D4 |
+| Photoresistor | A0 |
+| PIR OUT | D4 |
+| RGB LED | R→D8, G→D7, B→D6 |
+| Motor (IN1/IN2) | D2, D3 |
+| Pan servo | D9 |
+| Tilt servo | D10 |
+| Potentiometer | A2 |
+| Ultrasonic | TRIG→D11, ECHO→D12 |
+| DHT11 DATA | D4 |
+| Thermistor | A1 |
+| Joystick | SW→D4, X→A3, Y→A2 |
+| Two buttons (game) | left→D7, right→D6 |
+
 ## Software Platform
 
 - **Arduino App Lab**: Web-based IDE — the primary development tool for this course. No driver installation needed. Students create/edit/import/run apps in a browser-like environment.

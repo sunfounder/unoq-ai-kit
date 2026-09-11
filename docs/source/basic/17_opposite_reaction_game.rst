@@ -27,7 +27,7 @@ In this lesson, you will learn to:
      - 1 * :ref:`cpn_breadboard`
      - 2 * :ref:`cpn_button`
      - 1 * Passive :ref:`cpn_buzzer`
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_breadboard|
      - |list_button|
      - |list_passive_buzzer|
@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the left button to D3 and the right button to D2 — both use ``INPUT_PULLUP``, so do not add external pull-up or pull-down resistors — and the passive buzzer to D5; it has no polarity, so either pin can go to GND, while the built-in LED matrix needs no wiring.
+Connect the left button to D7 and the right button to D6 — both use ``INPUT_PULLUP``, so do not add external pull-up or pull-down resistors — and the passive buzzer to D5; it has no polarity, so either pin can go to GND, while the built-in LED matrix needs no wiring.
 
 .. image:: /img/wiring/wiring_buzzer_button.png
    :width: 500
@@ -97,8 +97,8 @@ Now that you've played the game, let's look at the sketch file.
    #include <Arduino_LED_Matrix.h>
    #include "matrix_patterns.h"
 
-   const int LEFT_BUTTON_PIN = 3;
-   const int RIGHT_BUTTON_PIN = 2;
+   const int LEFT_BUTTON_PIN = 7;
+   const int RIGHT_BUTTON_PIN = 6;
    const int BUZZER_PIN = 5;
 
    const int CORRECT_TONE = 1200;
@@ -476,7 +476,7 @@ Send the correct-streak count to the Serial Monitor. Reset it to zero on a wrong
 **Buttons don't respond — game ignores presses**
 
 * **Cause:** The buttons are wired incorrectly, or ``INPUT_PULLUP`` is not set.
-* **Solution:** Check that the left button connects between D3 and GND, and the right button between D2 and GND. Verify ``pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP)`` (D3) and ``pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP)`` (D2) are called in ``setup()``.
+* **Solution:** Check that the left button connects between D7 and GND, and the right button between D6 and GND. Verify ``pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP)`` (D7) and ``pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP)`` (D6) are called in ``setup()``.
 
 **Game registers multiple presses from a single click**
 

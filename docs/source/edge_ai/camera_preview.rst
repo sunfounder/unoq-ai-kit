@@ -20,11 +20,11 @@ Welcome to Edge AI! Before you can teach the UNO Q to see and recognize objects,
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * Multimedia Carrier
      - 1 * CSI Camera
      - 1 * USB Cable
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_multimedia_carrier|
      - |list_camera|
      - |list_usb_cable|

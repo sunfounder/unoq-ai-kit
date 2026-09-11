@@ -54,9 +54,9 @@ This project uses the following App Lab Brick:
 
 **Wiring Diagram**
 
-Connect the push button between D2 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. Connect each RGB LED channel to its pin through a 220Ω resistor:
+Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. Connect each RGB LED channel to its pin through a 220Ω resistor:
 
-- Button pin 1 → **D2**
+- Button pin 1 → **D4**
 - Button pin 2 → **GND**
 - RGB LED **R** → 220Ω → **D8**
 - RGB LED **G** → 220Ω → **D7**
@@ -84,7 +84,7 @@ The recognized speech is searched for keywords, and only the color name travels 
 .. mermaid::
 
    sequenceDiagram
-       participant B as Button (D2)
+       participant B as Button (D4)
        participant S as Sketch (sketch.ino)
        participant P as Python (main.py)
 

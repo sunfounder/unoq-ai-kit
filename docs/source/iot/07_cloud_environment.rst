@@ -46,7 +46,7 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-Connect the DHT11: VCC to 3.3V, DATA to pin 2, GND to GND. Connect the LED through a 220Ω resistor to pin D5.
+Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED through a 220Ω resistor to pin D5.
 
 .. image:: /img/wiring/wiring_dht11_led.png
    :width: 500
@@ -246,7 +246,7 @@ In ``update_environment_cloud``, check if temperature exceeds 30°C. If so, set 
 **Sensor reads always return "error"**
 
 * **Cause:** DHT11 wiring issue, or the sensor needs time to stabilize.
-* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
+* **Solution:** Check VCC → 3.3V, DATA → pin D4, GND → GND. Wait 1–2 seconds after power-on for the first valid reading.
 
 **Cloud switch doesn't control the LED**
 

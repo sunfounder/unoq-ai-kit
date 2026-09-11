@@ -26,11 +26,12 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+
+   * - 1 * Pan Tilt Kit
      - 1 * Passive :ref:`cpn_buzzer`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_passive_buzzer|
      - |list_wire|
      - |list_usb_cable|

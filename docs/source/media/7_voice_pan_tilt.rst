@@ -63,7 +63,7 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
 
 - Pan servo → **D9**
 - Tilt servo → **D10**
-- Button pin 1 → **D2**
+- Button pin 1 → **D4**
 - Button pin 2 → **GND**
 
 .. image:: /img/wiring/wiring_pan_tilt_button.png
@@ -90,7 +90,7 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
 .. mermaid::
 
    sequenceDiagram
-       participant B as Button (D2)
+       participant B as Button (D4)
        participant S as Sketch (sketch.ino)
        participant P as Python (main.py)
 
@@ -170,7 +170,7 @@ The sketch angles and the spoken feedback live in different places — the feedb
 **The servos don't move at all**
 
 * **Cause:** The servos are plugged into the wrong header, or the Robot Shield has no external power.
-* **Solution:** Check the wiring first — the pan servo goes on D9, the tilt servo on D10, and the button connects D2 to GND. Then check that external power is connected to the Robot Shield — the servos draw power from it.
+* **Solution:** Check the wiring first — the pan servo goes on D9, the tilt servo on D10, and the button connects D4 to GND. Then check that external power is connected to the Robot Shield — the servos draw power from it.
 
 **The servo moves in the wrong direction**
 

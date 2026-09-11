@@ -28,18 +28,18 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_joystick`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_joystick_module|
      - |list_wire|
      - |list_usb_cable|
 
 **Wiring Diagram**
 
-Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D2**, **VCC** to **3.3V** (the UNO Q's analog inputs measure 0–3.3V), and **GND** to **GND**.
+Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D4**, **VCC** to **3.3V** (the UNO Q's analog inputs measure 0–3.3V), and **GND** to **GND**.
 
 .. image:: /img/wiring/wiring_joystick.png
    :width: 600
@@ -171,7 +171,7 @@ The maze layout lives in ``assets/app.js`` as a grid of cells. Replace the maze 
 **The joystick button doesn't restart the game**
 
 * **Cause:** The SW pin wiring, or the button uses the wrong trigger edge.
-* **Solution:** Check SW → D2 with ``INPUT_PULLUP``. The sketch detects the falling edge (``lastButtonState == HIGH && buttonState == LOW``) — holding the button down restarts only once, on the press.
+* **Solution:** Check SW → D4 with ``INPUT_PULLUP``. The sketch detects the falling edge (``lastButtonState == HIGH && buttonState == LOW``) — holding the button down restarts only once, on the press.
 
 5. Summary
 -------------

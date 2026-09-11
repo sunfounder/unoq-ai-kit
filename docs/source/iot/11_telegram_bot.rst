@@ -27,11 +27,11 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_led` (Red)
      - 1 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_humiture_sensor`
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_red_led|
      - |list_220ohm|
      - |list_dht11|
@@ -46,7 +46,7 @@ In this lesson, you will learn to:
 
 **Wiring Diagram**
 
-Connect the DHT11: **VCC** → **3.3V**, **DATA** → **pin 2**, **GND** → **GND**. Connect the LED's anode through a 220Ω resistor to **pin 5**, and its cathode to GND.
+Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND**. Connect the LED's anode through a 220Ω resistor to **D5**, and its cathode to GND.
 
 .. image:: /img/wiring/wiring_dht11_led.png
    :width: 500
@@ -172,7 +172,7 @@ Make the bot **proactive**: store the chat ID from the last ``/status`` request,
 **The bot replies but sensor values are wrong or missing**
 
 * **Cause:** The DHT11 is wired incorrectly or needs a moment to stabilize.
-* **Solution:** Check VCC → 3.3V, DATA → pin 2, GND → GND. If the bot replies with the error message, wait a few seconds and send ``/status`` again — the DHT11 needs about a second after power-on.
+* **Solution:** Check VCC → 3.3V, DATA → D4, GND → GND. If the bot replies with the error message, wait a few seconds and send ``/status`` again — the DHT11 needs about a second after power-on.
 
 **The bot sees messages but the LED doesn't change**
 

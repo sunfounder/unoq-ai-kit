@@ -23,11 +23,11 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * :ref:`Arduino Uno Q <cpn_uno_q>`
+   * - 1 * Pan Tilt Kit
      - 1 * Robot Shield
      - 1 * :ref:`cpn_rgb_led` (Common Cathode)
      - 3 * :ref:`cpn_resistor` (220Ω)
-   * - |list_uno_q|
+   * - |list_pan_tilt|
      - |list_robot_shield|
      - |list_rgb_led|
      - |list_220ohm|

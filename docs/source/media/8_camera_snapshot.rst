@@ -48,7 +48,7 @@ Before using the camera, make sure external carriers are enabled on your UNO Q �
 
 **Wiring Diagram**
 
-Connect the push button between D2 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The camera is built into the Multimedia Carrier.
+Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The camera is built into the Multimedia Carrier.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
@@ -70,7 +70,7 @@ Connect the push button between D2 and GND — no external resistor is needed, t
 .. mermaid::
 
    sequenceDiagram
-       participant B as Button (D2)
+       participant B as Button (D4)
        participant S as Sketch (sketch.ino)
        participant P as Python (main.py)
 

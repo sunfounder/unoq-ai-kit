@@ -51,10 +51,10 @@ This project uses the following App Lab Bricks:
 
 **Wiring Diagram**
 
-Connect the two push buttons between D2 / D3 and GND — no external resistors are needed, the sketch uses the internal pull-up resistors. The microphone and speaker are built into the Multimedia Carrier.
+Connect the two push buttons between D7 / D6 and GND — no external resistors are needed, the sketch uses the internal pull-up resistors. The microphone and speaker are built into the Multimedia Carrier.
 
-- Record button: pin 1 → **D2**, pin 2 → **GND**
-- Play button: pin 1 → **D3**, pin 2 → **GND**
+- Record button: pin 1 → **D7**, pin 2 → **GND**
+- Play button: pin 1 → **D6**, pin 2 → **GND**
 
 .. image:: /img/wiring/wiring_two_buttons.png
    :width: 500
@@ -68,15 +68,15 @@ Connect the two push buttons between D2 / D3 and GND — no external resistors a
 #. Click **Run** (▶). The Output window shows::
 
       === Voice Recorder ===
-      D2: Record / Stop Recording
-      D3: Play / Stop Playback
+      D7: Record / Stop Recording
+      D6: Play / Stop Playback
       Ready.
 
-#. Press the **D2 button** once — **Recording...** appears in the Output window. Say something into the microphone.
+#. Press the **D7 button** once — **Recording...** appears in the Output window. Say something into the microphone.
 
-#. Press **D2** again — **Recording saved.** appears.
+#. Press **D7** again — **Recording saved.** appears.
 
-#. Press the **D3 button** once — **Playing...** appears and the speaker plays your recording. Press **D3** again to stop playback.
+#. Press the **D6 button** once — **Playing...** appears and the speaker plays your recording. Press **D6** again to stop playback.
 
 .. note::
 
@@ -87,8 +87,8 @@ Connect the two push buttons between D2 / D3 and GND — no external resistors a
 .. mermaid::
 
    sequenceDiagram
-       participant B1 as Record Button (D2)
-       participant B2 as Play Button (D3)
+       participant B1 as Record Button (D7)
+       participant B2 as Play Button (D6)
        participant S as Sketch (sketch.ino)
        participant P as Python (main.py)
 
@@ -97,14 +97,14 @@ Connect the two push buttons between D2 / D3 and GND — no external resistors a
            P->>S: Bridge.call("play_button_read")
            S-->>P: 0 or 1 for each button
        end
-       Note over P: D2 press edge (not recording)
+       Note over P: D7 press edge (not recording)
        P->>P: tts.stop_audio() first
        P->>P: stt.start_recording()
-       Note over P: D2 press edge again
+       Note over P: D7 press edge again
        P->>P: stt.stop_recording(AUDIO_FILE)
-       Note over P: D3 press edge
+       Note over P: D6 press edge
        P->>P: tts.play_audio(AUDIO_FILE)
-       Note over P: D3 press edge again
+       Note over P: D6 press edge again
        P->>P: tts.stop_audio()
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
@@ -122,7 +122,7 @@ The sketch reads both buttons and registers two RPC functions:
    Bridge.provide("record_button_read", recordButtonRead);
    Bridge.provide("play_button_read", playButtonRead);
 
-* ``RECORD_BUTTON_PIN = 2`` and ``PLAY_BUTTON_PIN = 3`` both use ``INPUT_PULLUP`` — pressing a button connects its pin to GND and the function returns ``1``.
+* ``RECORD_BUTTON_PIN = 7`` and ``PLAY_BUTTON_PIN = 6`` both use ``INPUT_PULLUP`` — pressing a button connects its pin to GND and the function returns ``1``.
 * Two Bridge RPCs are registered, one per button. Python polls both about 20 times per second.
 
 **Python (main.py)** — runs on the Linux MPU
@@ -145,18 +145,18 @@ Record a few different clips and play them back one by one:
 
    * - You do
      - Expected result
-   * - Press D2, count to three out loud, press D2
+   * - Press D7, count to three out loud, press D7
      - **Recording saved.** — the clip is stored
-   * - Press D3
+   * - Press D6
      - **Playing...** — the speaker plays your count
-   * - Press D3 while playing
+   * - Press D6 while playing
      - **Playback stopped.** — the speaker stops immediately
-   * - Press D3 again
+   * - Press D6 again
      - The same clip plays again — it is kept until the next recording
 
 **Record While Playing**
 
-Press D3 to play a clip, then press D2 while it plays — the playback stops and a new recording starts. The app never records and plays at the same time.
+Press D6 to play a clip, then press D7 while it plays — the playback stops and a new recording starts. The app never records and plays at the same time.
 
 **Challenge: Change the Audio File Name**
 
@@ -178,12 +178,12 @@ The recording is always saved to the same file, ``stt_last.wav`` — each new re
 **The buttons do nothing when pressed**
 
 * **Cause:** The buttons are wired to the wrong pins.
-* **Solution:** Check the Record button connects D2 to GND and the Play button connects D3 to GND — one pin of each button on the digital pin, the other on GND.
+* **Solution:** Check the Record button connects D7 to GND and the Play button connects D6 to GND — one pin of each button on the digital pin, the other on GND.
 
-**Pressing D3 prints "No recording yet. Press D2 to record first."**
+**Pressing D6 prints "No recording yet. Press D7 to record first."**
 
 * **Cause:** No recording has been saved in this run.
-* **Solution:** Press D2 to record first — the playback button only works after a recording is saved.
+* **Solution:** Press D7 to record first — the playback button only works after a recording is saved.
 
 5. Summary
 -------------

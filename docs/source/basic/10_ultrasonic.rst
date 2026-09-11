@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the HC-SR04's **VCC to 3.3V**, **Trig to pin 3**, **Echo to pin 2**, and **GND to GND** (leave any jumper cap on the sensor's back in place), and connect the active buzzer's **+ pin to D5** and **− pin to GND** — swapping Trig and Echo is the most common wiring mistake, so double-check these two wires.
+Connect the HC-SR04's **VCC to 3.3V**, **Trig to D11**, **Echo to D12**, and **GND to GND** (leave any jumper cap on the sensor's back in place), and connect the active buzzer's **+ pin to D5** and **− pin to GND** — swapping Trig and Echo is the most common wiring mistake, so double-check these two wires.
 
 .. image:: /img/wiring/wiring_ultrasonic.png
    :width: 500
@@ -92,8 +92,8 @@ Now that you've seen the radar in action, let's look at the sketch file that mea
     * Measures distance and beeps faster as obstacles get closer.
     */
 
-   const int trigPin = 3;     // Trigger pin
-   const int echoPin = 2;     // Echo pin
+   const int trigPin = 11;    // Trigger pin
+   const int echoPin = 12;    // Echo pin
    const int buzzerPin = 5;   // Active buzzer
 
    long duration;
@@ -185,8 +185,8 @@ This lesson introduces three new tools — microsecond timing with ``pulseIn()``
 
    .. code-block:: arduino
 
-      const int trigPin = 3;
-      const int echoPin = 2;
+      const int trigPin = 11;
+      const int echoPin = 12;
       const int buzzerPin = 5;
 
       long duration;
@@ -269,7 +269,7 @@ Try changing the distance thresholds and observe how the radar responds:
 **Distance always shows "Out of range"**
 
 * **Cause:** The Trig and Echo pins are swapped, or the module isn't receiving power.
-* **Solution:** Double-check: Trig → pin 3, Echo → pin 2, VCC → 3.3V, GND → GND. Swapping Trig and Echo is the most common wiring mistake with this sensor. Also verify the breadboard power rails are connected.
+* **Solution:** Double-check: Trig → D11, Echo → D12, VCC → 3.3V, GND → GND. Swapping Trig and Echo is the most common wiring mistake with this sensor. Also verify the breadboard power rails are connected.
 
 **Distance readings are consistently too high or too low**
 
