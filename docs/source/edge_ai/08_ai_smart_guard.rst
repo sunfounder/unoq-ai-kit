@@ -490,4 +490,4 @@ You just built a fully autonomous security guard — it patrols on its own, rais
 * How a spoken alert is throttled so the guard warns without nagging
 * How a timeout state returns the system to patrol after 3 quiet seconds
 
-Your UNO Q can now watch a room like a security professional. Every project in this module so far has started with the camera — but your board has a second sense you haven't used yet. In the next project, you'll stop showing it things and start **talking** to it: a wake word, a spoken command, and an LED that obeys your voice.
+Your UNO Q can now watch a room like a security professional. The Edge AI module is complete — and every project in it began with the same question: *what does the camera see?* Your board has got very good at answering that. But it still cannot *understand* what it sees, answer a question about it, or act on a sentence you type. That is exactly where you are headed next.
