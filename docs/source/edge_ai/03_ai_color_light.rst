@@ -48,10 +48,8 @@ The RGB LED has **four legs**: the longest one is the **common cathode** — con
    :width: 500
    :align: center
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -69,8 +67,6 @@ The RGB LED has **four legs**: the longest one is the **common cathode** — con
 
 #. The app appears in **Apps** — click it to open.
 
-**Run the Code**
-
 #. Click the **Run** button (▶). The sketch starts with the LED switched off, then the app boots the camera and loads the AI model — give it a few seconds before the video appears.
 
 #. Once running, open the **Web UI** tab. The live camera feed appears in the left card, with the connection status changing from **Connecting** to **Connected** and the hint text reading *"Edge AI is detecting objects locally"*. The **AI Result** card on the right starts at **Waiting...** / **Off** / **--** and lists the six supported examples: Apple, Banana, Orange, Broccoli, Bottle, Person.
@@ -81,253 +77,101 @@ The RGB LED has **four legs**: the longest one is the **common cathode** — con
 
 #. Take the object out of the camera's view. After about **2 seconds** with no mapped object, the LED switches off and the card reports **No mapped object** / **Off**.
 
-**The Code**
-
-**Sketch (sketch.ino)** — runs on the STM32 MCU and owns the RGB LED
-
-.. code-block:: cpp
-   :linenos:
-
-   /*
-    * AI Object Color Light
-    *
-    * The Linux application detects an object and sends a color code
-    * to this sketch through Router Bridge.
-    *
-    * RGB LED connections:
-    * R -> D8
-    * G -> D7
-    * B -> D6
-    */
-
-   #include <Arduino_RouterBridge.h>
-
-   const int redPin = 8;
-   const int greenPin = 7;
-   const int bluePin = 6;
-
-   void writeRgb(int red, int green, int blue) {
-       analogWrite(redPin, red);
-       analogWrite(greenPin, green);
-       analogWrite(bluePin, blue);
-   }
-
-   void setColor(int colorCode) {
-       switch (colorCode) {
-           case 1:  // Red
-               writeRgb(255, 0, 0);
-               break;
-
-           case 2:  // Yellow
-               writeRgb(255, 180, 0);
-               break;
-
-           case 3:  // Orange
-               writeRgb(255, 64, 0);
-               break;
-
-           case 4:  // Green
-               writeRgb(0, 255, 0);
-               break;
-
-           case 5:  // Blue
-               writeRgb(0, 0, 255);
-               break;
-
-           case 6:  // White
-               writeRgb(255, 255, 255);
-               break;
-
-           default:  // Off
-               writeRgb(0, 0, 0);
-               break;
-       }
-   }
-
-   void setup() {
-       pinMode(redPin, OUTPUT);
-       pinMode(greenPin, OUTPUT);
-       pinMode(bluePin, OUTPUT);
-
-       setColor(0);
-
-       Bridge.begin();
-       Bridge.provide("set_color", setColor);
-   }
-
-   void loop() {
-       delay(20);
-   }
-
-**Python (main.py)** — runs on the Linux MPU: object detection, color mapping, and Web UI
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   #
-   # SPDX-License-Identifier: MPL-2.0
-
-   """
-   AI Object Color Light
-
-   The object-detection model runs locally on the UNO Q. When a mapped
-   object is detected, the application sends a color code to the sketch
-   and updates the custom Web UI.
-   """
-
-   from datetime import datetime, UTC
-   import threading
-   import time
-
-   from arduino.app_utils import App, Bridge
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-
-   ui = WebUI()
-
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   detection = VideoObjectDetection(camera, confidence=0.45, debounce_sec=0.3)
-
-   # Object name: (color code, display name, HEX color)
-   OBJECT_COLORS = {
-       "apple": (1, "Red", "#ef5350"),
-       "banana": (2, "Yellow", "#fbc02d"),
-       "orange": (3, "Orange", "#fb8c00"),
-       "broccoli": (4, "Green", "#43a047"),
-       "bottle": (5, "Blue", "#29a3d9"),
-       "person": (6, "White", "#ffffff"),
-   }
-
-   NO_OBJECT_TIMEOUT = 2.0
-   last_detection_time = 0.0
-   current_object = None
-   state_lock = threading.Lock()
-
-
-   def set_color(color_code: int):
-       """Send a color code to the Arduino sketch."""
-       Bridge.call("set_color", color_code)
-
-
-   def publish_state(object_name, color_name, hex_color, confidence=0):
-       ui.send_message(
-           "object_color",
-           message={
-               "object": object_name,
-               "color": color_name,
-               "hex": hex_color,
-               "confidence": confidence,
-               "timestamp": datetime.now(UTC).isoformat(),
-           },
-       )
-
-
-   def send_detections(detections: dict):
-       """Choose the highest-confidence mapped object in the current frame."""
-       global last_detection_time, current_object
-
-       best_object = None
-       best_confidence = 0.0
-
-       for class_name, instances in detections.items():
-           if class_name not in OBJECT_COLORS:
-               continue
-
-           for instance in instances:
-               confidence = float(instance.get("confidence", 0.0))
-               if confidence > best_confidence:
-                   best_object = class_name
-                   best_confidence = confidence
-
-       if best_object is None:
-           return
-
-       color_code, color_name, hex_color = OBJECT_COLORS[best_object]
-
-       with state_lock:
-           last_detection_time = time.monotonic()
-           changed = best_object != current_object
-           current_object = best_object
-
-       if changed:
-           set_color(color_code)
-
-       publish_state(
-           best_object,
-           color_name,
-           hex_color,
-           round(best_confidence * 100),
-       )
-
-
-   def clear_when_object_is_lost():
-       """Turn the LED off after no mapped object has been seen for a while."""
-       global current_object
-
-       while True:
-           should_clear = False
-
-           with state_lock:
-               if (
-                   current_object is not None
-                   and time.monotonic() - last_detection_time > NO_OBJECT_TIMEOUT
-               ):
-                   current_object = None
-                   should_clear = True
-
-           if should_clear:
-               set_color(0)
-               publish_state("No mapped object", "Off", "#dfe6e9", 0)
-
-           time.sleep(0.2)
-
-
-   detection.on_detect_all(send_detections)
-
-   threading.Thread(target=clear_when_object_is_lost, daemon=True).start()
-
-   App.run()
-
 **How it Works**
 
-.. code-block:: text
+You have just watched the LED choose a color on its own. Here is the path that decision travels, from a camera frame to colored light — and back to the page.
 
-   CSI camera
-       │
-       ▼
-   VideoObjectDetection brick (confidence ≥ 0.45, debounce 0.3 s)
-       │
-       ├── video stream → port 4912 → <iframe> in Web UI
-       │
-       └── detections → Python: pick the highest-confidence
-           object that is in the OBJECT_COLORS mapping
-           │
-           ├── Bridge.call("set_color", color_code)
-           │       │
-           │       ▼
-           │   sketch setColor() switch → analogWrite() on D8/D7/D6
-           │
-           └── ui.send_message("object_color", …)
-                   │
-                   ▼
-               AI Result card + color swatch update
-       │
-       ▼
-   no mapped object for 2 s → set_color(0) → LED off, card shows "No mapped object"
+An App Lab project is a folder containing multiple files. Here's what each one does:
 
-This project is a two-process team, and each process does what it is good at. On the Linux MPU, **Python decides what the camera sees**. The ``VideoObjectDetection`` brick runs a general object-detection model locally on every frame — no cloud, no internet required — and hands the results to Python. On the STM32 MCU, the **sketch decides how the LED should light**, because it owns the pins. The bridge between them is a single small number: the color code.
+* ``03 AI Color Light/`` — the app folder
 
-* **Picking the best object** — The general model recognizes far more categories than this project needs, so ``send_detections()`` ignores every class that is not in the ``OBJECT_COLORS`` mapping — the six that matter: apple, banana, orange, broccoli, bottle, and person. When several mapped objects share the frame, only the instance with the highest confidence wins. If an apple and a banana are both visible, the one the model is more sure about drives the LED.
+  * Bricks
 
-* **Sending a code, not colors** — Python never sends raw red/green/blue values across Bridge. For each object it looks up a tiny integer code (1–6) and calls ``Bridge.call("set_color", code)``. The sketch's ``setColor()`` switch turns that code into the PWM brightness values with ``analogWrite()``. Notice the mix doesn't always use full brightness: yellow is ``(255, 180, 0)`` and orange is ``(255, 64, 0)`` — tuned so the colors read clearly on the LED instead of washing together. Python also tracks which object is current and only calls Bridge when the object actually *changes*, so the same apple doesn't spam the bridge on every frame.
+    * ``video_object_detection`` — runs the general object-detection model on every camera frame, locally on the UNO Q
+    * ``web_ui`` — serves the Web UI and pushes live updates to the browser
 
-* **Keeping the Web UI in sync** — With every mapped detection, ``publish_state()`` sends an ``object_color`` socket.io event carrying the object name, color name, a HEX color for the swatch (for example ``#ef5350`` for Red), and the confidence as a percentage. The browser just renders what it receives — no model runs in the page.
+  * Sketch libraries
 
-* **The auto-off watchdog** — A background thread wakes every 0.2 seconds and checks ``NO_OBJECT_TIMEOUT``: if the last mapped detection was more than 2 seconds ago, it sends code 0 (off) and publishes **No mapped object** / **Off** to the Web UI. This is why the LED lingers for a moment after you remove the object, then switches itself off.
+    * None — the sketch only uses the built-in Bridge library
+
+  * Files
+
+    * ``assets/``
+
+      * ``index.html`` — Web UI structure (camera card and AI Result card)
+      * ``app.js`` — Browser logic (Socket.IO client and card updates)
+      * ``style.css`` — Visual styling
+      * ``libs/`` — JavaScript libraries (Socket.IO)
+      * ``img/`` — UI images (logo)
+      * ``docs_assets/`` — Documentation images (result and wiring diagrams)
+
+    * ``python/``
+
+      * ``main.py`` — Camera, detection filtering, color mapping, and Bridge calls
+
+    * ``sketch/``
+
+      * ``sketch.yaml`` — Sketch configuration
+      * ``sketch.ino`` — RGB LED control on the microcontroller
+
+    * ``README.md`` — Project documentation and usage guide
+    * ``app.yaml`` — App metadata (name, icon, bricks used)
+
+The data path, from a camera frame to a lit RGB LED:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as Camera (CSI)
+       participant P as Python (main.py)
+       participant S as Sketch (sketch.ino)
+       participant B as Browser (HTML/JS)
+
+       C->>P: video frames
+       P->>P: VideoObjectDetection → send_detections()
+       P->>P: drop unmapped classes, keep the best confidence
+       P->>S: Bridge.call("set_color", color_code)
+       S->>S: setColor() → analogWrite() on D8/D7/D6
+       P-->>B: object_color {object, color, hex, confidence}
+       B->>B: update the AI Result card and the color swatch
+       P->>S: 2 s without a mapped object → Bridge.call("set_color", 0)
+
+Here's what each component does:
+
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``setColor()`` is a ``switch`` over the color code it receives: 1 Red, 2 Yellow, 3 Orange, 4 Green, 5 Blue, 6 White, anything else Off
+  * ``writeRgb()`` turns those three values into PWM brightness with ``analogWrite()`` on **D8**, **D7**, and **D6**
+  * ``Bridge.provide("set_color", setColor)`` registers the function Python is allowed to call
+  * ``loop()`` only delays — every color change arrives as an event
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``VideoObjectDetection(camera, confidence=0.45, debounce_sec=0.3)`` runs the model locally, frame by frame
+  * ``detection.on_detect_all(send_detections)`` hands every frame's results to your code
+  * ``send_detections()`` ignores every class that is not in ``OBJECT_COLORS`` and keeps only the highest-confidence instance
+  * ``Bridge.call("set_color", color_code)`` sends a single color code — and only when the object actually changes
+  * ``ui.send_message("object_color", ...)`` publishes the object name, the color name, the HEX swatch value, and the confidence
+  * ``clear_when_object_is_lost()`` runs in a background thread and switches the LED off after ``NO_OBJECT_TIMEOUT`` (2 seconds) without a mapped object
+
+**Bridge** — the communication channel between the MPU and the MCU
+  * Sketch side: ``Bridge.provide("set_color", setColor)`` exposes the color function
+  * Python side: ``Bridge.call("set_color", color_code)`` invokes it with one integer
+  * Python never sends raw red/green/blue values — the code number is the whole protocol
+
+**Browser (HTML/JS)** — runs in the user's browser
+  * ``socket.on('object_color', ...)`` writes the object name, the color name, and the confidence into the AI Result card
+  * The HEX value that arrives with the same message paints the color swatch
+  * The live video travels on its own channel: ``app.js`` embeds the camera stream from port 4912 in an ``<iframe>``
+  * ``socket.on('connect')`` and ``socket.on('disconnect')`` drive the status dot
+
+This project is a two-process team, and each process does what it is good at. On the Linux MPU, **Python decides what the camera sees** — the model runs entirely on the board, with no cloud and no internet required — and Python filters its output. On the STM32 MCU, the **sketch decides how the LED should light**, because it owns the pins. The link between them is a single small number: the color code.
+
+* **Picking the best object** — The general model recognizes far more categories than this project needs, so ``send_detections()`` keeps only the six that matter: apple, banana, orange, broccoli, bottle, and person. When several mapped objects share the frame, only the instance with the highest confidence wins — hold an apple and a banana side by side and the LED follows whichever one the model is more sure about.
+
+* **Sending a code, not colors** — Python looks up a tiny integer (1–6) for the object and sends that. The sketch's ``setColor()`` switch turns the code into PWM brightness, which keeps the protocol between the two processors small and easy to reason about: Python decides *what* the color is, the sketch decides *how* to produce it. Yellow is ``(255, 180, 0)`` and orange is ``(255, 64, 0)`` — tuned so the mixes read clearly on the LED instead of washing together.
+
+* **Keeping the Web UI in sync** — With every mapped detection, ``publish_state()`` sends an ``object_color`` socket.io event carrying the object name, the color name, a HEX color for the swatch (for example ``#ef5350`` for Red), and the confidence as a percentage. The browser only renders what it receives — no model runs in the page.
+
+* **The auto-off watchdog** — The background thread wakes every 0.2 seconds and checks the timestamp of the last mapped detection. If more than two seconds have passed, it sends code 0 (off) and publishes **No mapped object** / **Off** to the Web UI. That is why the LED lingers for a moment after you remove the object, then switches itself off — and why an unmapped object such as a book or a coffee cup never lights the LED at all.
 
 3. Experiment
 ----------------

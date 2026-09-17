@@ -454,16 +454,22 @@ Introduction
     - Hardware Check: #. numbered physical setup steps
     - Hardware photo (camera/carrier, NOT Fritzing breadboard)
 
-2. Code
-    - Import the Code: #. steps with screenshots at each step
-    - Run the Code: separate sub-heading, #. steps with result screenshot
-    - The Code: .. code-block:: python :linenos: for ``python/main.py``,
-      then .. code-block:: cpp :linenos: for ``sketch/sketch.ino``
-      (full source shown)
-    - How it Works:
-        .. mermaid:: sequenceDiagram for the data path (never ASCII art),
-        then prose paragraphs (NOT bullet list) explaining concepts
-        (e.g., "Camera capture — Each frame is a 2D array...")
+2. Run the App
+    - ONE continuous #. list: the import steps (with
+      /img/app_import_app.png and /img/app_import_pc.png), then the run
+      steps (with /img/app_run.png and the result screenshot). NO
+      "Import the Code" / "Run the Code" sub-headings.
+    - TTS lessons: the first-run .. note:: sits inside this section
+    - NO source code of any kind — no .. code-block:: python / cpp, no
+      literalinclude. The reader already has the code in App Lab.
+    - **How it Works**:
+        - one short transition sentence
+        - the project structure as an RST nested list (inline ``code``,
+          never ASCII art), listing only the files that exist
+        - one .. mermaid:: sequenceDiagram for the data path
+          (participants + arrows only, no notes, never ASCII art)
+        - then **Name (file)** — where it runs blocks whose bullets name
+          the API calls (Sketch / Python / Bridge / Browser)
 
 3. Experiment
     - Descriptive **bold sub-heading**
@@ -482,19 +488,19 @@ Introduction
 
 **Key differences from Module A and IoT:**
 
-- Section 1 is **"Setup"** (not "Build the Circuit") — no breadboard, no
-  resistors, no jumper wires. The hardware is pre-assembled (camera +
-  carrier).
+- Section 1 is **"Setup"** (not "Build the Circuit") — little or no
+  breadboard work. The hardware is pre-assembled (camera + carrier), so the
+  wiring sentence and image appear only in the lessons that add a component.
 - **"What You Need"** table (not "Components Needed") — uses placeholder
   images for all items including the carrier and camera.
-- **"Hardware Check"** subsection with physical assembly verification steps.
-- Import is split into **"Import the Code"** and **"Run the Code"** as
-  separate sub-headings.
-- **How it Works** uses prose paragraphs explaining AI concepts (camera
-  capture, inference, model format) — not a line-by-line code breakdown.
+- **Software Requirements** lists the Bricks (and any real sketch libraries)
+  the project declares.
+- The result screenshot goes right after the introduction.
+- **No source code anywhere.** The lessons show the project structure, a
+  Mermaid data-path diagram, and per-file API bullets instead — exactly like
+  the iot module.
 - **Experiment** has NO dropdown solutions. Challenges are observational
   ("try different lighting", "test max distance").
-- Code includes `#include` directives and library initialization.
 
 ## Writing Conventions
 

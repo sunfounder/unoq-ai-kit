@@ -56,10 +56,8 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
    :width: 500
    :align: center
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -77,8 +75,6 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
 
 #. The app appears in **Apps** — click it to open.
 
-**Run the Code**
-
 #. With the app open, click the **Run** button (▶) in the top-right corner. The app boots the camera and loads the face-detection model, which takes a few seconds the first time.
 
    .. image:: /img/app_run.png
@@ -95,176 +91,82 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
 
 #. Step away so your face is out of the frame. The alarm keeps sounding for about two more seconds — the app gives a face a grace period in case you simply turned away for a moment — and then stops. The status returns to *"No face — Alarm OFF"*.
 
-**The Code**
-
-**Sketch (sketch.ino)** — runs on the STM32 MCU and owns the buzzer
-
-.. code-block:: cpp
-   :linenos:
-
-   /*
-    * Face Alarm
-    *
-    * Bridge commands from Python:
-    *   alarm_on()  → starts beeping
-    *   alarm_off() → stops
-    *
-    * Pattern: short beeps repeating while alarm is active.
-    */
-
-   #include <Arduino_RouterBridge.h>
-
-   const int buzzerPin = 5;
-
-   bool alarmActive = false;
-
-   void alarm_on()  { alarmActive = true; }
-   void alarm_off() { alarmActive = false; digitalWrite(buzzerPin, LOW); }
-
-   void setup() {
-       pinMode(buzzerPin, OUTPUT);
-       digitalWrite(buzzerPin, LOW);
-
-       Bridge.begin();
-       Bridge.provide("alarm_on", alarm_on);
-       Bridge.provide("alarm_off", alarm_off);
-   }
-
-   void loop() {
-       if (!alarmActive) {
-           delay(100);
-           return;
-       }
-
-       // Rapid beep pattern
-       digitalWrite(buzzerPin, HIGH);
-       delay(150);
-       digitalWrite(buzzerPin, LOW);
-       delay(150);
-   }
-
-**Python (main.py)** — runs on the Linux MPU: face detection, alarm state, and Web UI
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   #
-   # SPDX-License-Identifier: MPL-2.0
-
-   """
-   Face Alarm — sound a buzzer when a face is detected.
-
-   When the camera sees a face, Python tells the sketch to turn on
-   the buzzer via Bridge. When the face disappears, the buzzer stops.
-   This is the first time AI controls physical hardware.
-   """
-
-   import threading
-   import time
-   from datetime import datetime, UTC
-
-   from arduino.app_utils import App, Bridge
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-
-   ui = WebUI()
-
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   detection = VideoObjectDetection(
-       camera,
-       confidence=0.5,
-       debounce_sec=0.5,
-   )
-
-   face_visible = False
-   last_face_time = 0.0
-   face_lock = threading.Lock()
-   FACE_LOST_TIMEOUT = 2.0  # seconds before turning off alarm
-
-
-   def face_detected():
-       """Called by the brick every time a face is seen."""
-       global face_visible, last_face_time
-
-       with face_lock:
-           last_face_time = time.monotonic()
-
-           if face_visible:
-               return  # Already alarming, just refresh the timer
-
-           face_visible = True
-
-       # First time we see a face → activate the buzzer
-       Bridge.call("alarm_on")
-
-       ui.send_message("face_status", {
-           "detected": True,
-           "text": "Face detected — Alarm ON",
-           "timestamp": datetime.now(UTC).isoformat(),
-       })
-
-
-   def monitor_face():
-       """Background thread: turn off alarm if face is lost for too long."""
-       global face_visible
-
-       while True:
-           should_off = False
-
-           with face_lock:
-               if face_visible:
-                   elapsed = time.monotonic() - last_face_time
-                   if elapsed >= FACE_LOST_TIMEOUT:
-                       face_visible = False
-                       should_off = True
-
-           if should_off:
-               Bridge.call("alarm_off")
-
-               ui.send_message("face_status", {
-                   "detected": False,
-                   "text": "No face — Alarm OFF",
-                   "timestamp": datetime.now(UTC).isoformat(),
-               })
-
-           time.sleep(0.2)
-
-
-   detection.on_detect("face", face_detected)
-
-   # Start background monitor thread
-   status_thread = threading.Thread(target=monitor_face, daemon=True)
-   status_thread.start()
-
-   print("🚨 Face Alarm running — show your face to the camera!")
-
-   App.run()
-
 **How it Works**
 
-.. code-block:: text
+One AI decision now reaches out of the screen and into the real world, and the work is split the way the UNO Q's two processors are built for it: Python on the Linux MPU decides *whether there is a face*, while the sketch on the STM32 MCU decides *how the buzzer behaves*.
 
-   camera frames → face-detection model (confidence ≥ 0.5, debounce 0.5 s)
-       → on_detect("face") → face_detected() — first sighting only
-           → Bridge.call("alarm_on") → sketch beeps 150 ms on / 150 ms off
-           → ui.send_message("face_status", detected: True)
-   monitor thread checks every 0.2 s:
-       face gone for ≥ 2.0 s → Bridge.call("alarm_off") → buzzer stops
-           → ui.send_message("face_status", detected: False)
+* ``02 Face Alarm/`` — the app folder
 
-This project is a two-process team, and the work is split exactly the way the two processors of the UNO Q are good at it. On the Linux MPU, Python decides *whether there is a face*. On the STM32 MCU, the sketch decides *how the buzzer should behave*. Between them runs the same RouterBridge pattern you met in the earlier web-UI projects — but with a new twist: this time Python is the caller and the sketch is the servant.
+  * ``app.yaml`` — app metadata and the Bricks it declares (``web_ui`` and ``video_object_detection`` with ``model: face-detection``)
+  * ``README.md`` — project documentation and usage guide
 
-**The sketch owns the buzzer** — ``alarm_on()`` and ``alarm_off()`` are tiny functions registered with ``Bridge.provide()`` in ``setup()``. The real work happens in ``loop()``: while ``alarmActive`` is false it just sleeps, but once the flag is set it drives ``buzzerPin`` (D5) high for 150 ms and low for 150 ms, over and over — the rapid beep you heard. Because ``alarm_off()`` also calls ``digitalWrite(buzzerPin, LOW)``, the buzzer goes silent instantly when Python calls it, even in the middle of a beep.
+  * ``python/``
 
-**Python asks for the alarm** — the AI side is nearly identical to the previous project, with two differences. First, the model: ``app.yaml`` requests ``video_object_detection`` with ``model: face-detection``, a model specialized for faces rather than the general object model. Second, the listener: instead of ``on_detect_all`` (every object, every frame), the code registers ``detection.on_detect("face", face_detected)``, which only fires for the single class the project cares about. The settings are tuned a bit more strictly — ``confidence=0.5`` means a face must score at least 50% before it counts, and ``debounce_sec=0.5`` paces the callbacks.
+    * ``main.py`` — face detection, alarm state, and the Web UI
 
-**The first-sighting latch** — when a face appears, the brick may call ``face_detected()`` repeatedly. The function must not spam Bridge with ``alarm_on`` calls, so a ``face_visible`` flag turns it into a latch: the first sighting sets the flag, refreshes ``last_face_time``, and calls ``Bridge.call("alarm_on")`` — every later sighting simply updates the timestamp and returns early. The alarm is turned on exactly once, and the Web UI receives a ``face_status`` message so the page can flip to "🚨 Face detected — Alarm ON".
+  * ``sketch/``
 
-**The watchdog thread** — someone has to notice when the face is *gone*. That cannot happen in the detection callback (it only fires when a face is seen), so Python starts a background thread. Every 0.2 seconds ``monitor_face()`` wakes up, and if a face was seen but the last sighting is more than ``FACE_LOST_TIMEOUT`` (2.0 s) ago, it clears the latch, calls ``Bridge.call("alarm_off")``, and tells the Web UI the alarm is off. This is the two-second grace period you felt: step out of frame briefly and the alarm keeps going; stay away and it stops. Both threads touch ``face_visible``, so every access is guarded by ``face_lock`` to keep them from stepping on each other.
+    * ``sketch.ino`` — buzzer control and the two Bridge functions Python calls
+    * ``sketch.yaml`` — sketch configuration
+
+  * ``assets/``
+
+    * ``index.html`` — Web UI structure: the camera card and the face status line
+    * ``app.js`` — browser logic: socket events and status text
+    * ``style.css`` — visual styling
+    * ``libs/socket.io.min.js`` — Socket.IO client library
+    * ``img/sf_logo.png`` — header logo
+
+The data path from a face in front of the lens to a buzzer that sounds:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as Camera (CSI)
+       participant P as Python (main.py)
+       participant S as Sketch (sketch.ino)
+       participant B as Browser (HTML/JS)
+
+       C->>P: frame
+       P->>P: VideoObjectDetection — face-detection model, confidence 0.5, debounce 0.5 s
+       P->>P: on_detect("face") → face_detected()
+       P->>S: Bridge.call("alarm_on")
+       S->>S: beep D5 — 150 ms on, 150 ms off
+       P-->>B: socket.io "face_status" — detected
+       P->>P: monitor thread — checks every 0.2 s
+       P->>S: Bridge.call("alarm_off") — no face for 2.0 s
+       S->>S: stop the buzzer
+       P-->>B: socket.io "face_status" — no face
+
+Here's what each component does:
+
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)`` register the two functions Python can call
+  * ``alarm_on()`` raises the ``alarmActive`` flag; ``alarm_off()`` clears it and immediately drives the pin low
+  * ``loop()`` beeps ``buzzerPin`` (D5) — 150 ms high, 150 ms low, over and over — while the flag is set, and idles when it is not
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``VideoObjectDetection(camera, confidence=0.5, debounce_sec=0.5)`` runs the ``face-detection`` model declared in ``app.yaml``
+  * ``detection.on_detect("face", face_detected)`` fires only for the class this project cares about
+  * ``Bridge.call("alarm_on")`` and ``Bridge.call("alarm_off")`` command the sketch
+  * ``ui.send_message("face_status", ...)`` tells the browser whether a face is present
+  * A background thread watches the clock so the alarm silences itself
+
+**Bridge** — communication channel between MPU and MCU
+  * Sketch side: ``Bridge.provide("name", function)`` exposes a function
+  * Python side: ``Bridge.call("name")`` invokes it — this is RPC across the two processors
+
+**Browser (HTML/JS)** — runs in the user's browser
+  * ``socket.on('face_status', ...)`` flips the status between "🚨 Face detected — Alarm ON" and "No face — Alarm OFF"
+  * The live video arrives on its own channel, in an ``<iframe>`` pointed at port 4912 ``/embed``
+
+**The sketch owns the buzzer** — the two Bridge functions are tiny: they only set or clear a flag. The real work happens back in ``loop()``, which sleeps while the flag is clear and otherwise toggles ``buzzerPin`` (D5) on and off every 150 ms — the rapid beep you heard. Because ``alarm_off()`` also writes the pin low, the buzzer falls silent instantly, even in the middle of a beep.
+
+**Python asks for the alarm** — the AI side follows the pattern from the previous project with two differences. First, the model: ``app.yaml`` requests ``video_object_detection`` with ``model: face-detection``, a model specialized for faces rather than the general object model. Second, the listener: instead of ``on_detect_all`` (every object, every frame), Python registers ``on_detect("face", ...)``, which fires only for the single class the project cares about. The settings are tuned more strictly — ``confidence=0.5`` means a face must score at least 50% before it counts, and ``debounce_sec=0.5`` paces the callbacks.
+
+**The first-sighting latch** — the brick may call ``face_detected()`` again and again while a face stays in view, and the function must not flood the Bridge with ``alarm_on`` calls, so a ``face_visible`` flag turns it into a latch: the first sighting refreshes the timestamp and calls ``Bridge.call("alarm_on")``, while every later sighting only updates the timestamp and returns early. The alarm turns on exactly once, and the browser is told so the page can flip to "🚨 Face detected — Alarm ON".
+
+**The watchdog thread** — someone has to notice when the face is *gone*, and that cannot happen in the detection callback because it only fires when a face is seen. So Python starts a background thread: every 0.2 seconds it wakes up, and if a face was seen but the last sighting is more than 2.0 seconds ago, it clears the latch, calls ``Bridge.call("alarm_off")``, and tells the Web UI the alarm is off. That is the two-second grace period you felt — step out of frame briefly and the alarm keeps going; stay away and it stops. Both threads touch ``face_visible``, so every access is guarded by a lock to keep them from stepping on each other.
 
 3. Experiment
 ----------------

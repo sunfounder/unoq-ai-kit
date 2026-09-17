@@ -45,10 +45,8 @@ To test the project, gather three objects you probably already have nearby: a co
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -65,8 +63,6 @@ To test the project, gather three objects you probably already have nearby: a co
 #. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``05 AI Object Counter.zip``.
 
 #. The app appears in **Apps** — click it to open.
-
-**Run the Code**
 
 #. Click the **Run** button (▶). The output console prints:
 
@@ -90,228 +86,82 @@ To test the project, gather three objects you probably already have nearby: a co
 
 #. Click **RESET COUNTS** — all three counters and the total return to 0.
 
-**The Code**
-
-**Python (main.py)** — runs on the Linux MPU: detection, counting logic, Web UI, and speech
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   # SPDX-License-Identifier: MPL-2.0
-
-   """AI Object Counter.
-
-   Detect mice, keyboards, and cell phones and count each new appearance once.
-   An object must leave the camera view before the same class can be counted again.
-   Each new count is also announced through online text-to-speech.
-   """
-
-   import queue
-   import threading
-
-   from arduino.app_utils import App
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-   from sunfounder_tts import EdgeTTS
-
-
-   TARGETS = ("mouse", "keyboard", "cell phone")
-   CONFIDENCE_THRESHOLD = 0.60
-   MISSING_FRAMES_TO_REARM = 10
-   TTS_VOICE = "en-US-JennyNeural"
-   TTS_VOLUME = 50
-
-   SPEECH_TEXT = {
-       "mouse": "Mouse detected",
-       "keyboard": "Keyboard detected",
-       "cell phone": "Cell phone detected",
-   }
-
-   ui = WebUI()
-
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   detection = VideoObjectDetection(
-       camera,
-       confidence=CONFIDENCE_THRESHOLD,
-       debounce_sec=0.2,
-   )
-
-   state_lock = threading.Lock()
-   counts = {label: 0 for label in TARGETS}
-   armed = {label: True for label in TARGETS}
-   missing_frames = {label: 0 for label in TARGETS}
-   last_detection = None
-   speech_queue = queue.Queue()
-
-
-   def speech_worker():
-       """Play queued messages without blocking object detection."""
-       try:
-           tts = EdgeTTS()
-           tts.set_voice(TTS_VOICE)
-           tts.set_volume(TTS_VOLUME)
-           print("TTS ready.", flush=True)
-
-           while True:
-               text = speech_queue.get()
-
-               try:
-                   tts.say(text)
-               except Exception as error:
-                   print(
-                       f"TTS error: {type(error).__name__}: {error}",
-                       flush=True,
-                   )
-               finally:
-                   speech_queue.task_done()
-
-       except Exception as error:
-           print(
-               f"TTS startup failed: {type(error).__name__}: {error}",
-               flush=True,
-           )
-
-
-   def speak(label):
-       """Queue the spoken name for a newly counted object."""
-       speech_queue.put(SPEECH_TEXT[label])
-
-
-   def public_state():
-       """Return the counter state for the Web UI."""
-       with state_lock:
-           return {
-               "counts": dict(counts),
-               "total": sum(counts.values()),
-               "last_detection": (
-                   dict(last_detection) if last_detection else None
-               ),
-           }
-
-
-   def publish_state():
-       ui.send_message("counter_state", public_state())
-
-
-   def reset_counts():
-       """Reset all counters without changing the current detection locks."""
-       global last_detection
-
-       with state_lock:
-           for label in TARGETS:
-               counts[label] = 0
-           last_detection = None
-
-       publish_state()
-       return public_state()
-
-
-   ui.expose_api("GET", "/state", public_state)
-   ui.expose_api("POST", "/reset-counts", reset_counts)
-
-
-   def on_detection(detections: dict):
-       """Count a target once, then wait until it leaves before rearming."""
-       global last_detection
-
-       counted_items = []
-
-       with state_lock:
-           for label in TARGETS:
-               instances = detections.get(label, [])
-               best_confidence = max(
-                   (
-                       instance.get("confidence", 0)
-                       for instance in instances
-                   ),
-                   default=0,
-               )
-               present = best_confidence >= CONFIDENCE_THRESHOLD
-
-               if present:
-                   missing_frames[label] = 0
-
-                   if armed[label]:
-                       counts[label] += 1
-                       armed[label] = False
-                       counted_items.append((label, best_confidence))
-               elif not armed[label]:
-                   missing_frames[label] += 1
-
-                   if missing_frames[label] >= MISSING_FRAMES_TO_REARM:
-                       armed[label] = True
-                       missing_frames[label] = 0
-
-           if counted_items:
-               counted_label, counted_confidence = counted_items[-1]
-               last_detection = {
-                   "object": counted_label,
-                   "confidence": round(counted_confidence * 100),
-               }
-
-       if counted_items:
-           for counted_label, counted_confidence in counted_items:
-               speak(counted_label)
-               print(
-                   f"Counted {counted_label}: "
-                   f"{counts[counted_label]} "
-                   f"({counted_confidence:.0%})",
-                   flush=True,
-               )
-
-           publish_state()
-
-
-   detection.on_detect_all(on_detection)
-
-   threading.Thread(target=speech_worker, daemon=True).start()
-
-   print(
-       "AI Object Counter is running. "
-       "Show one mouse, keyboard, or cell phone at a time.",
-       flush=True,
-   )
-
-   App.run()
-
 **How it Works**
 
-.. code-block:: text
+Here is what happens between showing an object and hearing its name — a chain that runs almost entirely inside Python on the Linux MPU:
 
-   CSI camera
-       │
-       ▼
-   VideoObjectDetection brick (confidence ≥ 0.60, debounce 0.2 s)
-       │
-       ▼
-   on_detection() — one pass per target class (mouse, keyboard, cell phone)
-       │
-       ├── present (best confidence ≥ 60%)?
-       │       └── class armed?  →  count + 1, disarm, speak, publish
-       │
-       └── absent and disarmed?
-               └── missing_frames + 1
-                       │
-                       ▼
-               missing_frames ≥ 10  →  rearm the class
-       │
-       ▼
-   Web UI: counter_state event → card +1, TOTAL update, "Mouse added"
-   Speech:  queue → worker thread → EdgeTTS says "Mouse detected"
+* ``05 AI Object Counter/`` — the app folder
 
-* **Counting events, not frames** — The detector processes many video frames every second. If the program incremented a counter on every frame where a mouse appeared, a single mouse sitting on the desk would rack up hundreds of counts. So ``on_detection()`` first decides *presence*: a class is present when its best instance confidence in this frame is at least ``CONFIDENCE_THRESHOLD`` (0.60) — the same 60% you saw printed in the console. Only a change in that presence state is worth counting.
+  * Bricks
 
-* **The armed / re-arm pattern** — Each class starts ``armed``. The first time a present class is seen while armed, its counter goes up by one and the class is *disarmed*. From then on, the only thing that matters is absence: the class must be missing from the frame for ``MISSING_FRAMES_TO_REARM`` (10) consecutive detection passes before it is rearmed and can be counted again. In plain language: the object must fully leave the camera view before the same class earns another count. This is the heart of the lesson — a small state machine that turns noisy, frame-by-frame detections into clean, human-meaningful events.
+    * ``video_object_detection`` — the object-detection model, declared as ``arduino:video_object_detection`` in ``app.yaml``
+    * ``web_ui`` — the Web UI server and socket channel
+    * ``sunfounder_tts`` — online text-to-speech through the carrier's speaker
 
-* **The Web UI as a live dashboard** — ``publish_state()`` sends a ``counter_state`` socket.io event carrying the per-class counts, the total, and the most recently counted object with its confidence, so the browser can show the +1 animation and the "Mouse added" panel. The state is also exposed as web APIs: the page fetches ``GET /state`` when it connects, and the **RESET COUNTS** button posts to ``POST /reset-counts``. Notice that reset deliberately leaves the armed flags untouched — if an object is still on screen when you reset, it won't be counted again until it leaves the view and comes back. The Web UI is pure presentation; it could never cheat the count, because the counting itself happens only in Python.
+  * Sketch libraries
 
-* **Speech that never blocks vision** — Announcing every count by calling the TTS engine directly in the detection callback would pause detection while the audio renders. Instead, ``speak()`` only puts text into a ``speech_queue``, and a separate worker thread consumes the queue — ``EdgeTTS`` synthesizes each phrase with the ``en-US-JennyNeural`` voice at volume 50 while detection keeps running. EdgeTTS is an online service: it needs internet access but no API key, and if speech fails for any reason the console prints a ``TTS error: ...`` or ``TTS startup failed: ...`` line while counting and the Web UI continue working.
+    * None — the sketch is an empty stub and declares no libraries
 
-* **Everything is tunable** — The behavior of the whole project lives in five constants at the top of ``main.py``: ``TARGETS`` (which classes appear in the Web UI), ``CONFIDENCE_THRESHOLD`` (how sure the model must be), ``MISSING_FRAMES_TO_REARM`` (how long an object must be gone), ``TTS_VOICE``, and ``TTS_VOLUME``. Change a value, click Run again, and watch how the counter behaves differently.
+  * Files
+
+    * ``assets/``
+
+      * ``index.html`` — Web UI structure: camera feed, counter cards, reset button
+      * ``app.js`` — Browser logic (Socket.IO client and reset request)
+      * ``style.css`` — Visual styling
+      * ``libs/`` — JavaScript libraries (Socket.IO)
+      * ``img/`` — Static resources
+
+    * ``python/``
+
+      * ``main.py`` — Detection, counting state machine, Web UI, and speech
+
+    * ``sketch/``
+
+      * ``sketch.yaml`` — Sketch configuration
+      * ``sketch.ino`` — Empty stub; this project needs no MCU-side hardware
+
+    * ``README.md`` — Project documentation and usage guide
+    * ``app.yaml`` — App metadata (name, icon, bricks used)
+
+The data path from frame to count:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as CSI camera
+       participant P as Python (main.py)
+       participant S as EdgeTTS (sunfounder_tts)
+       participant B as Browser (Web UI)
+
+       C->>P: frame → VideoObjectDetection (confidence ≥ 0.60)
+       P->>P: on_detection() → best confidence per target class
+       P->>P: class armed and present → counts[label] += 1
+       P->>P: disarm class; count missing frames
+       P->>P: 10 missing frames → re-arm class
+       P->>S: speech_queue.put("Mouse detected")
+       S-->>P: tts.say() plays the phrase
+       P->>B: ui.send_message("counter_state", ...)
+       B->>P: POST /reset-counts
+       P->>B: counter_state with counts back at 0
+
+Here's what each component does:
+
+**Python (main.py)** — runs on the Linux MPU
+  * Starts the camera with ``Camera(adjustments=lambda frame: frame[::-1, :])`` and ``camera.start()``
+  * ``VideoObjectDetection(camera, confidence=0.60, debounce_sec=0.2)`` reports every object it recognizes in each frame
+  * ``detection.on_detect_all(on_detection)`` receives those results; ``on_detection()`` keeps only the three entries of ``TARGETS``
+  * ``counts[label] += 1`` the first time a class is present while ``armed``, then disarms it so a single appearance is never counted twice
+  * ``MISSING_FRAMES_TO_REARM`` (10) consecutive missing frames re-arm the class — the object has to leave the view before it can be counted again
+  * ``ui.send_message("counter_state", public_state())`` publishes the counts, the total, and the latest detection as a socket event
+  * ``speak()`` puts the object's name into ``speech_queue``; ``speech_worker()`` runs ``EdgeTTS.say()`` on a background thread so detection never pauses
+  * ``ui.expose_api()`` publishes ``GET /state`` and ``POST /reset-counts``; reset zeroes the counters but deliberately leaves the armed flags alone
+
+**Browser (index.html / app.js)** — runs in the user's browser
+  * Shows the live camera feed, the three counter cards, and the **TOTAL OBJECTS** counter
+  * ``socket.on('counter_state')`` flashes the +1 animation and writes the "Mouse added" panel with its confidence
+  * ``fetch('/state')`` loads the current counts when the page connects
+  * The **RESET COUNTS** button posts to ``/reset-counts`` and redraws the cards at 0
 
 3. Experiment
 ----------------

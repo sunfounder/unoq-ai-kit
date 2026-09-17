@@ -7,6 +7,10 @@
 
 The gesture camera moved, but only in fixed steps: one gesture, one 15° nudge, then it waited for you to leave the frame. What if the camera could *keep its eyes on you* instead? In this lesson, the UNO Q not only detects your face — it **follows it**. The pan-tilt camera greets you, then tracks you as you move left, right, up, and down, like a tiny robot that wants to keep you in the center of its view.
 
+.. image:: img/07_face_tracking_camera.png
+   :width: 600
+   :align: center
+
 In this lesson, you will learn to:
 
 * Greet a face **once per visit** with spoken text ("Nice to meet you.")
@@ -44,10 +48,6 @@ This project uses the following Bricks and sketch library:
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 **Wiring Diagram**
 
 This lesson uses no breadboard components — everything plugs into the Robot Shield. Plug the pan servo into pin **D9** and the tilt servo into pin **D10** on the Robot Shield's servo headers.
@@ -56,10 +56,8 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
    :width: 600
    :align: center
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -77,8 +75,6 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
 
 #. The app appears in **Apps** — click it to open.
 
-**Run the Code**
-
 #. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.
 
 #. Click the **Run** button (▶). The servos move to the 90° center position. On the Console you'll see the Python side announce itself: ``Face Tracking Camera with TTS is running.``, and once the speech engine is ready, ``EdgeTTS ready.`` The sketch prints its own banner, ``=== Face Tracking Camera ===``, over the serial connection.
@@ -93,382 +89,94 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
    :width: 600
    :align: center
 
-**The Code**
+.. note::
 
-The project has two files that run on two different processors:
-
-* ``sketch/sketch.ino`` — runs on the STM32 MCU and physically moves the servos
-* ``python/main.py`` — runs on the Linux MPU: face detection, greeting speech, and the tracking decisions
-
-.. code-block:: cpp
-   :linenos:
-
-   /*
-    * Face Tracking Camera
-    *
-    * The pan servo on D9 follows the detected face left and right.
-    * The tilt servo on D10 follows the detected face up and down.
-    * When the Linux application reports that the face is lost,
-    * the pan-tilt returns to the center.
-    */
-
-   #include <Arduino_RouterBridge.h>
-   #include <Arduino_HardwareServo.h>
-
-   const int PAN_SERVO_PIN = 9;
-   const int TILT_SERVO_PIN = 10;
-
-   // Absolute servo angles — the center is 90°.
-   const int PAN_MIN_ANGLE = 45;
-   const int PAN_MAX_ANGLE = 135;
-   const int TILT_MIN_ANGLE = 45;
-   const int TILT_MAX_ANGLE = 115;
-   const int CENTER_ANGLE = 90;
-
-   const int STEP_DEGREES = 1;
-
-   HardwareServo panServo;
-   HardwareServo tiltServo;
-
-   int panAngle = CENTER_ANGLE;
-   int tiltAngle = CENTER_ANGLE;
-
-   int panStep(int direction)
-   {
-       // direction > 0: face is right of center, turn right.
-       panAngle += (direction > 0 ? STEP_DEGREES : -STEP_DEGREES);
-       panAngle = constrain(panAngle, PAN_MIN_ANGLE, PAN_MAX_ANGLE);
-
-       panServo.write(panAngle);
-       return panAngle;
-   }
-
-   int tiltStep(int direction)
-   {
-       // direction > 0: face is below center, tilt the camera down.
-       tiltAngle += (direction > 0 ? STEP_DEGREES : -STEP_DEGREES);
-       tiltAngle = constrain(tiltAngle, TILT_MIN_ANGLE, TILT_MAX_ANGLE);
-
-       tiltServo.write(tiltAngle);
-       return tiltAngle;
-   }
-
-   int centerPanTilt(String dummy)
-   {
-       (void)dummy;
-
-       panAngle = CENTER_ANGLE;
-       tiltAngle = CENTER_ANGLE;
-
-       panServo.write(CENTER_ANGLE);
-       tiltServo.write(CENTER_ANGLE);
-       return CENTER_ANGLE;
-   }
-
-   void setup()
-   {
-       Serial.begin(115200);
-
-       panServo.attach(PAN_SERVO_PIN);
-       tiltServo.attach(TILT_SERVO_PIN);
-
-       panServo.write(CENTER_ANGLE);
-       tiltServo.write(CENTER_ANGLE);
-       delay(500);
-
-       Bridge.begin();
-
-       Bridge.provide("pan_step", panStep);
-       Bridge.provide("tilt_step", tiltStep);
-       Bridge.provide("center_pan_tilt", centerPanTilt);
-
-       Serial.println("=== Face Tracking Camera ===");
-   }
-
-   void loop()
-   {
-       delay(20);
-   }
-
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   #
-   # SPDX-License-Identifier: MPL-2.0
-
-   """
-   Face Tracking Camera with Online TTS
-
-   When a face is detected for the first time, the board greets
-   "Nice to meet you." and starts following the face. The pan and tilt
-   servos move to keep the face centered in the frame.
-
-   When the face disappears for 2.5 seconds, the pan-tilt returns to
-   the center and the next face triggers a new greeting.
-
-   The greeting uses EdgeTTS:
-   - Internet access is required.
-   - No API key is required.
-   """
-
-   from datetime import UTC, datetime
-   import queue
-   import threading
-   import time
-
-   from arduino.app_utils import App, Bridge
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-   from sunfounder_tts import EdgeTTS
-
-
-   # Custom web interface
-   ui = WebUI()
-
-   # CSI camera
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   # Face detection
-   detection = VideoObjectDetection(
-       camera,
-       confidence=0.5,
-       debounce_sec=0.1,
-   )
-
-   # ── Tracking configuration ────────────────────────────────
-   FRAME_WIDTH = 640
-   FRAME_HEIGHT = 480
-   DEAD_ZONE_RATIO = 0.10   # Ignore small offsets to reduce servo jitter.
-   FACE_LOST_TIMEOUT = 2.5  # Seconds before returning to the center.
-
-   # ── Greeting configuration ────────────────────────────────
-   GREETING_TEXT = "Nice to meet you."
-   GREETING_VOICE = "en-US-JennyNeural"
-   GREETING_VOLUME = 50
-
-   # ── Tracking state ────────────────────────────────────────
-   face_visible = False
-   last_face_time = 0.0
-   state_lock = threading.Lock()
-
-   # TTS runs in a background worker so tracking stays responsive
-   speech_queue = queue.Queue()
-
-
-   def speech_worker():
-       """Play queued messages through EdgeTTS."""
-       try:
-           tts = EdgeTTS()
-           tts.set_voice(GREETING_VOICE)
-           tts.set_volume(GREETING_VOLUME)
-
-           print("EdgeTTS ready.")
-
-           while True:
-               text = speech_queue.get()
-
-               try:
-                   tts.say(text)
-               except Exception as error:
-                   print(f"TTS error: {type(error).__name__}: {error}")
-               finally:
-                   speech_queue.task_done()
-
-       except Exception as error:
-           print(f"TTS startup failed: {type(error).__name__}: {error}")
-
-
-   def speak(text):
-       """Queue a message for speech without blocking tracking."""
-       if text:
-           speech_queue.put(str(text))
-
-
-   def box_center(instance):
-       """Return the (x, y) center of a detection box, or None.
-
-       App Lab normally reports ``bounding_box_xyxy`` as the top-left
-       and bottom-right coordinates. Older alternative formats are kept
-       as fallbacks.
-       """
-       bbox_xyxy = instance.get("bounding_box_xyxy")
-
-       if isinstance(bbox_xyxy, (list, tuple)) and len(bbox_xyxy) >= 4:
-           x1, y1, x2, y2 = bbox_xyxy[:4]
-           return (x1 + x2) / 2.0, (y1 + y2) / 2.0
-
-       bbox = instance.get("bbox") or instance.get("box")
-
-       if isinstance(bbox, (list, tuple)) and len(bbox) >= 4:
-           x, y, w, h = bbox[0], bbox[1], bbox[2], bbox[3]
-       elif all(key in instance for key in ("x", "y", "width", "height")):
-           x = instance["x"]
-           y = instance["y"]
-           w = instance["width"]
-           h = instance["height"]
-       else:
-           return None
-
-       if x + w <= 1.0 and y + h <= 1.0:
-           # Normalized coordinates → scale to pixels.
-           x, w = x * FRAME_WIDTH, w * FRAME_WIDTH
-           y, h = y * FRAME_HEIGHT, h * FRAME_HEIGHT
-
-       return x + w / 2.0, y + h / 2.0
-
-
-   def as_detection_list(value):
-       """Normalize one detection dictionary or a list of dictionaries."""
-       if isinstance(value, dict):
-           return [value]
-
-       if isinstance(value, (list, tuple)):
-           return [item for item in value if isinstance(item, dict)]
-
-       return []
-
-
-   def track_face(center_x, center_y):
-       """Move both servos when the face drifts outside the dead zone."""
-       offset_x = center_x - FRAME_WIDTH / 2.0
-       offset_y = center_y - FRAME_HEIGHT / 2.0
-
-       pan_direction = 0
-       tilt_direction = 0
-
-       if abs(offset_x) >= FRAME_WIDTH * DEAD_ZONE_RATIO:
-           pan_direction = 1 if offset_x > 0 else -1
-
-       if abs(offset_y) >= FRAME_HEIGHT * DEAD_ZONE_RATIO:
-           tilt_direction = 1 if offset_y > 0 else -1
-
-       if pan_direction:
-           Bridge.call("pan_step", pan_direction)
-
-       if tilt_direction:
-           Bridge.call("tilt_step", tilt_direction)
-
-
-   def send_detections(detections: dict):
-       """Follow the most confident face in the current frame."""
-       global face_visible, last_face_time
-
-       best_center = None
-       best_confidence = 0.0
-
-       for instance in as_detection_list(detections.get("face")):
-           confidence = float(instance.get("confidence", 0.0))
-
-           if confidence > best_confidence:
-               best_center = box_center(instance)
-               best_confidence = confidence
-
-       if best_confidence <= 0:
-           return
-
-       is_new_face = False
-
-       with state_lock:
-           last_face_time = time.monotonic()
-
-           if not face_visible:
-               # Face reappeared → greet again and start following.
-               face_visible = True
-               is_new_face = True
-
-       if is_new_face:
-           speak(GREETING_TEXT)
-
-           ui.send_message("face_status", {
-               "detected": True,
-               "text": "Nice to meet you!",
-               "timestamp": datetime.now(UTC).isoformat(),
-           })
-
-       # Greeting and status still work even if a future detector version
-       # changes its bounding-box format.
-       if best_center is not None:
-           track_face(*best_center)
-
-
-   def monitor_face_status():
-       """Return the pan-tilt to center when the face has been lost."""
-       global face_visible
-
-       while True:
-           should_center = False
-
-           with state_lock:
-               if face_visible:
-                   elapsed = time.monotonic() - last_face_time
-
-                   if elapsed >= FACE_LOST_TIMEOUT:
-                       face_visible = False
-                       should_center = True
-
-           if should_center:
-               Bridge.call("center_pan_tilt", "")
-
-               ui.send_message("face_status", {
-                   "detected": False,
-                   "text": "Looking for a face",
-                   "timestamp": datetime.now(UTC).isoformat(),
-               })
-
-           time.sleep(0.2)
-
-
-   detection.on_detect_all(send_detections)
-
-   threading.Thread(target=speech_worker, daemon=True).start()
-   threading.Thread(target=monitor_face_status, daemon=True).start()
-
-   print("Face Tracking Camera with TTS is running.")
-
-   App.run()
-
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
-.. code-block:: text
+Now that you've seen the camera follow you, here is what happens between a face appearing in the frame and a servo moving.
 
-   Camera (CSI, flipped vertically)
-       │  every frame
-       ▼
-   VideoObjectDetection brick (face-detection model, confidence > 0.5)
-       │
-       ▼
-   send_detections() → picks the most confident face in the frame
-       │
-       ├── first sighting of this visit?
-       │       ├── speak "Nice to meet you."   (EdgeTTS, background thread)
-       │       └── Web UI: "Face detected"
-       │
-       └── track_face() → compare face center with frame center
-               ├── offset outside the 10% dead zone?
-               │       └── Bridge.call("pan_step" / "tilt_step", ±1)
-               └── sketch moves that servo 1° (pan 45–135°, tilt 45–115°)
+An App Lab project is a folder containing multiple files. Here's what each one does:
 
-   Background monitor thread (checks every 0.2 s)
-       └── face gone for 2.5 s?
-               ├── Bridge.call("center_pan_tilt") → both servos back to 90°
-               └── Web UI: "Looking for a face"
+* ``07 Face Tracking Camera/`` — the app folder
 
-**Face detection on the Linux MPU** — The ``VideoObjectDetection`` brick runs the same **face-detection** model you used earlier, frame after frame, right on the UNO Q. Each detection comes with a bounding box and a confidence score, and only detections above 0.5 confidence are accepted. The camera image is flipped vertically before analysis — on this carrier the camera is mounted upside down, so the flip makes the world look right side up again.
+  * ``app.yaml`` — App metadata: declares the ``video_object_detection``, ``web_ui``, and ``sunfounder_tts`` bricks
 
-**Pick the best face** — When several faces are in view, ``send_detections()`` keeps only the most confident one. The bounding box is converted to a pixel coordinate at its center (handled by ``box_center()``), and that single point drives the tracking. The AI doesn't decide where to point the camera — it just reports where the face is, in numbers.
+  * ``python/``
 
-**Greeting once per visit** — The greeting isn't triggered by every detection, or the board would chatter nonstop. A Python-side flag, ``face_visible``, remembers whether a face is already being followed. Only when the flag flips from *lost* to *found* — the first time a face appears — does ``speak("Nice to meet you.")`` queue the greeting. The text is synthesized by EdgeTTS (voice ``en-US-JennyNeural``, volume 50) on the Internet and played through the carrier's speaker; no API key is needed. Because the greeting runs in its own background thread with a queue, the long speech task never stalls face detection.
+    * ``main.py`` — Face detection, greeting speech, and the tracking decisions
 
-**The dead zone** — ``track_face()`` compares the face's center with the exact center of the 640×480 frame. Offsets smaller than 10% of the frame width (64 px) or height (48 px) are ignored. Without this dead zone, even the tiniest face wobble would nudge a servo, and the servo's movement would nudge the face in the frame, creating an endless jitter loop. Inside the dead zone, the servos rest.
+  * ``sketch/``
 
-**One degree at a time** — When the face drifts beyond the dead zone, Python calls ``Bridge.call("pan_step", ±1)`` or ``Bridge.call("tilt_step", ±1)``. In the sketch, each call adds or subtracts a single degree — ``STEP_DEGREES = 1`` — and writes the new angle to the servo. The sketch constrains the pan between 45° and 135° and the tilt between 45° and 115°, so the camera can never over-rotate and hit its mount. Small, frequent steps are what make the motion look smooth and alive instead of snappy.
+    * ``sketch.yaml`` — Sketch configuration (declares the ``Arduino_HardwareServo`` library)
+    * ``sketch.ino`` — Servo control on the microcontroller
 
-**The lost-face timeout** — A background thread checks every 0.2 s whether any detection has refreshed ``last_face_time`` within the last 2.5 seconds. If not, it calls ``center_pan_tilt``, which drives both servos back to 90°, and tells the Web UI the camera is **Looking for a face**. The ``face_visible`` flag resets too — so the next face that walks in is a new "visit" and earns a brand-new greeting.
+  * ``assets/``
+
+    * ``index.html`` — Web UI structure (camera frame and face status)
+    * ``app.js`` — Browser logic: camera stream and Socket.IO events
+    * ``style.css`` — Visual styling
+    * ``libs/`` — JavaScript libraries (Socket.IO)
+    * ``img/`` — Static resources
+
+  * ``README.md`` — Project documentation and usage guide
+
+The data path from a face in front of the camera to a servo movement — and back:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as Camera (CSI)
+       participant P as Python (main.py)
+       participant S as Sketch (sketch.ino)
+       participant B as Browser (HTML/JS)
+
+       C->>P: frame (flipped vertically)
+       P->>P: VideoObjectDetection → send_detections()
+       P->>P: box_center() vs. the middle of the frame
+       P->>P: EdgeTTS speaks "Nice to meet you." — first sighting only
+       P-->>B: face_status {detected: true}
+       P->>S: Bridge.call("pan_step", ±1)
+       P->>S: Bridge.call("tilt_step", ±1)
+       S->>S: servo.write(angle) — one degree, clamped
+       P->>S: Bridge.call("center_pan_tilt", "") — no face for 2.5 s
+       P-->>B: face_status {detected: false}
+
+Here's what each component does:
+
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``panServo.attach(9)`` and ``tiltServo.attach(10)`` bind the servos to **D9** (pan) and **D10** (tilt)
+  * ``Bridge.provide()`` registers the three functions Python may call — ``pan_step``, ``tilt_step``, and ``center_pan_tilt``
+  * ``panStep()`` and ``tiltStep()`` add or subtract a single degree (``STEP_DEGREES = 1``), clamp the result with ``constrain()`` — pan 45°–135°, tilt 45°–115° — and write it to the servo
+  * ``centerPanTilt()`` sends both servos back to 90°
+  * ``loop()`` only sleeps — every movement arrives as a Bridge call
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``Camera(adjustments=lambda frame: frame[::-1, :])`` flips every frame vertically, because the CSI camera is mounted upside down on the carrier
+  * ``VideoObjectDetection(camera, confidence=0.5, debounce_sec=0.1)`` runs the **face-detection** model on each frame
+  * ``detection.on_detect_all(send_detections)`` hands every detection to ``send_detections()``, which keeps the most confident face using ``box_center()``
+  * ``track_face()`` compares that face center with the middle of the 640 × 480 frame and calls ``Bridge.call("pan_step", ±1)`` or ``Bridge.call("tilt_step", ±1)`` only when the offset leaves the dead zone
+  * ``speak()`` puts the greeting on a queue for EdgeTTS, which runs in its own daemon thread
+  * ``monitor_face_status()`` checks the clock every 0.2 s and calls ``Bridge.call("center_pan_tilt", "")`` after ``FACE_LOST_TIMEOUT = 2.5`` seconds without a face
+  * ``ui.send_message("face_status", …)`` tells the browser whether a face is being followed
+  * ``App.run()`` starts the app
+
+**Bridge** — communication channel between MPU and MCU
+  * Python side: ``Bridge.call("pan_step", direction)`` invokes a sketch function across the two processors
+  * Sketch side: ``Bridge.provide("pan_step", panStep)`` exposes that function
+  * Only a direction (``+1`` or ``-1``) crosses the Bridge — the sketch owns every angle
+
+**Browser (HTML/JS)** — runs in the user's browser
+  * The camera feed is an ``<iframe>`` pointed at the stream URL on port 4912 (``/embed``), reloaded once a second until it appears
+  * ``socket.on("face_status", …)`` switches the label between **Face detected** and **Looking for a face**, and updates the hint text below it
+  * ``socket.on("connect")`` and ``socket.on("disconnect")`` drive the status dot and the "Connection lost" banner
+
+**Why the dead zone?** — Offsets smaller than 10% of the frame (64 px horizontally, 48 px vertically) are ignored. Without that margin, even the tiniest wobble in the detected box would nudge a servo; the servo would then move the face in the frame, which nudges the box again, and the two would chase each other in an endless jitter loop. Inside the dead zone, the servos simply rest.
+
+**One greeting per visit** — The greeting is not triggered by every detection, or the board would chatter nonstop. The ``face_visible`` flag remembers whether a face is already being followed, so only the moment it flips from *lost* to *found* queues ``speak("Nice to meet you.")``. The sentence is synthesized by EdgeTTS (voice ``en-US-JennyNeural``, volume 50), which works **online — an Internet connection is required, but no API key**. Because it runs on its own worker thread with a queue, a sentence that takes a second to produce never stalls face detection.
+
+**One degree at a time** — The AI never decides where to point the camera; it only reports where the face is, in numbers. Python turns that into a direction, and the sketch turns the direction into a small, safe movement. One degree per call, several calls per second, is what makes the motion look smooth and alive instead of snappy — and because the sketch clamps every angle to the servo's safe range, a badly framed face can never drive the mechanism past its limits.
 
 3. Experiment
 ----------------

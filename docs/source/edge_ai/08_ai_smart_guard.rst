@@ -7,6 +7,10 @@
 
 You've watched your camera detect faces, track them, and speak — now it's time to give it a job. In this lesson you'll build the **AI Smart Guard**: a complete security sentry that patrols the room by sweeping its camera back and forth, and the moment it spots an intruder — a whole **person**, not just a face — it turns red, screams an alarm, and announces the intruder out loud. When the coast is clear, it settles back into green, silent patrol. It is the largest vision project in this module: detection, motion, light, sound, and voice, all fused into one autonomous system.
 
+.. image:: img/08_ai_smart_guard.png
+   :width: 600
+   :align: center
+
 In this lesson, you will learn to:
 
 * Detect **people** (full bodies) with a general object-detection model — not just faces
@@ -48,10 +52,6 @@ This project uses the following Bricks and sketch library:
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 **Wiring Diagram**
 
 Wire the RGB LED with the same layout as the color mixing project earlier: the **common cathode** (the longest leg) goes to **GND**, and the red, green, and blue anodes go to **D8**, **D7**, and **D6** — each through its own 220Ω resistor. The active buzzer's **+** leg goes to **D5** and its **−** leg to **GND**. The pan and tilt servos plug straight into **D9** and **D10** on the Robot Shield's servo headers; they need no breadboard wiring.
@@ -64,10 +64,8 @@ Wire the RGB LED with the same layout as the color mixing project earlier: the *
 
 Why does the guard watch for whole people instead of faces? Because the two jobs need two different models. The **face-detection** model you used earlier only fires on a clear view of a face — eyes, nose, and mouth. The **general object-detection** model this project uses reports a "person" class for a full body, so it still works when someone faces away, wears a mask or sunglasses, or is partly hidden. A greeter wants faces; a guard wants intruders — and an intruder usually doesn't cooperate by facing the camera.
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -85,8 +83,6 @@ Why does the guard watch for whole people instead of faces? Because the two jobs
 
 #. The app appears in **Apps** — click it to open.
 
-**Run the Code**
-
 #. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.
 
 #. Click the **Run** button (▶). The RGB LED glows **green** and the pan servo starts sweeping slowly from side to side like a watchman. The sketch prints its banner, ``=== AI Smart Guard Ready ===``, over the serial connection, and the Console shows ``🛡️  AI Smart Guard is running.`` followed by ``🔊 TTS ready.`` once the speech engine is up.
@@ -101,318 +97,94 @@ Why does the guard watch for whole people instead of faces? Because the two jobs
    :width: 600
    :align: center
 
-**The Code**
+.. note::
 
-The project has two files that run on two different processors:
-
-* ``sketch/sketch.ino`` — runs on the STM32 MCU and owns all the hardware: servo sweep, RGB LED, buzzer
-* ``python/main.py`` — runs on the Linux MPU: person detection, the alarm decisions, and the voice alerts
-
-.. code-block:: cpp
-   :linenos:
-
-   /*
-    * AI Smart Guard
-    *
-    * Full security system: servo scanning, RGB status, buzzer alarm.
-    * All controlled from Python via Bridge:
-    *   alarm_on()       → red LED + buzzer + stop scan
-    *   alarm_off()      → green LED + buzzer off + resume scan
-    *   guard_status()   → Python polls this for current state
-    *
-    * Hardware:
-    *   D9 = pan servo, D10 = tilt servo
-    *   D8=R, D7=G, D6=B  (RGB LED)
-    *   D5 = active buzzer
-    */
-
-   #include <Arduino_RouterBridge.h>
-   #include <Arduino_HardwareServo.h>
-
-   HardwareServo panServo;
-   HardwareServo tiltServo;
-
-   const int RED_LED_PIN = 8;
-   const int GREEN_LED_PIN = 7;
-   const int BLUE_LED_PIN = 6;
-   const int BUZZER_PIN = 5;
-   const int PAN_SERVO_PIN = 9;
-   const int TILT_SERVO_PIN = 10;
-
-   const int MIN_PAN_ANGLE = 45;
-   const int MAX_PAN_ANGLE = 135;
-   const int CENTER_ANGLE = 90;
-   const int SCAN_STEP = 1;
-   const unsigned long scanInterval = 40;
-
-   int panAngle = CENTER_ANGLE, scanDir = 1;
-   bool scanning = true, alarming = false;
-   unsigned long lastScan = 0, lastBeep = 0;
-   bool beepState = false;
-
-   void setRgb(int red, int green, int blue) {
-       analogWrite(RED_LED_PIN, red);
-       analogWrite(GREEN_LED_PIN, green);
-       analogWrite(BLUE_LED_PIN, blue);
-   }
-
-   // ---- Bridge commands ----
-
-   void alarm_on() {
-       if (alarming) return;
-       alarming = true;
-       scanning = false;
-
-       // Red LED
-       setRgb(255, 0, 0);
-   }
-
-   void alarm_off() {
-       if (!alarming) return;
-       alarming = false;
-       scanning = true;
-       digitalWrite(BUZZER_PIN, LOW);
-
-       // Green LED (all clear)
-       setRgb(0, 255, 0);
-   }
-
-   // ---- Setup ----
-
-   void setup() {
-       Serial.begin(115200);
-
-       panServo.attach(PAN_SERVO_PIN);
-       tiltServo.attach(TILT_SERVO_PIN);
-       panServo.write(CENTER_ANGLE);
-       tiltServo.write(CENTER_ANGLE);
-
-       pinMode(RED_LED_PIN, OUTPUT);
-       pinMode(GREEN_LED_PIN, OUTPUT);
-       pinMode(BLUE_LED_PIN, OUTPUT);
-       pinMode(BUZZER_PIN, OUTPUT);
-       digitalWrite(BUZZER_PIN, LOW);
-
-       // Start with green (all clear)
-       setRgb(0, 255, 0);
-
-       Bridge.begin();
-       Bridge.provide("alarm_on", alarm_on);
-       Bridge.provide("alarm_off", alarm_off);
-
-       Serial.println("=== AI Smart Guard Ready ===");
-   }
-
-   // ---- Loop ----
-
-   void loop() {
-       if (alarming) {
-           // Beep pattern: 150ms on / 150ms off
-           unsigned long now = millis();
-           if (now - lastBeep >= 150) {
-               lastBeep = now;
-               beepState = !beepState;
-               digitalWrite(BUZZER_PIN, beepState ? HIGH : LOW);
-           }
-           return;
-       }
-
-       // Scanning mode
-       if (!scanning) { delay(20); return; }
-
-       unsigned long now = millis();
-       if (now - lastScan < scanInterval) return;
-       lastScan = now;
-
-       panAngle += scanDir * SCAN_STEP;
-       if (panAngle >= MAX_PAN_ANGLE) {
-           panAngle = MAX_PAN_ANGLE;
-           scanDir = -1;
-       }
-       else if (panAngle <= MIN_PAN_ANGLE) {
-           panAngle = MIN_PAN_ANGLE;
-           scanDir = 1;
-       }
-
-       panServo.write(panAngle);
-   }
-
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   #
-   # SPDX-License-Identifier: MPL-2.0
-
-   """
-   AI Smart Guard
-
-   A complete security system:
-     - Servo scans left/right (green LED = all clear)
-     - Person detected → red LED, buzzer alarm, servo tracks,
-       TTS announces "Intruder detected"
-     - Person lost for 3 seconds → returns to green/scanning
-   """
-
-   import queue
-   import threading
-   import time
-   from datetime import datetime, UTC
-
-   from arduino.app_utils import App, Bridge
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-   from sunfounder_tts import EdgeTTS
-
-   # ---- Web UI ----
-   ui = WebUI()
-
-   # ---- Camera + Detection ----
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   detection = VideoObjectDetection(
-       camera,
-       confidence=0.4,
-       debounce_sec=0.5,
-   )
-
-   # ---- State ----
-   intruder_visible = False
-   last_intruder_time = 0.0
-   state_lock = threading.Lock()
-   LOST_TIMEOUT = 3.0  # seconds before all-clear
-   last_spoke_alert = 0.0     # prevent TTS spam
-
-   # ---- Voice ----
-   ALERT_TEXT = "Intruder detected. Intruder detected."
-   CLEAR_TEXT = "All clear."
-   speech_queue = queue.Queue()
-
-
-   def speech_worker():
-       """Background TTS worker."""
-       try:
-           tts = EdgeTTS()
-           tts.set_voice("en-US-JennyNeural")
-           tts.set_volume(50)
-
-           print("🔊 TTS ready.")
-
-           while True:
-               text = speech_queue.get()
-               try:
-                   tts.say(text)
-               except Exception as e:
-                   print(f"TTS error: {e}")
-               finally:
-                   speech_queue.task_done()
-       except Exception as e:
-           print(f"TTS init failed: {e}")
-
-
-   def speak(text):
-       if text:
-           speech_queue.put(str(text))
-
-
-   # ---- Detection callback ----
-
-   def person_detected():
-       """Called each time the model detects a person."""
-       global intruder_visible, last_intruder_time, last_spoke_alert
-
-       now = time.monotonic()
-
-       with state_lock:
-           last_intruder_time = now
-
-           if not intruder_visible:
-               intruder_visible = True
-               Bridge.call("alarm_on")
-
-       # Only speak once every 8 seconds to avoid spamming
-       if now - last_spoke_alert > 8.0:
-           last_spoke_alert = now
-           speak(ALERT_TEXT)
-
-       ui.send_message("guard_status", {
-           "alert": True,
-           "confidence": 100,
-           "message": "🚨 Intruder detected!",
-           "timestamp": datetime.now(UTC).isoformat(),
-       })
-
-
-   def monitor_guard():
-       """Background: return to all-clear after timeout."""
-       global intruder_visible
-
-       while True:
-           should_clear = False
-
-           with state_lock:
-               if intruder_visible:
-                   if time.monotonic() - last_intruder_time >= LOST_TIMEOUT:
-                       intruder_visible = False
-                       should_clear = True
-
-           if should_clear:
-               Bridge.call("alarm_off")
-               speak(CLEAR_TEXT)
-
-               ui.send_message("guard_status", {
-                   "alert": False,
-                   "confidence": 0,
-                   "message": "✅ All clear — scanning",
-                   "timestamp": datetime.now(UTC).isoformat(),
-               })
-
-           time.sleep(0.2)
-
-
-   # ---- Start ----
-
-   detection.on_detect("person", person_detected)
-
-   threading.Thread(target=speech_worker, daemon=True).start()
-   threading.Thread(target=monitor_guard, daemon=True).start()
-
-   print("🛡️  AI Smart Guard is running.")
-
-   App.run()
-
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
-.. code-block:: text
+Now that you've seen the guard react, here is how the two processors share the job: the whole system is two states — **patrolling** and **alarming** — decided in Python and executed in the sketch.
 
-   Two states, decided in Python, executed in the sketch:
+An App Lab project is a folder containing multiple files. Here's what each one does:
 
-   PATROLLING (green LED, buzzer silent)
-   ├── sketch sweeps the pan servo 45° → 135° → 45°, 1° every 40 ms
-   ├── Python detects a "person" (confidence > 0.4) → alarm_on
-   └── Bridge.call("alarm_on")
+* ``08 AI Smart Guard/`` — the app folder
 
-   ALARMING (red LED, buzzer beeping, servo frozen)
-   ├── sketch: RGB red, buzzer toggles every 150 ms, no scanning
-   ├── Python: speak "Intruder detected. Intruder detected."
-   │           (throttled to once per 8 s) → Web UI: 🚨 Intruder detected! (100%)
-   └── monitor thread: no person seen for 3 s → Bridge.call("alarm_off")
-              └── back to PATROLLING: green LED, buzzer off, servo resumes sweep
-                   └── speak "All clear."
+  * ``app.yaml`` — App metadata: declares the ``video_object_detection``, ``web_ui``, and ``sunfounder_tts`` bricks
 
-**The sketch owns the hardware** — All three outputs live in one file on the STM32 MCU. During normal patrol, ``loop()`` sweeps the pan servo between 45° and 135° by moving it one degree every 40 ms (``scanInterval``) — the tilt servo just holds its 90° center. When ``alarm_on()`` arrives over Bridge, the sketch flips two flags: ``alarming = true`` (the loop now spends its time toggling the buzzer every 150 ms — a classic beep-beep-beep alarm, without any ``delay()`` blocking) and ``scanning = false`` (the servo freezes, locking the camera on the intruder's position). ``alarm_off()`` reverses everything: it silences the buzzer, sets the RGB back to green, and lets the sweep resume. Guard functions inside the sketch also prevent double-triggering: calling ``alarm_on()`` twice in a row does nothing.
+  * ``python/``
 
-**The RGB LED doubles as a status lamp** — ``setRgb()`` writes three channels with ``analogWrite()``: red on **D8**, green on **D7**, blue on **D6**. Green means *patrolling — all clear*; red means *intruder!* Because this is a common-cathode LED, a channel lights when its pin goes high, so full brightness is 255. The buzzer on **D5** is an *active* buzzer — it generates its own tone, so the sketch only needs to switch its power on and off.
+    * ``main.py`` — Person detection, the alarm decisions, and the voice alerts
 
-**Python decides, the sketch executes** — The `person_detected()` callback fires each time the model reports a person, and it is the heart of the guard logic. A person was already being watched? Then nothing happens — the flags are guarded. But the **first** sighting flips ``intruder_visible`` and fires ``Bridge.call("alarm_on")``. The detection config itself is tuned for security: confidence threshold **0.4** (generous enough to catch people at a distance) and a **0.5 s** debounce (brief flickers in the model output are ignored). The ``VideoObjectDetection`` brick is used *without* a ``face-detection`` model this time, so the underlying general model reports any of its ~80 classes — and Python subscribes only to **"person"** with ``detection.on_detect("person", person_detected)``.
+  * ``sketch/``
 
-**The guard never nags** — Speaking takes seconds, and the intruder stays in view — if Python announced the alert on every detection, the speaker would be screaming continuously. A timestamp, ``last_spoke_alert``, throttles the voice: the message "Intruder detected. Intruder detected." is spoken at most **once every 8 seconds**, no matter how many detections arrive. The alert text is deliberately repeated so it stays audible above the buzzer. The Web UI panel updates on every detection, showing **🚨 Intruder detected! (100%)**.
+    * ``sketch.yaml`` — Sketch configuration (declares the ``Arduino_HardwareServo`` library)
+    * ``sketch.ino`` — Servo sweep, RGB status, and the buzzer alarm on the microcontroller
 
-**All clear, automatically** — A background monitor thread checks every 0.2 s whether any person detection has refreshed ``last_intruder_time`` within the last **3 seconds**. When the intruder leaves (or hides) long enough, the thread flips the state back: ``Bridge.call("alarm_off")``, a spoken *"All clear."*, and the Web UI's green **All clear — scanning** panel. The guard is then ready for its next intruder — no button, no human in the loop.
+  * ``assets/``
+
+    * ``index.html`` — Web UI structure (camera frame, guard panel, status row)
+    * ``app.js`` — Browser logic: camera stream and Socket.IO events
+    * ``style.css`` — Visual styling
+    * ``libs/`` — JavaScript libraries (Socket.IO)
+    * ``img/`` — Static resources
+
+  * ``README.md`` — Project documentation and usage guide
+
+The data path from a person walking into the frame to the alarm — and back:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as Camera (CSI)
+       participant P as Python (main.py)
+       participant S as Sketch (sketch.ino)
+       participant B as Browser (HTML/JS)
+
+       C->>P: frame (flipped vertically)
+       S->>S: pan servo sweeps 45°–135°, 1° every 40 ms
+       P->>P: VideoObjectDetection → on_detect("person")
+       P->>S: Bridge.call("alarm_on")
+       S->>S: RGB red, buzzer beeps every 150 ms, sweep stops
+       P->>P: EdgeTTS speaks "Intruder detected." — at most once per 8 s
+       P-->>B: guard_status {alert: true, confidence: 100}
+       P->>S: Bridge.call("alarm_off") — no person for 3 s
+       S->>S: RGB green, buzzer off, sweep resumes
+       P-->>B: guard_status {alert: false}
+
+Here's what each component does:
+
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``loop()`` sweeps the pan servo one degree every 40 ms (``scanInterval``) between 45° and 135°, reversing at each end; the tilt servo holds its 90° center
+  * ``alarm_on()`` sets ``alarming = true`` and ``scanning = false``, then paints the LED red with ``setRgb()`` — ``analogWrite()`` on **D8** (red), **D7** (green), and **D6** (blue)
+  * While alarming, ``loop()`` toggles the buzzer on **D5** every 150 ms — a beep-beep-beep alarm with no blocking ``delay()``
+  * ``alarm_off()`` silences the buzzer, returns the RGB LED to green, and lets the sweep resume
+  * ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)`` expose both commands, and each one ignores a repeated call
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``Camera(adjustments=lambda frame: frame[::-1, :])`` flips every frame vertically, because the CSI camera is mounted upside down on the carrier
+  * ``VideoObjectDetection(camera, confidence=0.4, debounce_sec=0.5)`` runs the **general object-detection** model — this time with no ``model:`` restriction, so it reports all of its classes
+  * ``detection.on_detect("person", person_detected)`` subscribes to the ``person`` class only
+  * ``person_detected()`` refreshes ``last_intruder_time`` and, on the first sighting, calls ``Bridge.call("alarm_on")``
+  * ``speak()`` queues the alert for EdgeTTS, which runs in its own daemon thread, and ``last_spoke_alert`` throttles it to once every 8 seconds
+  * ``ui.send_message("guard_status", …)`` sends the red or green panel state to the browser
+  * ``monitor_guard()`` checks the clock every 0.2 s and, after ``LOST_TIMEOUT = 3.0`` seconds with no person, calls ``Bridge.call("alarm_off")`` and speaks "All clear."
+  * ``App.run()`` starts the app
+
+**Bridge** — communication channel between MPU and MCU
+  * Python side: ``Bridge.call("alarm_on")`` and ``Bridge.call("alarm_off")``
+  * Sketch side: ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)``
+  * Only two short commands ever cross the Bridge — the pins, the sweep speed, and the beep timing all stay in the sketch
+
+**Browser (HTML/JS)** — runs in the user's browser
+  * The camera feed is an ``<iframe>`` pointed at the stream URL on port 4912 (``/embed``), reloaded once a second until it loads
+  * ``socket.on("guard_status", …)`` swaps the panel between the green **All clear — scanning** state and the red **🚨 Intruder detected! (100%)** alert
+  * ``socket.on("disconnect")`` flips the dot red and shows **Connection lost**
+
+**The RGB LED is the guard's status lamp** — Green means *patrolling — all clear*; red means *intruder!* Because the LED is common cathode, a channel lights when its pin goes high, so full brightness is 255. The buzzer on **D5** is an *active* buzzer — it generates its own tone, so the sketch only has to switch its power on and off.
+
+**Why throttle the voice?** — Speaking takes seconds and the intruder usually stays in view, so announcing every detection would leave the speaker screaming continuously. The ``last_spoke_alert`` timestamp limits the alert to **once every 8 seconds**, however many detections arrive. The sentence repeats "Intruder detected" on purpose, so it stays audible over the buzzer.
+
+**All clear, automatically** — A background monitor thread checks every 0.2 s whether any person detection has refreshed ``last_intruder_time`` within the last 3 seconds. Once the intruder leaves — or hides long enough — the thread flips the state back: ``Bridge.call("alarm_off")``, a spoken *"All clear."*, and the Web UI's green panel. The guard is then ready for its next intruder — no button, no human in the loop.
 
 3. Experiment
 ----------------

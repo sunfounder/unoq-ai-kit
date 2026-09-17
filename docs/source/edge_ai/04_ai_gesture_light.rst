@@ -57,10 +57,8 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
    :width: 500
    :align: center
 
-2. Code
----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -77,8 +75,6 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
 #. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``04 AI Gesture Light.zip``.
 
 #. The app appears in **Apps** — click it to open.
-
-**Run the Code**
 
 #. Click the **Run** button (▶). The app boots the camera and loads the hand-gesture model, which takes a few seconds the first time. The Output window prints:
 
@@ -100,229 +96,105 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
 
 #. Take your hand out of the frame and wait about two seconds. The card clears back to **Waiting...** with *"Confidence: --"* and the action line **Show a gesture**.
 
-**The Code**
-
-**Python (main.py)** — runs on the Linux MPU: camera, gesture classification, and Web UI
-
-.. code-block:: python
-   :linenos:
-
-   """AI Gesture Light — use hand gestures to control one LED."""
-
-   import threading
-   import time
-
-   from arduino.app_utils import App, Bridge
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_peripherals.camera import Camera
-
-
-   CONFIDENCE_THRESHOLD = 0.25
-   GESTURE_LOST_TIMEOUT = 2.0
-   FLIP_IMAGE = True
-
-   GESTURE_NAMES = {
-       "good": "Thumbs up",
-       "neut": "Fist",
-       "five": "Open hand",
-       "peace": "V-sign",
-   }
-
-   ui = WebUI()
-   state_lock = threading.Lock()
-   last_gesture = None
-   last_gesture_time = 0.0
-
-
-   def set_led(state):
-       """Turn the external LED on or off through Bridge."""
-       Bridge.call("set_led", 1 if state else 0)
-
-
-   def send_result(label, confidence, action):
-       ui.send_message("gesture_result", {
-           "gesture": GESTURE_NAMES.get(label, "None"),
-           "confidence": round(confidence * 100),
-           "action": action,
-       })
-
-
-   def best_gesture(detections):
-       """Return the strongest supported model label."""
-       best_label = None
-       best_confidence = 0.0
-
-       for label, instances in detections.items():
-           if label not in GESTURE_NAMES:
-               continue
-
-           for instance in instances:
-               confidence = float(instance.get("confidence", 0.0))
-               if confidence > 1:
-                   confidence /= 100
-               if confidence > best_confidence:
-                   best_label = label
-                   best_confidence = confidence
-
-       if best_confidence < CONFIDENCE_THRESHOLD:
-           return None, 0.0
-       return best_label, best_confidence
-
-
-   def on_detections(detections):
-       """Display every supported gesture and act only when it changes."""
-       global last_gesture, last_gesture_time
-
-       label, confidence = best_gesture(detections)
-       if label is None:
-           return
-
-       with state_lock:
-           last_gesture_time = time.monotonic()
-           if label == last_gesture:
-               return
-           last_gesture = label
-
-       if label == "good":
-           set_led(True)
-           action = "LED ON"
-       elif label == "neut":
-           set_led(False)
-           action = "LED OFF"
-       else:
-           action = "Gesture displayed"
-
-       print(
-           f"[GESTURE] {GESTURE_NAMES[label]} — {confidence * 100:.0f}% — {action}",
-           flush=True,
-       )
-       send_result(label, confidence, action)
-
-
-   def reset_when_gesture_is_lost():
-       """Return the webpage to waiting after the hand leaves the camera."""
-       global last_gesture
-
-       while True:
-           should_reset = False
-
-           with state_lock:
-               if (
-                   last_gesture is not None
-                   and time.monotonic() - last_gesture_time >= GESTURE_LOST_TIMEOUT
-               ):
-                   last_gesture = None
-                   should_reset = True
-
-           if should_reset:
-               send_result("", 0.0, "Show a gesture")
-
-           time.sleep(0.2)
-
-
-   if FLIP_IMAGE:
-       camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   else:
-       camera = Camera()
-
-   camera.start()
-
-   detection = VideoObjectDetection(
-       camera,
-       confidence=CONFIDENCE_THRESHOLD,
-       debounce_sec=0.2,
-   )
-   detection.on_detect_all(on_detections)
-
-   threading.Thread(target=reset_when_gesture_is_lost, daemon=True).start()
-
-   print("AI Gesture Light is running — show your hand to the camera.", flush=True)
-   App.run()
-
-**Sketch (sketch.ino)** — runs on the STM32 MCU and owns the LED on D5
-
-.. code-block:: cpp
-   :linenos:
-
-   /*
-    * AI Gesture Light
-    *
-    * External LED: D5 through a 220 ohm resistor
-    */
-
-   #include <Arduino_RouterBridge.h>
-
-   const int LED_PIN = 5;
-
-
-   int setLed(int state)
-   {
-       digitalWrite(LED_PIN, state ? HIGH : LOW);
-       return state ? 1 : 0;
-   }
-
-
-   void setup()
-   {
-       pinMode(LED_PIN, OUTPUT);
-       digitalWrite(LED_PIN, LOW);
-
-       Bridge.begin();
-       Bridge.provide("set_led", setLed);
-   }
-
-
-   void loop()
-   {
-       delay(10);
-   }
-
 **How it Works**
+
+A single gesture now crosses four layers — the model labels it, Python decides whether the label means anything, the sketch moves the pin, and the page reports what happened.
+
+An App Lab project is a folder containing multiple files. Here's what each one does:
+
+* ``04 AI Gesture Light/`` — the app folder
+
+  * Bricks
+
+    * ``video_object_detection`` with ``model: hand-gestures`` — runs the hand-gesture classification model on every camera frame
+    * ``web_ui`` — serves the Web UI with the live camera feed, the Current Gesture card, and the gesture hint line
+
+  * Sketch libraries
+
+    * None — the sketch only uses the built-in Bridge library
+
+  * Files
+
+    * ``assets/``
+
+      * ``index.html`` — Web UI structure (camera feed, Current Gesture card, hint line)
+      * ``app.js`` — Browser logic (Socket.IO client and card updates)
+      * ``style.css`` — Visual styling
+      * ``libs/`` — JavaScript libraries (Socket.IO)
+      * ``img/`` — UI images (logo)
+      * ``docs_assets/`` — Documentation images (result and wiring diagrams)
+
+    * ``python/``
+
+      * ``main.py`` — Camera, gesture classification, edge-triggered actions, and the reset thread
+
+    * ``sketch/``
+
+      * ``sketch.yaml`` — Sketch configuration
+      * ``sketch.ino`` — LED control on the microcontroller
+
+    * ``README.md`` — Project documentation and usage guide
+    * ``app.yaml`` — App metadata (name, icon, bricks used)
+
+The data path, from a raised hand to a lit LED:
 
 .. mermaid::
 
    sequenceDiagram
-       participant B as Browser (HTML/JS)
+       participant C as Camera (CSI)
        participant P as Python (main.py)
        participant S as Sketch (sketch.ino)
+       participant B as Browser (HTML/JS)
 
+       C->>P: video frames
        P->>P: hand-gestures model → best_gesture()
-       P->>P: label changed? ("good" → LED ON)
+       P->>P: same label as last time? then nothing happens
        P->>S: Bridge.call("set_led", 1)
        S->>S: digitalWrite(5, HIGH)
        P-->>B: gesture_result {gesture, confidence, action}
-       B->>B: update Current Gesture card
-       P->>B: 2 s without a gesture → "Show a gesture"
+       B->>B: update the Current Gesture card
+       P-->>B: 2 s without a gesture → "Show a gesture"
 
-Everything else in the project supports these two files: the ``assets/`` folder holds the Web UI pages (``index.html``, ``app.js``, ``style.css``, and the socket.io client library), and ``app.yaml`` declares the two bricks the app relies on — ``video_object_detection`` with the ``hand-gestures`` model, and ``web_ui``. No model training is involved: the hand-gesture model ships with App Lab, and this project simply asks for it by name.
+Here's what each component does:
 
-**A classification model, not an object model** — The general model you used earlier knows around 80 everyday categories and answers *"what is in this picture?"* — it has to consider the whole world. This project requests ``arduino:video_object_detection`` with ``model: hand-gestures``, which replaces that general model with a small, specialized one that answers a narrower question: *"which of my four gestures is this?"* That difference matters in three practical ways. It only ever returns one of its own classes, so you never have to filter out cups and chairs; it is trained specifically on hands, so it still recognizes a gesture when the background is busy; and because its whole world is four possibilities, "something" is always the answer — which is exactly why the confidence threshold has to be low (below).
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``digitalWrite(LED_PIN, state ? HIGH : LOW)`` switches **D5**
+  * ``setLed()`` takes a plain integer — Python sends ``1`` or ``0``, never a gesture name
+  * ``Bridge.provide("set_led", setLed)`` registers the function Python is allowed to call
+  * ``setup()`` drives the pin LOW once so the LED starts dark, and ``loop()`` only delays — all the real work is event-driven
 
-**Four labels, four meanings** — The model speaks in short internal labels, and the ``GESTURE_NAMES`` dictionary is the translation table between the model's vocabulary and yours: ``good`` is a 👍 thumbs up, ``neut`` is a ✊ fist, ``five`` is a 🖐️ open hand, and ``peace`` is a ✌️ V-sign. Keeping the mapping in one dictionary means the rest of the program never deals in raw model labels — ``send_result()`` looks a label up with ``GESTURE_NAMES.get(label, "None")`` so the Web UI always shows a human-readable name — and it also decides which labels are *supported*: ``best_gesture()`` skips any class with ``if label not in GESTURE_NAMES: continue``, so if the model ever reports something outside this set, Python ignores it. Only two of the four labels have a hardware consequence: ``good`` calls ``set_led(True)`` and ``neut`` calls ``set_led(False)``, while every other label falls into the ``else`` branch and gets the action string ``"Gesture displayed"`` — recognized, shown, and deliberately harmless.
+**Python (main.py)** — runs on the Linux MPU
+  * ``VideoObjectDetection(camera, confidence=0.25, debounce_sec=0.2)`` runs the hand-gesture model locally
+  * ``best_gesture()`` ignores any label that is not in ``GESTURE_NAMES`` and returns the highest-confidence one
+  * ``on_detections()`` compares the new label with ``last_gesture`` and returns early when the two match
+  * ``set_led()`` calls ``Bridge.call("set_led", 1 if state else 0)``, and only for ``good`` (thumbs up) and ``neut`` (fist)
+  * ``send_result()`` pushes the gesture name, the confidence as a percentage, and an action string to the browser
+  * ``reset_when_gesture_is_lost()`` runs in a background thread and clears the stored label after ``GESTURE_LOST_TIMEOUT`` (2 seconds)
 
-**Why the threshold is only 0.25** — The earlier projects used a picky threshold such as 0.4, because a wrong object detection means the wrong colour or a false alarm. Here ``CONFIDENCE_THRESHOLD = 0.25`` is deliberately permissive, for a reason that comes straight from classification: the model always has to choose one of four classes, so even a half-visible hand gets *some* answer, and that answer's score is spread across four candidates rather than across 80. A stricter threshold would leave you waving at the camera waiting for nothing. The safety net is elsewhere: ``best_gesture()`` also picks the **highest-confidence** instance across all labels, so if the model is uncertain between a thumbs up and a fist, only the stronger guess is acted on.
+**Bridge** — the communication channel between the MPU and the MCU
+  * Sketch side: ``Bridge.provide("set_led", setLed)`` exposes the LED function
+  * Python side: ``Bridge.call("set_led", 1)`` invokes it with one integer
+  * Keeping the gesture vocabulary on the Linux side leaves the MCU with nothing to interpret — it just switches a pin
 
-**Why debounce is a mere 0.2 seconds** — ``debounce_sec=0.2`` is the brick's own rate limit: the same label cannot trigger a callback more often than five times a second. Compare that with the one-second debounce the general model used — that setting exists to stop a *detector* from re-announcing the same cup dozens of times per second. Here the pace is different because the model is classifying continuously and you want the display to feel live, while 0.2 s is still long enough to swallow frame-to-frame flicker that would otherwise make the card strobe between labels.
+**Browser (HTML/JS)** — runs in the user's browser
+  * ``socket.on('gesture_result', ...)`` writes the gesture name, the confidence, and the action into the Current Gesture card
+  * ``setDefaultUI()`` runs on page load, before the socket connects, so the card starts at **Waiting...** / **Confidence: --**
+  * The live video travels on its own channel: ``app.js`` embeds the camera stream from port 4912 in an ``<iframe>``
+  * ``socket.on('connect')`` and ``socket.on('disconnect')`` drive the status dot, independently of the gesture card
 
-**Act on the change, not on the frame** — This is the heart of the lesson. ``on_detect_all()`` fires for *every* frame, so with a hand held in view it might call ``on_detections()`` thirty times a second — and thirty times a second it would call ``Bridge.call("set_led", 1)``, hammering the Bridge with messages that all ask for the state the LED is already in. The guard is four lines long:
+**A classification model, not an object model** — The general model you used earlier knows around 80 everyday categories and answers *"what is in this picture?"* — it has to consider the whole world. This project requests ``arduino:video_object_detection`` with ``model: hand-gestures``, which replaces that general model with a small, specialized one that answers a narrower question: *"which of my four gestures is this?"* That difference matters in three practical ways. It only ever returns one of its own classes, so you never have to filter out cups and chairs; it is trained specifically on hands, so it still recognizes a gesture when the background is busy; and because its whole world is four possibilities, "something" is always the answer — which is exactly why the confidence threshold has to be low.
 
-.. code-block:: python
-   :linenos:
+**Four labels, four meanings** — The model speaks in short internal labels, and the ``GESTURE_NAMES`` dictionary is the translation table between the model's vocabulary and yours: ``good`` is a 👍 thumbs up, ``neut`` is a ✊ fist, ``five`` is a 🖐️ open hand, and ``peace`` is a ✌️ V-sign. Keeping the mapping in one dictionary means the rest of the program never deals in raw model labels — ``send_result()`` looks a label up with ``GESTURE_NAMES.get(label, "None")`` so the Web UI always shows a human-readable name — and it also decides which labels are *supported*: ``best_gesture()`` skips any class that is not in the dictionary, so if the model ever reports something outside this set, Python ignores it. Only two of the four labels have a hardware consequence: ``good`` calls ``set_led(True)`` and ``neut`` calls ``set_led(False)``, while every other label falls into the ``else`` branch and gets the action string ``"Gesture displayed"`` — recognized, shown, and deliberately harmless.
 
-   with state_lock:
-       last_gesture_time = time.monotonic()
-       if label == last_gesture:
-           return
-       last_gesture = label
+**Why the threshold is only 0.25** — The object-detection project used a picky threshold of 0.45, because a wrong detection there means the wrong colour or a false alarm. Here ``CONFIDENCE_THRESHOLD = 0.25`` is deliberately permissive, for a reason that comes straight from classification: the model always has to choose one of four classes, so even a half-visible hand gets *some* answer, and that answer's score is spread across four candidates rather than across 80. A stricter threshold would leave you waving at the camera waiting for nothing. The safety net is elsewhere: ``best_gesture()`` also picks the **highest-confidence** instance across all labels, so if the model is uncertain between a thumbs up and a fist, only the stronger guess is acted on.
 
-``last_gesture`` remembers the label that was last *acted on*. If the freshly recognized label is the same one, the function returns immediately — no Bridge call, no socket message, no work at all. Only a genuine **change** of label falls through to the action code. This is called **edge-triggered** behaviour, and it is the habit worth taking away from this project: a model's output is a stream, but your hardware usually cares about transitions in that stream, not about its instantaneous value. Notice that the timestamp is refreshed *before* the comparison, so time keeps counting even while the same gesture is held — which is what the next paragraph needs.
+**Why debounce is a mere 0.2 seconds** — ``debounce_sec=0.2`` is the brick's own rate limit: the model cannot report more often than five times a second. Compare that with the 0.3-second debounce the general model used — that setting exists to stop a *detector* from re-announcing the same object dozens of times per second. Here the pace is different because the model is classifying continuously and you want the display to feel live, while 0.2 s is still long enough to swallow frame-to-frame flicker that would otherwise make the card strobe between labels.
+
+**Act on the change, not on the frame** — This is the heart of the lesson. Detection callbacks fire for *every* frame, so with a hand held in view ``on_detections()`` might run thirty times a second — and thirty times a second it would call ``Bridge.call("set_led", 1)``, hammering the Bridge with messages that all ask for the state the LED is already in. The guard is a timestamp and a comparison. ``last_gesture`` remembers the label that was last *acted on*; if the freshly recognized label is the same one, the function returns immediately — no Bridge call, no socket message, no work at all. Only a genuine **change** of label falls through to the action code. This is called **edge-triggered** behaviour, and it is the habit worth taking away from this project: a model's output is a stream, but your hardware usually cares about transitions in that stream, not about its instantaneous value. Notice that the timestamp is refreshed *before* the comparison, so time keeps counting even while the same gesture is held — which is what the next paragraph needs.
 
 **The two-second reset** — ``reset_when_gesture_is_lost()`` runs in a background thread and wakes every 0.2 seconds to compare ``time.monotonic()`` against ``last_gesture_time``, the stamp that ``on_detections()`` keeps refreshing. If more than ``GESTURE_LOST_TIMEOUT`` (2 seconds) have passed since the last recognized gesture, the thread clears ``last_gesture`` back to ``None`` and sends an empty result, which the browser renders as **Waiting...** / **Show a gesture**. Cleaning up matters for a subtle reason: ``last_gesture`` is not just a label, it is the memory that makes edge-triggering work. Clearing it means that when you bring your hand back, the gesture counts as a fresh change and fires again — hold up a thumbs up, drop your hand, wait two seconds, and the same thumbs up will turn the LED on again. Without that reset, the second thumbs up would look identical to the last one and be silently ignored.
 
-**Python decides, the sketch executes** — The sketch is tiny on purpose. ``setLed(int state)`` is mounted on the Bridge with ``Bridge.provide("set_led", setLed)``, so Python can reach it with ``Bridge.call("set_led", 1 if state else 0)``, and it writes the pin with ``digitalWrite(LED_PIN, state ? HIGH : LOW)`` on **D5**. Python sends plain integers rather than words like "good" or "neut", because keeping the gesture vocabulary on the Linux side leaves the MCU with nothing to interpret — it just switches a pin. ``setup()`` also drives the pin LOW once so the LED starts dark, and ``loop()`` does nothing but ``delay(10)``: as in every Bridge project, all the real work is event-driven.
-
-**Showing it in the browser** — ``send_result()`` pushes a ``gesture_result`` socket.io event carrying three fields: the human-readable gesture name, the confidence as a whole percentage (``round(confidence * 100)``), and an action string such as ``LED ON`` or ``Gesture displayed``. The page's ``socket.on('gesture_result', ...)`` handler writes them into the Current Gesture card. The live video arrives on a separate channel — the page embeds the camera stream in an ``<iframe>`` pointed at port 4912's ``/embed`` page — so pixels and gesture results never block each other. The status dot is driven by a third, independent thing: the socket's ``connect`` and ``disconnect`` events, which is why it can honestly say **Connected** even before you have shown the camera anything.
+One last detail from the page: the status dot is driven by the socket's ``connect`` and ``disconnect`` events, while the gesture card is driven by ``gesture_result`` messages and the picture arrives on yet another channel. That is why the dot can honestly say **Connected** even before you have shown the camera anything.
 
 3. Experiment
 ---------------

@@ -38,10 +38,8 @@ In this lesson, you will learn to:
 
 No breadboard wiring is needed in this lesson. The CSI camera is already attached to the Multimedia Carrier, which is part of your pre-assembled kit — the only "circuit" here is the light entering the lens.
 
-2. Code
-----------
-
-**Import the Code**
+2. Run the App
+----------------
 
 #. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
 
@@ -58,8 +56,6 @@ No breadboard wiring is needed in this lesson. The CSI camera is already attache
 #. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``01 AI Vision Recognition.zip``.
 
 #. The app appears in **Apps** — click it to open.
-
-**Run the Code**
 
 #. With the app open, click the **Run** button (▶) in the top-right corner. The app boots the camera and loads the AI model, which takes a few seconds the first time.
 
@@ -79,85 +75,74 @@ No breadboard wiring is needed in this lesson. The CSI camera is already attache
 
 #. Try a person and a cell phone too — each detection row shows its own icon, name, and confidence.
 
-**The Code**
-
-**Python (main.py)** — runs on the Linux MPU: camera, object detection, and Web UI
-
-.. code-block:: python
-   :linenos:
-
-   # SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-   #
-   # SPDX-License-Identifier: MPL-2.0
-
-   """
-   AI Vision Recognition — detect common objects in the camera feed.
-
-   The VideoObjectDetection brick (with no model restriction) detects
-   common objects in the camera feed. Detections are sent to the custom
-   Web UI via socket.io and displayed alongside the live video stream.
-   """
-
-   from datetime import datetime, UTC
-   from arduino.app_utils import App
-   from arduino.app_bricks.web_ui import WebUI
-   from arduino.app_bricks.video_objectdetection import VideoObjectDetection
-   from arduino.app_peripherals.camera import Camera
-
-   # Serve our custom web interface
-   ui = WebUI()
-
-   # Start the CSI camera
-   camera = Camera(adjustments=lambda frame: frame[::-1, :])
-   camera.start()
-
-   # Video object detection — general model for common objects
-   detection = VideoObjectDetection(camera, confidence=0.4, debounce_sec=1.0)
-
-   # Send all detections to the web UI
-   def send_detections(detections: dict):
-       """Called for every frame with detection results."""
-       results = []
-       for class_name, instances in detections.items():
-           for instance in instances:
-               results.append({
-                   "object": class_name,
-                   "confidence": round(instance.get("confidence", 0) * 100),
-                   "timestamp": datetime.now(UTC).isoformat(),
-               })
-
-       if results:
-           ui.send_message("detections", {"objects": results})
-
-
-   detection.on_detect_all(send_detections)
-
-   print("🤖 AI Vision Recognition running — open the Web UI.")
-
-   App.run()
-
-Everything else in the project supports this file: the ``assets/`` folder holds the Web UI pages (``index.html``, ``app.js``, ``style.css``, and the socket.io client library), and ``app.yaml`` declares the two bricks the app relies on — ``web_ui`` and ``video_object_detection``.
-
 **How it Works**
 
-.. code-block:: text
+Now that detections are appearing on screen, let's trace how a frame of video becomes a labeled object in the panel.
 
-   camera frames → vertical flip (frame[::-1, :]) → VideoObjectDetection
-   general object model (confidence ≥ 0.4, debounce 1.0 s)
-       → on_detect_all → send_detections() → confidence as a percentage
-       → ui.send_message("detections", ...) over socket.io
-   Browser: video stream (port 4912 /embed) in the left card,
-            detection rows with icons and bars on the right
+* ``01 AI Vision Recognition/`` — the app folder
 
-In this lesson the entire project runs on the Linux MPU as a single Python program — the sketch half of the app is an idle placeholder, because object detection happens entirely on the Linux side. The work is split across three pieces that cooperate: the ``Camera`` peripheral produces frames, the ``VideoObjectDetection`` brick interprets them, and the ``WebUI`` brick delivers the result to your browser.
+  * ``app.yaml`` — app metadata and the Bricks it declares (``web_ui`` and ``video_object_detection``)
+  * ``README.md`` — project documentation and usage guide
 
-**Capturing frames** — ``Camera`` is an App Lab peripheral, not a brick. Once ``camera.start()`` is called it keeps producing frames in the background. Its ``adjustments`` parameter is a function applied to every frame before anything else sees it; ``lambda frame: frame[::-1, :]`` reverses the rows, flipping the picture top-to-bottom. The CSI camera is mounted upside down in this kit, so without this flip the whole preview would be upside down.
+  * ``python/``
 
-**Turning pixels into objects** — ``VideoObjectDetection(camera, confidence=0.4, debounce_sec=1.0)`` wraps the camera with a pre-trained AI model. Because no specific model is requested, the brick uses its general model, which recognizes roughly 80 common object categories — cups, people, cell phones, bottles, books, and many more. The two settings control how picky it is: ``confidence=0.4`` means any detection the model is less than 40% sure about is discarded, and ``debounce_sec=1.0`` means the same object can trigger a callback at most once per second, so it cannot spam Python with rapid repeated events.
+    * ``main.py`` — camera access, object detection, and the Web UI
 
-**From detections to data** — ``detection.on_detect_all(send_detections)`` registers a callback that fires with a dictionary: each key is a class name like ``"cup"``, and its value is a list of every instance of that class found in the frame. ``send_detections()`` flattens that dictionary into a plain list of records, converting each instance's confidence (a fraction between 0 and 1) into a whole percentage with ``round(instance.get("confidence", 0) * 100)``, and stamps each one with the current time.
+  * ``sketch/``
 
-**Getting the results to the screen** — The browser never runs a model; it only renders data. Python sends each batch of results with ``ui.send_message("detections", {"objects": results})``, a socket.io event that ``app.js`` listens for. The page rebuilds its list of detection rows from the payload — each row's icon, name, and confidence bar are pure HTML. The live video, meanwhile, travels on a separate channel: the page embeds the camera stream (served on port 4912 as an ``/embed`` page) in an ``<iframe>``, so pixels and detections stay nicely decoupled. Note that Python only sends a message when at least one object is detected — while the view stays empty, the panel simply keeps whatever it showed last.
+    * ``sketch.ino`` — idle placeholder; all the work happens on the Linux side
+    * ``sketch.yaml`` — sketch configuration
+
+  * ``assets/``
+
+    * ``index.html`` — Web UI structure: the video card and the Detected Objects panel
+    * ``app.js`` — browser logic: socket events, object icons, confidence bars
+    * ``style.css`` — visual styling
+    * ``libs/socket.io.min.js`` — Socket.IO client library
+    * ``img/sf_logo.png`` — header logo
+
+The data path from camera frame to on-screen result:
+
+.. mermaid::
+
+   sequenceDiagram
+       participant C as Camera (CSI)
+       participant P as Python (main.py)
+       participant B as Browser (HTML/JS)
+
+       C->>P: frame
+       P->>P: adjustments — vertical flip
+       P->>P: VideoObjectDetection — general model, confidence 0.4, debounce 1.0 s
+       P->>P: on_detect_all → send_detections()
+       P-->>B: socket.io "detections" — object, confidence %, timestamp
+       B->>B: renderDetections() — icon, name, confidence bar
+       B->>P: GET :4912/embed — live video in an iframe
+
+Here's what each piece does:
+
+**Python (main.py)** — runs on the Linux MPU
+  * ``Camera(adjustments=...)`` starts the CSI camera and applies the flip to every frame it produces
+  * ``VideoObjectDetection(camera, confidence=0.4, debounce_sec=1.0)`` runs the model over each frame
+  * ``detection.on_detect_all(send_detections)`` hands every detection to Python as a dictionary
+  * ``ui.send_message("detections", ...)`` pushes each batch of results to the browser over socket.io
+  * ``App.run()`` starts the app and keeps it running
+
+**Sketch (sketch.ino)** — runs on the STM32 MCU
+  * ``setup()`` is empty and ``loop()`` only sleeps — the sketch is an idle placeholder
+  * All of the AI work happens on the Linux side, so this project never calls across the Bridge
+
+**Browser (HTML/JS)** — runs in the user's browser
+  * ``socket.on('detections', ...)`` receives each batch of results and rebuilds the list of rows
+  * ``renderDetections()`` draws the icon, name, and confidence bar for every object
+  * An ``<iframe>`` pointed at port 4912 ``/embed`` shows the live video beside the results
+
+**Capturing frames** — ``Camera`` is an App Lab peripheral, not a brick, and once started it keeps producing frames in the background. Its ``adjustments`` function is applied to every frame before anything else sees it: the rows are reversed, which flips the picture top-to-bottom. The CSI camera is mounted upside down in this kit, so without that flip the whole preview would be upside down.
+
+**Turning pixels into objects** — ``VideoObjectDetection`` wraps the camera with a pre-trained AI model. Because no specific model is requested, the brick loads its general model, which recognizes roughly 80 common object categories — cups, people, cell phones, bottles, books, and many more. The two settings control how picky it is: ``confidence=0.4`` discards any detection the model is less than 40% sure about, and ``debounce_sec=1.0`` means the same object can trigger a callback at most once per second, so it cannot flood Python with rapid repeats.
+
+**From detections to data** — the callback receives a dictionary: each key is a class name like ``"cup"``, and its value is a list of every instance of that class found in the frame. Python flattens that into plain records and converts each confidence from a fraction between 0 and 1 into a whole percentage — the number you see under the object's name.
+
+**Getting the results to the screen** — the browser never runs a model; it only renders data. Python sends each batch of results with a socket.io message that ``app.js`` listens for, and the page rebuilds its rows from the payload — every icon, name, and bar is pure HTML. The live video travels on a separate channel, embedded in an ``<iframe>`` as an ``/embed`` page, so pixels and detections stay nicely decoupled. Notice that Python only sends a message when at least one object is detected: while the view is empty, the panel simply keeps whatever it showed last.
 
 3. Experiment
 ----------------
