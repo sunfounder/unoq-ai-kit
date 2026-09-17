@@ -1,5 +1,5 @@
-# SunFounder Inventor Lab Kit
-This repository is for SunFounder Inventor Lab Kit. you can buy it on [our website](https://www.sunfounder.com/), or search sunfounder in Amazon.
+# SunFounder AI Starter Kit for Arduino UNO Q
+This repository is for SunFounder AI Starter Kit for Arduino UNO Q. you can buy it on [our website](https://www.sunfounder.com/), or search sunfounder in Amazon.
 
 Quick Links:
 
@@ -13,14 +13,23 @@ Quick Links:
 <a id="about_this_kit"></a>
 ## About this kit:
 
-Embark on your electronics journey with the Inventor Lab Kit, designed for learners and enthusiasts. Centered around the Arduino Uno R3, this kit includes everything from basic components like LEDs and buzzers to advanced modules such as RFID systems and ultrasonic sensors, along with a mini-multimeter for circuit analysis.
+The SunFounder AI Starter Kit for Arduino Uno Q is an all-in-one learning platform for AI, programming, and interactive electronics. It combines modular hardware, a ready-to-use software environment App Lab, and step-by-step lessons to help users build hands-on projects with computer vision, voice interaction, and multi-LLM AI technologies.
+
+**Main Content**
+
+Features the Robot Shield, Multimedia carrier, camera, pan-tilt module, sensors, and electronic components, enabling hands-on AI projects with vision recognition, voice interaction, and hardware control.
+
+**Target Users**
+
+Aged 10+ students, educators, makers, and engineers.
+
+**Application**
+
+Object recognition, face recognition, gesture recognition, voice interaction and control, pan-tilt tracking systems, multi-LLM interactive applications, and smart home systems.
 
 <a id="update"></a>
 ## Update:
-2024-07-31:
-- add some tips
-
-2024-07-22:
+2026-09-17:
 - First Release
 
 
@@ -33,16 +42,16 @@ SunFounder is a company focused on STEAM education with products like open sourc
 
 <a id="license"></a>
 ## License
-This is the code for SunFounder Inventor Lab Kit.
+This is the code for SunFounder AI Starter Kit for Arduino UNO Q.
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied wa rranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-inventor-lab-kit comes with ABSOLUTELY NO WARRANTY; for details run ./show w. This is free software, and you are welcome to redistribute it under certain conditions; run ./show c for details.
+unoq-ai-kit comes with ABSOLUTELY NO WARRANTY; for details run ./show w. This is free software, and you are welcome to redistribute it under certain conditions; run ./show c for details.
 
-SunFounder, Inc., hereby disclaims all copyright interest in the program 'inventor-lab-kit' (which makes passes at compilers).
+SunFounder, Inc., hereby disclaims all copyright interest in the program 'unoq-ai-kit' (which makes passes at compilers).
 
 Mike Huang, 21 August 2015
 

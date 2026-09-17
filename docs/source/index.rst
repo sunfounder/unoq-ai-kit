@@ -17,10 +17,10 @@
 .. end_hello_message
 
 
-Aruino UNO Q AI Starter Kit
-=================================================
+SunFounder AI Starter Kit for Arduino UNO Q
+===========================================
 
-Thank You for Choosing the Inventor Lab Kit.
+Thank You for Choosing the SunFounder AI Starter Kit.
 
 .. image:: img/home_page.png
     :width: 800
@@ -32,7 +32,25 @@ Thank You for Choosing the Inventor Lab Kit.
         * |link_jp_tutorials|
         * |link_en_tutorials|
 
-关于模拟引脚，需要最终确认下到底是A3~A0, 还是A2~A5
+Product Overview
+----------------
+
+The SunFounder AI Starter Kit for Arduino Uno Q is an all-in-one learning platform for AI, programming, and interactive electronics. It combines modular hardware, a ready-to-use software environment App Lab, and step-by-step lessons to help users build hands-on projects with computer vision, voice interaction, and multi-LLM AI technologies.
+
+Main Content
+------------
+
+Features the Robot Shield, Multimedia carrier, camera, pan-tilt module, sensors, and electronic components, enabling hands-on AI projects with vision recognition, voice interaction, and hardware control.
+
+Target Users
+------------
+
+Aged 10+ students, educators, makers, and engineers.
+
+Application
+-----------
+
+Object recognition, face recognition, gesture recognition, voice interaction and control, pan-tilt tracking systems, multi-LLM interactive applications, and smart home systems.
 
 
 .. toctree::
