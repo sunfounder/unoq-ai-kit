@@ -2,12 +2,12 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-1. AI Vision Recognition
+01 AI Vision Recognition
 ==========================
 
 By now your UNO Q has streamed a live camera feed to a Web UI, and you have been the one watching it and deciding what it means. This lesson flips that around: point the camera at a cup, a person, or a cell phone, and the board itself recognizes what it is looking at — in real time, entirely on the device, with no cloud involved. The detected objects appear on screen, side by side with the live video, each labeled with its name and a confidence score.
 
-.. image:: img/1_ai_vision_recognition.png
+.. image:: img/01_ai_vision_recognition.png
    :width: 600
    :align: center
 

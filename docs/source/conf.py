@@ -241,25 +241,19 @@ rst_epilog += """
 .. |list_7segment| image:: /img/list_cpn/list_7segment.png 
 .. |list_74hc595| image:: /img/list_cpn/list_74hc595.png 
 .. |list_ultrasonic| image:: /img/list_cpn/list_ultrasonic.png 
-.. |list_meter| image:: /img/list_cpn/list_meter.png 
 .. |list_wire| image:: /img/list_cpn/list_wire.png
 .. |list_breadboard| image:: /img/list_cpn/list_breadboard.png 
 .. |list_usb_cable| image:: /img/list_cpn/list_usb_cable.png 
 .. |list_uno_q| image:: /img/list_cpn/list_uno_q.png 
 
 .. |list_4digit| image:: /img/list_cpn/list_4digit.png 
-.. |list_bat_cable| image:: /img/list_cpn/list_bat_cable.png 
-.. |list_battery| image:: /img/list_cpn/list_battery.png
 .. |list_pan_tilt| image:: /img/list_cpn/list_pan_tilt.png 
 .. |list_fan| image:: /img/list_cpn/list_fan.png 
 .. |list_joystick_module| image:: /img/list_cpn/list_joystick_module.png 
 .. |list_l293d| image:: /img/list_cpn/list_l293d.png 
 .. |list_moisture_module| image:: /img/list_cpn/list_moisture_module.png
 .. |list_motor| image:: /img/list_cpn/list_xh254_motor.png 
-.. |list_power_module| image:: /img/list_cpn/list_power_module.png 
 .. |list_pump| image:: /img/list_cpn/list_pump.png 
-.. |list_rab| image:: /img/list_cpn/list_rab.png 
-.. |list_rc522_module| image:: /img/list_cpn/list_rc522_module.png 
 .. |list_receiver| image:: /img/list_cpn/list_receiver.png 
 .. |list_relay_module| image:: /img/list_cpn/list_relay_module.png 
 .. |list_remote| image:: /img/list_cpn/list_remote.png 

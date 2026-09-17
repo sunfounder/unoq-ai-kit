@@ -2,12 +2,12 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-4. AI Object Counter
+05 AI Object Counter
 ======================
 
-In the color light project, the AI answered *what is it?* with a single color. But many real systems need a running tally instead: how many boxes passed on a conveyor belt, how many people walked through a door. In this lesson, you'll build an AI counter. The UNO Q watches the camera and counts how many times three everyday objects appear — a computer **mouse**, a **keyboard**, and a **cell phone** — showing the totals live in a Web UI and announcing every new count out loud.
+The gesture project read *you* — one hand signal, one LED. This project goes back to watching the world, but asks a different kind of question: not *what is it?* but *how many?* Many real systems need a running tally: how many boxes passed on a conveyor belt, how many people walked through a door. In this lesson, you'll build an AI counter. The UNO Q watches the camera and counts how many times three everyday objects appear — a computer **mouse**, a **keyboard**, and a **cell phone** — showing the totals live in a Web UI and announcing every new count out loud.
 
-.. image:: img/4_object_counter_result.gif
+.. image:: img/05_ai_object_counter.png
    :width: 600
    :align: center
 
@@ -62,7 +62,7 @@ To test the project, gather three objects you probably already have nearby: a co
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``04 AI Object Counter.zip``.
+#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``05 AI Object Counter.zip``.
 
 #. The app appears in **Apps** — click it to open.
 
@@ -385,4 +385,4 @@ You built your first AI *event counter* — not just a classifier, but a small s
 * How to expose live state and actions to a Web UI through socket.io events and web APIs
 * How a speech worker thread adds voice feedback without ever blocking detection
 
-In the next lesson, you'll leave counting behind and chase motion instead — the camera will lock onto a moving target and steer the pan-tilt mechanism to follow it.
+In the next project, gestures come back — and this time they do more than switch a light. One gesture tilts the camera, another returns it to the centre, another takes a photo, and the UNO Q tells you out loud what it just did.

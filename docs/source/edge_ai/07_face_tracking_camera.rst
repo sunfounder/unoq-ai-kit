@@ -2,10 +2,10 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-5. Face Tracking Camera
+07 Face Tracking Camera
 =======================
 
-So far, every AI project you've built reacts **once**: a face appears, and something happens — a buzzer sounds, a light changes. But what if the camera could *keep its eyes on you*? In this lesson, the UNO Q not only detects your face — it **follows it**. The pan-tilt camera greets you, then tracks you as you move left, right, up, and down, like a tiny robot that wants to keep you in the center of its view.
+The gesture camera moved, but only in fixed steps: one gesture, one 15° nudge, then it waited for you to leave the frame. What if the camera could *keep its eyes on you* instead? In this lesson, the UNO Q not only detects your face — it **follows it**. The pan-tilt camera greets you, then tracks you as you move left, right, up, and down, like a tiny robot that wants to keep you in the center of its view.
 
 In this lesson, you will learn to:
 
@@ -73,7 +73,7 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``05 Face Tracking Camera.zip``.
+#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``07 Face Tracking Camera.zip``.
 
 #. The app appears in **Apps** — click it to open.
 
@@ -89,7 +89,7 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
 
 #. Move left and right, then duck and rise. The camera follows you to keep your face centered. Now step out of view and count to three — after about 2.5 seconds the camera returns to center, the status goes back to **Looking for a face**, and the next face that appears triggers a fresh greeting.
 
-.. image:: img/5_face_tracking_result.png
+.. image:: img/07_face_tracking_camera.png
    :width: 600
    :align: center
 

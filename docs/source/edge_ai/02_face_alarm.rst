@@ -2,12 +2,12 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-2. Face Alarm
+02 Face Alarm
 ===============
 
 In the previous project the AI *watched* — it recognized objects and reported them on screen, but nothing happened beyond the Web UI. This lesson crosses that line: the moment the camera sees a face, a buzzer on the breadboard starts sounding an alarm, and when the face leaves, the alarm stops by itself. This is the first time in this module that an AI decision directly drives physical hardware — the AI sees, decides, and acts.
 
-.. image:: img/2_face_alarm.png
+.. image:: img/02_face_alarm.png
    :width: 600
    :align: center
 

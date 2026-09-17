@@ -60,7 +60,7 @@ only a subset:
 | A: Basic Interaction | 17 | Sketch-only hardware control — no Python, no Web UI |
 | B: Multimedia | 9 | Camera, STT, TTS — no breadboard, Carrier-only |
 | C: IoT | 9 | Bridge, Web UI, Python+Sketch hybrid |
-| D: Edge AI | 6 | Camera + AI vision + physical response |
+| D: Edge AI | 9 | Camera + microphone, AI vision and voice, then physical response |
 | E: AI & LLM | 7 | CloudLLM, natural language, Tool Calling |
 | F: AI Projects | 4 | Vision + Voice + LLM fusion |
 
@@ -429,16 +429,16 @@ Introduction
 
 ### Module D: Edge AI (edge_ai/)
 
-**Canonical reference:** `edge_ai/1_ai_vision_intro.rst`
+**Canonical reference:** `edge_ai/01_ai_vision_recognition.rst`
 
 AI/ML lessons using camera, microphone, and Edge Impulse models.
 Minimal or no breadboard wiring — the hardware is the Multimedia Carrier
 with its built-in peripherals.
 
-**Section checklist (follow `1_ai_vision_intro.rst` exactly):**
+**Section checklist (follow `01_ai_vision_recognition.rst` exactly):**
 
 ```
-1. AI Vision Recognition   <-- no leading zero; "1." prefix is part of title
+01 AI Vision Recognition   <-- two-digit number + space, same style as the iot module
 ============================
 
 .. include:: /index.rst
@@ -457,10 +457,12 @@ Introduction
 2. Code
     - Import the Code: #. steps with screenshots at each step
     - Run the Code: separate sub-heading, #. steps with result screenshot
-    - The Code: .. code-block:: cpp with :linenos: (full source shown)
+    - The Code: .. code-block:: python :linenos: for ``python/main.py``,
+      then .. code-block:: cpp :linenos: for ``sketch/sketch.ino``
+      (full source shown)
     - How it Works:
-        .. code-block:: text flow diagram (setup → loop rhythm)
-        Prose paragraphs (NOT bullet list) explaining concepts
+        .. mermaid:: sequenceDiagram for the data path (never ASCII art),
+        then prose paragraphs (NOT bullet list) explaining concepts
         (e.g., "Camera capture — Each frame is a 2D array...")
 
 3. Experiment

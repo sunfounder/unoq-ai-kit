@@ -5,31 +5,40 @@
 Module D: Edge AI
 =====================
 
-In this module, you'll give your UNO Q the ability to **see and respond**. Using the Multimedia Carrier's camera and pre-trained AI models, you'll build projects that recognize objects, detect faces, and trigger physical actions — all running directly on the device.
+In this module, you'll give your UNO Q the ability to **see, hear, and respond**. Using the Multimedia Carrier's camera and microphone with pre-trained AI models that run entirely on the device, you'll build projects that recognize objects, read your hand gestures, follow your face, count what passes in front of the lens, and finally obey your voice.
 
-Each lesson builds on the previous one, adding one new concept at a time:
+Each project adds one new idea, building on the one before it:
 
-* **Detection → Screen** (01): The camera sees, the AI identifies, results appear on screen
-* **Detection → Buzzer** (02): AI triggers physical hardware — face detected, alarm sounds
-* **Detection → Color** (03): AI classification maps to hardware states — object type sets LED color
-* **Detection → Count** (04): AI counts appearances — objects tallied and announced
-* **Detection → Tracking** (05): AI controls continuous motion — face tracking with a pan-tilt
-* **Capstone** (06): Everything combined — a smart security guard
+* **Camera setup** — get the CSI camera working and take your first photo
+* **01 AI Vision Recognition** — the camera sees, the model names what it finds, and the results appear on screen
+* **02 Face Alarm** — the first time an AI decision drives real hardware: the camera sees a face, and a buzzer sounds
+* **03 AI Color Light** — the model classifies an object, and the object picks the colour of an RGB LED
+* **04 AI Gesture Light** — a classification model reads *you*: one gesture switches an LED on, another switches it off
+* **05 AI Object Counter** — turn a stream of video frames into counted events, announced out loud
+* **06 AI Gesture Camera** — gestures drive a pan-tilt camera, take a photo, and get a spoken answer
+* **07 Face Tracking Camera** — the camera stops reacting just once and starts following you continuously
+* **08 AI Smart Guard** — everything fused into one autonomous security sentry
+* **09 AI Voice Light** — no camera at all: a wake word, a spoken command, and an LED that obeys your voice
 
 By the end of this module, you will be able to:
 
-* Run pre-trained AI vision models on the UNO Q
-* Connect AI detection results to physical hardware via Bridge
-* Build interactive systems that respond to what the camera sees
+* Run pre-trained AI vision and audio models on the UNO Q
+* Connect AI results to physical hardware through the Bridge
+* Build systems that respond to what the camera sees and what you say
 
-Let's give your UNO Q vision.
+Let's give your UNO Q senses.
 
 .. toctree::
    :maxdepth: 1
 
-   1_ai_vision_recognition
-   2_face_alarm
-   3_ai_color_light
-   4_ai_object_counter
-   5_face_tracking_camera
-   6_ai_smart_guard
+   camera_preview
+   01_ai_vision_recognition
+   02_face_alarm
+   03_ai_color_light
+   04_ai_gesture_light
+   05_ai_object_counter
+   06_ai_gesture_camera
+   07_face_tracking_camera
+   08_ai_smart_guard
+   09_ai_voice_light
+   camera_troubleshooting

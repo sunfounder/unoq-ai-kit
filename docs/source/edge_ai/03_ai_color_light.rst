@@ -2,12 +2,12 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-3. AI Color Light
+03 AI Color Light
 ===================
 
 In the face alarm project, the AI answered a yes-or-no question — is a face there? — and the buzzer had exactly one response. But real-world AI usually has to answer a richer question: not just *is something there*, but *what is it?* That is exactly what this project does. Point the camera at an apple, a banana, a water bottle, or a person — the model identifies the object, and the UNO Q lights an **RGB LED** in a matching color. Apple → red, banana → yellow, broccoli → green.
 
-.. image:: img/3_color_light_result.png
+.. image:: img/03_ai_color_light.png
    :width: 600
    :align: center
 
@@ -400,4 +400,4 @@ You just built a complete AI decision chain: the camera sees, the model classifi
 * How the sketch's ``setColor()`` switch turns the code into PWM values on three channels
 * How a watchdog thread turns the LED off automatically when the object leaves
 
-In the next lesson, the question changes from *what is it?* to *how many times did it appear?* — you'll count objects as they come and go, and let the UNO Q announce each count out loud.
+In the next project the camera turns away from the desk and toward *you*. Instead of naming an object, the AI reads a hand signal — and the gesture you make will switch an LED on or off.

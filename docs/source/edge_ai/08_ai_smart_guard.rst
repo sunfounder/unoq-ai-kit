@@ -2,10 +2,10 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-6. AI Smart Guard
+08 AI Smart Guard
 =================
 
-You've watched your camera detect faces, track them, and speak — now it's time to give it a job. In this lesson you'll build the **AI Smart Guard**: a complete security sentry that patrols the room by sweeping its camera back and forth, and the moment it spots an intruder — a whole **person**, not just a face — it turns red, screams an alarm, and announces the intruder out loud. When the coast is clear, it settles back into green, silent patrol. This is the capstone of the Edge AI module: detection, motion, light, sound, and voice, all fused into one autonomous system.
+You've watched your camera detect faces, track them, and speak — now it's time to give it a job. In this lesson you'll build the **AI Smart Guard**: a complete security sentry that patrols the room by sweeping its camera back and forth, and the moment it spots an intruder — a whole **person**, not just a face — it turns red, screams an alarm, and announces the intruder out loud. When the coast is clear, it settles back into green, silent patrol. It is the largest vision project in this module: detection, motion, light, sound, and voice, all fused into one autonomous system.
 
 In this lesson, you will learn to:
 
@@ -81,7 +81,7 @@ Why does the guard watch for whole people instead of faces? Because the two jobs
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``06 AI Smart Guard.zip``.
+#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``08 AI Smart Guard.zip``.
 
 #. The app appears in **Apps** — click it to open.
 
@@ -97,7 +97,7 @@ Why does the guard watch for whole people instead of faces? Because the two jobs
 
 #. Step out of view and count to four. After about 3 seconds without seeing you, the guard returns to **green**, the buzzer falls silent, the servo resumes its patrol sweep, and the speaker announces *"All clear."*
 
-.. image:: img/6_ai_smart_guard_result.png
+.. image:: img/08_ai_smart_guard.png
    :width: 600
    :align: center
 
@@ -490,4 +490,4 @@ You just built a fully autonomous security guard — it patrols on its own, rais
 * How a spoken alert is throttled so the guard warns without nagging
 * How a timeout state returns the system to patrol after 3 quiet seconds
 
-Your UNO Q can now watch a room like a security professional. The Edge AI module is complete — but the guard's senses are still local. What if it could *understand* what it sees, answer questions, and act on natural language? That's exactly where you're headed next.
+Your UNO Q can now watch a room like a security professional. Every project in this module so far has started with the camera — but your board has a second sense you haven't used yet. In the next project, you'll stop showing it things and start **talking** to it: a wake word, a spoken command, and an LED that obeys your voice.

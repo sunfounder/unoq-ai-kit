@@ -17,16 +17,12 @@ Welcome to Edge AI! Before you can teach the UNO Q to see and recognize objects,
 **What You Need**
 
 .. list-table::
-   :widths: 25 25 25 25
+   :widths: 25 25
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * Multimedia Carrier
-     - 1 * CSI Camera
      - 1 * USB Cable
    * - |list_pan_tilt|
-     - |list_multimedia_carrier|
-     - |list_camera|
      - |list_usb_cable|
 
 **Step 1: Attach the Camera**
@@ -64,15 +60,13 @@ Welcome to Edge AI! Before you can teach the UNO Q to see and recognize objects,
 2. Camera Preview
 -------------------
 
-Now let's confirm the camera works. Import and run the Camera Preview project:
+Now let's confirm the camera works. Import and run the Camera Snapshot project from the Multimedia module:
 
 .. code-block:: text
 
-   unoq-ai-kit/iot/03 Camera Preview.zip
+   unoq-ai-kit/media/08 Camera Snapshot.zip
 
-(Or the Edge AI version of this project, depending on your course structure.)
-
-#. Open **Arduino App Lab**, go to **Apps**. Import the Camera Preview project from your computer.
+#. Open **Arduino App Lab**, go to **Apps**. Import the **Camera Snapshot** project from your computer.
 
 #. Click **Run** (▶).
 
