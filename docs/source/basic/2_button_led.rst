@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 02 Button-Controlled Light
-======================
+==========================
 
 In the last lesson, you made an LED blink — but it just blinked on its own, following the code. Now you'll take control: press a button, the LED turns on. Release it, the LED turns off. This is your first step into **interactive** hardware — where the board reads input from the physical world and responds to you.
 

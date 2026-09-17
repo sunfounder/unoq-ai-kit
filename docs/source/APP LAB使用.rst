@@ -1,3 +1,5 @@
+:orphan:
+
 1. 从APP LAB导出的.zip文件多一层文件夹，就是名字全小写之后再嵌入一层
 
 \Copy of Blink LED.zip\copy-of-blink-led\

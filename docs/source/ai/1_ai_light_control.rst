@@ -20,25 +20,21 @@ In this lesson, you will learn to:
 **Components Needed**
 
 .. list-table::
-   :widths: 25 25 25 25
+   :widths: 25 25 25
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * Robot Shield
      - 1 * :ref:`cpn_rgb_led` (Common Cathode)
      - 3 * :ref:`cpn_resistor` (220Ω)
    * - |list_pan_tilt|
-     - |list_robot_shield|
      - |list_rgb_led|
      - |list_220ohm|
    * - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-     -
    * - |list_breadboard|
      - |list_wire|
      - |list_usb_cable|
-     -
 
 .. tip::
 

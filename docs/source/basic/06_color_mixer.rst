@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 06 Color Mixer
-=============
+==============
 
 So far, every LED you've controlled produced a single color — red. But color displays, stage lights, and smart bulbs can create millions of colors from just three primary ones: **red, green, and blue**. In this lesson, you'll use an **RGB LED** — three tiny LEDs (red, green, and blue) fused into one package — and control each channel independently with PWM to mix any color you want.
 
