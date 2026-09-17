@@ -52,7 +52,7 @@ In this lesson, you will learn to:
 
 Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, so its **+** pin (or longer leg) goes to D5 and its **−** pin (or shorter leg) to GND, routed through the breadboard with jumper wires. The sketch drives the pin high and low to make it beep, so no extra resistor or transistor is needed.
 
-.. image:: /img/wiring/wiring_face_alarm.png
+.. image:: /img/wiring/wiring_ac_buzzer.png
    :width: 500
    :align: center
 

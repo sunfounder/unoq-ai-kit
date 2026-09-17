@@ -53,6 +53,10 @@ The sketch uses no external libraries — only the built-in Bridge library from 
 
 This is a one-component circuit on a breadboard: the LED's **anode** (the longer leg) goes to **D5** through a **220Ω resistor**, and its **cathode** (the shorter leg, the flat side of the body) goes to **GND**. The resistor is not optional — without it the LED draws far more current than it can survive.
 
+.. image:: /img/wiring/wiring_led.png
+   :width: 500
+   :align: center
+
 2. Code
 ---------
 

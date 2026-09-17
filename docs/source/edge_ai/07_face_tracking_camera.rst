@@ -52,7 +52,7 @@ This project uses the following Bricks and sketch library:
 
 This lesson uses no breadboard components — everything plugs into the Robot Shield. Plug the pan servo into pin **D9** and the tilt servo into pin **D10** on the Robot Shield's servo headers.
 
-.. image:: /img/wiring/wiring_imu_servo.png
+.. image:: /img/wiring/wiring_pan_tilt.png
    :width: 600
    :align: center
 
