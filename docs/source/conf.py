@@ -201,15 +201,15 @@ rst_epilog += """
 
 .. |link_german_tutorials| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/inventor-lab-kit/de/latest/" target="_blank">Deutsch Online-Kurs</a>
+    <a href="https://docs.sunfounder.com/projects/unoq-ai-kit/de/latest/" target="_blank">Deutsch Online-Kurs</a>
 
 .. |link_jp_tutorials| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/inventor-lab-kit/ja/latest/" target="_blank">日本語オンライン教材</a>
+    <a href="https://docs.sunfounder.com/projects/unoq-ai-kit/ja/latest/" target="_blank">日本語オンライン教材</a>
 
 .. |link_en_tutorials| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/inventor-lab-kit/en/latest/" target="_blank">English Online-tutorials</a>
+    <a href="https://docs.sunfounder.com/projects/unoq-ai-kit/en/latest/" target="_blank">English Online-tutorials</a>
 
 """
 
@@ -275,18 +275,5 @@ rst_epilog += """
 .. |list_imu| image:: /img/list_cpn/list_imu.png
 
 .. |list_pan_tilt_kit| image:: /img/list_cpn/list_pan_tilt.png
-
-"""
-# purchase links
-
-rst_epilog += """
-
-.. |link_Inventor_Lab_Kit| raw:: html
-
-    <a href="https://www.sunfounder.com/collections/esp32-1/products/sunfounder-esp32-ultimate-starter-kit-with-esp32-camera-extension-board-battery" target="_blank">Purchase Link for Inventor Lab Kit</a>
-
-.. |link_Inventor_kit| raw:: html
-
-    <a href="https://www.sunfounder.com/products/sunfounder-esp32-ultimate-starter-kit-with-esp32-camera-extension-board-battery" target="_blank">Inventor Lab Kit</a>
 
 """

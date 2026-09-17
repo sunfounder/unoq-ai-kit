@@ -4,7 +4,7 @@
 
 This is the documentation and course repository for the **SunFounder AI Starter Kit with Arduino Uno Q** (UNO Q AIoT Learning Kit). The kit targets beginners aged 10+, students, educators, and makers. Through hardware experiments, IoT applications, and AI technology practices, learners progress from basic hardware control to IoT systems to AI-powered devices.
 
-- **GitHub**: sunfounder/inventor-lab-kit
+- **GitHub**: sunfounder/unoq-ai-kit
 - **Docs engine**: Sphinx (RST format, sphinx_rtd_theme)
 - **Source**: `docs/source/`
 - **Audience**: Beginners with zero programming or electronics experience
