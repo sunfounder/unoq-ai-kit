@@ -9,7 +9,6 @@ In this module, you'll give your UNO Q the ability to **see and respond**. Using
 
 Each project adds one new idea, building on the one before it:
 
-* **Camera setup** — get the CSI camera working and take your first photo
 * **01 AI Vision Recognition** — the camera sees, the model names what it finds, and the results appear on screen
 * **02 Face Alarm** — the first time an AI decision drives real hardware: the camera sees a face, and a buzzer sounds
 * **03 AI Color Light** — the model classifies an object, and the object picks the colour of an RGB LED
@@ -30,7 +29,6 @@ Let's give your UNO Q vision.
 .. toctree::
    :maxdepth: 1
 
-   camera_preview
    01_ai_vision_recognition
    02_face_alarm
    03_ai_color_light
