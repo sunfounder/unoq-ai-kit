@@ -882,7 +882,7 @@ project. Keep it concise: the code is right there, no need to duplicate it.
 2. **No `(install via Library Manager)`** — ``app.yaml`` / ``sketch.yaml`` declares libraries; App Lab auto-installs them.
 3. **No troubleshooting section** — that belongs in the RST course docs, not in the project README.
 4. **No Code Overview section** — the code lives in the same folder; README describes behavior, not implementation.
-5. **No intro image** after the title — the wiring image belongs only in the Wiring section.
+5. **Result image after the description** — every project README shows one result screenshot right after the one-sentence description: ``![Result](assets/docs_assets/<result_image>.png)``. The wiring image belongs only in the Wiring section.
 6. **Wiring section** = one short sentence + one ``![Wiring Diagram](assets/docs_assets/wiring_xxx.png)`` image. No bullet lists, no tables, no warnings.
 7. **Hardware** = ``Pan Tilt Kit ×1`` as the first item, followed by breadboard components. The kit contains UNO Q, Robot Shield, Multimedia Carrier, 2× servos, camera, and battery — all pre-assembled. Do NOT list kit components individually.
 8. **How it Works** uses plain markdown only: ``**Flow**`` bullet list for setup/loop, then ``**Descriptive Title**`` subsections with 1–3 sentence explanations. Function names and values use inline `` `code` `` backticks.
@@ -903,6 +903,8 @@ Hardware is controlled entirely from ``sketch.ino``.
 # NN Lesson Title
 
 One-sentence description of what the project does.
+
+![Result](assets/docs_assets/<result_image>.png)
 
 ## Libraries Used
 
@@ -959,6 +961,8 @@ Projects use bricks to access STT, TTS, and camera capabilities.
 # NN Lesson Title
 
 One-sentence description of what the project does.
+
+![Result](assets/docs_assets/<result_image>.png)
 
 ## Software
 
