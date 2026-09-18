@@ -9,3 +9,9 @@ test/scene/*
 backups/*
 **secret*
 .claude/
+# Screenshots are documentation, not credentials. Without these two lines an
+# image whose file name contains "secret" - 3_cloud_brick_secret_id.png - stays
+# out of the repository, so it builds on the machine that has the file and
+# fails everywhere else.
+!**/img/**
+!**/*.png
