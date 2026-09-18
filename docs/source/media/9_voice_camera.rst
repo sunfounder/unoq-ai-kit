@@ -61,7 +61,7 @@ Connect the servos to the Robot Shield:
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``09 Voice-Controlled Camera.zip`` from the ``unoq-ai-kit/media/`` folder.
+#. Download :download:`09 Voice-Controlled Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.Voice-Controlled.Camera.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The Output window shows:
 

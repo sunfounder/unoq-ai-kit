@@ -53,7 +53,7 @@ No breadboard wiring is needed in this lesson. The CSI camera is already attache
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``01 AI Vision Recognition.zip``.
+#. Download :download:`01 AI Vision Recognition.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Vision.Recognition.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

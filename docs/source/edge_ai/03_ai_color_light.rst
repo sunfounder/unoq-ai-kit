@@ -63,7 +63,7 @@ The RGB LED has **four legs**: the longest one is the **common cathode** — con
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``03 AI Color Light.zip``.
+#. Download :download:`03 AI Color Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Color.Light.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

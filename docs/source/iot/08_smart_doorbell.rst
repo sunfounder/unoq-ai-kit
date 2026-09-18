@@ -62,7 +62,7 @@ Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and 
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``08 Smart Doorbell.zip``. Open it.
+#. Download :download:`08 Smart Doorbell.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip>` and import it in App Lab. Open it.
 
 #. Click the **Run** button (▶). The Web UI opens with a live camera preview and an empty **Recent Visitors** list.
 

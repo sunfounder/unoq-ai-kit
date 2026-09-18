@@ -50,7 +50,7 @@ No breadboard wiring is needed — the 8×13 LED matrix is built into the UNO Q 
    .. image:: /img/app_import_pc.png
       :width: 600
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``16 LED Matrix Patterns.zip``. The app appears in **Apps** — click it to open.
+#. Download :download:`16 LED Matrix Patterns.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/16.LED.Matrix.Patterns.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
 
 #. Click the **Run** button (▶) in the top-right corner.
 

@@ -71,7 +71,7 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``07 Face Tracking Camera.zip``.
+#. Download :download:`07 Face Tracking Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

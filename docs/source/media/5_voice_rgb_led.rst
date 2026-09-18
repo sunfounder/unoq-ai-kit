@@ -69,7 +69,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``05 Voice-Controlled RGB LED.zip`` from the ``unoq-ai-kit/media/`` folder.
+#. Download :download:`05 Voice-Controlled RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.Voice-Controlled.RGB.LED.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The RGB LED flashes red → green → blue → off as a wiring test, and the Output window shows:
 

@@ -71,7 +71,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 600
 
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``01 Hello LED.zip``. The app appears in **Apps** — click it to open.
+#. Download :download:`01 Hello LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Hello.LED.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
 
    .. image:: img/1_import_led.png
       :width: 600

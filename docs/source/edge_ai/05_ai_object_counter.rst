@@ -60,7 +60,7 @@ To test the project, gather three objects you probably already have nearby: a co
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``05 AI Object Counter.zip``.
+#. Download :download:`05 AI Object Counter.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

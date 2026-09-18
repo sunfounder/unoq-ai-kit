@@ -153,7 +153,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED thro
 
 #. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``07 Arduino Cloud Environment Monitor.zip``. Open it.
+#. Download :download:`07 Arduino Cloud Environment Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip>` and import it in App Lab. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 

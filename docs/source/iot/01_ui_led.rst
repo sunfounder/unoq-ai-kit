@@ -58,7 +58,7 @@ Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — 
 
 #. In App Lab, go to **Apps** → **Create new app** -> **Import App** → **Import from Computer**. 
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``01 UI Control LED.zip``. Open the app.
+#. Download :download:`01 UI Control LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip>` and import it in App Lab. Open the app.
 
 #. Click the **Run** button (▶). A **Web UI** tab opens automatically.
 

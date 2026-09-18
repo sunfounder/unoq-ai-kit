@@ -68,7 +68,7 @@ In this lesson, you will learn to:
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``12 IoT Smart Room.zip`` from the ``unoq-ai-kit/iot/`` folder.
+#. Download :download:`12 IoT Smart Room.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/12.IoT.Smart.Room.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The Output window shows:
 

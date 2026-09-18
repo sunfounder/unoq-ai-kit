@@ -79,7 +79,7 @@ Why does the guard watch for whole people instead of faces? Because the two jobs
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``08 AI Smart Guard.zip``.
+#. Download :download:`08 AI Smart Guard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

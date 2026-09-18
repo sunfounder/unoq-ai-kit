@@ -45,7 +45,7 @@ This project uses the following App Lab Brick:
 
 #. Open **Arduino App Lab**, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/media/`` and select ``04 Local STT.zip``. Open the app.
+#. Download :download:`04 Local STT.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Local.STT.zip>` and import it in App Lab. Open the app.
 
 #. Click the **Run** button (▶). The Output window shows:
 

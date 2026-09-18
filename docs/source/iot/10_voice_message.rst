@@ -37,7 +37,7 @@ No breadboard wiring is needed — the microphone and speaker are built into the
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``10 IoT Voice Message.zip`` from the ``unoq-ai-kit/iot/`` folder.
+#. Download :download:`10 IoT Voice Message.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.IoT.Voice.Message.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The Output window shows:
 

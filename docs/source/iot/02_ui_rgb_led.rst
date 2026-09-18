@@ -64,7 +64,7 @@ In this lesson, you will learn to:
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``02 UI Control RGB LED.zip``. Open it.
+#. Download :download:`02 UI Control RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip>` and import it in App Lab. Open it.
 
 #. Click the **Run** button (▶). The Web UI opens with a color wheel, a brightness slider, and a preview circle.
 

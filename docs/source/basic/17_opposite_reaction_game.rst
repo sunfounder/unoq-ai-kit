@@ -67,7 +67,7 @@ Connect the left button to D7 and the right button to D6 — both use ``INPUT_PU
    .. image:: /img/app_import_pc.png
       :width: 600
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``17 Opposite Reaction Game.zip``. The app appears in **Apps** — click it to open.
+#. Download :download:`17 Opposite Reaction Game.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
 
 #. Click the **Run** button (▶) in the top-right corner.
 

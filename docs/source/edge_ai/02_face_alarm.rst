@@ -71,7 +71,7 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``02 Face Alarm.zip``.
+#. Download :download:`02 Face Alarm.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Face.Alarm.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

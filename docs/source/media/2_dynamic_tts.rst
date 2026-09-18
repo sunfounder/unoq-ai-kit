@@ -55,7 +55,7 @@ Connect the DHT11: VCC to 3.3V, DATA to D4, GND to GND.
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``02 Dynamic TTS Weather Reporter.zip`` from ``unoq-ai-kit/media/``.
+#. Download :download:`02 Dynamic TTS Weather Reporter.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Dynamic.TTS.Weather.Reporter.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). Every 30 seconds, the speaker announces:
 

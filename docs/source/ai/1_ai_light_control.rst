@@ -89,7 +89,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/ai/`` folder and select ``01 AI Light Control.zip``. The app appears in **Apps** — click it to open.
+#. Download :download:`01 AI Light Control.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Light.Control.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
 
 #. Click the **Run** button (▶). App Lab will ask for your **OpenAI API Key**. Enter it and click Save, then click Run again.
 

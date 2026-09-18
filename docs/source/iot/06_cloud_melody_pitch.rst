@@ -127,7 +127,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
 
 #. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``06 Arduino Cloud Melody Pitch.zip``. Open it.
+#. Download :download:`06 Arduino Cloud Melody Pitch.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Arduino.Cloud.Melody.Pitch.zip>` and import it in App Lab. Open it.
 
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 

@@ -617,7 +617,7 @@ no gaps. The base pattern is:
 ```
 1. Open **Arduino App Lab**.
 2. Select **My Apps** → ...
-3. Import `NN Name.zip` from `unoq-ai-kit\basic`.
+3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. [Expected result.]
 ```
@@ -626,7 +626,7 @@ For projects that require battery power, insert an additional step
 between Import and Run:
 
 ```
-3. Import `NN Name.zip` from `unoq-ai-kit\basic`.
+3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
 4. Connect the battery pack to the Robot Shield.
 5. Click **Run**.
 6. [Expected result.]
@@ -651,6 +651,14 @@ inside the project folder. The Wiring section format is:
 
 Projects with no breadboard wiring (built-in LED matrix, IMU-only via QWIIC)
 may explain this in text without an image.
+
+> **Release download links.** The import step links straight to the lesson
+> package on the releases page, using
+> ``https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/<name>.zip``
+> so the link keeps working when a new release is published. GitHub publishes
+> asset names with dots instead of spaces (``NN Name.zip`` becomes
+> ``NN.Name.zip``); the link text keeps the readable name. The *Run the App*
+> step of the matching RST lesson uses the same URL in a ``:download:`` role.
 
 ### Zip Reference Consistency
 
@@ -934,7 +942,7 @@ One-sentence description of what the project does.
 
 1. Open **Arduino App Lab**.
 2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `NN Name.zip` from `unoq-ai-kit\basic`.
+3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. [Expected result.]
 
@@ -999,7 +1007,7 @@ This example uses the following Bricks:
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `NN Name.zip` from `unoq-ai-kit\media`.
+3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. [Expected result.]
 

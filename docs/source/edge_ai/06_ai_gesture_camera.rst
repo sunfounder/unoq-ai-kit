@@ -61,7 +61,7 @@ Plug the pan servo's signal lead into **D9** and the tilt servo's into **D10**, 
       :width: 600
       :align: center
 
-#. Navigate to the ``unoq-ai-kit/edge_ai/`` folder and select ``06 AI Gesture Camera.zip``.
+#. Download :download:`06 AI Gesture Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.AI.Gesture.Camera.zip>` and import it in App Lab.
 
 #. The app appears in **Apps** — click it to open.
 

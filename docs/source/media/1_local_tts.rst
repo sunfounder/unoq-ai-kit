@@ -38,7 +38,7 @@ This project uses the following App Lab Brick:
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``01 Local TTS.zip`` from the ``unoq-ai-kit/media/`` folder.
+#. Download :download:`01 Local TTS.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Local.TTS.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The speaker says:
 

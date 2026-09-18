@@ -71,7 +71,7 @@ All code for this course is provided as ``.zip`` files that you can import direc
       :width: 600
 
 
-#. Navigate to the ``unoq-ai-kit/basic/`` folder and select ``02 Button-Controlled Light.zip``. The app appears in **Apps** — click it to open.
+#. Download :download:`02 Button-Controlled Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Button-Controlled.Light.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 

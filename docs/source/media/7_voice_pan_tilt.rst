@@ -73,7 +73,7 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``07 Voice-Controlled Pan-Tilt.zip`` from the ``unoq-ai-kit/media/`` folder.
+#. Download :download:`07 Voice-Controlled Pan-Tilt.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Voice-Controlled.Pan-Tilt.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The Output window shows:
 

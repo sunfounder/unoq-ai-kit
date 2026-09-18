@@ -57,7 +57,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, import ``08 Camera Snapshot.zip`` from the ``unoq-ai-kit/media/`` folder.
+#. Download :download:`08 Camera Snapshot.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Camera.Snapshot.zip>` and import it in **Arduino App Lab**.
 
 #. Click **Run** (▶). The Output window shows:
 

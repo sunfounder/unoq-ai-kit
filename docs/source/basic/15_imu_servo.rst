@@ -54,7 +54,7 @@ Connect the IMU to the UNO Q's QWIIC connector (no wiring needed), then plug the
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
-#. Open **Arduino App Lab** and import ``14 IMU Calibration.zip`` from the ``unoq-ai-kit/basic/`` folder.
+#. Download :download:`14 IMU Calibration.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip>` and import it in **Arduino App Lab**.
 
    .. image:: /img/app_import_app.png
       :width: 600

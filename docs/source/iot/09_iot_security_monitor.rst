@@ -62,7 +62,7 @@ Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → *
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``09 IoT Security Monitor.zip``. Open it.
+#. Download :download:`09 IoT Security Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.IoT.Security.Monitor.zip>` and import it in App Lab. Open it.
 
 #. Click the **Run** button (▶). The Web UI opens with the live camera preview, a motion status, an alarm status, and an event log.
 

@@ -58,7 +58,7 @@ Connect the photoresistor between **3.3V** and **A0**, and the 10kΩ resistor be
 
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
 
-#. Navigate to ``unoq-ai-kit/iot/`` and select ``03 Sensor Data Dashboard.zip``. Open it.
+#. Download :download:`03 Sensor Data Dashboard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip>` and import it in App Lab. Open it.
 
 #. Click the **Run** button (▶). A **Web UI** tab opens showing the current light level, a level bar, and a trend chart.
 
