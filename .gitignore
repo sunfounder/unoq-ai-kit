@@ -1,12 +1,16 @@
-*.zip
-*.pyc
-__pycache__/
-*.wav
-*.mp3
-*.bin
+# Local brick copies stay out of the repository.
+#
+# Every lesson carries its own copy of the SunFounder bricks under bricks/,
+# and the speech bricks ship a 72 MB Whisper model each. That is roughly
+# 950 MB of duplicated binaries across the lessons, so the copies are kept
+# on the machine and shipped inside the lesson zips instead.
 bricks/
 
-audio_output/
-photos/*
-!photos/.gitkeep
-BRICK_RELEASE_CANDIDATE.md
+# Lesson packages are published as release attachments, not as commits:
+# each zip is about 95 MB, and every revision would add that much to the
+# history of the repository for good.
+*.zip
+
+# Python bytecode
+__pycache__/
+*.pyc
