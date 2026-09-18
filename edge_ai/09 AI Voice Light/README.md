@@ -2,8 +2,6 @@
 
 A hands-free lamp: the wake-word model listens to the microphone continuously and, when it hears **"Hey Arduino"**, the assistant answers *"I'm here."*, records one spoken command, and switches the RGB LED on **D8**, **D7**, and **D6** through the Bridge. There is no Web UI and no button — the console is the interface.
 
-![Result](assets/docs_assets/ai_voice_light.png)
-
 ## Software
 
 ### Bricks Used
@@ -16,6 +14,7 @@ This example uses the following Bricks:
 
 ## Hardware
 
+- Pan Tilt Kit ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
 - 220 Ω resistor ×3
@@ -30,13 +29,12 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [09 AI Voice Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.AI.Voice.Light.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Wait for `[READY] Waiting for "Hey Arduino"...` in the console, then say **"Hey Arduino"**.
-6. When the assistant answers *"I'm here."*, say one light command within four seconds — for example *"Turn the light blue."*
-7. The LED keeps that colour and the console returns to `[READY]`, listening for the next wake word.
+1. Download [`09 AI Voice Light.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.AI.Voice.Light.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Wait for `[READY] Waiting for "Hey Arduino"...` in the console, then say **"Hey Arduino"**.
+5. When the assistant answers *"I'm here."*, say one light command within four seconds — for example *"Turn the light blue."*
+6. The LED keeps that colour and the console returns to `[READY]`, listening for the next wake word.
 
 > **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 

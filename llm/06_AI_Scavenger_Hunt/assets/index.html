@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Scavenger Hunt</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+        <h1>AI Scavenger Hunt</h1>
+        <p>Find It · Show It · Let AI Check It</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="connection">
+                <span id="status-dot" class="status-indicator"></span>
+                <span id="connection-label">Connecting</span>
+            </div>
+
+            <section class="score-board">
+                <div>
+                    <span class="score-label">Score</span>
+                    <strong id="score-value">0</strong>
+                </div>
+                <div>
+                    <span class="score-label">Attempts</span>
+                    <strong id="attempts-value">0</strong>
+                </div>
+                <button id="reset-button" type="button" disabled>RESET</button>
+            </section>
+
+            <section class="mission-card">
+                <span class="mission-label">Your Mission</span>
+                <h2 id="mission-text">Choose NEW MISSION to begin.</h2>
+            </section>
+
+            <div class="camera-frame">
+                <img id="camera-stream" src="" crossorigin="anonymous" alt="Live camera view">
+                <div class="camera-placeholder">Waiting for camera...</div>
+            </div>
+
+            <div id="status-panel" class="status-panel">
+                <strong id="status-title">Connecting...</strong>
+                <span id="status-message">Waiting for the app.</span>
+            </div>
+
+            <div class="game-actions">
+                <button id="new-button" class="secondary" type="button" disabled>
+                    NEW MISSION
+                </button>
+                <button id="check-button" class="primary" type="button" disabled>
+                    CHECK OBJECT
+                </button>
+            </div>
+
+            <article id="result-card" class="result-card">
+                <div class="result-label">AI Referee</div>
+                <div id="result-text">The AI result will appear here.</div>
+            </article>
+
+            <p id="error-container"></p>
+            <p class="hint">Keep one object clearly visible near the center of the camera.</p>
+        </section>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

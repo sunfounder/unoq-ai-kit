@@ -2,6 +2,8 @@
 
 Type a message in the Web UI and let the UNO Q speak it aloud through the speaker.
 
+![Result](assets/docs_assets/voice_announcer_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -20,11 +22,10 @@ No breadboard wiring is needed — the speaker is built into the Multimedia Carr
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [05 IoT Voice Announcer.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.IoT.Voice.Announcer.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. In the Web UI, type a short message and click **Speak** — the status changes to **Speaking...**, the UNO Q reads your message aloud, and then the status returns to **Ready to speak another message.**
+1. Download [`05 IoT Voice Announcer.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.IoT.Voice.Announcer.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. In the Web UI, type a short message and click **Speak** — the status changes to **Speaking...**, the UNO Q reads your message aloud, and then the status returns to **Ready to speak another message.**
 
 ## How it Works
 

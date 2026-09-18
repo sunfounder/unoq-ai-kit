@@ -21,11 +21,10 @@ No breadboard wiring is needed. The speaker is built into the Multimedia Carrier
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [01 Local TTS.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Local.TTS.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. The speaker on the Multimedia Carrier says: *"Hello! Welcome to Arduino App Lab."*
+1. Download [`01 Local TTS.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Local.TTS.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. The speaker on the Multimedia Carrier says: *"Hello! Welcome to Arduino App Lab."*
 
 > **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 

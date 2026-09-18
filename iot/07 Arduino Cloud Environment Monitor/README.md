@@ -10,7 +10,7 @@ Build an IoT environment monitoring system using Arduino Cloud. The sketch reads
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Breadboard ×1
 - DHT11 temperature and humidity sensor module ×1
 - LED ×1
@@ -26,13 +26,12 @@ Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the externa
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [07 Arduino Cloud Environment Monitor.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip) and import it in **Arduino App Lab**.
-4. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
-5. In Arduino Cloud, create a Thing associated with your Device, with three variables: `temperature` and `humidity` (Floating Point Number, Read Only, On change) and `led` (Boolean, Read & Write, On change). Build a Dashboard with widgets linked to all three.
-6. Click **Run**.
-7. Open the Dashboard — temperature and humidity widgets update with each DHT11 reading, and the LED switch turns the external LED on or off.
+1. Download [`07 Arduino Cloud Environment Monitor.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
+4. In Arduino Cloud, create a Thing associated with your Device, with three variables: `temperature` and `humidity` (Floating Point Number, Read Only, On change) and `led` (Boolean, Read & Write, On change). Build a Dashboard with widgets linked to all three.
+5. Click **Run**.
+6. Open the Dashboard — temperature and humidity widgets update with each DHT11 reading, and the LED switch turns the external LED on or off.
 
 ## How it Works
 

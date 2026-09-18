@@ -25,15 +25,14 @@ The IMU is connected to the UNO Q QWIIC connector — no breadboard wiring neede
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [14 IMU Calibration.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip) and import it in **Arduino App Lab**.
-4. Click **Run** and switch to the **Serial Monitor** window.
-5. Send any character once to display the first instruction: **Z face up**.
-6. Place the device in the requested orientation and keep it completely still.
-7. Send any character again to measure the current face.
-8. Repeat the process for all six orientations.
-9. Copy the printed constants into `calibration_data.h` in the **14 IMU Attitude** project.
+1. Download [`14 IMU Calibration.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run** and switch to the **Serial Monitor** window.
+4. Send any character once to display the first instruction: **Z face up**.
+5. Place the device in the requested orientation and keep it completely still.
+6. Send any character again to measure the current face.
+7. Repeat the process for all six orientations.
+8. Copy the printed constants into `calibration_data.h` in the **14 IMU Attitude** project.
 
 > Keep the device away from magnets, speakers, motors, and large metal objects while calibrating the magnetometer.
 

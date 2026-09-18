@@ -1,0 +1,10 @@
+name: 06 AI Scavenger Hunt
+description: Complete AI-generated camera challenges with RGB and buzzer feedback
+ports: []
+bricks:
+  - arduino:cloud_llm:
+      variables:
+        API_KEY: ""
+  - arduino:web_ui
+  - sunfounder_tts: {}
+icon: 🧭

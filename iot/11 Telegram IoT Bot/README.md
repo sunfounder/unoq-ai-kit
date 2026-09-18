@@ -2,6 +2,8 @@
 
 Turn your Arduino UNO Q into an Internet-connected Telegram bot. Send `/status` to read temperature and humidity from a DHT11 and check the LED state; send `/led_on` and `/led_off` to control an external LED on D5 from anywhere in the world.
 
+![Result](assets/docs_assets/telegram_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Turn your Arduino UNO Q into an Internet-connected Telegram bot. Send `/status` 
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Breadboard ×1
 - DHT11 temperature and humidity sensor ×1
 - LED ×1
@@ -26,13 +28,11 @@ Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the externa
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [11 Telegram IoT Bot.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip) and import it in **Arduino App Lab**.
-4. In Telegram, open **@BotFather** and create a new bot with `/newbot` — save the API token it gives you (treat it like a password).
-5. In App Lab, open the **Telegram Bot** Brick, click **Brick Configuration**, and paste the token.
-6. Click **Run**.
-7. Open Telegram, find your bot, and send `/start` — it replies with the available commands. Then try `/status`, `/led_on`, and `/led_off`.
+1. Download [`11 Telegram IoT Bot.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. In Telegram, open **@BotFather** and create a new bot with `/newbot` — save the API token it gives you (treat it like a password).
+4. Click **Run**.
+5. Open Telegram, find your bot, and send `/start` — it replies with the available commands. Then try `/status`, `/led_on`, and `/led_off`.
 
 ## How it Works
 

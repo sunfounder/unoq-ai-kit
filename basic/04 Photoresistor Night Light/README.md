@@ -24,12 +24,11 @@ Connect the photoresistor with a 10 kΩ resistor to analog pin A0, and four LEDs
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [04 Photoresistor Night Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Photoresistor.Night.Light.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Cover the photoresistor with your hand — more LEDs light up. Shine a flashlight on it — they turn off.
-6. Open the **Serial Monitor** to see live light readings.
+1. Download [`04 Photoresistor Night Light.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Photoresistor.Night.Light.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Cover the photoresistor with your hand — more LEDs light up. Shine a flashlight on it — they turn off.
+5. Open the **Serial Monitor** to see live light readings.
 
 ## How it Works
 

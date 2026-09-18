@@ -4,7 +4,7 @@ Display five simple icons — heart, star, smile, arrow, and check mark — on t
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - USB-C cable ×1
 
 ## Wiring
@@ -13,11 +13,10 @@ No breadboard wiring is needed. The LED matrix is built into the UNO Q board.
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [16 LED Matrix Patterns.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/16.LED.Matrix.Patterns.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Five patterns cycle continuously on the LED matrix — one second per pattern.
+1. Download [`16 LED Matrix Patterns.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/16.LED.Matrix.Patterns.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Five patterns cycle continuously on the LED matrix — one second per pattern.
 
 ## How it Works
 

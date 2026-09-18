@@ -4,7 +4,7 @@ Test your reaction skills! The LED matrix shows a left or right arrow at random 
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Breadboard ×1
 - Push buttons ×2
 - Passive buzzer ×1
@@ -19,11 +19,10 @@ Connect the left button to D7 and the right button to D6, and the passive buzzer
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [17 Opposite Reaction Game.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. A smile appears, then an arrow. Press the opposite button — left arrow → right button, right arrow → left button. A correct answer shows a check mark with a short beep. A wrong answer shows an X with a continuous alarm. Press either button to restart.
+1. Download [`17 Opposite Reaction Game.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. A smile appears, then an arrow. Press the opposite button — left arrow → right button, right arrow → left button. A correct answer shows a check mark with a short beep. A wrong answer shows an X with a continuous alarm. Press either button to restart.
 
 ## How it Works
 

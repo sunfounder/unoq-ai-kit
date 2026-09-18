@@ -2,6 +2,8 @@
 
 Use a physical joystick to guide an explorer through a maze in your browser. Push up/down/left/right to move one cell at a time, reach the yellow goal to finish, and press the joystick button to restart. The page tracks your move count and completion time.
 
+![Result](assets/docs_assets/maze_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Use a physical joystick to guide an explorer through a maze in your browser. Pus
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Joystick module ×1
 - Jumper wires
 - USB-C cable ×1
@@ -23,11 +25,10 @@ Connect the joystick's VRX to A3, VRY to A2, SW to D4, VCC to 3.3V (the UNO Q's 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [04 UI Joystick Maze.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Open the Web UI and move the joystick to guide the blue explorer through the maze. Reach the yellow goal to see your moves and completion time. Press the joystick button or click **Play Again** to restart.
+1. Download [`04 UI Joystick Maze.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Open the Web UI and move the joystick to guide the blue explorer through the maze. Reach the yellow goal to see your moves and completion time. Press the joystick button or click **Play Again** to restart.
 
 ## How it Works
 

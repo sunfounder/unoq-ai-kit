@@ -19,11 +19,10 @@ Connect the PIR sensor's VCC to 3.3V, OUT to D4, GND to GND, and the passive buz
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [05 PIR Motion Alarm.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.PIR.Motion.Alarm.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Wait 30 seconds for the PIR sensor to warm up (the Serial Monitor shows "PIR Motion Alarm — warming up (30 seconds)..."). Once it says "Ready!", wave your hand or walk in front of the sensor — the buzzer sounds a two-tone siren (alternating 800 Hz and 1200 Hz). Stay still and the alarm stops.
+1. Download [`05 PIR Motion Alarm.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.PIR.Motion.Alarm.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Wait 30 seconds for the PIR sensor to warm up (the Serial Monitor shows "PIR Motion Alarm — warming up (30 seconds)..."). Once it says "Ready!", wave your hand or walk in front of the sensor — the buzzer sounds a two-tone siren (alternating 800 Hz and 1200 Hz). Stay still and the alarm stops.
 
 ## How it Works
 

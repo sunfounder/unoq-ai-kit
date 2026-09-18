@@ -19,11 +19,10 @@ Connect the potentiometer to A2 and the passive buzzer to D5.
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [09 Variable Pitch Melody.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.Variable.Pitch.Melody.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Turn the potentiometer while the melody plays — the pitch shifts up or down. Open the Serial Monitor to see the current frequency.
+1. Download [`09 Variable Pitch Melody.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.Variable.Pitch.Melody.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Turn the potentiometer while the melody plays — the pitch shifts up or down. Open the Serial Monitor to see the current frequency.
 
 ## How it Works
 

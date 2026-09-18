@@ -25,11 +25,10 @@ The camera and the speaker are both built into the Multimedia Carrier, so no bre
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [05 AI Object Counter.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip) and import it in **Arduino App Lab**.
-4. Click **Run** and open the Web UI.
-5. Show one mouse, keyboard, or cell phone to the camera. Once the model reaches 60% confidence the matching counter goes up by one and the speaker says the object's name. Remove the object completely, then show the next one. Click **RESET COUNTS** to start again.
+1. Download [`05 AI Object Counter.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run** and open the Web UI.
+4. Show one mouse, keyboard, or cell phone to the camera. Once the model reaches 60% confidence the matching counter goes up by one and the speaker says the object's name. Remove the object completely, then show the next one. Click **RESET COUNTS** to start again.
 
 > **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 

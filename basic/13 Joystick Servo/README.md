@@ -24,12 +24,11 @@ Connect the joystick's VCC to 3.3V, VRx to A3, VRy to A2, SW to D4, and GND to G
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [13 Joystick Servo.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/13.Joystick.Servo.zip) and import it in **Arduino App Lab**.
-4. Connect the battery pack to the Robot Shield.
-5. Click **Run**.
-6. Wait one second for auto-calibration (don't touch the joystick). Then move the stick — the servos follow in real time. Press the stick down to reset both to center (90°).
+1. Download [`13 Joystick Servo.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/13.Joystick.Servo.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Connect the battery pack to the Robot Shield.
+4. Click **Run**.
+5. Wait one second for auto-calibration (don't touch the joystick). Then move the stick — the servos follow in real time. Press the stick down to reset both to center (90°).
 
 ## How it Works
 

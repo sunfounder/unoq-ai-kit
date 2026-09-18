@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: #37474f;
+    background: #eceff1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+header {
+    position: relative;
+    padding: 24px;
+    text-align: center;
+    background: #ffffff;
+    border-top: 7px solid #c8d9f5;
+    border-bottom: 1px solid #dfe4e8;
+}
+
+header img {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    width: auto;
+    height: 28px;
+    transform: translateY(-50%);
+}
+
+header h1 {
+    margin: 0;
+    color: #173d5c;
+    font-size: 31px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #78909c;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.card {
+    width: 100%;
+    max-width: 720px;
+    padding: 36px;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(24, 55, 75, 0.10);
+}
+
+.connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #78909c;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.status-indicator {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #b0bec5;
+}
+
+.status-indicator.on {
+    background: #29a3d9;
+}
+
+.status-indicator.error {
+    background: #d32f2f;
+}
+
+.camera-frame {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #dfe5e8;
+}
+
+#camera-stream {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#camera-placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    color: #78909c;
+}
+
+.status-panel {
+    display: grid;
+    gap: 6px;
+    min-height: 76px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: #f3f6f8;
+}
+
+.status-panel.capturing,
+.status-panel.thinking {
+    background: #eaf3ff;
+}
+
+.status-panel.speaking {
+    background: #eaf8ef;
+}
+
+.status-panel.error {
+    background: #ffebee;
+}
+
+#status-title {
+    color: #263b4a;
+}
+
+#status-message {
+    color: #607d8b;
+    line-height: 1.45;
+}
+
+#question-form {
+    margin: 20px 0;
+}
+
+#question-form label,
+.answer-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #78909c;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.question-row {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 10px;
+}
+
+#question-input {
+    min-width: 0;
+    height: 52px;
+    padding: 0 15px;
+    border: 1px solid #cfd8dc;
+    border-radius: 10px;
+    color: #263b4a;
+    background: #ffffff;
+    font: inherit;
+    outline: none;
+}
+
+#question-input:focus {
+    border-color: #29a3d9;
+    box-shadow: 0 0 0 3px rgba(41, 163, 217, 0.14);
+}
+
+#ask-button {
+    height: 52px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #2fa2d3;
+    cursor: pointer;
+    font-weight: 750;
+}
+
+#ask-button:hover:not(:disabled) {
+    background: #1689b8;
+}
+
+#ask-button:disabled,
+#question-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.answer-card {
+    min-height: 100px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #eaf5fb;
+    line-height: 1.55;
+}
+
+#error-container {
+    display: none;
+    margin: 14px 0 0;
+    padding: 12px;
+    border-radius: 8px;
+    color: #c62828;
+    background: #ffebee;
+    line-height: 1.45;
+}
+
+.hint {
+    margin: 20px 0 0;
+    color: #90a4ae;
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 620px) {
+    header img {
+        position: static;
+        height: 22px;
+        margin-bottom: 10px;
+        transform: none;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    main {
+        padding: 24px 14px;
+    }
+
+    .card {
+        padding: 22px 16px;
+    }
+
+    .question-row {
+        grid-template-columns: 1fr;
+    }
+
+    #ask-button {
+        width: 100%;
+    }
+}

@@ -2,6 +2,8 @@
 
 Record a real voice message with the UNO Q microphone, watch the live audio level in the Web UI, then play the recording through the speaker.
 
+![Result](assets/docs_assets/voice_message_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -21,11 +23,10 @@ No breadboard wiring is needed — the microphone and speaker are built into the
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [10 IoT Voice Message.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.IoT.Voice.Message.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. In the Web UI: click **Record** and speak into the microphone while watching the live audio level, click **Stop** to save the recording, then click **Play** to hear it through the speaker. **Pause** pauses playback, and **Play** resumes it.
+1. Download [`10 IoT Voice Message.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.IoT.Voice.Message.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. In the Web UI: click **Record** and speak into the microphone while watching the live audio level, click **Stop** to save the recording, then click **Play** to hear it through the speaker. **Pause** pauses playback, and **Play** resumes it.
 
 ## How it Works
 

@@ -2,6 +2,8 @@
 
 Control an external LED from a web page. The browser sends button clicks through Socket.IO to the Python backend, Python calls the sketch through Bridge, and the sketch toggles the LED on digital pin D5.
 
+![Result](assets/docs_assets/led_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Control an external LED from a web page. The browser sends button clicks through
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Breadboard ×1
 - Red LED ×1
 - 220 Ω resistor ×1
@@ -25,11 +27,10 @@ Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [01 UI Control LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. When the Web UI opens, click the **LED IS OFF** button to toggle the LED.
+1. Download [`01 UI Control LED.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. When the Web UI opens, click the **LED IS OFF** button to toggle the LED.
 
 ## How it Works
 

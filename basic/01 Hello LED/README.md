@@ -22,11 +22,10 @@ Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [01 Hello LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Hello.LED.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. The LED on the breadboard blinks — half a second on, half a second off.
+1. Download [`01 Hello LED.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Hello.LED.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. The LED on the breadboard blinks — half a second on, half a second off.
 
 ## How it Works
 

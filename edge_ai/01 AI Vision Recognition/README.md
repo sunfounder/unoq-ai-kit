@@ -24,11 +24,10 @@ The CSI camera is built into the Multimedia Carrier, so no breadboard wiring is 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [01 AI Vision Recognition.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Vision.Recognition.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Open the Web UI and show an everyday object such as a cup to the camera — its name and confidence appear next to the live video.
+1. Download [`01 AI Vision Recognition.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Vision.Recognition.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Open the Web UI and show an everyday object such as a cup to the camera — its name and confidence appear next to the live video.
 
 ## How it Works
 

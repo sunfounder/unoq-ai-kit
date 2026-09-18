@@ -29,11 +29,10 @@ Connect the buzzer's positive leg to digital pin **D5** and its negative leg to 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [02 Face Alarm.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Face.Alarm.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Show your face to the camera — the buzzer beeps rapidly and the Web UI reports the alarm. Step away and it stops after about two seconds.
+1. Download [`02 Face Alarm.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Face.Alarm.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Show your face to the camera — the buzzer beeps rapidly and the Web UI reports the alarm. Step away and it stops after about two seconds.
 
 ## Alarm Behavior
 

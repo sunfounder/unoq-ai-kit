@@ -10,7 +10,7 @@ Use a slider on an Arduino Cloud Dashboard to raise or lower the pitch of a repe
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Passive buzzer ×1
 - Jumper wires
 - USB-C cable ×1
@@ -23,13 +23,12 @@ Connect the passive buzzer between D5 and GND (the sketch drives it with `tone()
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [06 Arduino Cloud Melody Pitch.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Arduino.Cloud.Melody.Pitch.zip) and import it in **Arduino App Lab**.
-4. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
-5. In Arduino Cloud, create a Device, a Thing with an Integer `pitch` variable (Read & Write, On change), and a Dashboard with a 0–50 slider linked to `pitch`.
-6. Click **Run**.
-7. Move the Dashboard slider — the melody's pitch shifts lower or higher while staying recognizable.
+1. Download [`06 Arduino Cloud Melody Pitch.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Arduino.Cloud.Melody.Pitch.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
+4. In Arduino Cloud, create a Device, a Thing with an Integer `pitch` variable (Read & Write, On change), and a Dashboard with a 0–50 slider linked to `pitch`.
+5. Click **Run**.
+6. Move the Dashboard slider — the melody's pitch shifts lower or higher while staying recognizable.
 
 ## How it Works
 

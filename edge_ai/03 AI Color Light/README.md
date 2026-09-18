@@ -30,11 +30,10 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [03 AI Color Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Color.Light.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Hold an apple up to the camera — the LED glows red and the Web UI shows the object, its color, and the confidence. Remove the object and the LED turns off after about two seconds.
+1. Download [`03 AI Color Light.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Color.Light.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Hold an apple up to the camera — the LED glows red and the Web UI shows the object, its color, and the confidence. Remove the object and the LED turns off after about two seconds.
 
 ## Object to Color Mapping
 

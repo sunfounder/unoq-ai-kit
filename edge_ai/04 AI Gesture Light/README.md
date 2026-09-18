@@ -30,11 +30,10 @@ Connect the LED's anode to digital pin **D5** through a **220 Ω resistor**, and
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [04 AI Gesture Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.AI.Gesture.Light.zip) and import it in **Arduino App Lab**.
-4. Click **Run** and open the Web UI.
-5. Hold a thumbs-up gesture steady for a moment — the LED lights up and the card shows the gesture and its confidence. Make a fist to switch it off. Remove your hand and the card returns to **Show a gesture**.
+1. Download [`04 AI Gesture Light.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.AI.Gesture.Light.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run** and open the Web UI.
+4. Hold a thumbs-up gesture steady for a moment — the LED lights up and the card shows the gesture and its confidence. Make a fist to switch it off. Remove your hand and the card returns to **Show a gesture**.
 
 ## Gesture Actions
 

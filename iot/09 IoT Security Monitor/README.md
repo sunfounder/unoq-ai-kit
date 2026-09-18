@@ -2,6 +2,8 @@
 
 Build an IoT security monitor with a live camera stream, PIR motion detection, a two-tone buzzer alarm, automatic snapshots, and a browser event log. This project does **not** use Edge AI or the Video Object Detection Brick — the CSI camera is used as a normal camera.
 
+![Result](assets/docs_assets/security_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Build an IoT security monitor with a live camera stream, PIR motion detection, a
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Multimedia Carrier with CSI camera ×1
 - PIR motion sensor ×1
 - Passive buzzer ×1
@@ -25,11 +27,10 @@ Connect the PIR sensor's VCC to 3.3V, GND to GND, and OUT to D4; connect the pas
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [09 IoT Security Monitor.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.IoT.Security.Monitor.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Open the Web UI — you'll see the live camera preview, motion status, and event log. Walk in front of the PIR sensor: the status changes to **MOTION DETECTED**, the buzzer sounds a two-tone siren, and a snapshot is saved. Stand still for 10 seconds and the status returns to **AREA CLEAR**.
+1. Download [`09 IoT Security Monitor.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.IoT.Security.Monitor.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Open the Web UI — you'll see the live camera preview, motion status, and event log. Walk in front of the PIR sensor: the status changes to **MOTION DETECTED**, the buzzer sounds a two-tone siren, and a snapshot is saved. Stand still for 10 seconds and the status returns to **AREA CLEAR**.
 
 ## How it Works
 

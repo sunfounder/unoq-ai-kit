@@ -40,9 +40,9 @@ Each app's README.md follows this structure:
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [`<NN> <Lesson Name>.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/<NN>.<Lesson.Name>.zip) and import it in **Arduino App Lab**.
+1. Download [`<NN> <Lesson Name>.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/<NN>.<Lesson.Name>.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. <What to do in the Web UI to see the result.>
 

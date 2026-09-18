@@ -2,6 +2,8 @@
 
 A final IoT project that combines sensing, automation, control, camera monitoring, and voice interaction.
 
+![Result](assets/docs_assets/smart_room_result.png)
+
 ## Smart Room Systems
 
 - **Environment** — DHT11 measures temperature and humidity; a photoresistor on A0 measures ambient light.

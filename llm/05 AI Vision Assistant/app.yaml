@@ -1,0 +1,10 @@
+name: 05 AI Vision Assistant
+description: Ask questions about the live camera image and hear the AI answer
+ports: []
+bricks:
+  - arduino:cloud_llm:
+      variables:
+        API_KEY: ""
+  - arduino:web_ui
+  - sunfounder_tts: {}
+icon: 👁️

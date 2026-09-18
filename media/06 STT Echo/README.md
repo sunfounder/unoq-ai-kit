@@ -32,11 +32,10 @@ No external resistor is needed — the sketch uses the Arduino internal pull-up 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [06 STT Echo.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.STT.Echo.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Wait for `STT Echo is ready.` in the **Output** window, then hold the button and speak. When you release the button, the recognized sentence appears after `You said:` and the speaker repeats it aloud.
+1. Download [`06 STT Echo.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.STT.Echo.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Wait for `STT Echo is ready.` in the **Output** window, then hold the button and speak. When you release the button, the recognized sentence appears after `You said:` and the speaker repeats it aloud.
 
 > **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 

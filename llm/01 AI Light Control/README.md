@@ -1,0 +1,59 @@
+# 01 AI Light Control
+
+Your first AI-powered hardware project. Type a natural-language command —"turn the light red", "make it blue", "switch off" —and an LLM (large language model) translates your words into an RGB LED color.
+
+![Result](assets/docs_assets/ai_rgb_result.png)
+
+## Software
+
+### Bricks Used
+
+This example uses the following Bricks:
+
+- `web_ui` —Creates the web interface and keeps the browser in sync with Python
+- `cloud_llm` —Sends the prompt to a cloud LLM (OpenAI, Anthropic, or Google) and returns the reply
+
+## Hardware
+
+- Pan Tilt Kit ×1
+- Arduino UNO Q ×1
+- Breadboard ×1
+- RGB LED (common cathode) ×1
+- 220 Ω resistors ×3
+- Jumper wires
+- USB-C cable ×1
+- Arduino App Lab
+
+## Wiring
+
+Connect the RGB LED through **220 Ω resistors** to the Robot Shield PWM channels:
+| RGB LED pin | Robot Shield | Resistor |
+|-------------|-------------|----------|
+| Red         | **D8** | 220 Ω    |
+| Green       | **D7** | 220 Ω    |
+| Blue        | **D6** | 220 Ω    |
+| GND (common)| GND         | —       |
+![Wiring RGB LED](assets/docs_assets/wiring_rgb_led.png)
+
+![Wiring Diagram](assets/docs_assets/wiring_rgb_led.png)
+
+## How to Use the Example
+
+1. Download [`01 AI Light Control.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Light.Control.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** →**Create New App** →**Import App** →**Import from Computer**, then choose the package you downloaded.
+4. Click **Run**.
+5. Ask for a colour in the Web UI and the RGB LED changes to match.
+
+## How it Works
+
+**How it Works**
+
+- Browser (your words)
+- ├ "Turn the light blue"
+- ▶- CloudLLM  ├€├€→ OpenAI GPT
+- ├             ├- ├        returns "blue"
+- ▶- Bridge.call("set_color", 3)
+- ▶- Sketch —setRgb(0, 0, 1000)
+- ▶- RGB LED lights up blue
+**AI converts natural language into hardware commands.**

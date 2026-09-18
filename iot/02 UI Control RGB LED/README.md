@@ -2,6 +2,8 @@
 
 Control an RGB LED from a web page using a color picker. Pick any color and the RGB LED lights up in that color — the browser sends RGB values to Python via Socket.IO, Python forwards them to the sketch via Bridge, and the sketch drives the three PWM channels on the Robot Shield.
 
+![Result](assets/docs_assets/rgb_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Control an RGB LED from a web page using a color picker. Pick any color and the 
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Robot Shield ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
@@ -26,11 +28,10 @@ Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to P6
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [02 UI Control RGB LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. When the Web UI opens, click the color preview circle to open the color picker and choose a color — the RGB LED lights up in that color.
+1. Download [`02 UI Control RGB LED.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. When the Web UI opens, click the color preview circle to open the color picker and choose a color — the RGB LED lights up in that color.
 
 ## How it Works
 

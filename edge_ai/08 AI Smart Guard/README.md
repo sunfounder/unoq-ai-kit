@@ -36,11 +36,10 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [08 AI Smart Guard.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. The servo scans left and right while the RGB LED glows green. Walk in front of the camera — the light turns red, the buzzer beeps, and the board announces the intruder. Step away and after 3 seconds it settles back into silent green patrol.
+1. Download [`08 AI Smart Guard.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. The servo scans left and right while the RGB LED glows green. Walk in front of the camera — the light turns red, the buzzer beeps, and the board announces the intruder. Step away and after 3 seconds it settles back into silent green patrol.
 
 > **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 

@@ -2,6 +2,8 @@
 
 Build a real-time sensor dashboard that displays light levels and visualizes changes over time. A photoresistor connected to A0 measures the surrounding light — the sketch sends the reading to Python through Bridge, and Python forwards it to the Web UI's current-value display and trend chart.
 
+![Result](assets/docs_assets/sensor_date_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -10,7 +12,7 @@ Build a real-time sensor dashboard that displays light levels and visualizes cha
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Photoresistor ×1
 - 10 kΩ resistor ×1
 - Jumper wires
@@ -24,11 +26,10 @@ Connect the photoresistor between 3.3V and A0, and the 10 kΩ resistor between A
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [03 Sensor Data Dashboard.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Open the Web UI and watch the current light level and trend chart. Cover the photoresistor with your hand, then uncover it — the percentage and chart change in real time. The chart displays approximately the last 30 seconds of readings.
+1. Download [`03 Sensor Data Dashboard.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Open the Web UI and watch the current light level and trend chart. Cover the photoresistor with your hand, then uncover it — the percentage and chart change in real time. The chart displays approximately the last 30 seconds of readings.
 
 ## How it Works
 

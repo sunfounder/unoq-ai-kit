@@ -23,11 +23,10 @@ No external resistor is needed — the sketch uses the Arduino internal pull-up 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [08 Camera Snapshot.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Camera.Snapshot.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Wait for `Camera ready.` in the **Output** window, then press the button — a photo is captured and saved as `photos/photo_001.jpg` (the next press saves `photo_002.jpg`, and so on).
+1. Download [`08 Camera Snapshot.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Camera.Snapshot.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Wait for `Camera ready.` in the **Output** window, then press the button — a photo is captured and saved as `photos/photo_001.jpg` (the next press saves `photo_002.jpg`, and so on).
 
 ## How it Works
 

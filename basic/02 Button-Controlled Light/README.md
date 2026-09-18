@@ -23,11 +23,10 @@ Connect the push button to digital pin D4 and the LED through a 220 Ω resistor 
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [02 Button-Controlled Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Button-Controlled.Light.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Press the button — the LED lights up. Release it — the LED turns off.
+1. Download [`02 Button-Controlled Light.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Button-Controlled.Light.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Press the button — the LED lights up. Release it — the LED turns off.
 
 ## How it Works
 

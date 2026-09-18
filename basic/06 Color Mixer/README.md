@@ -19,11 +19,10 @@ Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to D8
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [06 Color Mixer.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Color.Mixer.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. The RGB LED cycles through Red, Green, Blue, Yellow, Cyan, Magenta, White, and Off — one second per color.
+1. Download [`06 Color Mixer.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Color.Mixer.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. The RGB LED cycles through Red, Green, Blue, Yellow, Cyan, Magenta, White, and Off — one second per color.
 
 ## How it Works
 

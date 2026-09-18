@@ -2,6 +2,8 @@
 
 Build a smart doorbell with a push button, passive buzzer, live camera preview, automatic visitor photo, browser notification, and spoken visitor alert. Press the button — the buzzer plays a "ding-dong" chime, the Web UI shows "Someone is at the door!", a visitor photo is saved, and the UNO Q speaker says "Someone is at the door."
 
+![Result](assets/docs_assets/doorbell_result.png)
+
 ## Software
 
 ### Bricks Used
@@ -11,7 +13,7 @@ Build a smart doorbell with a push button, passive buzzer, live camera preview, 
 
 ## Hardware
 
-- Arduino UNO Q ×1
+- Pan Tilt Kit ×1
 - Multimedia Carrier with CSI camera ×1
 - Push button ×1
 - Passive buzzer ×1
@@ -26,11 +28,10 @@ Connect the push button between D4 and GND (uses `INPUT_PULLUP`), and the passiv
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [08 Smart Doorbell.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip) and import it in **Arduino App Lab**.
-4. Click **Run**.
-5. Open the Web UI and press the doorbell button. The buzzer plays the chime, the page shows **Someone is at the door!**, a visitor photo is saved, and the speaker says **"Someone is at the door."**
+1. Download [`08 Smart Doorbell.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip).
+2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
+3. Click **Run**.
+4. Open the Web UI and press the doorbell button. The buzzer plays the chime, the page shows **Someone is at the door!**, a visitor photo is saved, and the speaker says **"Someone is at the door."**
 
 ## How it Works
 
