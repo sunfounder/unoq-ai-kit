@@ -35,7 +35,7 @@ No push button is used — the microphone on the Multimedia Carrier listens auto
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `09 Voice-Controlled Camera.zip` from `unoq-ai-kit\media`.
+3. Download [09 Voice-Controlled Camera.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.Voice-Controlled.Camera.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Wait for `Voice-controlled camera is ready.` in the **Output** window, then speak a command into the microphone — say "Take photo" and a photo is saved as `photos/photo_001.jpg`, or say "Turn left" and the pan-tilt moves. The speaker confirms each action, then the microphone listens again automatically.
 

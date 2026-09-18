@@ -23,7 +23,7 @@ Connect the HC-SR04's VCC to 3.3V, Trig to D11, Echo to D12, and GND to GND, and
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `10 Ultrasonic Radar.zip` from `unoq-ai-kit\basic`.
+3. Download [10 Ultrasonic Radar.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.Ultrasonic.Radar.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Move your hand toward and away from the sensor. The buzzer beeps faster as obstacles get closer. Open the Serial Monitor to see distance in cm.
 

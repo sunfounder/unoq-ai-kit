@@ -28,7 +28,7 @@ Connect the push button between D4 and GND (uses `INPUT_PULLUP`), and the passiv
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `08 Smart Doorbell.zip` from `unoq-ai-kit\iot`.
+3. Download [08 Smart Doorbell.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Open the Web UI and press the doorbell button. The buzzer plays the chime, the page shows **Someone is at the door!**, a visitor photo is saved, and the speaker says **"Someone is at the door."**
 

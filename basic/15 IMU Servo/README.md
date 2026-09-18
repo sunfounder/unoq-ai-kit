@@ -27,7 +27,7 @@ The IMU is connected to the UNO Q QWIIC connector (no wiring needed); connect th
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `15 IMU Servo.zip` from `unoq-ai-kit\basic`.
+3. Download [15 IMU Servo.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/15.IMU.Servo.zip) and import it in **Arduino App Lab**.
 4. Connect the battery pack to the Robot Shield.
 5. Click **Run**.
 6. Hold the board level — both servos center at 90°. Tilt left/right to pan, forward/back to tilt. The servos follow your motion smoothly.

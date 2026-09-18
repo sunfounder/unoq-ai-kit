@@ -27,7 +27,7 @@ The IMU is connected to the UNO Q QWIIC connector — no breadboard wiring neede
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `14 IMU Calibration.zip` from `unoq-ai-kit\basic`.
+3. Download [14 IMU Calibration.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip) and import it in **Arduino App Lab**.
 4. Click **Run** and switch to the **Serial Monitor** window.
 5. Send any character once to display the first instruction: **Z face up**.
 6. Place the device in the requested orientation and keep it completely still.

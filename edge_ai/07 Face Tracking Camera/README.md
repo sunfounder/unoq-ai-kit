@@ -33,7 +33,7 @@ Connect the pan servo signal to **D9** and the tilt servo signal to **D10**, wit
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `07 Face Tracking Camera.zip` from `unoq-ai-kit\edge_ai`.
+3. Download [07 Face Tracking Camera.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Stand in front of the camera — the board says *"Nice to meet you."* Move left, right, up, and down slowly and the camera follows you. Step away and after 2.5 seconds both servos return to their center positions.
 

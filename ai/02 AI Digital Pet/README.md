@@ -20,7 +20,7 @@ No external circuit is required. This lesson uses the UNO Q onboard LED matrix.
 
 ## How to Use
 
-1. Import `02 AI Digital Pet.zip` into Arduino App Lab.
+1. Download [02 AI Digital Pet.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.AI.Digital.Pet.zip) and import it in **Arduino App Lab**.
 2. Click **Run**. App Lab asks for your OpenAI API Key the first time.
 3. Enter the key, save it, and run the App again.
 4. When the Web UI opens, type a message and press **Send**.

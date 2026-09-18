@@ -33,7 +33,7 @@ Connect the pan servo signal to **D9** and the tilt servo signal to **D10**, wit
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `06 AI Gesture Camera.zip` from `unoq-ai-kit\edge_ai`.
+3. Download [06 AI Gesture Camera.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.AI.Gesture.Camera.zip) and import it in **Arduino App Lab**.
 4. Click **Run** and open the Web UI.
 5. Hold one gesture steady for about a second — the camera tilts, a photo is taken, or the pan-tilt centers, and the board says what it did. Then take your hand out of the frame and wait for **Ready — show a gesture** before the next one.
 

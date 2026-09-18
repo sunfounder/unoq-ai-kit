@@ -23,7 +23,7 @@ No breadboard wiring is needed — the microphone and speaker are built into the
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `10 IoT Voice Message.zip` from `unoq-ai-kit\iot`.
+3. Download [10 IoT Voice Message.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.IoT.Voice.Message.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. In the Web UI: click **Record** and speak into the microphone while watching the live audio level, click **Stop** to save the recording, then click **Play** to hear it through the speaker. **Pause** pauses playback, and **Play** resumes it.
 

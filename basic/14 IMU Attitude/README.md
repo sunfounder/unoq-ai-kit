@@ -27,7 +27,7 @@ The IMU is connected to the UNO Q QWIIC connector — no breadboard wiring neede
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `14 IMU Attitude.zip` from `unoq-ai-kit\basic`.
+3. Download [14 IMU Attitude.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Attitude.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Open the **Serial Monitor**. You'll see accelerometer (m/s²), gyroscope (deg/s), magnetometer (Gauss), azimuth (degrees), temperature (°C), pressure (hPa), and altitude (m) readings every second. Pick up the board and tilt it — watch the values change in real time.
 

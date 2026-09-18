@@ -27,7 +27,7 @@ The camera and the speaker are both built into the Multimedia Carrier, so no bre
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `05 AI Object Counter.zip` from `unoq-ai-kit\edge_ai`.
+3. Download [05 AI Object Counter.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip) and import it in **Arduino App Lab**.
 4. Click **Run** and open the Web UI.
 5. Show one mouse, keyboard, or cell phone to the camera. Once the model reaches 60% confidence the matching counter goes up by one and the speaker says the object's name. Remove the object completely, then show the next one. Click **RESET COUNTS** to start again.
 

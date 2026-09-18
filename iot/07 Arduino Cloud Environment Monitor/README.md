@@ -28,7 +28,7 @@ Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the externa
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `07 Arduino Cloud Environment Monitor.zip` from `unoq-ai-kit\iot`.
+3. Download [07 Arduino Cloud Environment Monitor.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip) and import it in **Arduino App Lab**.
 4. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
 5. In Arduino Cloud, create a Thing associated with your Device, with three variables: `temperature` and `humidity` (Floating Point Number, Read Only, On change) and `led` (Boolean, Read & Write, On change). Build a Dashboard with widgets linked to all three.
 6. Click **Run**.

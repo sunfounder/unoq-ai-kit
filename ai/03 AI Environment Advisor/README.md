@@ -33,7 +33,7 @@ Read temperature, humidity, and light data from the real world, then ask an LLM 
 ## How to Use
 
 1. Connect the DHT11 to D4 and the photoresistor module to A0.
-2. Import `03 AI Environment Advisor.zip` into Arduino App Lab.
+2. Download [03 AI Environment Advisor.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Environment.Advisor.zip) and import it in **Arduino App Lab**.
 3. Click **Run**. Enter your OpenAI API key when App Lab asks for it.
 4. Wait for temperature, humidity, and light data to appear in the Web UI.
 5. Click **Analyze Environment**.

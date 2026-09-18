@@ -38,7 +38,7 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `08 AI Smart Guard.zip` from `unoq-ai-kit\edge_ai`.
+3. Download [08 AI Smart Guard.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. The servo scans left and right while the RGB LED glows green. Walk in front of the camera — the light turns red, the buzzer beeps, and the board announces the intruder. Step away and after 3 seconds it settles back into silent green patrol.
 

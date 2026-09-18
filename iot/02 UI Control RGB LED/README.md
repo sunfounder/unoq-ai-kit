@@ -28,7 +28,7 @@ Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to P6
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `02 UI Control RGB LED.zip` from `unoq-ai-kit\iot`.
+3. Download [02 UI Control RGB LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. When the Web UI opens, click the color preview circle to open the color picker and choose a color — the RGB LED lights up in that color.
 

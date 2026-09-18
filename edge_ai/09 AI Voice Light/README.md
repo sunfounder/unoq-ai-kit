@@ -32,7 +32,7 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `09 AI Voice Light.zip` from `unoq-ai-kit\edge_ai`.
+3. Download [09 AI Voice Light.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.AI.Voice.Light.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Wait for `[READY] Waiting for "Hey Arduino"...` in the console, then say **"Hey Arduino"**.
 6. When the assistant answers *"I'm here."*, say one light command within four seconds — for example *"Turn the light blue."*

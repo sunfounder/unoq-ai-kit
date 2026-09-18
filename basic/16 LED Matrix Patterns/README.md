@@ -15,7 +15,7 @@ No breadboard wiring is needed. The LED matrix is built into the UNO Q board.
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `16 LED Matrix Patterns.zip` from `unoq-ai-kit\basic`.
+3. Download [16 LED Matrix Patterns.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/16.LED.Matrix.Patterns.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Five patterns cycle continuously on the LED matrix — one second per pattern.
 

@@ -24,7 +24,7 @@ Connect the NTC thermistor with a 10 kΩ resistor to analog pin A1 and the DC mo
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `12 Thermistor-Controlled Fan.zip` from `unoq-ai-kit\basic`.
+3. Download [12 Thermistor-Controlled Fan.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/12.Thermistor-Controlled.Fan.zip) and import it in **Arduino App Lab**.
 4. Connect the battery pack to the Robot Shield.
 5. Click **Run**.
 6. Open the Serial Monitor. Gently pinch the thermistor bead between your fingers — the temperature rises and the fan starts spinning. Let go and watch it cool down and stop.

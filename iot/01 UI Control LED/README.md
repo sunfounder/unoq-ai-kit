@@ -27,7 +27,7 @@ Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `01 UI Control LED.zip` from `unoq-ai-kit\iot`.
+3. Download [01 UI Control LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. When the Web UI opens, click the **LED IS OFF** button to toggle the LED.
 

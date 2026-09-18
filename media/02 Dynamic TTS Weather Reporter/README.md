@@ -39,7 +39,7 @@ Connect the DHT11 module as follows:
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `02 Dynamic TTS Weather Reporter.zip` from `unoq-ai-kit\media`.
+3. Download [02 Dynamic TTS Weather Reporter.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Dynamic.TTS.Weather.Reporter.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Every 30 seconds, the speaker announces: *"The temperature is 26.3 degrees Celsius. The humidity is 58.2 percent."* Try breathing warm air onto the DHT11 — the next announcement reflects the change.
 

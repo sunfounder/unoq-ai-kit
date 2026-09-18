@@ -34,7 +34,7 @@ No external resistors are needed — the sketch uses the internal pull-up resist
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `03 Voice Recorder.zip` from `unoq-ai-kit\media`.
+3. Download [03 Voice Recorder.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Voice.Recorder.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Wait for `Ready.` in the **Output** window, then:
    - Press the **D7 button** once — **Recording...** appears; speak into the microphone.

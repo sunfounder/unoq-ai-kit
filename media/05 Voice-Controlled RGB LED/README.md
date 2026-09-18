@@ -41,7 +41,7 @@ Connect the RGB LED ground pin to GND when required by your module.
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `05 Voice-Controlled RGB LED.zip` from `unoq-ai-kit\media`.
+3. Download [05 Voice-Controlled RGB LED.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.Voice-Controlled.RGB.LED.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. When the app starts, the RGB LED flashes red → green → blue → off as a wiring test. Then wait for `Local STT is ready.`, hold the button and say a color command (for example, "Turn on the blue light."), and release the button — the RGB LED changes color and `Light set to blue.` appears in the **Output** window.
 

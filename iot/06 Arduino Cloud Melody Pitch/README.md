@@ -25,7 +25,7 @@ Connect the passive buzzer between D5 and GND (the sketch drives it with `tone()
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `06 Arduino Cloud Melody Pitch.zip` from `unoq-ai-kit\iot`.
+3. Download [06 Arduino Cloud Melody Pitch.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Arduino.Cloud.Melody.Pitch.zip) and import it in **Arduino App Lab**.
 4. Open the **Arduino Cloud** Brick, click **Brick Configuration**, and enter your `ARDUINO_DEVICE_ID` and `ARDUINO_SECRET`.
 5. In Arduino Cloud, create a Device, a Thing with an Integer `pitch` variable (Read & Write, On change), and a Dashboard with a 0–50 slider linked to `pitch`.
 6. Click **Run**.

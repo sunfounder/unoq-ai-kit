@@ -25,7 +25,7 @@ Connect the joystick's VRX to A3, VRY to A2, SW to D4, VCC to 3.3V (the UNO Q's 
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `04 UI Joystick Maze.zip` from `unoq-ai-kit\iot`.
+3. Download [04 UI Joystick Maze.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Open the Web UI and move the joystick to guide the blue explorer through the maze. Reach the yellow goal to see your moves and completion time. Press the joystick button or click **Play Again** to restart.
 

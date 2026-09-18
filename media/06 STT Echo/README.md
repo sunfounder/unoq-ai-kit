@@ -34,7 +34,7 @@ No external resistor is needed — the sketch uses the Arduino internal pull-up 
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `06 STT Echo.zip` from `unoq-ai-kit\media`.
+3. Download [06 STT Echo.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.STT.Echo.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Wait for `STT Echo is ready.` in the **Output** window, then hold the button and speak. When you release the button, the recognized sentence appears after `You said:` and the speaker repeats it aloud.
 

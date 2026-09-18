@@ -21,7 +21,7 @@ Connect the left button to D7 and the right button to D6, and the passive buzzer
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `17 Opposite Reaction Game.zip` from `unoq-ai-kit\basic`.
+3. Download [17 Opposite Reaction Game.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. A smile appears, then an arrow. Press the opposite button — left arrow → right button, right arrow → left button. A correct answer shows a check mark with a short beep. A wrong answer shows an X with a continuous alarm. Press either button to restart.
 

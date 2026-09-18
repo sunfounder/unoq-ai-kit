@@ -27,7 +27,7 @@ Connect the DHT11 module's VCC to 3.3V, DATA to D4, and GND to GND.
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `11 Temperature & Humidity Monitor.zip` from `unoq-ai-kit\basic`.
+3. Download [11 Temperature & Humidity Monitor.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Temperature.Humidity.Monitor.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Open the **Serial Monitor** to see temperature (°C) and humidity (%) readings every 2 seconds. Try breathing on the sensor — the humidity should spike.
 

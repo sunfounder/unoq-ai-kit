@@ -28,7 +28,7 @@ Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the externa
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `11 Telegram IoT Bot.zip` from `unoq-ai-kit\iot`.
+3. Download [11 Telegram IoT Bot.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip) and import it in **Arduino App Lab**.
 4. In Telegram, open **@BotFather** and create a new bot with `/newbot` — save the API token it gives you (treat it like a password).
 5. In App Lab, open the **Telegram Bot** Brick, click **Brick Configuration**, and paste the token.
 6. Click **Run**.

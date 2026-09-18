@@ -26,7 +26,7 @@ Connect the photoresistor between 3.3V and A0, and the 10 kΩ resistor between A
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `03 Sensor Data Dashboard.zip` from `unoq-ai-kit\iot`.
+3. Download [03 Sensor Data Dashboard.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Open the Web UI and watch the current light level and trend chart. Cover the photoresistor with your hand, then uncover it — the percentage and chart change in real time. The chart displays approximately the last 30 seconds of readings.
 

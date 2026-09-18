@@ -40,7 +40,7 @@ Connect the RGB LED through **220 Ω resistors** to the Robot Shield PWM channel
 
 ## How to Use
 
-1. Import `01 AI Light Control.zip` into **Arduino App Lab**.
+1. Download [01 AI Light Control.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Light.Control.zip) and import it in **Arduino App Lab**.
 2. Install the **RobotShield** library if prompted.
 3. Click **Run** — App Lab asks for your OpenAI API Key.
 4. Enter your key, click Save, then Run again.

@@ -23,7 +23,7 @@ No breadboard wiring is needed. The speaker is built into the Multimedia Carrier
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `01 Local TTS.zip` from `unoq-ai-kit\media`.
+3. Download [01 Local TTS.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Local.TTS.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. The speaker on the Multimedia Carrier says: *"Hello! Welcome to Arduino App Lab."*
 

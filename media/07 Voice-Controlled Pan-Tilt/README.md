@@ -40,7 +40,7 @@ No external resistor is needed for the button — the sketch uses the internal p
 
 1. Open **Arduino App Lab**.
 2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Import `07 Voice-Controlled Pan-Tilt.zip` from `unoq-ai-kit\media`.
+3. Download [07 Voice-Controlled Pan-Tilt.zip](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Voice-Controlled.Pan-Tilt.zip) and import it in **Arduino App Lab**.
 4. Click **Run**.
 5. Wait for `Voice-controlled pan-tilt is ready.` in the **Output** window, then hold the button and say a command (for example, "Turn left"), and release the button — the pan-tilt moves to the matching angle and the speaker confirms: *"Turning left."*
 
