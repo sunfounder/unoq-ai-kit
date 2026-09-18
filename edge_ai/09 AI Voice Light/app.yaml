@@ -1,0 +1,16 @@
+name: 09 AI Voice Light
+description: Wake the assistant with "Hey Arduino", then use a spoken command to control an RGB LED.
+ports: []
+bricks:
+# keyword_spotting MUST stay first: if it is listed after another audio brick
+# it takes over the Web UI port (4912) and the app misbehaves.
+- arduino:keyword_spotting:
+    model: keyword-spotting-hey-arduino
+- sunfounder_stt: {}
+- sunfounder_tts: {}
+icon: 💡
+profiles:
+  default:
+    platforms:
+      - platform: arduino:zephyr
+default_profile: default

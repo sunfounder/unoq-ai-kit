@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Gesture Light</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="img/sf_logo.png" alt="SunFounder">
+    <h1>AI Gesture Light</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="status-row">
+        <span id="status-indicator" class="status-indicator"></span>
+        <span id="status-text" class="status-label">Connecting...</span>
+      </div>
+
+      <div class="camera-container">
+        <div id="video-placeholder" class="video-placeholder">
+          <div class="camera-icon">📷</div>
+          <p>Starting camera...</p>
+        </div>
+        <iframe id="camera-stream" title="Camera" frameborder="0"
+                allow="autoplay" style="display: none;"></iframe>
+      </div>
+
+      <div class="gesture-card">
+        <span class="gesture-label">Current Gesture</span>
+        <span id="current-gesture" class="gesture-name">Waiting...</span>
+        <span id="gesture-confidence" class="gesture-confidence">Confidence: --</span>
+        <span id="last-action" class="last-action"></span>
+      </div>
+
+      <div class="hint">
+        👍 Thumbs up: LED ON · ✊ Fist: LED OFF · ✌️ V-sign and 🖐️ open hand: display only
+      </div>
+    </section>
+  </main>
+
+  <script src="libs/socket.io.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

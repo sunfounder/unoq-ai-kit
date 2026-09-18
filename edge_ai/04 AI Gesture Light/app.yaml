@@ -1,0 +1,8 @@
+name: 04 AI Gesture Light
+description: Recognize hand gestures and control one external LED
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: hand-gestures
+- arduino:web_ui: {}
+icon: 💡

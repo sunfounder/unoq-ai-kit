@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                 Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    background: #eceff1;
+    color: #37474f;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #23425d;
+    letter-spacing: -.2px;
+}
+
+header img {
+    position: absolute;
+    left: 40px;
+    height: 28px;
+    width: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 64px 24px 48px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+    padding: 40px 48px 36px;
+    width: 100%;
+    max-width: 720px;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b0bec5;
+}
+
+.status-indicator.on {
+    background: #29a3d9;
+    box-shadow: 0 0 0 4px rgba(41,163,217,.15);
+}
+
+.status-indicator.analyzing {
+    background: #7e57c2;
+    box-shadow: 0 0 0 4px rgba(126,87,194,.15);
+}
+
+.status-indicator.error {
+    background: #d32f2f;
+    box-shadow: 0 0 0 4px rgba(211,47,47,.12);
+}
+
+.status-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #90a4ae;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.sensor-card {
+    min-height: 145px;
+    padding: 18px 12px;
+    border: 1px solid #e3e9ec;
+    border-radius: 12px;
+    background: #f8fafb;
+    text-align: center;
+}
+
+.sensor-icon { display: block; font-size: 28px; margin-bottom: 8px; }
+.sensor-title {
+    display: block;
+    color: #78909c;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.sensor-card strong {
+    display: block;
+    margin-top: 7px;
+    color: #23425d;
+    font-size: 25px;
+}
+
+.sensor-card small { color: #90a4ae; font-size: 12px; }
+
+.analysis-panel {
+    margin-top: 22px;
+    padding: 22px 24px;
+    border: 1px solid #dce5e9;
+    border-radius: 12px;
+    background: #fff;
+    text-align: center;
+}
+
+.panel-label {
+    color: #90a4ae;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.analysis-panel h2 {
+    margin: 7px 0 9px;
+    color: #23425d;
+    font-size: 22px;
+}
+
+#analysis-summary { color: #607d8b; font-size: 14px; line-height: 1.55; }
+
+.suggestion {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    background: #eaf7fd;
+    text-align: left;
+}
+
+.suggestion span {
+    color: #258bb8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.suggestion p { margin-top: 4px; color: #455a64; font-size: 14px; }
+
+#analyze-button {
+    display: block;
+    width: 230px;
+    height: 48px;
+    margin: 30px auto 0;
+    border: none;
+    border-radius: 24px;
+    background: #29a3d9;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(41,163,217,.25);
+    transition: transform .15s, box-shadow .2s, opacity .2s;
+}
+
+#analyze-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(41,163,217,.3);
+}
+
+#analyze-button:active:not(:disabled) { transform: translateY(1px); }
+#analyze-button:disabled { cursor: default; opacity: .55; }
+
+#status-text {
+    margin-top: 24px;
+    text-align: center;
+    color: #607d8b;
+    font-size: 14px;
+}
+
+#error-container {
+    display: none;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #ffebee;
+    color: #c62828;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    header { padding: 16px 20px; }
+    header h1 { font-size: 18px; }
+    header img { left: 20px; height: 22px; }
+    main { padding: 36px 18px; }
+    .card { padding: 30px 24px 28px; }
+    .sensor-grid { grid-template-columns: 1fr; }
+    .sensor-card { min-height: 120px; }
+}

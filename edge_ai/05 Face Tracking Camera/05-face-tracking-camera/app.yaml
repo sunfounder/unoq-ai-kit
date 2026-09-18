@@ -1,9 +1,0 @@
-name: 05 Face Tracking Camera
-description: Greet a detected face and follow it with the pan-tilt servo
-ports: []
-bricks:
-- arduino:video_object_detection:
-    model: face-detection
-- arduino:web_ui: {}
-- sunfounder_tts: {}
-icon: 🤖

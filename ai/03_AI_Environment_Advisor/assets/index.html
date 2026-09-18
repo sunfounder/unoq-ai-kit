@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Environment Advisor</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Environment Advisor</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="status-dot"></span>
+                <span class="status-label" id="status-label">Ready</span>
+            </div>
+
+            <div class="sensor-grid">
+                <section class="sensor-card temperature">
+                    <span class="sensor-icon">🌡️</span>
+                    <span class="sensor-title">Temperature</span>
+                    <strong id="temperature-value">--.-°C</strong>
+                </section>
+                <section class="sensor-card humidity">
+                    <span class="sensor-icon">💧</span>
+                    <span class="sensor-title">Humidity</span>
+                    <strong id="humidity-value">--.-%</strong>
+                </section>
+                <section class="sensor-card light">
+                    <span class="sensor-icon">☀️</span>
+                    <span class="sensor-title">Light</span>
+                    <strong id="light-value">--%</strong>
+                    <small id="light-label">Waiting</small>
+                </section>
+            </div>
+
+            <section class="analysis-panel">
+                <span class="panel-label">AI Analysis</span>
+                <h2 id="analysis-status">Waiting for analysis</h2>
+                <p id="analysis-summary">Click the button to let AI analyze the current environment.</p>
+                <div class="suggestion" id="suggestion-box">
+                    <span>Suggestion</span>
+                    <p id="analysis-suggestion">No suggestion yet.</p>
+                </div>
+            </section>
+
+            <button id="analyze-button" disabled>Analyze Environment</button>
+
+            <p id="status-text">Waiting for sensor readings.</p>
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

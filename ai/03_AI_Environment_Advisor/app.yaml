@@ -1,0 +1,9 @@
+name: 03 AI Environment Advisor
+description: Let an LLM analyze live temperature, humidity, and light data and provide useful advice
+ports: []
+bricks:
+- arduino:web_ui: {}
+- arduino:cloud_llm:
+    variables:
+      API_KEY: ""
+icon: 🌤️

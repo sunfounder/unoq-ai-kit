@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Digital Pet</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Digital Pet</h1>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="status-row">
+                <span class="status-indicator" id="status-dot"></span>
+                <span class="status-label" id="status-label">Connecting</span>
+            </div>
+
+            <div class="pet-preview" id="pet-preview" aria-label="Pet emotion">• — •</div>
+            <p class="pet-name">PIXEL</p>
+            <p class="emotion-name" id="emotion-name">Neutral</p>
+
+            <div id="chat-box" class="chat-box">
+                <div class="msg bot">Hello! I’m Pixel. Tell me something about your day.</div>
+            </div>
+
+            <label for="message-input">Message</label>
+            <textarea id="message-input" maxlength="300"
+                      placeholder="Try: I passed my exam today!"
+                      rows="3" autocomplete="off"></textarea>
+            <div class="message-info">
+                <span>Tell Pixel something about your day.</span>
+                <span id="character-count">0 / 300</span>
+            </div>
+            <button id="send-btn">Send</button>
+
+            <p class="core-concept">AI generates a reply and turns its emotion into a matrix expression.</p>
+            <p id="error-container"></p>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
