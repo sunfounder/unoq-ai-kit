@@ -13,9 +13,9 @@ This example uses the following Bricks:
 - `web_ui` — Creates the web interface and keeps the browser in sync with Python
 - `cloud_llm` — Sends the prompt to a cloud LLM (OpenAI, Anthropic, or Google) and returns the reply
 - `sunfounder_stt` — Turns your spoken sentence into text locally with Whisper
-- sunfounder_tts — Speaks the reply through the Multimedia Carrier's speaker (the voice is synthesised online, but no API key is needed)
+- `sunfounder_tts` — Speaks the reply through the Multimedia Carrier's speaker (the voice is synthesised online, but no API key is needed)
 
-- sunfounder_tts — Speaks the reply through the Multimedia Carrier's speaker (the voice is synthesised online, but no API key is needed)
+
 
 ## Hardware
 
@@ -41,11 +41,9 @@ No breadboard wiring is needed — everything is built into the Multimedia Carri
 - ↓
 - RobotShield microphone
 - ↓
-- sunfounder_stt
 - ↓
 - CloudLLM
 - ↓
-- sunfounder_tts
 - ↓
 - RobotShield speaker
 
