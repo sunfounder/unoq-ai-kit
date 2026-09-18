@@ -15,6 +15,8 @@ This example uses the following Bricks:
 - `sunfounder_stt` — Turns your spoken sentence into text locally with Whisper
 - sunfounder_tts — Speaks the reply through the Multimedia Carrier's speaker (the voice is synthesised online, but no API key is needed)
 
+- sunfounder_tts — Speaks the reply through the Multimedia Carrier's speaker (the voice is synthesised online, but no API key is needed)
+
 ## Hardware
 
 - Pan Tilt Kit ×1
