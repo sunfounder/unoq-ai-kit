@@ -1,4 +1,4 @@
-name: AI Gesture Camera
+name: 06 AI Gesture Camera
 description: Use hand gestures to tilt the camera, take photos, and receive spoken feedback
 ports: []
 bricks:
