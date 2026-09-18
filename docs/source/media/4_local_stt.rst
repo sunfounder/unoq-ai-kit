@@ -43,10 +43,8 @@ This project uses the following App Lab Brick:
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`04 Local STT.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Local.STT.zip>` and import it in App Lab. Open the app.
-
+#. Download :download:`04 Local STT.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Local.STT.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). The Output window shows:
 
    *"Local STT is ready. The microphone will listen for 5 seconds each time."*

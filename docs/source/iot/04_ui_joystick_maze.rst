@@ -49,10 +49,8 @@ Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D4**, *
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`04 UI Joystick Maze.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`04 UI Joystick Maze.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). A **Web UI** tab opens showing a maze with a blue explorer and a yellow goal.
 
 #. Push the joystick up, down, left, or right — the explorer moves one cell per push. Reach the yellow goal and a **Maze Complete!** dialog shows your moves and completion time. Press the joystick button (or click **Play Again**) to restart.

@@ -69,8 +69,8 @@ Connect the push button between D4 and GND — no external resistor is needed, t
 2. Run the App
 ----------------
 
-#. Download :download:`05 Voice-Controlled RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.Voice-Controlled.RGB.LED.zip>` and import it in **Arduino App Lab**.
-
+#. Download :download:`05 Voice-Controlled RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.Voice-Controlled.RGB.LED.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click **Run** (▶). The RGB LED flashes red → green → blue → off as a wiring test, and the Output window shows:
 
    *"Local STT is ready."*

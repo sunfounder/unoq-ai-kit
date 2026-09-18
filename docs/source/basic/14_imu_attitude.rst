@@ -53,11 +53,8 @@ Plug the 10-Axis IMU into the UNO Q's QWIIC connector — no breadboard wiring i
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
-#. Download :download:`14 IMU Calibration.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip>` and import it in **Arduino App Lab**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
+#. Download :download:`14 IMU Calibration.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Calibration.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click **Run** (▶) and open the **Serial Monitor** (📊).
 
    .. note::

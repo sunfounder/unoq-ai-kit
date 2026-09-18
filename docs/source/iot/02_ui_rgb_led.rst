@@ -62,10 +62,8 @@ In this lesson, you will learn to:
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`02 UI Control RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`02 UI Control RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). The Web UI opens with a color wheel, a brightness slider, and a preview circle.
 
 #. Drag around the wheel — the LED and the preview change color together. Slide the brightness up and down. Try: pure red (top of the wheel), orange (between red and yellow), cyan, and magenta.

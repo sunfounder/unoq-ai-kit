@@ -57,11 +57,8 @@ Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT
 
 **Import and Run the Code**
 
-#. Download :download:`05 PIR Motion Alarm.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.PIR.Motion.Alarm.zip>` and import it in **Arduino App Lab**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
+#. Download :download:`05 PIR Motion Alarm.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.PIR.Motion.Alarm.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶) in the top-right corner.
 
    .. image:: /img/app_run.png

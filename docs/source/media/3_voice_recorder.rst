@@ -63,8 +63,8 @@ Connect the two push buttons between D7 / D6 and GND — no external resistors a
 2. Run the App
 ----------------
 
-#. Download :download:`03 Voice Recorder.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Voice.Recorder.zip>` and import it in **Arduino App Lab**.
-
+#. Download :download:`03 Voice Recorder.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Voice.Recorder.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click **Run** (▶). The Output window shows::
 
       === Voice Recorder ===

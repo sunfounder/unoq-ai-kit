@@ -745,3 +745,63 @@ F	AI Agent Projects	AI 自己获取信息、判断并控制硬件
 06	AI Smart Guard	Person Recognition	PIR + Camera + RGB + Buzzer + TTS	AI 安防系统
 07	Custom Image Classifier	Custom Model	RGB + TTS	自己训练模型并让 AI 报出结果
 08	AI Vision Challenge	Custom Model / Detection	STT + TTS + Servo + RGB + Buzzer
+
+
+模块F候选项：AI 互动项目（16 个）
+--------------------------------------------
+
+.. list-table::
+   :widths: 24 34 42
+   :header-rows: 1
+
+   * - 项目
+     - AI 判断的内容
+     - 硬件反馈
+   * - AI Scavenger Hunt
+     - 判断找到的物品是否符合任务
+     - RGB 显示结果、蜂鸣器提示、点阵计分
+   * - AI Quiz Show
+     - LLM 出题并判断答案
+     - 按键抢答、点阵显示分数、蜂鸣器播放对错音效
+   * - AI Sorting Challenge
+     - 判断物品分类是否正确
+     - RGB 显示正确/错误、点阵累计得分
+   * - AI Recycling Game
+     - 识别物品并判断垃圾类别
+     - 不同颜色 LED 表示垃圾桶类型、舵机打开对应盖子
+   * - AI Mood Light
+     - 分析画面、文字或语音表达的情绪
+     - RGB 生成对应氛围灯颜色
+   * - AI Story Machine
+     - 根据物品、传感器或关键词生成故事
+     - TTS 讲故事、RGB 改变场景气氛、点阵显示角色表情
+   * - AI Environment Pet
+     - 分析温湿度、光照等数据
+     - 点阵显示宠物状态、RGB 显示舒适度、TTS 说出感受
+   * - AI Magic Mirror
+     - 分析摄像头画面并给出评价或建议
+     - 超声波检测靠近、RGB 亮起、TTS 朗读结果
+   * - AI Smart Guard
+     - PIR 触发拍照，AI 描述画面
+     - 蜂鸣器报警、RGB 显示警戒等级、网页保存事件
+   * - AI Treasure Hunt
+     - AI 生成寻找任务并判断结果
+     - 点阵显示倒计时、蜂鸣器提示、RGB 显示进度
+   * - AI Drawing Guesser
+     - AI 猜学生画的内容
+     - 点阵显示表情、RGB 显示是否猜中、蜂鸣器庆祝
+   * - AI Gesture Command Game
+     - 识别手势并判断指令
+     - 控制 RGB、蜂鸣器、点阵或舵机
+   * - AI Color Challenge
+     - AI 提出颜色任务并检查物品
+     - RGB 显示目标颜色、点阵显示分数
+   * - AI Object Story Dice
+     - 识别三个物品并生成故事
+     - TTS 朗读故事、点阵播放表情动画
+   * - AI Reaction Game
+     - AI 随机发布动作或物品任务
+     - 蜂鸣器开始计时、点阵倒计时、RGB 判断成功
+   * - AI Sensor Detective
+     - 根据多个传感器数据推断环境状态
+     - 点阵显示结论、RGB 显示风险、蜂鸣器预警

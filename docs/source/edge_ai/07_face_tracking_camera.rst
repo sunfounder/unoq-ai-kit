@@ -59,20 +59,8 @@ This lesson uses no breadboard components — everything plugs into the Robot Sh
 2. Run the App
 ----------------
 
-#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-      :align: center
-
-#. Select **Import from Computer**.
-
-   .. image:: /img/app_import_pc.png
-      :width: 600
-      :align: center
-
-#. Download :download:`07 Face Tracking Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip>` and import it in App Lab.
-
+#. Download :download:`07 Face Tracking Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. The app appears in **Apps** — click it to open.
 
 #. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.

@@ -60,10 +60,8 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND*
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`11 Telegram IoT Bot.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`11 Telegram IoT Bot.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. On the App page, locate the **Telegram Bot** Brick, click **Brick Configuration**, and paste the API token from BotFather.
 
    .. image:: img/09_telegram_bot_token.png

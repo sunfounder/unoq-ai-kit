@@ -60,10 +60,8 @@ Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and 
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`08 Smart Doorbell.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`08 Smart Doorbell.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). The Web UI opens with a live camera preview and an empty **Recent Visitors** list.
 
 #. Press the button — the buzzer plays "ding-dong", the page flashes **Someone is at the door!**, a visitor photo is saved, and the event joins the **Recent Visitors** list with its timestamp.

@@ -37,8 +37,8 @@ No breadboard wiring is needed — the speaker is built into the Multimedia Carr
 2. Run the App
 ----------------
 
-#. Download :download:`05 IoT Voice Announcer.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.IoT.Voice.Announcer.zip>` and import it in **Arduino App Lab**.
-
+#. Download :download:`05 IoT Voice Announcer.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.IoT.Voice.Announcer.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click **Run** (▶). The Output window shows:
 
    *"=== IoT Voice Announcer ==="*

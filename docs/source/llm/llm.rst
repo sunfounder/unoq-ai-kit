@@ -26,4 +26,13 @@ Let's give your UNO Q a mind.
 .. toctree::
    :maxdepth: 1
 
-   1_ai_light_control
+   01_ai_light_control
+   03_ai_environment_advisor
+
+   02_ai_digital_pet
+
+   04_ai_voice_assistant
+
+   05_ai_vision_assistant
+
+   

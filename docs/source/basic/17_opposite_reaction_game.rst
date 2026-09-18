@@ -57,18 +57,8 @@ Connect the left button to D7 and the right button to D6 — both use ``INPUT_PU
 
 **Import and Run the Code**
 
-#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
-#. Select **Import from Computer**.
-
-   .. image:: /img/app_import_pc.png
-      :width: 600
-
-#. Download :download:`17 Opposite Reaction Game.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
-
+#. Download :download:`17 Opposite Reaction Game.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/17.Opposite.Reaction.Game.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶) in the top-right corner.
 
    .. image:: /img/app_run.png

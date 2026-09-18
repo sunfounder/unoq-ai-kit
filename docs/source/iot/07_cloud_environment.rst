@@ -151,10 +151,8 @@ Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED thro
 3. Run the App
 ----------------
 
-#. In App Lab, go to **Apps** → **Import App** → **Import from Computer**.
-
-#. Download :download:`07 Arduino Cloud Environment Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`07 Arduino Cloud Environment Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click on the "Arduino Cloud" Brick, then click the "Brick Configuration" button.
 
    .. image:: img/03_cloud_brick_configure.png

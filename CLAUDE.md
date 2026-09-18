@@ -615,9 +615,9 @@ In the **How to Use the Example** section, steps must be sequential with
 no gaps. The base pattern is:
 
 ```
-1. Open **Arduino App Lab**.
-2. Select **My Apps** → ...
-3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
+1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. [Expected result.]
 ```
@@ -626,7 +626,9 @@ For projects that require battery power, insert an additional step
 between Import and Run:
 
 ```
-3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
+1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Connect the battery pack to the Robot Shield.
 5. Click **Run**.
 6. [Expected result.]
@@ -734,7 +736,7 @@ docs/source/
 │   └── <n>_<lesson_name>.rst    # Individual lessons (1–17)
 ├── media/                       # Module B: Multimedia (STT, TTS, Camera)
 ├── iot/                         # Module C: IoT
-├── ai/                          # Module E: AI/LLM
+├── llm/                          # Module E: AI/LLM
 ├── edge_ai/                     # Module D: Edge AI
 └── _static/                     # Static assets
     ├── img/
@@ -754,11 +756,11 @@ unoq-ai-kit/
 │   ├── 2_button_led.zip
 │   └── ...
 ├── iot/
-├── ai/
+├── llm/
 └── edge_ai/
 ```
 
-The student imports these via: App Lab → Import App → navigate to folder → select `.zip`.
+Each lesson's *Run the App* section, and each project README, links to that lesson's package on the releases page, so a student downloads the package for the lesson they are working on and imports it with App Lab → **Import App** → **Import from Computer**.
 
 ## IoT Web UI Design System
 
@@ -940,9 +942,9 @@ One-sentence description of what the project does.
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **My Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
+1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. [Expected result.]
 
@@ -1005,9 +1007,9 @@ This example uses the following Bricks:
 
 ## How to Use the Example
 
-1. Open **Arduino App Lab**.
-2. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**.
-3. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip) and import it in **Arduino App Lab**.
+1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. [Expected result.]
 

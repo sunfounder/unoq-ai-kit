@@ -56,10 +56,8 @@ Connect the photoresistor between **3.3V** and **A0**, and the 10kΩ resistor be
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**.
-
-#. Download :download:`03 Sensor Data Dashboard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip>` and import it in App Lab. Open it.
-
+#. Download :download:`03 Sensor Data Dashboard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). A **Web UI** tab opens showing the current light level, a level bar, and a trend chart.
 
 #. Cover the photoresistor with your hand — the percentage drops and the chart curves downward. Uncover it, or shine a flashlight on it — the curve climbs back up.

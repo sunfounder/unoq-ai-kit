@@ -56,10 +56,8 @@ Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — 
 ----------------
 
 
-#. In App Lab, go to **Apps** → **Create new app** -> **Import App** → **Import from Computer**. 
-
-#. Download :download:`01 UI Control LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip>` and import it in App Lab. Open the app.
-
+#. Download :download:`01 UI Control LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶). A **Web UI** tab opens automatically.
 
 #. You'll see a large circular button labeled "**LED IS OFF**". Click it — the LED lights up and the button glows teal with "**LED IS ON**". Click again to turn it off.

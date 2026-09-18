@@ -62,7 +62,7 @@ Object recognition, face recognition, gesture recognition, voice interaction and
     media/media
     iot/iot
     edge_ai/edge_ai
-    ai/ai
+    llm/llm
     faq
 
 
