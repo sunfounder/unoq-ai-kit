@@ -57,14 +57,6 @@ The sketch needs two libraries, both declared in ``sketch.yaml`` and installed f
 
 The Bridge library that lets the sketch and Python talk to each other is part of the UNO Q core, so there is nothing else to install.
 
-**Hardware Check**
-
-#. Power the board down before you move any wires — both sensors sit on the 5V rail.
-#. Plug the **DHT11** into its cable, then run the three wires to the Robot Shield: **VCC** to **5V**, **GND** to **GND**, and **DATA** to **D4**. The DATA line carries the whole measurement, so it must be a firm connection.
-#. Plug the **photoresistor module** in next to it and run its three wires the same way: **VCC** to **5V**, **GND** to **GND**, and its signal pin to **A0**.
-#. Space the two sensors apart. The DHT11 reports the air around it, so a photoresistor module pressed against it, or a hand cupped over it, will change what the temperature reading means.
-#. Plug the **USB-C cable** into the UNO Q and your computer, and check that the board powers up.
-
 **Wiring Diagram**
 
 The **DHT11** uses three pins — **DATA** to **D4**, **VCC** to **5V**, **GND** to **GND** — and the **photoresistor module** uses the same three connections with its signal pin on **A0**. The light reading is a *relative* classroom measurement taken from the voltage on **A0**, so it depends on how the module is built: on most modules the percentage rises as the room gets brighter, but on a module whose resistor and photoresistor are swapped it will rise as the room gets darker instead. Compare the number with the room you are sitting in — if it moves the wrong way, that is the module, not a mistake in your wiring.

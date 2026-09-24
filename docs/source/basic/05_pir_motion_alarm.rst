@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the PIR sensor's three pins — **VCC → 3.3V**, **GND → GND**, **OUT → D4** — and the passive buzzer to **D5**.
+Connect the PIR sensor's three pins — **VCC → 5V**, **GND → GND**, **OUT → D4** — and the passive buzzer to **D5**.
 
 .. image:: /img/wiring/wiring_pc_buzzer_pir.png
    :width: 600

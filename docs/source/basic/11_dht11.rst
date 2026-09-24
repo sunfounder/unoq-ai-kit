@@ -55,7 +55,7 @@ This project uses the following sketch libraries:
 The DHT11 module has three labeled pins — double-check them before powering on: **VCC → 3.3V**, **DATA → D4**, **GND → GND**.
 
 .. image:: /img/wiring/wiring_dht11.png
-   :width: 500
+   :width: 600
    :align: center
 
 2. Run the App

@@ -24,7 +24,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_led`
      - 1 * :ref:`cpn_resistor` (220Ω)
      - Several :ref:`cpn_wires`
    * - |list_pan_tilt|
@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the LED to **D5** through a 220Ω resistor: the long leg (anode) goes to D5, the short leg (cathode) to the resistor and GND. Never connect an LED without a resistor — it burns out immediately.
+Connect the LED to **D5** through a 220Ω resistor: the long leg (anode) goes through the resistor to D5, and the short leg (cathode) to GND. Never connect an LED without a resistor — it burns out immediately.
 
 .. image:: /img/wiring/wiring_led.png
    :width: 500
@@ -59,19 +59,8 @@ Connect the LED to **D5** through a 220Ω resistor: the long leg (anode) goes to
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
-
-#. Select **Import from Computer**.
-
-   .. image:: /img/app_import_pc.png
-      :width: 600
-
-
-#. Download :download:`01 Hello LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Hello.LED.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
+#. Download :download:`01 Hello LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Hello.LED.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded. The app appears in **Apps** — click it to open.
 
    .. image:: img/1_import_led.png
       :width: 600
@@ -213,7 +202,7 @@ SOS in Morse code is three short, three long, three short (··· −−− ··
 **LED does not light up**
 
 * **Cause:** The LED is connected backwards, or a jumper wire is loose.
-* **Solution:** Check that the long leg (anode) connects to pin 5, and the short leg (cathode) connects to the resistor and GND. Push all wires firmly into the breadboard.
+* **Solution:** Check that the long leg (anode) connects through the resistor to pin 5, and the short leg (cathode) connects to GND. Push all wires firmly into the breadboard.
 
 **LED is very dim**
 

@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so either leg works — and the **10kΩ fixed resistor** (bands **Brown → Black → Orange**) between **A0** and **GND**; the two resistors form a voltage divider that turns light into a readable voltage. The four LEDs go to **D4, D5, D6, D7**, each with its **own** 220Ω resistor (bands **Red → Red → Brown → Gold**) and a shared GND rail: the long leg (anode) goes toward the digital pin, the short leg (cathode) toward GND. Never connect multiple LEDs to a single resistor — they share current unevenly and may burn out.
+Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so either leg works — and the **10kΩ fixed resistor** (bands **Brown → Black → Orange**) between **A0** and **GND**; the two resistors form a voltage divider that turns light into a readable voltage. The four LEDs go to **D4, D5, D6, D7**, each with its **own** 220Ω resistor (bands **Red → Red → Brown → Gold**) and a shared GND rail: the long leg (anode) goes through its resistor to the digital pin, the short leg (cathode) to GND. Never connect multiple LEDs to a single resistor — they share current unevenly and may burn out.
 
 .. image:: /img/wiring/wiring_photoresistor_led.png
    :width: 500
@@ -255,7 +255,7 @@ A real night light should turn **off** during the day and only activate at night
 **Some LEDs never turn on**
 
 * **Cause:** A specific LED is burned out, connected backwards, or on the wrong breadboard row.
-* **Solution:** Swap the suspect LED with a known working one to test. Check polarity — the long leg goes toward the digital pin. Verify the jumper wire from the digital pin to the LED's row is fully inserted.
+* **Solution:** Swap the suspect LED with a known working one to test. Check polarity — the long leg (anode) goes through the resistor to the digital pin, and the short leg (cathode) to GND. Verify the jumper wire from the digital pin to the LED's row is fully inserted.
 
 5. Summary
 -------------

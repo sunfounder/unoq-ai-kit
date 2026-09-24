@@ -54,11 +54,15 @@ This project uses the following App Lab Bricks:
 
 **Wiring Diagram**
 
-Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The speaker and microphone are built into the Multimedia Carrier.
+Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The speaker and microphone are built into the AVIO Carrier.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
    :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
 ----------------
@@ -70,10 +74,6 @@ Connect the push button between D4 and GND — no external resistor is needed, t
    *"STT Echo is ready."*
 
 #. Hold the button, say a sentence — for example, "Hello Arduino" — then release the button. The board prints **You said: hello arduino** and the speaker repeats the sentence aloud.
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -141,7 +141,7 @@ Now the board comments on what you said instead of just repeating it.
 **The speaker stays silent after recognition**
 
 * **Cause:** The TTS runtime is still being set up on the first run, or the audio environment isn't configured.
-* **Solution:** The first run can take half an hour or more while App Lab downloads the TTS runtime — keep the UNO Q connected to the Internet and wait. Check that the Multimedia Carrier is firmly attached to the UNO Q.
+* **Solution:** The first run can take half an hour or more while App Lab downloads the TTS runtime — keep the UNO Q connected to the Internet and wait. Check that the AVIO Carrier is firmly attached to the UNO Q.
 
 **"You said:" appears, but the spoken echo sounds different**
 
@@ -156,7 +156,7 @@ Now the board comments on what you said instead of just repeating it.
 **"No speech detected." appears for every try**
 
 * **Cause:** The microphone isn't picking up your voice, or the room is too quiet.
-* **Solution:** Speak closer to the microphone and a bit louder. Check that the Multimedia Carrier is firmly attached. Say a full sentence instead of a single word.
+* **Solution:** Speak closer to the microphone and a bit louder. Check that the AVIO Carrier is firmly attached. Say a full sentence instead of a single word.
 
 5. Summary
 -------------

@@ -25,16 +25,16 @@ In this lesson, you will learn to:
 **What You Need**
 
 .. list-table::
-   :widths: 25 25
+   :widths: 25 25 25 25
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_rgb_led` (common cathode)
-   * - 3 * :ref:`cpn_resistor` (220Ω)
+     - 1 * :ref:`cpn_rgb_led`
+     - 3 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_buzzer` (active)
    * - |list_pan_tilt|
      - |list_rgb_led|
-   * - |list_220ohm|
+     - |list_220ohm|
      - |list_active_buzzer|
 
 **Software Requirements**
@@ -42,10 +42,12 @@ In this lesson, you will learn to:
 This project uses the following Bricks and sketch library:
 
 * Bricks (declared in ``app.yaml``):
+
   * ``video_object_detection`` — runs the **general object-detection** model on every camera frame
   * ``web_ui`` — serves the Web UI with the live camera feed and guard status
   * ``sunfounder_tts`` — text-to-speech for the voice alerts (EdgeTTS)
 * Libraries (declared in ``sketch.yaml``):
+
   * ``Arduino_HardwareServo`` (0.0.1) — drives the servos with hardware PWM
 
 .. note::
@@ -64,30 +66,22 @@ Wire the RGB LED with the same layout as the color mixing project earlier: the *
 
 Why does the guard watch for whole people instead of faces? Because the two jobs need two different models. The **face-detection** model you used earlier only fires on a clear view of a face — eyes, nose, and mouth. The **general object-detection** model this project uses reports a "person" class for a full body, so it still works when someone faces away, wears a mask or sunglasses, or is partly hidden. A greeter wants faces; a guard wants intruders — and an intruder usually doesn't cooperate by facing the camera.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
 #. Download :download:`08 AI Smart Guard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
+#. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield, then click the **Run** button (▶). The RGB LED glows **green** and the pan servo starts sweeping slowly side to side like a watchman; the Console shows ``🛡️  AI Smart Guard is running.`` and then ``🔊 TTS ready.`` once the speech engine is up.
 
-#. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.
-
-#. Click the **Run** button (▶). The RGB LED glows **green** and the pan servo starts sweeping slowly from side to side like a watchman. The sketch prints its banner, ``=== AI Smart Guard Ready ===``, over the serial connection, and the Console shows ``🛡️  AI Smart Guard is running.`` followed by ``🔊 TTS ready.`` once the speech engine is up.
-
-#. Open the **Web UI** tab. The live camera feed fills the page, and the guard panel shows a green dot — **All clear — scanning** — with the note "AI Smart Guard protecting the perimeter."
-
-#. Walk in front of the camera. The guard snaps to **red**, the buzzer starts beeping, the scanning stops, and you hear the voice alert: *"Intruder detected. Intruder detected."* The Web UI switches to the red alert panel: **🚨 Intruder detected! (100%)**.
-
-#. Step out of view and count to four. After about 3 seconds without seeing you, the guard returns to **green**, the buzzer falls silent, the servo resumes its patrol sweep, and the speaker announces *"All clear."*
+#. Open the **Web UI** tab: the live camera feed and a green **All clear — scanning** panel. Walk in front of the camera — the guard snaps to **red**, the buzzer starts beeping, and the voice alert says *"Intruder detected. Intruder detected."* Step out of view and after about 3 seconds it returns to **green**, the buzzer falls silent, the servo resumes its patrol sweep, and the speaker announces *"All clear."*
 
 .. image:: img/08_ai_smart_guard.png
    :width: 600
    :align: center
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -198,13 +192,6 @@ Try each of these scenarios with the app running and watch the whole system resp
    * - Put a coat or backpack on a chair in view
      - May trigger — person-shaped objects can fool the model (that's what the next experiment is about)
 
-**Challenge: Reduce False Alarms**
-
-Hang a coat on a chair and place it in the camera's view. Does the guard raise an alarm on it? The sensitivity lives in one number in ``main.py``: ``confidence=0.4``. Try raising it to ``0.6`` and then ``0.8`` — run the app after each change and test both the coat and a real person walking by. Find the lowest confidence value where the coat stops triggering while a real person still does. What's the trade-off you're making at each threshold?
-
-**Challenge: Test the Recovery Time**
-
-Have a friend walk through the frame and keep walking until they're out of view. Time the gap between them disappearing and the buzzer stopping — is it really about 3 seconds? The timer lives in ``LOST_TIMEOUT = 3.0``. Try setting it to ``10.0`` and think about which is better for a real security system: a guard that stands down quickly after a false alarm, or one that stays alert a little longer?
 
 4. Troubleshooting
 --------------------

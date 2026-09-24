@@ -227,7 +227,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
        Write 90° + offset to each servo
        Wait 20ms, repeat (~50 Hz update rate)
 
-1. **Library Includes and Hardware Objects**
+#. Library Includes and Hardware Objects
 
    - The includes bring in the standard **Arduino_HardwareServo** library, the IMU library, the calibration data header, I2C, and math functions
    - The UNO Q uses ``Arduino_HardwareServo`` because it drives the servo with the STM32's hardware PWM — the standard Servo library causes jitter on this board
@@ -250,7 +250,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
       panServo.write(90);   // Center both servos
       tiltServo.write(90);
 
-2. **Multi-Sample Averaging to Reduce Noise**
+#. Multi-Sample Averaging to Reduce Noise
 
    - The accelerometer is read 10 times per frame, summed, and divided by the count to produce an average
    - Without averaging, electrical noise would cause the servos to twitch randomly
@@ -269,7 +269,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
       accelY /= sampleCount;
       accelZ /= sampleCount;
 
-3. **Converting Accelerometer Readings to Angles**
+#. Converting Accelerometer Readings to Angles
 
    - ``atan2(y, x)`` is the arctangent function that converts the ratio of two accelerometer axes into an angle
    - ``atan2(accelY, accelZ)`` calculates roll (left/right tilt), and ``atan2(-accelX, sqrt(Y² + Z²))`` calculates pitch (forward/back tilt)
@@ -281,7 +281,7 @@ This lesson fuses IMU sensor data with servo control — the same principle behi
       float pitch = atan2(-accelX, sqrt(accelY*accelY + accelZ*accelZ))
                     * 180.0 / PI;
 
-4. **Dead Zone and Incremental Stepping**
+#. Dead Zone and Incremental Stepping
 
    - The dead zone ignores tilt angles smaller than 5°, creating a stable region where tiny vibrations and noise do not affect the servos
    - ``constrain()`` clamps the target angles to the safe ±45° range
@@ -345,7 +345,7 @@ Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoot
 **"IMU not detected" — servos don't move**
 
 * **Cause:** The IMU initialization failed.
-* **Solution:** Check the Serial Monitor for the startup message. If it prints "WARNING: IMU not detected", detach and reattach the Multimedia Carrier, then restart. Also verify ``Wire1.begin()`` is called before ``imu.begin()``.
+* **Solution:** Check the Serial Monitor for the startup message. If it prints "WARNING: IMU not detected", detach and reattach the AVIO Carrier, then restart. Also verify ``Wire1.begin()`` is called before ``imu.begin()``.
 
 **Servos jitter or shake continuously**
 

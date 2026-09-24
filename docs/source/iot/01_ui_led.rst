@@ -5,7 +5,7 @@
 01 UI Control LED
 =====================
 
-In Module A, you controlled an LED with code running on the UNO Q. In Module B, you used the Multimedia Carrier's built-in speaker, microphone, and camera. Now you'll control hardware from a **webpage** — click a button in your browser, and an LED on your desk turns on. This is your first step into the hybrid architecture of the UNO Q: **Python** on the Linux processor handles the web server, while the **sketch** on the microcontroller controls the hardware. They talk to each other through the **Bridge**.
+In Module A, you controlled an LED with code running on the UNO Q. In Module B, you used the AVIO Carrier's built-in speaker, microphone, and camera. Now you'll control hardware from a **webpage** — click a button in your browser, and an LED on your desk turns on. This is your first step into the hybrid architecture of the UNO Q: **Python** on the Linux processor handles the web server, while the **sketch** on the microcontroller controls the hardware. They talk to each other through the **Bridge**.
 
 .. image:: img/led_result.png
    :width: 600
@@ -28,7 +28,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_led`
      - 1 * :ref:`cpn_resistor` (220Ω)
      - Several :ref:`cpn_wires`
    * - |list_pan_tilt|
@@ -44,9 +44,20 @@ In this lesson, you will learn to:
      -
      -
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the Web UI and pushes live LED updates to the browser
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``RobotShield`` (1.0.4) — access to the Robot Shield's GPIO, PWM, and I2C hardware
+
 **Wiring Diagram**
 
-Connect the LED (with 220Ω resistor) between **digital pin 5** and **GND** — the same circuit you built in the very first Module A lesson.
+Connect the LED between **digital pin 5** and **GND**, with the 220Ω resistor on the anode side: the long leg (anode) through the resistor to **D5**, the short leg (cathode) to **GND** — the same circuit you built earlier.
 
 .. image:: /img/wiring/wiring_led.png
    :width: 500

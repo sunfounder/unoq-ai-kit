@@ -44,6 +44,14 @@ In this lesson, you will learn to:
      -
      -
 
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the dashboard page and streams sensor readings to the browser
+
 **Wiring Diagram**
 
 Connect the photoresistor between **3.3V** and **A0**, and the 10kΩ resistor between **A0** and **GND** — the two resistors form a voltage divider, and the UNO Q reads the divided voltage on A0.

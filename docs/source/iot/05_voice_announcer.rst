@@ -32,7 +32,20 @@ In this lesson, you will learn to:
    * - |list_pan_tilt|
      - |list_usb_cable|
 
-No breadboard wiring is needed — the speaker is built into the Multimedia Carrier.
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — takes the typed message from the browser
+  * ``sunfounder_tts`` — text-to-speech for the spoken announcement (EdgeTTS)
+
+No breadboard wiring is needed — the speaker is built into the AVIO Carrier.
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
 ----------------
@@ -45,13 +58,9 @@ No breadboard wiring is needed — the speaker is built into the Multimedia Carr
 
 #. Open the **Web UI** tab, type a short message — for example, "Hello from my UNO Q" — and click **Speak**. The status changes to **Speaking...**, the board reads your message aloud, and the status returns to **Ready to speak another message.**
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
-   .. image:: img/5_voice_announcer.png
-      :width: 80%
-      :align: center
+.. image:: img/5_voice_announcer.png
+   :width: 80%
+   :align: center
 
 **How it Works**
 
@@ -121,7 +130,7 @@ After speaking, the status returns to **Ready to speak another message.** Find t
 **The board speaks nothing after clicking Speak**
 
 * **Cause:** The TTS runtime is still being prepared on the first run, or the message box was empty.
-* **Solution:** On the first run, wait for the TTS runtime download to finish — it can take half an hour or more. Check that the Multimedia Carrier is firmly attached, and that the message box isn't empty.
+* **Solution:** On the first run, wait for the TTS runtime download to finish — it can take half an hour or more. Check that the AVIO Carrier is firmly attached, and that the message box isn't empty.
 
 **The status stays on "Speaking..." forever**
 

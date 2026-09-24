@@ -24,29 +24,33 @@ In this lesson, you will learn to:
 **Components Needed**
 
 .. list-table::
-   :widths: 25 25 25 25
+   :widths: 25 25 25
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * Multimedia Carrier (with camera)
      - 1 * :ref:`cpn_pir`
      - 1 * Passive :ref:`cpn_buzzer`
    * - |list_pan_tilt|
-     - |list_pan_tilt|
      - |list_pir|
      - |list_passive_buzzer|
    * - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-     -
    * - |list_breadboard|
      - |list_wire|
      - |list_usb_cable|
-     -
+
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the monitoring page with the live camera feed and the event log
 
 .. note::
 
-   You used the Multimedia Carrier and camera in Module B — they should already be attached. The PIR sensor needs about 30 seconds after power-on to calibrate to the background infrared level before it detects reliably.
+   You used the AVIO Carrier and camera in Module B — they should already be attached. The PIR sensor needs about 30 seconds after power-on to calibrate to the background infrared level before it detects reliably.
 
 **Wiring Diagram**
 

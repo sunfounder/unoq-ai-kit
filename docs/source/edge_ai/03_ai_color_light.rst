@@ -36,6 +36,15 @@ In this lesson, you will learn to:
      - |list_220ohm|
      - |list_usb_cable|
 
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``video_object_detection`` — runs the **general object-detection** model on every camera frame
+  * ``web_ui`` — serves the Web UI with the live camera feed and the AI Result card
+
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
@@ -53,17 +62,12 @@ The RGB LED has **four legs**: the longest one is the **common cathode** — con
 
 #. Download :download:`03 AI Color Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Color.Light.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
-
 #. Click the **Run** button (▶). The sketch starts with the LED switched off, then the app boots the camera and loads the AI model — give it a few seconds before the video appears.
+#. Open the **Web UI** tab: the live camera feed on the left (the status changes from **Connecting** to **Connected**) and the **AI Result** card on the right. Hold a real apple up to the camera — at 45% confidence the LED glows **red** and the card shows ``apple`` / **Red** / the confidence percentage. Try a banana, a water bottle, then a person: each mapped object lights its own color (yellow, blue, white). Take the object out of view and after about **2 seconds** the LED switches off.
 
-#. Once running, open the **Web UI** tab. The live camera feed appears in the left card, with the connection status changing from **Connecting** to **Connected** and the hint text reading *"Edge AI is detecting objects locally"*. The **AI Result** card on the right starts at **Waiting...** / **Off** / **--** and lists the six supported examples: Apple, Banana, Orange, Broccoli, Bottle, Person.
-
-#. Hold a real apple up to the camera. When the model reaches at least 45% confidence, the LED glows **red**, and the AI Result card updates with the object name (``apple``), the color (``Red``), and the confidence percentage (for example ``92%``). The color swatch in the card turns red too.
-
-#. Try a banana, then a water bottle, then have a friend stand in front of the camera. Each mapped object lights its own color: yellow, blue, and white.
-
-#. Take the object out of the camera's view. After about **2 seconds** with no mapped object, the LED switches off and the card reports **No mapped object** / **Off**.
+.. image:: img/03_ai_color_light.png
+   :width: 600
+   :align: center
 
 **How it Works**
 
@@ -187,17 +191,11 @@ Show each object to the camera and check the result:
    * - A friend standing in front of the camera
      - LED glows white; card shows ``person`` / White
 
-**What About Objects That Aren't in the List?**
-
-Light the LED red with an apple, then remove it and hold up a book or a coffee cup instead. The LED stays red for about 2 seconds, then switches off and the card shows **No mapped object** / **Off** — even though the model probably recognizes the cup. The mapping filters it out, and the watchdog timer runs out. This is a useful habit for any AI project: decide up front which classes deserve a physical response.
 
 **Challenge: Two Objects at Once**
 
 Hold an apple and a banana side by side in front of the camera. Watch the LED — it takes the color of whichever object the model is more confident about in the current frame, so it may hop between red and yellow as the confidence scores jitter. Watch the Confidence number in the Web UI while you move one object closer or further away — can you predict which color wins?
 
-**Challenge: Distance and Lighting**
-
-Move a mapped object slowly away from the camera. The Confidence percentage falls as the object gets smaller. Find the distance where the LED stops responding (confidence drops below 45%). Then repeat in a dim room — edge AI models were trained on well-lit photos, so poor lighting usually makes the model less certain.
 
 4. Troubleshooting
 --------------------

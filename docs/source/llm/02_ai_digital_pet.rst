@@ -44,12 +44,6 @@ Because the model is reached over the internet, the project needs a key of your 
 
 The sketch declares no libraries of its own in ``sketch.yaml``. The two headers it uses — the Bridge library and the LED matrix library — ship with the UNO Q core, so there is nothing to install.
 
-**Hardware Check**
-
-#. Build the kit as you did for the previous projects: the UNO Q sits on the Robot Shield, and the Multimedia Carrier is attached if your kit uses one.
-#. Find the **LED matrix** on the UNO Q itself — the 8 × 13 grid of blue LEDs. It is connected inside the board, so nothing has to be plugged into it.
-#. Plug the **USB-C cable** into the UNO Q and your computer, and check that the board powers up.
-
 No breadboard wiring is needed in this lesson — the pet's face is drawn on the LED matrix that is already part of the UNO Q, so there is nothing to connect before you run the app.
 
 2. Run the App

@@ -188,7 +188,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
        Write the angles to both servos
        Wait 30ms, repeat
 
-1. **Pin Declarations, Servo Objects, and Variables**
+#. Pin Declarations, Servo Objects, and Variables
 
    - The joystick provides three inputs: X position on A3, Y position on A2, and a button on pin 4 (D4)
    - Two ``HardwareServo`` objects are declared — ``panServo`` attaches to pin 9 (D9), ``tiltServo`` to pin 10 (D10)
@@ -207,7 +207,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
       const int tiltMinAngle = 45, tiltMaxAngle = 115;
       const int deadZone = 100, stepSize = 1;
 
-2. **Auto-Calibration in Setup**
+#. Auto-Calibration in Setup
 
    - Every joystick has a slightly different center voltage due to manufacturing tolerances
    - This loop reads both axes 20 times, sums the values, and averages them to find the true center
@@ -224,7 +224,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
       xCenter = xTotal / 20;
       yCenter = yTotal / 20;
 
-3. **Incremental Control with a Dead Zone**
+#. Incremental Control with a Dead Zone
 
    - If the joystick is pushed beyond the dead zone (100 units from center), the angle changes by one degree per loop iteration
    - The dead zone prevents servo twitching from tiny voltage fluctuations when the stick is at rest
@@ -237,7 +237,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
       if (yValue > yCenter + deadZone)       tiltAngle -= stepSize;
       else if (yValue < yCenter - deadZone)  tiltAngle += stepSize;
 
-4. **Constraining Angles and Updating Servos**
+#. Constraining Angles and Updating Servos
 
    - ``constrain()`` clamps both angles to their safe ranges — 45° to 135° for the pan and 45° to 115° for the tilt
    - Even if the stick is held at the extreme edge, the servos stay within their safe range
@@ -251,7 +251,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
       panServo.write(panAngle);
       tiltServo.write(tiltAngle);
 
-5. **Why Incremental Instead of Direct Mapping?**
+#. Why Incremental Instead of Direct Mapping?
 
    - Direct mapping (``panAngle = map(yValue, 0, 1023, 45, 135)``) works for LEDs but not for servos
    - A joystick returns to center when released, so direct mapping would snap the servo back immediately

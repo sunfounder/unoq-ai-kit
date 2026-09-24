@@ -37,7 +37,17 @@ In this lesson, you will learn to:
      - -
      - -
 
-All the hardware is already on the kit: the camera sees the objects, and the Multimedia Carrier's built-in speaker does the talking — no breadboard wiring needed.
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``video_object_detection`` — runs the **general object-detection** model on every camera frame
+  * ``web_ui`` — serves the Web UI with the live camera feed and the three counters
+  * ``sunfounder_tts`` — text-to-speech for the spoken object names (EdgeTTS)
+
+All the hardware is already on the kit: the camera sees the objects, and the AVIO Carrier's built-in speaker does the talking — no breadboard wiring needed.
 
 To test the project, gather three objects you probably already have nearby: a computer **mouse**, a **keyboard**, and a **cell phone**. The spoken announcements use an online text-to-speech voice, so the UNO Q also needs an **internet connection**.
 
@@ -45,34 +55,21 @@ To test the project, gather three objects you probably already have nearby: a co
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
 #. Download :download:`05 AI Object Counter.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
+#. Click the **Run** button (▶). The console prints ``AI Object Counter is running. Show one mouse, keyboard, or cell phone at a time.`` and then ``TTS ready.`` once the speech engine is up. The sketch is just an empty stub — every part that matters runs on the Linux MPU.
+#. Open the **Web UI** tab: the live camera feed, three counter cards (**MOUSE**, **KEYBOARD**, **PHONE**) at 0, and a **TOTAL OBJECTS** counter. Hold a computer mouse in front of the camera — at **60% confidence** the mouse counter goes to 1 and the speaker says *"Mouse detected"*. Keep it in view and the count stays; move it away and show it again to add another. Repeat with a keyboard and a cell phone, then click **RESET COUNTS** to return everything to 0.
 
-#. Click the **Run** button (▶). The output console prints:
-
-   ``AI Object Counter is running. Show one mouse, keyboard, or cell phone at a time.``
-
-   The sketch in this project is just an empty stub — every part that matters runs on the Linux MPU.
-
-#. While the TTS engine prepares itself, the console prints ``TTS ready.``
-
-   .. note::
-
-      The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
-#. Open the **Web UI** tab. You'll see the live camera feed, three counter cards — MOUSE, KEYBOARD, and PHONE, all at 0 — and a **TOTAL OBJECTS** counter. The panel above the cards reads "Show one object to the camera".
-
-#. Hold a computer mouse in front of the camera. When the model reaches **60% confidence**, the mouse counter changes from 0 to 1 with a +1 flash, the panel reads **Mouse added** with the confidence percentage, the speaker says *"Mouse detected"*, and the console prints a line like:
-
-   ``Counted mouse: 1 (87%)``
-
-#. Keep the mouse in view — the counter stays at 1 no matter how long it stays. Move the mouse away completely and show it again: the counter goes to 2, then 3, and so on for every new appearance. Repeat with a keyboard and a cell phone — each has its own counter, and the speaker announces *"Keyboard detected"* and *"Cell phone detected"*.
-
-#. Click **RESET COUNTS** — all three counters and the total return to 0.
+.. image:: img/05_ai_object_counter.png
+   :width: 600
+   :align: center
 
 **How it Works**
 
@@ -125,7 +122,7 @@ The data path from frame to count:
        C->>P: frame → VideoObjectDetection (confidence ≥ 0.60)
        P->>P: on_detection() → best confidence per target class
        P->>P: class armed and present → counts[label] += 1
-       P->>P: disarm class; count missing frames
+       P->>P: disarm class, then count missing frames
        P->>P: 10 missing frames → re-arm class
        P->>S: speech_queue.put("Mouse detected")
        S-->>P: tts.say() plays the phrase
@@ -177,13 +174,6 @@ Show the objects to the camera one at a time and check the results:
    * - Click **RESET COUNTS**
      - All counters and the total return to 0
 
-**Challenge: Where Does the Counter Stop?**
-
-Walk backwards while holding a mouse until the model's confidence drops below 60% — that's the moment counting stops. Try each object: which one stays recognizable from the farthest distance? Then repeat in dim light and note how much closer you have to stand. The 60% line is not a wall; confidence drifts with distance, lighting, and angle, and the counter only trusts detections above the line.
-
-**Challenge: Two Targets at Once**
-
-Show a mouse and a keyboard together in the same frame. Each class has its own armed state, so both counters rise together — one count each. Now hold up two mice at the same time: only one count appears, because the *class* is counted, not individual instances. What happens if you remove one mouse while the other stays? Watch the counter card and try to predict the rearm behavior.
 
 4. Troubleshooting
 --------------------

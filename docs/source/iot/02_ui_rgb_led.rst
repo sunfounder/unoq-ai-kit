@@ -44,6 +44,17 @@ In this lesson, you will learn to:
      -
      -
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the Web UI and pushes live colour updates to the browser
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``RobotShield`` (1.0.4) — access to the Robot Shield's GPIO, PWM, and I2C hardware
+
 .. note::
 
    An RGB LED is three LEDs (red, green, blue) in one package. It has four pins: one common cathode (longest pin) and three anodes, each needing its own 220Ω current-limiting resistor.
@@ -52,7 +63,7 @@ In this lesson, you will learn to:
 
 #. Connect the RGB LED's **common cathode** (longest pin, flat edge side) to **GND**.
 
-#. Connect the **red** anode → 220Ω → **P6**. **Green** anode → 220Ω → **P5**. **Blue** anode → 220Ω → **P4**. These are PWM channels on the Robot Shield.
+#. Connect the **red** anode → 220Ω → **D8**. **Green** anode → 220Ω → **D7**. **Blue** anode → 220Ω → **D6**. These are PWM channels on the Robot Shield.
 
 .. image:: /img/wiring/wiring_rgb_led.png
    :width: 500
@@ -106,14 +117,14 @@ A color wheel is a circle of hues — the browser turns your selection into R/G/
        B->>B: wheel drag → HSV → {r, g, b} (0–255)
        B->>P: socket.emit('set_rgb_color', {r, g, b})
        P->>S: Bridge.call("set_rgb_color", r, g, b)
-       S->>S: map 0–255 → 0–1000, setPulse on P6/P5/P4
+       S->>S: map 0–255 → 0–1000, setPulse on D8/D7/D6
        P-->>B: rgb_status_update
        B->>B: update preview circle
 
 Here's what each component does:
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
-  * Creates three ``Pwm`` objects: ``red(6)``, ``green(5)``, ``blue(4)`` — the Robot Shield's PWM channels
+  * Creates three ``Pwm`` objects: ``red(8)``, ``green(7)``, ``blue(6)`` — red on **D8**, green on **D7**, blue on **D6**
   * Initializes I2C (``I2cBus::i2c().begin()``) and sets each channel to 1000 Hz
   * ``Bridge.provide("set_rgb_color", set_rgb_color)`` registers the function Python calls
   * ``set_rgb_color()`` maps web-standard 0–255 values to the Robot Shield's 0–1000 pulse range with ``map(r, 0, 255, 0, 1000)``
@@ -158,7 +169,7 @@ Add a "Fade" button in the HTML. In ``app.js``, animate between two colors over 
 **LED shows wrong colors — red is green, etc.**
 
 * **Cause:** The RGB LED pins are connected in the wrong order.
-* **Solution:** Check: red anode → P6, green → P5, blue → P4. RGB LEDs have four pins — the longest is common cathode (GND). The three shorter pins are the color anodes.
+* **Solution:** Check: red anode → D8, green → D7, blue → D6. RGB LEDs have four pins — the longest is common cathode (GND). The three shorter pins are the color anodes.
 
 **The LED stays dark or only one color works**
 

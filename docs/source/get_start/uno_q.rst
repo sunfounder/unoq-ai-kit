@@ -4,7 +4,7 @@
 
 .. _cpn_uno_q:
 
-Getting to Know Arduino Uno Q
+Arduino Uno Q
 ======================================
 
 .. image:: img/unoq_chips.png
@@ -17,13 +17,6 @@ The board can be programmed using **Arduino App Lab**, which provides an integra
 
 * |link_unoq_manual|
 
-Pinout
----------------
-
-.. image:: img/unoq_pinout.png
-   :width: 600
-   :align: center
-  
 * |link_unoq_full_pinout|
 
 Onboard User Interface
@@ -86,7 +79,7 @@ The table below summarizes the main capabilities of the USB-C interface.
    * - Feature
      - Description
    * - USB Power (Sink)
-     - 5 VDC, 3 A (15 W)
+     - 5VDC, 3A (15W)
    * - USB Standard
      - USB 3.1 Gen 1 (5 Gb/s)
    * - Display over USB-C
@@ -222,11 +215,9 @@ The analog pin mapping is shown below.
    :width: 600
    :align: center
 
-All digital pins from **D0 to D13** on the UNO Q support **PWM (Pulse Width Modulation)**.
+PWM (Pulse Width Modulation) lets the board simulate an analog output using digital signals, which is useful for controlling LED brightness, motor speed, or other devices that require variable output levels.
 
-PWM allows the board to simulate analog output using digital signals, which is useful for controlling LED brightness, motor speed, or other devices that require variable output levels.
-
-In your sketch, ``analogWrite(pin, value)`` works on any pin from D0 to D13, with a value from 0 (off) to 255 (full).
+In your sketch, ``analogWrite(pin, value)`` works on **D0 through D13 with the single exception of D4** — D4 (PA12) has no PWM timer. The six pins Arduino documents as PWM, marked with a **~** on the board, are **D3, D5, D6, D9, D10, and D11**; prefer those when the quality of the PWM signal matters.
 
 **Power Pins**
 
@@ -244,11 +235,11 @@ The available power and control pins are summarized below.
    * - Pin
      - Description
    * - 5V
-     - Provides regulated 5 V power for external modules. Can also be used to supply the board with a regulated 5 V source.
+     - Provides regulated 5V power for external modules. Can also be used to supply the board with a regulated 5V source.
    * - 3.3V
-     - Provides 3.3 V power for low-voltage sensors and devices.
+     - Provides 3.3V power for low-voltage sensors and devices.
    * - VIN
-     - External power input (7–24 V). The board converts this voltage internally to the system 5 V rail.
+     - External power input (7–24V). The board converts this voltage internally to the system 5V rail.
    * - RESET
      - Allows external circuits to reset the board by pulling the pin LOW.
    * - IOREF
@@ -262,7 +253,7 @@ The available power and control pins are summarized below.
 
 In addition to the standard Arduino UNO headers on the top, the UNO Q also includes **high-speed connectors on the bottom side** of the board.
 
-These connectors are designed to work with dedicated **UNO Q carrier boards**, such as the Multimedia Carrier. They provide access to advanced interfaces like camera, display, audio, and additional high-speed peripherals.
+These connectors are designed to work with dedicated **UNO Q carrier boards**, such as the AVIO Carrier. They provide access to advanced interfaces like camera, display, audio, and additional high-speed peripherals.
 
 This expansion interface enables the UNO Q to support more advanced applications such as multimedia processing and AI-based projects.
 

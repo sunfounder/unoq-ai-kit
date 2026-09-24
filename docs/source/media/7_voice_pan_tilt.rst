@@ -70,6 +70,10 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
    :width: 500
    :align: center
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
@@ -80,10 +84,6 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
    *"Voice-controlled pan-tilt is ready."*
 
 #. Hold the button, say a command — for example, "Turn left" — then release the button. The pan-tilt turns left, the Output window shows **Turning left.**, and the speaker confirms: *"Turning left."*
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 

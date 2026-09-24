@@ -5,7 +5,7 @@
 01 Local TTS
 ===============
 
-In Module A, your output devices were LEDs, buzzers, and servos — they communicated through light, sound, and motion. Now you'll use the Multimedia Carrier's built-in **speaker** — it can speak real sentences. This project is simple: make the speaker say one sentence.
+In Module A, your output devices were LEDs, buzzers, and servos — they communicated through light, sound, and motion. Now you'll use the AVIO Carrier's built-in **speaker** — it can speak real sentences. This project is simple: make the speaker say one sentence.
 
 In this lesson, you will learn to:
 
@@ -35,6 +35,10 @@ This project uses the following App Lab Brick:
 
   * ``sunfounder_tts`` (EdgeTTS engine)
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
@@ -43,10 +47,6 @@ This project uses the following App Lab Brick:
 #. Click **Run** (▶). The speaker says:
 
    *"Hello! Welcome to Arduino App Lab."*
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -126,7 +126,7 @@ Make the speaker say three sentences in a row — a greeting, a question, and an
 
 **No sound at all**
 
-* **Cause:** The Multimedia Carrier isn't properly attached, or the volume is set too low.
+* **Cause:** The AVIO Carrier isn't properly attached, or the volume is set too low.
 * **Solution:** Check that the Carrier is firmly connected to the UNO Q. Make sure ``set_volume()`` hasn't been set to a very low value — 30 to 100 is a comfortable range.
 
 **Program ends immediately with no sound**

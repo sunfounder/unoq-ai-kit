@@ -147,21 +147,21 @@ If the **Run** button (▶) doesn't respond or your board doesn't appear in App 
 
 .. _install_update_lib_c:
 
-安装或更新Sketch库
+Install or Update Sketch Libraries
 -----------------------------------------
 
 When you import a ``.zip`` file, App Lab may list the libraries the app needs under **Sketch Libraries**. They are installed automatically, so there is nothing to do.
 
 
-或者当你运行时，显示报错 ``fatal error: xxxx.h: No such file or directory``
+Or, when you run the app, you may see an error like ``fatal error: xxxx.h: No such file or directory``.
 
-你可以去安装或更新对应的库。现在参考下面两个步骤。
+You can install or update the missing library. Follow the two steps below.
 
-#. 点击**Add Sketch Library**
+#. Click **Add Sketch Library**.
 
    .. image:: img/faq_add_lib_c.png
 
-#. 搜索文档上提示的库的比如，比如RobotShield
+#. Search for the library named in the error message — for example, ``RobotShield``.
 
    .. image:: img/faq_install_lib_c.png
 
@@ -203,19 +203,152 @@ every project.
       :width: 500
       :align: center
 
+.. _single_camera_only:
 
+.. warning::
+
+   If you are using a **single camera**, enable only the connector it is
+   plugged into — **Camera0** or **Camera1** — and leave the other one set
+   to **none**. Enabling **both** Camera0 and Camera1 at the same time makes
+   the App fail to detect the camera.
+
+
+.. _check_camera_detected:
+
+How do I check that the camera is detected?
+--------------------------------------------------
+
+The camera works as soon as external carriers are enabled
+(:ref:`enable_external_carriers`). If a camera lesson still cannot find the
+sensor, connect to the board from a terminal and work through these checks —
+they separate a wrong carrier setting from a loose cable.
+
+**List the cameras the system can see**
+
+.. code-block:: bash
+
+   cam -l
+
+This is the most reliable check. A working camera appears under
+**Available cameras**, followed by its sensor path, for example:
+
+.. code-block:: text
+
+   Available cameras:
+   1: 'imx219' (/base/soc@0/cci@5c1b000/i2c-bus@0/sensor@10)
+
+The path also tells you the I2C bus and address — ``i2c-bus@0`` and
+``sensor@10`` mean bus **0**, address **0x10**. If nothing is listed, the
+carrier is not enabled or the FFC cable is not seated; go back to
+:ref:`enable_external_carriers`.
+
+**Capture a test frame**
+
+.. code-block:: bash
+
+   cam -c 1 -C1 -s "width=1280,height=720,pixelformat=BGR888" -F"/home/arduino/frame_#.ppm"
+
+A ``Capture 1 frames`` line means the whole stack works. The frames are
+written to the ``arduino`` home folder.
+
+**Confirm the sensor answers on the I2C bus**
+
+Use the bus number from the ``cam -l`` output above — it is usually **0**,
+but it can differ, so do not assume one:
+
+.. code-block:: bash
+
+   sudo i2cdetect -l          # list the buses; the camera sits on a Qualcomm-CCI bus
+   sudo i2cdetect -y 0        # replace 0 with the bus number from cam -l
+
+The camera shows as ``UU`` at address ``0x10``. You can also read its name
+directly:
+
+.. code-block:: bash
+
+   sudo cat /sys/class/i2c-dev/i2c-0/device/0-0010/name
+
+A working camera prints ``imx219``. If the address is missing, re-seat the
+FFC cable (the blue side faces up) and check the carrier setting again.
+
+.. note::
+
+   ``dmesg | grep imx219`` and ``ls /dev/video*`` are **not** reliable on this
+   board — the kernel log is often empty even when the camera works, and the
+   ``/dev/video*`` devices exist whether or not a camera is attached. Trust
+   ``cam -l`` and the capture test instead.
+
+**List the carriers and their camera configuration**
+
+.. code-block:: bash
+
+   sudo arduino-linux-config carrier list
+
+**Set the camera channel from the command line**
+
+This is the same setting as **Settings → carriers** in App Lab. Match the
+channel to the connector the camera is plugged into.
+
+.. code-block:: bash
+
+   # Camera 1 connector, 2-lane
+   sudo arduino-linux-config carrier enable media-carrier camera0=none camera1=type1-2lanes
+
+   # Camera 1 connector, 4-lane
+   sudo arduino-linux-config carrier enable media-carrier camera0=none camera1=type1-4lanes
+
+   sudo reboot
+
+For a camera on the **Camera 0** connector, move the setting to ``camera0`` —
+for example ``camera0=type1-2lanes camera1=none``.
+
+**Update the system**
+
+If the camera is detected but an app cannot open it, make sure the board is
+up to date:
+
+.. code-block:: bash
+
+   arduino-app-cli system update
+
+
+.. _camera_troubleshooting:
+.. _camera_detected_app_fails:
+
+The camera is detected, but a camera app still fails
+------------------------------------------------------
+
+**"No camera found" in App Lab**
+
+* **Cause:** The FFC cable is loose or inserted backwards, or both camera channels are enabled for a single camera.
+* **Solution:** Re-seat both ends of the FFC cable — the blue side faces up, and the connectors click when closed. Then check that only the connector you actually use is enabled: :ref:`single camera only <single_camera_only>`.
+
+**Black screen in the Web UI, but cam -l lists the camera**
+
+* **Cause:** The app is not starting its camera service.
+* **Solution:** Make sure the camera brick the lesson uses is declared under ``bricks:`` in ``app.yaml``, then stop and run the app again.
+
+**The camera works in the terminal but not in Python**
+
+* **Cause:** The CSI image arrives upside-down on the AVIO Carrier.
+* **Solution:** Add the vertical flip when the camera is opened: ``Camera(adjustments=lambda frame: frame[::-1,:])``.
+
+**"Permission denied" when running cam or i2cdetect**
+
+* **Cause:** These commands need root privileges.
+* **Solution:** Prefix them with ``sudo`` (for example ``sudo cam -l``, ``sudo i2cdetect -y 0``).
 
 Flashing a New Image to the UNO Q
 -------------------------------------------
 
 
-需要短接2个引脚，然后插入UNO Q
+Short two pins together, then plug in the UNO Q.
 
-<此处需要配张图>
+.. An image showing which two pins to short is still needed.
 
 https://docs.arduino.cc/tutorials/uno-q/update-image/
 
-Download the Arduino Flasher CLI for your OS (MacOS / Linux / Windows)：https://www.arduino.cc/en/software/#flasher-tool
+Download the Arduino Flasher CLI for your OS (macOS / Linux / Windows): https://www.arduino.cc/en/software/#flasher-tool
 
 
 Unzip the downloaded file, (you will receive an executable binary named arduino-flasher-cli)
@@ -223,7 +356,7 @@ Unzip the downloaded file, (you will receive an executable binary named arduino-
 
 Navigate to the unzipped folder (e.g. arduino-flasher-cli-x.x.x-windows-amd64), and run the following command:
 
-windows运行下面的命令
+On Windows, run the following command:
 
 
 ./arduino-flasher-cli.exe flash latest

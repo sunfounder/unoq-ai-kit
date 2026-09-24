@@ -37,6 +37,14 @@ In this lesson, you will learn to:
      - |list_wire|
      - |list_usb_cable|
 
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the browser game and streams joystick input to the page
+
 **Wiring Diagram**
 
 Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D4**, **VCC** to **3.3V** (the UNO Q's analog inputs measure 0–3.3V), and **GND** to **GND**.

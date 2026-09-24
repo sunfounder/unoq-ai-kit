@@ -29,7 +29,7 @@ In this lesson, you will learn to:
 
    * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_humiture_sensor`
-     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_led`
      - 1 * :ref:`cpn_resistor` (220Ω)
    * - |list_pan_tilt_kit|
      - |list_dht11|
@@ -44,12 +44,24 @@ In this lesson, you will learn to:
      -
      -
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``arduino_cloud`` — connects the app to Arduino Cloud and exposes the ``temperature``, ``humidity``, and ``led`` variables
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``DHT sensor library`` (1.4.6) — reads the DHT11 temperature and humidity sensor
+  * ``Adafruit Unified Sensor`` (1.1.15) — the sensor abstraction the DHT library is built on
+
 **Wiring Diagram**
 
-Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED through a 220Ω resistor to pin D5.
+Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED with its anode (long leg) through a 220Ω resistor to pin D5, and its cathode (short leg) to GND.
 
 .. image:: /img/wiring/wiring_dht11_led.png
-   :width: 500
+   :width: 600
    :align: center
 
 2. Setup

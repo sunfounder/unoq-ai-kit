@@ -113,7 +113,7 @@ Now that you've seen the IMU output all four sensor streams, let's look at the s
    :linenos:
 
    /*
-    * Reads 10-axis IMU sensor data via I2C on the Multimedia Carrier.
+    * Reads 10-axis IMU sensor data via I2C on the AVIO Carrier.
     * Outputs accelerometer, gyroscope, magnetometer, and barometer readings
     * to the Serial Monitor every second.
     *
@@ -212,10 +212,10 @@ This lesson introduces I2C communication — and works with the most sensor-rich
        Barometer found?     → print temperature + pressure + altitude
        Wait 1 second, repeat
 
-1. **Library Includes and IMU Object Creation**
+#. Library Includes and IMU Object Creation
 
    - ``SunFounder_IMU.hpp`` provides the library that handles all four sensors in the IMU
-   - ``Wire.h`` is the standard Arduino I2C library; ``Wire1`` is the I2C bus the Multimedia Carrier uses
+   - ``Wire.h`` is the standard Arduino I2C library; ``Wire1`` is the I2C bus the AVIO Carrier uses
    - The IMU object is created with a reference to ``Wire1`` so it can communicate over that bus
 
    .. code-block:: arduino
@@ -226,7 +226,7 @@ This lesson introduces I2C communication — and works with the most sensor-rich
 
       SunFounder_IMU imu(&Wire1);
 
-2. **Setup: I2C Bus, IMU Initialization, and Calibration**
+#. Setup: I2C Bus, IMU Initialization, and Calibration
 
    - ``Wire1.begin()`` starts the I2C bus, and ``imu.begin()`` initializes the sensor
    - ``set_*_bias()`` corrects for factory offsets (like a sensor reading 0.05g when flat)
@@ -246,7 +246,7 @@ This lesson introduces I2C communication — and works with the most sensor-rich
           imu.set_magnetometer_scale(MAG_SCALE);
       }
 
-3. **Reading Motion Sensor Data in the Loop**
+#. Reading Motion Sensor Data in the Loop
 
    - ``imu.read()`` queries all four sensor subsystems in a single I2C command
    - ``is_motion_sensor_found()`` checks if the accelerometer and gyroscope are responding, skipping gracefully if not
@@ -260,7 +260,7 @@ This lesson introduces I2C communication — and works with the most sensor-rich
           Vector3f accel = imu.get_accel();
           Vector3f gyro = imu.get_gyro();
 
-4. **Reading Magnetometer and Barometer Data**
+#. Reading Magnetometer and Barometer Data
 
    - Each sensor subsystem has its own ``is_*_found()`` check to handle failures gracefully
    - ``imu.get_azimuth()`` calculates the compass heading (0–360 degrees) from magnetometer data
@@ -278,7 +278,7 @@ This lesson introduces I2C communication — and works with the most sensor-rich
           float altitude = imu.get_altitude();
       }
 
-5. **I2C Addresses**
+#. I2C Addresses
 
    - Every I2C device has a unique 7-bit address that the UNO Q uses to select which device it talks to
    - All other devices on the bus ignore messages not addressed to them
@@ -345,7 +345,7 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
 **"IMU not detected" or no sensor output**
 
 * **Cause:** The I2C bus isn't initialized, or the carrier isn't properly attached.
-* **Solution:** Make sure the Multimedia Carrier is firmly connected to the UNO Q. Verify ``Wire1.begin()`` is called before ``imu.begin()``. Check the Serial Monitor for the startup message — if it says "WARNING: IMU not detected", the sensor isn't responding on the I2C bus.
+* **Solution:** Make sure the AVIO Carrier is firmly connected to the UNO Q. Verify ``Wire1.begin()`` is called before ``imu.begin()``. Check the Serial Monitor for the startup message — if it says "WARNING: IMU not detected", the sensor isn't responding on the I2C bus.
 
 **Readings are all zeros**
 

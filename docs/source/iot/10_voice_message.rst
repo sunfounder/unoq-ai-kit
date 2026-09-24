@@ -32,7 +32,26 @@ In this lesson, you will learn to:
    * - |list_pan_tilt|
      - |list_usb_cable|
 
-No breadboard wiring is needed — the microphone and speaker are built into the Multimedia Carrier.
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — the record button and the playback list in the browser
+  * ``sunfounder_stt`` — local speech-to-text (Whisper model)
+  * ``sunfounder_tts`` — text-to-speech for playback (EdgeTTS)
+
+.. note::
+
+   The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
+
+No breadboard wiring is needed — the microphone and speaker are built into the AVIO Carrier.
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 
 2. Run the App
 ----------------
@@ -131,12 +150,12 @@ The Web UI receives a ``duration`` field in the status updates, but right now it
 **The audio level bar never moves while recording**
 
 * **Cause:** The microphone isn't picking up sound, or the background thread isn't running.
-* **Solution:** Speak closer to the microphone and check that the Multimedia Carrier is firmly attached. In the Output window, look for **Audio status error** messages.
+* **Solution:** Speak closer to the microphone and check that the AVIO Carrier is firmly attached. In the Output window, look for **Audio status error** messages.
 
 **The recording plays back silent**
 
 * **Cause:** The recording was too short, or the microphone level was very low.
-* **Solution:** Record for at least a second and speak clearly. Check that the Multimedia Carrier is firmly attached to the UNO Q.
+* **Solution:** Record for at least a second and speak clearly. Check that the AVIO Carrier is firmly attached to the UNO Q.
 
 **Playback doesn't start when I click Play**
 

@@ -28,7 +28,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_led`
      - 1 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_humiture_sensor`
    * - |list_pan_tilt|
@@ -44,6 +44,18 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      -
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``telegram_bot`` — connects the app to your Telegram bot (paste the token from @BotFather in the Brick settings)
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``DHT sensor library`` (1.4.6) — reads the DHT11 temperature and humidity sensor
+  * ``Adafruit Unified Sensor`` (1.1.15) — the sensor abstraction the DHT library is built on
+
 **Wiring Diagram**
 
 Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND**. Connect the LED's anode through a 220Ω resistor to **D5**, and its cathode to GND.
@@ -52,11 +64,16 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND*
    :width: 500
    :align: center
 
-.. note::
+2. Setup
+---------------
 
-   Before running: open Telegram, message **@BotFather**, send ``/newbot``, and follow the prompts. Copy the API token — you'll configure it in the Brick settings.
+**Create the Bot and Get the API Token**
 
-2. Run the App
+#. Open Telegram and message **@BotFather**.
+#. Send ``/newbot`` and follow the prompts — choose a name and a username for your bot.
+#. Copy the **API token** that BotFather returns. You will paste it into the **Telegram Bot** Brick in the next section.
+
+3. Run the App
 ----------------
 
 
@@ -141,7 +158,7 @@ Here's what each component does:
 
 Every handler wraps its Bridge calls in ``try``/``except`` — if the DHT11 hiccups, the bot replies "❌ I couldn't read the sensor right now. Please try again." instead of crashing the whole App.
 
-3. Experiment
+4. Experiment
 ----------------
 
 **Add a Beep Command**
@@ -159,7 +176,7 @@ The circuit has an LED — what else could the bot control? Add a passive buzzer
 
 Make the bot **proactive**: store the chat ID from the last ``/status`` request, and have the Python app check the temperature in a loop — if it exceeds 30°C, send an unsolicited warning message.
 
-4. Troubleshooting
+5. Troubleshooting
 --------------------
 
 **Bot never responds to messages**
@@ -182,7 +199,7 @@ Make the bot **proactive**: store the chat ID from the last ``/status`` request,
 * **Cause:** The token was exposed (screenshot, shared file) and should be considered compromised.
 * **Solution:** Never include a real token in screenshots, documentation, or shared ZIP files. If a token leaks, open @BotFather and revoke/regenerate it — the old one stops working immediately.
 
-5. Summary
+6. Summary
 -------------
 
 Your hardware is a Telegram contact! In this lesson, you learned:

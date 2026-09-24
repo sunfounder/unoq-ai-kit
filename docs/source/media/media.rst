@@ -5,7 +5,7 @@
 Module B: Multimedia (Python and Sketch)
 ==========================================
 
-In Module A, your outputs were LEDs and buzzers, and your inputs were switches and sensors. Now you'll work with the **Multimedia Carrier** — the expansion board with a **speaker**, **microphone**, and **camera** built in. No breadboard, no wiring: everything is already attached to your UNO Q.
+In Module A, your outputs were LEDs and buzzers, and your inputs were switches and sensors. Now you'll work with the **AVIO Carrier** — the expansion board with a **speaker**, **microphone**, and **camera** built in. No breadboard, no wiring: everything is already attached to your UNO Q.
 
 In this module, you'll learn to:
 

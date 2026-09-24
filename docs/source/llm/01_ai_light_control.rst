@@ -52,16 +52,9 @@ Because the model is reached over the internet, the project needs a key of your 
 
 The sketch needs no libraries at all — the Bridge library that lets Python call the sketch is part of the UNO Q core, so there is nothing to install.
 
-**Hardware Check**
-
-#. Push the **RGB LED** into the breadboard with each of its four legs in its own column of holes. Three legs are the red, green, and blue anodes; the fourth and longest leg is the **common cathode**.
-#. Add the three **220 Ω resistors**, one in series with each anode leg. An LED leg must never reach a pin without its resistor.
-#. Run a jumper wire from the common cathode to a **GND** pin on the Robot Shield, then three wires from the far ends of the resistors to **D8**, **D7**, and **D6**.
-#. Plug the **USB-C cable** into the UNO Q and your computer, and check that the board powers up.
-
 **Wiring Diagram**
 
-The RGB LED has four legs: the longest one is the **common cathode** and goes to **GND**, while the red, green, and blue anodes go to **D8**, **D7**, and **D6**, each through its own **220 Ω** resistor. Never connect a channel straight to a pin without its resistor — the LED can burn out.
+The RGB LED has four legs: the longest one is the **common cathode** and goes to **GND**, while the red, green, and blue anodes go to **D8**, **D7**, and **D6**, each through its own **220Ω** resistor. Never connect a channel straight to a pin without its resistor — the LED can burn out.
 
 .. image:: /img/wiring/wiring_rgb_led.png
    :width: 500
@@ -233,7 +226,7 @@ Now try to push the model off its rails. Ask for two colours at once (*"red and 
 **The LED lights the wrong colour**
 
 * **Cause:** The three anode legs are on the wrong pins, so the sketch is driving the wrong channel.
-* **Solution:** Follow the wiring diagram again: red to **D8**, green to **D7**, blue to **D6**, each through its own **220 Ω** resistor, with the common cathode (the longest leg) on **GND**. The order of the legs along the LED body does not have to match the order of the pins — what matters is which leg ends up on which pin.
+* **Solution:** Follow the wiring diagram again: red to **D8**, green to **D7**, blue to **D6**, each through its own **220Ω** resistor, with the common cathode (the longest leg) on **GND**. The order of the legs along the LED body does not have to match the order of the pins — what matters is which leg ends up on which pin.
 
 **The Web UI never opens**
 

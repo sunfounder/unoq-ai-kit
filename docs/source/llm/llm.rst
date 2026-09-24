@@ -27,12 +27,12 @@ Let's give your UNO Q a mind.
    :maxdepth: 1
 
    01_ai_light_control
-   03_ai_environment_advisor
-
    02_ai_digital_pet
-
+   03_ai_environment_advisor
    04_ai_voice_assistant
-
    05_ai_vision_assistant
+   06_ai_scavenger_hunt
+   07_ai_quiz_show
+   08_ai_story_dice
 
-   
+

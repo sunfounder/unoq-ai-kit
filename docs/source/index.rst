@@ -22,35 +22,22 @@ SunFounder AI Starter Kit for Arduino UNO Q
 
 Thank You for Choosing the SunFounder AI Starter Kit.
 
+The SunFounder AI Starter Kit for Arduino Uno Q is an all-in-one learning platform for AI, programming, and interactive electronics. It combines modular hardware — the Robot Shield, the AVIO Carrier, the camera, the pan-tilt module, sensors, and electronic components — with the ready-to-use **App Lab** software environment and step-by-step lessons, so beginners aged 10 and up (students, educators, makers, and engineers) can build hands-on projects in object and face recognition, gesture recognition, voice interaction and control, pan-tilt tracking, multi-LLM AI applications, and smart home systems.
+
+Questions, feedback, or support: **service@sunfounder.com**
+
+.. .. note::
+..     This document is available in the following languages.
+..         * |link_german_tutorials|
+..         * |link_jp_tutorials|
+..         * |link_en_tutorials|
+
 .. image:: img/home_page.png
     :width: 800
     :align: center
 
-.. note::
-    This document is available in the following languages.
-        * |link_german_tutorials|
-        * |link_jp_tutorials|
-        * |link_en_tutorials|
 
-Product Overview
-----------------
 
-The SunFounder AI Starter Kit for Arduino Uno Q is an all-in-one learning platform for AI, programming, and interactive electronics. It combines modular hardware, a ready-to-use software environment App Lab, and step-by-step lessons to help users build hands-on projects with computer vision, voice interaction, and multi-LLM AI technologies.
-
-Main Content
-------------
-
-Features the Robot Shield, Multimedia carrier, camera, pan-tilt module, sensors, and electronic components, enabling hands-on AI projects with vision recognition, voice interaction, and hardware control.
-
-Target Users
-------------
-
-Aged 10+ students, educators, makers, and engineers.
-
-Application
------------
-
-Object recognition, face recognition, gesture recognition, voice interaction and control, pan-tilt tracking systems, multi-LLM interactive applications, and smart home systems.
 
 
 .. toctree::

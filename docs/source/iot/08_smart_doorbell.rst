@@ -24,29 +24,34 @@ In this lesson, you will learn to:
 **Components Needed**
 
 .. list-table::
-   :widths: 25 25 25 25
+   :widths: 25 25 25
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * Multimedia Carrier (with camera)
      - 1 * :ref:`cpn_button`
      - 1 * Passive :ref:`cpn_buzzer`
    * - |list_pan_tilt|
-     - |list_pan_tilt|
      - |list_button|
      - |list_passive_buzzer|
    * - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
      - 1 * USB Cable
-     -
    * - |list_breadboard|
      - |list_wire|
      - |list_usb_cable|
-     -
+
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the announcement page with the live camera feed
+  * ``sunfounder_tts`` — text-to-speech for the doorbell chime and the visitor alert (EdgeTTS)
 
 .. note::
 
-   You used the Multimedia Carrier and camera in Module B — they should already be attached. If not, attach the carrier to the UNO Q and connect the camera's FFC ribbon cable to a CSI connector — the blue side of the cable faces up.
+   You used the AVIO Carrier and camera in Module B — they should already be attached. If not, attach the carrier to the UNO Q and connect the camera's FFC ribbon cable to a CSI connector — the blue side of the cable faces up.
 
 **Wiring Diagram**
 
@@ -55,6 +60,11 @@ Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and 
 .. image:: /img/wiring/wiring_pc_buzzer_button.png
    :width: 500
    :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 
 2. Run the App
 ----------------

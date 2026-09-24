@@ -44,6 +44,15 @@ In this lesson, you will learn to:
      - -
      - -
 
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``video_object_detection`` — runs the **face-detection** model on every camera frame
+  * ``web_ui`` — serves the Web UI with the live camera feed and the alarm status
+
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
@@ -61,23 +70,17 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
 
 #. Download :download:`02 Face Alarm.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Face.Alarm.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
-
 #. With the app open, click the **Run** button (▶) in the top-right corner. The app boots the camera and loads the face-detection model, which takes a few seconds the first time.
 
    .. image:: /img/app_run.png
       :width: 500
       :align: center
 
-#. The Output window prints:
+#. The **Web UI** opens automatically: the live camera feed with the status *"No face — Alarm OFF"* below it. Face the camera — the status flips to *"🚨 Face detected — Alarm ON"* and the buzzer starts beeping rapidly. Step away and the alarm keeps sounding for about two more seconds, then stops and the status returns to *"No face — Alarm OFF"*.
 
-   *"🚨 Face Alarm running — show your face to the camera!"*
-
-   A **Web UI** tab opens automatically, showing the live camera feed with the status *"No face — Alarm OFF"* below it.
-
-#. Position yourself in front of the camera and face it. Within a moment the status flips to *"🚨 Face detected — Alarm ON"*, the hint text changes to *"The buzzer is sounding!"*, and the buzzer starts beeping rapidly — short bursts, about 150 ms on and 150 ms off.
-
-#. Step away so your face is out of the frame. The alarm keeps sounding for about two more seconds — the app gives a face a grace period in case you simply turned away for a moment — and then stops. The status returns to *"No face — Alarm OFF"*.
+.. image:: img/02_face_alarm.png
+   :width: 600
+   :align: center
 
 **How it Works**
 

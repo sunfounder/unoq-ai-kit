@@ -32,36 +32,37 @@ In this lesson, you will learn to:
    * - |list_pan_tilt|
      - |list_usb_cable|
 
+**Software Requirements**
+
+This project uses the following Bricks:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``video_object_detection`` — runs the **general object-detection** model on every camera frame
+  * ``web_ui`` — serves the Web UI with the live camera feed and the Detected Objects panel
+
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
-No breadboard wiring is needed in this lesson. The CSI camera is already attached to the Multimedia Carrier, which is part of your pre-assembled kit — the only "circuit" here is the light entering the lens.
+No breadboard wiring is needed in this lesson. The CSI camera is already attached to the AVIO Carrier, which is part of your pre-assembled kit — the only "circuit" here is the light entering the lens.
 
 2. Run the App
 ----------------
 
 #. Download :download:`01 AI Vision Recognition.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.AI.Vision.Recognition.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
-
 #. With the app open, click the **Run** button (▶) in the top-right corner. The app boots the camera and loads the AI model, which takes a few seconds the first time.
 
    .. image:: /img/app_run.png
       :width: 500
       :align: center
 
-#. The Output window prints:
+#. The **Web UI** opens automatically — the live camera feed on the left and the **Detected Objects** panel on the right. Wait for the status dot to turn blue and the label to change from **Connecting** to **Connected**, then point the camera at an everyday object: a cup, a person, or a cell phone. It appears in the panel with an icon, its name, and a confidence percentage — the higher the percentage, the more certain the model is.
 
-   *"🤖 AI Vision Recognition running — open the Web UI."*
-
-   A **Web UI** tab opens automatically, showing two cards: the live camera feed on the left, and a **Detected Objects** panel on the right.
-
-#. When the video appears, the status dot turns blue and the label changes from **Connecting** to **Connected**, with the hint text reading *"AI detecting objects in real time"*. The Detected Objects panel starts with the placeholder *"Point the camera at an everyday object"*.
-
-#. Show the camera an everyday object — a cup works well. Within a moment, the object appears in the Detected Objects panel with an icon, its name (``cup``), and a confidence percentage: the higher the percentage, the more certain the model is. A blue bar under the name shows the same score at a glance.
-
-#. Try a person and a cell phone too — each detection row shows its own icon, name, and confidence.
+.. image:: img/01_ai_vision_recognition.png
+   :width: 600
+   :align: center
 
 **How it Works**
 

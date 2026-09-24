@@ -5,7 +5,7 @@
 Module C: UI / Arduino Cloud / IoT
 =======================================
 
-In Module A, you controlled hardware with sketches — LEDs, sensors, servos, and motors, all running locally on your desk. In Module B, you explored the Multimedia Carrier's built-in **speaker**, **microphone**, and **camera**. Now you'll connect your device to the **internet** and build applications that bridge the physical and digital worlds.
+In Module A, you controlled hardware with sketches — LEDs, sensors, servos, and motors, all running locally on your desk. In Module B, you explored the AVIO Carrier's built-in **speaker**, **microphone**, and **camera**. Now you'll connect your device to the **internet** and build applications that bridge the physical and digital worlds.
 
 Using **Arduino App Lab's UI builder**, **Arduino Cloud**, and **Telegram**, you'll create web dashboards, remote controls, games, security systems, and even a chat bot that can interact with your hardware from anywhere in the world. Press a button on a webpage and an LED lights up on your desk. Watch sensor data flow into a live chart. Upload readings to the cloud and view them as dashboards. Send a message from your phone and your LED turns on.
 

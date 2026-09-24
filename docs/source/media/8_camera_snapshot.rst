@@ -5,7 +5,7 @@
 08 Camera Snapshot
 ====================
 
-The Multimedia Carrier doesn't just speak and listen — it has eyes too. In this lesson you'll use the built-in camera: press the button, and the board captures a photo and saves it to the ``photos`` folder with automatic numbering. One press, one picture.
+The AVIO Carrier doesn't just speak and listen — it has eyes too. In this lesson you'll use the built-in camera: press the button, and the board captures a photo and saves it to the ``photos`` folder with automatic numbering. One press, one picture.
 
 In this lesson, you will learn to:
 
@@ -48,7 +48,7 @@ Before using the camera, make sure external carriers are enabled on your UNO Q �
 
 **Wiring Diagram**
 
-Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The camera is built into the Multimedia Carrier.
+Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The camera is built into the AVIO Carrier.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
@@ -134,7 +134,7 @@ Modify ``next_photo_path()`` so the app never keeps more than five photos: befor
 
 **"Initializing camera..." never finishes**
 
-* **Cause:** The Multimedia Carrier isn't properly attached, or the camera is busy.
+* **Cause:** The AVIO Carrier isn't properly attached, or the camera is busy.
 * **Solution:** Check that the Carrier is firmly connected to the UNO Q, then stop and run the app again.
 
 **The photo is upside down**

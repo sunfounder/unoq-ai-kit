@@ -37,6 +37,17 @@ In this lesson, you will learn to:
      - |list_usb_cable|
 
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``arduino_cloud`` — connects the app to Arduino Cloud and exposes the ``pitch`` variable
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``RobotShield`` (1.0.3) — access to the Robot Shield's GPIO, PWM, and I2C hardware
+
 **Wiring Diagram**
 
 Connect the passive buzzer between **D5** and **GND** — the sketch drives it with ``tone()``.

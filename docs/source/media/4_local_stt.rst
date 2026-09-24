@@ -5,7 +5,7 @@
 04 Local STT
 ===============
 
-In the previous lesson, the UNO Q recorded your voice and played it back — but it didn't understand a word. Now it will **transcribe** your speech: using the Multimedia Carrier's built-in microphone and a local speech-to-text engine, the board listens to your voice and prints what you said. Everything runs on the device — no cloud, no internet needed for recognition.
+In the previous lesson, the UNO Q recorded your voice and played it back — but it didn't understand a word. Now it will **transcribe** your speech: using the AVIO Carrier's built-in microphone and a local speech-to-text engine, the board listens to your voice and prints what you said. Everything runs on the device — no cloud, no internet needed for recognition.
 
 In this lesson, you will learn to:
 
@@ -103,7 +103,7 @@ Change the ``language`` parameter in ``STT(type="local_fast", language="en")``. 
 **It always prints "No speech detected."**
 
 * **Cause:** The microphone isn't picking up your voice, or the room is too quiet.
-* **Solution:** Speak closer to the microphone and a bit louder. Check that the Multimedia Carrier is firmly attached. Try the recording while saying a full sentence instead of a single word.
+* **Solution:** Speak closer to the microphone and a bit louder. Check that the AVIO Carrier is firmly attached. Try the recording while saying a full sentence instead of a single word.
 
 **It prints a different word from what you said**
 

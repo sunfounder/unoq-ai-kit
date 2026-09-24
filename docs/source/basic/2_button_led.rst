@@ -25,7 +25,7 @@ In this lesson, you will learn to:
 
    * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_button`
-     - 1 * :ref:`cpn_led` (Red)
+     - 1 * :ref:`cpn_led`
      - 1 * :ref:`cpn_resistor` (220Ω)
    * - |list_pan_tilt|
      - |list_button|
@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the button to **D4** and the LED to **D5** through a 220Ω resistor (bands **Red → Red → Brown → Gold**): the button's two wires go to opposite sides of the center gap (one side to D4, the other to GND), and the LED's long leg (anode) goes to D5, short leg (cathode) to the resistor and GND.
+Connect the button to **D4** and the LED to **D5** through a 220Ω resistor (bands **Red → Red → Brown → Gold**): the button's two wires go to opposite sides of the center gap (one side to D4, the other to GND), and the LED's long leg (anode) goes through the resistor to D5, short leg (cathode) to GND.
 
 .. image:: /img/wiring/wiring_button.png
    :width: 500
@@ -59,19 +59,8 @@ Connect the button to **D4** and the LED to **D5** through a 220Ω resistor (ban
 
 All code for this course is provided as ``.zip`` files that you can import directly into App Lab.
 
-#. Open **Arduino App Lab**, go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
-
-#. Select **Import from Computer**.
-
-   .. image:: /img/app_import_pc.png
-      :width: 600
-
-
-#. Download :download:`02 Button-Controlled Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Button-Controlled.Light.zip>` and import it in App Lab. The app appears in **Apps** — click it to open.
+#. Download :download:`02 Button-Controlled Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Button-Controlled.Light.zip>`.
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded. The app appears in **Apps** — click it to open.
 
 #. With the app open, click the **Run** button (▶) in the top-right corner.
 

@@ -52,18 +52,46 @@ In this lesson, you will learn to:
      - |list_usb_cable|
      - -
 
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``web_ui`` — serves the control panel with the live camera feed
+  * ``sunfounder_stt`` — local speech-to-text for the voice commands (Whisper model)
+  * ``sunfounder_tts`` — text-to-speech for the spoken replies (EdgeTTS)
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``Arduino_HardwareServo`` (0.0.1) — drives the pan and tilt servos with hardware PWM
+  * ``DHT sensor library`` (1.4.6) — reads the DHT11 temperature and humidity sensor
+  * ``Adafruit Unified Sensor`` (1.1.15) — the sensor abstraction the DHT library is built on
+
 .. note::
 
-   The Pan Tilt Kit includes the two servos, the camera, and the Multimedia Carrier. Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
+   The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
+
+.. note::
+
+   The Pan Tilt Kit includes the two servos, the camera, and the AVIO Carrier. Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
 **Wiring Diagram**
 
-- Motor **IN1** → **D0**, Motor **IN2** → **D1**
+- Motor **IN1** → **D2**, Motor **IN2** → **D3**
 - PIR **OUT** → **D4**, DHT11 **DATA** → **D5**
-- RGB LED **R/G/B** → **D6/D7/D8**, each through a 220Ω resistor
+- RGB LED **R/G/B** → **D8/D7/D6**, each through a 220Ω resistor
 - Pan servo → **D9**, Tilt servo → **D10**
 - Photoresistor → **A0** (with a 10kΩ fixed resistor to GND)
 - Joystick **X** → **A3**, Joystick **Y** → **A2**, Joystick **VCC** → **3.3V**, **GND** → **GND**
+
+.. image:: /img/wiring/wiring_smart_room.png
+   :width: 600
+   :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 
 2. Run the App
 ----------------
@@ -169,7 +197,7 @@ Add a new voice command to ``main.py`` — for example, *"Good night"*: switch t
 **The fan never spins**
 
 * **Cause:** The motor wires are on the wrong pins, or the System Run switch is off.
-* **Solution:** Check the motor connects to D0/D1, and that the **System Run** switch is on. In AUTO mode the fan only starts above 28°C — switch to MANUAL to test it directly.
+* **Solution:** Check the motor connects to D2/D3, and that the **System Run** switch is on. In AUTO mode the fan only starts above 28°C — switch to MANUAL to test it directly.
 
 **The servos don't move with the joystick**
 
@@ -184,7 +212,7 @@ Add a new voice command to ``main.py`` — for example, *"Good night"*: switch t
 **The camera preview is frozen or black**
 
 * **Cause:** External carriers aren't enabled, or the Carrier isn't firmly attached.
-* **Solution:** Check the one-time setup at :ref:`enable_external_carriers`, then check that the Multimedia Carrier is firmly connected and run the app again.
+* **Solution:** Check the one-time setup at :ref:`enable_external_carriers`, then check that the AVIO Carrier is firmly connected and run the app again.
 
 **The Web UI shows stale sensor values**
 

@@ -58,6 +58,10 @@ Connect the servos to the Robot Shield:
    :width: 500
    :align: center
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
@@ -68,10 +72,6 @@ Connect the servos to the Robot Shield:
    *"Voice-controlled camera is ready. The microphone listens for 4 seconds each time."*
 
 #. Speak a command into the microphone — say "Take photo" and a photo is saved as ``photos/photo_001.jpg``, or say "Turn left" and the pan-tilt moves. The speaker confirms each action, then the microphone listens again automatically.
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -150,7 +150,7 @@ The sketch is the same five servo RPCs from the pan-tilt lesson: ``pan_left``, `
 
 **The servos move but the camera doesn't work — or the other way around**
 
-* **Cause:** The Robot Shield has no external power, or the Multimedia Carrier isn't firmly attached.
+* **Cause:** The Robot Shield has no external power, or the AVIO Carrier isn't firmly attached.
 * **Solution:** Check that external power is connected to the Robot Shield, and that the Carrier is firmly connected to the UNO Q. Stop and run the app again.
 
 **The board keeps saying "Command not recognized."**

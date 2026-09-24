@@ -46,13 +46,7 @@ There is no sketch in this project and no sketch libraries to install: nothing h
 
 Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The two speech Bricks need no key at all — and because both of them travel inside the package, together with the Whisper model, this download is much larger than the other projects in the module.
 
-**Hardware Check**
-
-#. Check that the **Multimedia Carrier** is sitting firmly on the UNO Q — the microphone and the speaker this project uses are built into it.
-#. Plug the **USB-C cable** into the UNO Q and your computer, and check that the board powers up.
-#. Stand the board on the table in front of you with the carrier's microphone facing you, about 30–50 cm away, and keep the room reasonably quiet for your first attempt.
-
-No breadboard wiring is needed here: the ears and the voice belong to the Multimedia Carrier, so the kit works exactly as it comes out of the box.
+No breadboard wiring is needed here: the ears and the voice belong to the AVIO Carrier, so the kit works exactly as it comes out of the box.
 
 .. note::
 
@@ -170,7 +164,7 @@ Here is what each piece does:
   * This is the only step that asks for your **API key** — the reasoning happens in the cloud
 
 **Text to Speech (behind the ``sunfounder_tts`` brick)** — the brick runs on the board and the voice is synthesized online
-  * ``tts.say(reply)`` turns the answer text into audio and plays it through the Multimedia Carrier's speaker
+  * ``tts.say(reply)`` turns the answer text into audio and plays it through the AVIO Carrier's speaker
   * The voice is fixed to ``en-US-JennyNeural`` at volume 50 in ``main.py``; the voice service needs an internet connection, but never a key
   * The first run downloads the runtime this Brick needs, which is why the very first conversation takes so long to speak
 
@@ -226,7 +220,7 @@ The card under **You said** is not what you said — it is what the recognizer h
 **The panel says "No speech was recognized..."**
 
 * **Cause:** The recording was silent or too quiet to transcribe. The recognizer found no words in it — usually because the button was released before you started speaking, or because you were too far from the microphone.
-* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing. If the panel instead shows *"Unable to start recording"*, the microphone itself could not be opened: check that the Multimedia Carrier is firmly attached and that no other app is holding the audio device.
+* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing. If the panel instead shows *"Unable to start recording"*, the microphone itself could not be opened: check that the AVIO Carrier is firmly attached and that no other app is holding the audio device.
 
 **The answer appears on screen, but you hear nothing**
 

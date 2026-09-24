@@ -47,7 +47,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the passive buzzer — it has **no polarity**, so either orientation works — to **D5**, and the potentiometer's **left pin to 3.3V**, **middle (wiper) pin to A2**, and **right pin to GND**; reversing 3.3V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it). Unlike an **active buzzer**, which buzzes by itself the moment it is powered, a **passive buzzer** makes no sound on its own — the sketch must generate the sound wave with ``tone()``.
+Connect the passive buzzer — it has **no polarity**, so either orientation works — to **D5**, and the potentiometer's **left pin to GND**, **middle (wiper) pin to A2**, and **right pin to 3.3V**; reversing 3.3V and GND won't damage the potentiometer, but the knob will behave backwards (clockwise lowers the pitch instead of raising it). Unlike an **active buzzer**, which buzzes by itself the moment it is powered, a **passive buzzer** makes no sound on its own — the sketch must generate the sound wave with ``tone()``.
 
 .. image:: /img/wiring/wiring_pot_buzzer.png
    :width: 500
@@ -238,11 +238,11 @@ You've used both types now — let's compare them:
 
 In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5**, alternating between ``tone(buzzerPin, 800)`` and ``tone(buzzerPin, 1200)`` — a two-tone siren. This lesson uses the same function and the same pin, but now the frequency changes with every note:
 
-  * **``tone(BUZZER_PIN, frequency)``** — Arduino generates the square wave in **software** on the main MCU: it toggles pin D5 at the frequency you pass in. One line of code, no library, no extra hardware.
+  * ``tone(BUZZER_PIN, frequency)`` — Arduino generates the square wave in **software** on the main MCU: it toggles pin D5 at the frequency you pass in. One line of code, no library, no extra hardware.
 
   * **The frequency comes from your code** — ``MELODY[note] * pitchPercent / 100`` combines the melody array with the knob position. That math is the real goal of this lesson: turning data into sound, not driving the buzzer.
 
-  * **``noTone(BUZZER_PIN)``** — stops the wave so you can insert the 50ms silence between notes, keeping them separate.
+  * ``noTone(BUZZER_PIN)`` — stops the wave so you can insert the 50ms silence between notes, keeping them separate.
 
 3. Experiment
 ----------------

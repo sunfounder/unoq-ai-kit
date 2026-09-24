@@ -10,79 +10,31 @@ This is the documentation and course repository for the **SunFounder AI Starter 
 - **Audience**: Beginners with zero programming or electronics experience
 - **Language**: English
 
-## Hardware Platform
+## Hardware
 
-- **Board**: Arduino UNO Q (Qualcomm QRB2210 MPU + STM32U585 MCU, dual-processor)
-- **Expansion**: Robot Shield (battery management, motor/servo drivers, multi-rail power, onboard MCU)
-- **Multimedia**: Multimedia Carrier (dual CSI cameras, DSI display, microphone, speaker, headphone jack, RGB LEDs, 10-axis IMU)
-- **Sensors**: Ultrasonic, DHT11, photoresistor, thermistor, PIR motion sensor
-- **Actuators**: Servos (×2, metal gear), DC motor + fan, active/passive buzzers, RGB LED, LEDs
-- **Input**: Joystick, potentiometer, tilt switch, buttons
-- **Components**: Breadboard, resistors (10Ω–1MΩ), transistors (NPN/PNP), capacitors, jumper wires
+The kit is built around three boards: the **Arduino UNO Q** (Qualcomm QRB2210 MPU + STM32U585 MCU), the **Robot Shield** (power, battery charging, motor and servo drivers), and the **AVIO Carrier** (camera, microphone, speaker, RGB LEDs).
 
-## Hardware Pin Assignments
+Do not mirror the component list, pin assignments, or board specs in this file — they change with the kit. The Get Started pages are the source of truth:
 
-The authoritative pin table for all lessons (updated 2026-09 for the new
-RobotShield layout). Components may share pins because each lesson uses
-only a subset:
+- ``docs/source/get_start/uno_q.rst`` — the UNO Q board
+- ``docs/source/get_start/robot_shield.rst`` — the Robot Shield
+- ``docs/source/get_start/avio_carrier.rst`` — the AVIO Carrier
 
-| Component | Pin |
-|-----------|-----|
-| LED | D5 |
-| 4-LED group | D4, D5, D6, D7 |
-| Active / passive buzzer | D5 |
-| Push button | D4 |
-| Tilt switch | D4 |
-| Photoresistor | A0 |
-| PIR OUT | D4 |
-| RGB LED | R→D8, G→D7, B→D6 |
-| Motor (IN1/IN2) | D2, D3 |
-| Pan servo | D9 |
-| Tilt servo | D10 |
-| Potentiometer | A2 |
-| Ultrasonic | TRIG→D11, ECHO→D12 |
-| DHT11 DATA | D4 |
-| Thermistor | A1 |
-| Joystick | SW→D4, X→A3, Y→A2 |
-| Two buttons (game) | left→D7, right→D6 |
+Pin assignments live in each lesson's own Setup section, and the board headers are described on the **Robot Shield** page. Components may share pins because each lesson uses only a subset.
 
 ## Software Platform
 
-- **Arduino App Lab**: Web-based IDE — the primary development tool for this course. No driver installation needed. Students create/edit/import/run apps in a browser-like environment.
-- **Arduino IDE**: Introduced in a comparison lesson (Module A, lesson 13).
-- **Edge Impulse**: Used in Module D for AI model training and deployment.
-- **LLM Integration**: Module E connects to Gemini/ChatGPT for AI-driven hardware interaction.
+- **Arduino App Lab** is the primary development tool for the course — no driver installation, and students create, import, and run apps in it.
+- **Arduino IDE** is covered in an optional comparison page for readers who want traditional Arduino development.
+- Other tools (Edge Impulse, cloud LLM providers) are introduced by the individual lessons that need them.
 
-## Course Structure (6 Modules)
+## Course Structure
 
-| Module | Lessons | Theme |
-|--------|---------|-------|
-| A: Basic Interaction | 17 | Sketch-only hardware control — no Python, no Web UI |
-| B: Multimedia | 9 | Camera, STT, TTS — no breadboard, Carrier-only |
-| C: IoT | 9 | Bridge, Web UI, Python+Sketch hybrid |
-| D: Edge AI | 9 | Camera + microphone, AI vision and voice, then physical response |
-| E: AI & LLM | 7 | CloudLLM, natural language, Tool Calling |
-| F: AI Projects | 4 | Vision + Voice + LLM fusion |
-
-### Module A Lesson Order
-
-1. Hello LED — digital output
-2. Button-Controlled Light — digital input
-3. Tilt Alarm — digital input + active buzzer
-4. Photoresistor Night Light — analogRead (first analog lesson)
-5. PIR Motion Alarm — digital sensor (motion) + active buzzer alarm
-6. Color Mixer — RGB PWM color mixing
-7. Motor Speed Controller — DC motor PWM
-8. Servo Sweep — Arduino_HardwareServo library
-9. Variable Pitch Melody — analog input + PWM audio
-10. Ultrasonic Radar — timing-based sensor
-11. Temperature & Humidity Monitor — DHT11 sensor
-12. Thermistor-Controlled Fan — analog input + PWM motor
-13. Joystick Servo — dual-axis control + auto-calibration
-14. IMU Attitude — I2C + calibration (depends on 14 IMU Calibration)
-15. IMU Servo — motion-controlled servo
-16. LED Matrix Patterns — built-in 8×13 display
-17. Opposite Reaction Game — game logic, button+buzzer+display
+The lesson inventory belongs to the course, not to this file. The
+per-module toctrees in ``docs/source/`` are the single source of truth for
+which lessons exist, their order, and how many there are — read them
+before writing or renumbering a lesson instead of assuming a count from
+this file.
 
 **Pedagogical principle**: Each lesson introduces at most one genuinely new concept. Everything else builds on previously learned knowledge, so students feel "I already know this, just one small new thing."
 
@@ -114,8 +66,10 @@ structure is shared across all modules:
         callouts clutter the page; fold the facts (resistor required, LED
         orientation, pull-up, built-in parts, servo power) into the Wiring
         Diagram sentence instead
-        (exceptions: STT ZIP ~100 MB note, TTS first-run note — both live
-        in the Run/Code section anyway)
+        (exceptions: the STT ZIP ~100 MB note, which goes after Software
+        Requirements, and the TTS first-run note, which goes just above
+        the ``2. Run the App`` heading — never inside that section, where
+        it would interrupt the numbered steps)
     - Software Requirements (projects with Bricks/libraries): nested list
       * Bricks: what app.yaml declares (sunfounder_stt, sunfounder_tts, ...)
       * Libraries: ONLY real sketch.yaml libraries (Arduino_HardwareServo,
@@ -234,9 +188,9 @@ Introduction
 
 **Pan Tilt Kit:**
 
-For lessons using the Robot Shield + servos + Multimedia Carrier + battery,
+For lessons using the Robot Shield + servos + AVIO Carrier + battery,
 use the ``Pan Tilt Kit`` entry in Components Needed instead of listing each
-item separately. The kit includes: UNO Q, Robot Shield, Multimedia Carrier,
+item separately. The kit includes: UNO Q, Robot Shield, AVIO Carrier,
 2× servos, camera, battery, and structural parts — pre-assembled.
 
 .. code-block:: rst
@@ -274,7 +228,7 @@ the standard Servo library causes jitter on this board.
 
 **Canonical reference:** `media/3_local_stt.rst`
 
-Python + Sketch App Lab projects using the Multimedia Carrier's speaker,
+Python + Sketch App Lab projects using the AVIO Carrier's speaker,
 microphone, and camera. Follows the IoT lesson structure — the **Run the
 App** section covers the run steps and How it Works only; full source code
 is NOT shown (media projects have both ``main.py`` and ``sketch.ino``,
@@ -300,7 +254,8 @@ Introduction
 2. Run the App
     - NO "Import and Run the Code" sub-heading, NO "The Code" section
     - #. steps go directly under the section title
-    - TTS lessons: .. note:: with the standard first-run text (below)
+    - TTS lessons: the standard first-run .. note:: (text below) goes just
+      ABOVE this section's heading — never inside it
     - **How it Works** sub-heading:
         - .. code-block:: text flow for Python-only lessons (01, 03)
         - .. mermaid:: sequenceDiagram for lessons with sketch interaction
@@ -432,7 +387,7 @@ Introduction
 **Canonical reference:** `edge_ai/01_ai_vision_recognition.rst`
 
 AI/ML lessons using camera, microphone, and Edge Impulse models.
-Minimal or no breadboard wiring — the hardware is the Multimedia Carrier
+Minimal or no breadboard wiring — the hardware is the AVIO Carrier
 with its built-in peripherals.
 
 **Section checklist (follow `01_ai_vision_recognition.rst` exactly):**
@@ -451,7 +406,6 @@ Introduction
     - What You Need: 4-col table (like Components Needed, but uses
       |list_xxx| placeholders, fewer :ref: links)
     - .. note:: for assembly reminders (NOT .. tip::)
-    - Hardware Check: #. numbered physical setup steps
     - Hardware photo (camera/carrier, NOT Fritzing breadboard)
 
 2. Run the App
@@ -459,7 +413,8 @@ Introduction
       /img/app_import_app.png and /img/app_import_pc.png), then the run
       steps (with /img/app_run.png and the result screenshot). NO
       "Import the Code" / "Run the Code" sub-headings.
-    - TTS lessons: the first-run .. note:: sits inside this section
+    - TTS lessons: the first-run .. note:: sits just ABOVE this section's
+      heading — never inside it
     - NO source code of any kind — no .. code-block:: python / cpp, no
       literalinclude. The reader already has the code in App Lab.
     - **How it Works**:
@@ -588,10 +543,15 @@ by topic, not number):
 
 ### Lesson Numbering Convention
 
-RST files and code folders use two numbering styles:
+RST lesson files appear in two numbering styles, and both are still in the
+tree:
 
-- **Lessons 1–4**: Old-style, no leading zero (``1_hello_led.rst``, ``2_button_led.rst``, ``3_tilt_alarm.rst``, ``4_photoresistor_led.rst``)
-- **Lessons 5+**: New-style with leading zero (``05_pir_motion_alarm.rst``, ``06_color_mixer.rst``, etc.)
+- Some have **no leading zero** (``1_hello_led.rst``)
+- Most use a **two-digit number** (``05_pir_motion_alarm.rst``)
+
+Never renumber a file just to change its style. When you add a lesson, match
+the files around it, and use the checklist below when the lesson order
+changes.
 
 Code folders always use the two-digit format: ``01 Hello LED/``, ``05 PIR Motion Alarm/``.
 
@@ -725,19 +685,14 @@ docs/source/
 ├── 大纲.rst                     # Course outline (Chinese, authoritative)
 ├── faq.rst                      # FAQ
 ├── get_start/                   # Getting Started (before lessons)
-│   ├── get_start.rst
-│   ├── uno_q.rst
-│   ├── robot_shield.rst
-│   ├── app_lab.rst
-│   ├── first_app.rst
-│   └── arduino_ide.rst
+│   └── <page>.rst               # One page per board, tool, or reference
 ├── basic/                       # Module A: Basic Interaction
 │   ├── basic.rst                # Module index + toctree
-│   └── <n>_<lesson_name>.rst    # Individual lessons (1–17)
+│   └── <n>_<lesson_name>.rst    # Individual lessons
 ├── media/                       # Module B: Multimedia (STT, TTS, Camera)
 ├── iot/                         # Module C: IoT
-├── llm/                          # Module E: AI/LLM
 ├── edge_ai/                     # Module D: Edge AI
+├── llm/                          # Module E: AI/LLM
 └── _static/                     # Static assets
     ├── img/
     ├── video/
@@ -900,7 +855,7 @@ project. Keep it concise: the code is right there, no need to duplicate it.
 4. **No Code Overview section** — the code lives in the same folder; README describes behavior, not implementation.
 5. **Result image after the description** — every project README shows one result screenshot right after the one-sentence description: ``![Result](assets/docs_assets/<result_image>.png)``. The wiring image belongs only in the Wiring section.
 6. **Wiring section** = one short sentence + one ``![Wiring Diagram](assets/docs_assets/wiring_xxx.png)`` image. No bullet lists, no tables, no warnings.
-7. **Hardware** = ``Pan Tilt Kit ×1`` as the first item, followed by breadboard components. The kit contains UNO Q, Robot Shield, Multimedia Carrier, 2× servos, camera, and battery — all pre-assembled. Do NOT list kit components individually.
+7. **Hardware** = ``Pan Tilt Kit ×1`` as the first item, followed by breadboard components. The kit contains UNO Q, Robot Shield, AVIO Carrier, 2× servos, camera, and battery — all pre-assembled. Do NOT list kit components individually.
 8. **How it Works** uses plain markdown only: ``**Flow**`` bullet list for setup/loop, then ``**Descriptive Title**`` subsections with 1–3 sentence explanations. Function names and values use inline `` `code` `` backticks.
 9. **Software before Hardware** — if the project uses Bricks or Libraries, those sections come first.
 
@@ -967,7 +922,7 @@ loop() → runs over and over forever:
 
 **Canonical reference:** `media/01 Local TTS/README.md`
 
-Pure Python lessons using the Multimedia Carrier's speaker, microphone,
+Pure Python lessons using the AVIO Carrier's speaker, microphone,
 and camera. No breadboard wiring — all hardware is built into the carrier.
 Projects use bricks to access STT, TTS, and camera capabilities.
 
@@ -1005,6 +960,13 @@ This example uses the following Bricks:
 
 ![Wiring Diagram](assets/docs_assets/wiring_xxx.png)
 
+> **Note:** (TTS lessons only) The first time you run a TTS example on this
+UNO Q, App Lab needs to download and prepare the TTS runtime and audio
+dependencies. This may take half an hour or more, depending on your network
+connection. Keep the UNO Q connected to the Internet and wait for the setup
+to complete. This setup only happens once — after it finishes, every TTS
+example starts much faster.
+
 ## How to Use the Example
 
 1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
@@ -1012,13 +974,6 @@ This example uses the following Bricks:
 3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. [Expected result.]
-
-> **Note:** (TTS lessons only) The first time you run a TTS example on this
-UNO Q, App Lab needs to download and prepare the TTS runtime and audio
-dependencies. This may take half an hour or more, depending on your network
-connection. Keep the UNO Q connected to the Internet and wait for the setup
-to complete. This setup only happens once — after it finishes, every TTS
-example starts much faster.
 
 ## How it Works
 
@@ -1034,6 +989,7 @@ example starts much faster.
 - **Libraries Used** lists ONLY real sketch.yaml libraries — bricks are declared in app.yaml, they are NOT libraries
 - Hardware is a simple bullet list (**Pan Tilt Kit ×1** first, kit components never listed individually)
 - Wiring section = one short sentence + one image; the image may stay a placeholder while waiting for the PNG
+- **TTS note** goes just above the ``## How to Use the Example`` heading — never after the steps
 - **No Code Overview section** — the code lives in the same folder; README describes behavior, not implementation
 - **How it Works** uses a plain-markdown arrow flow (NO fenced blocks), then explanation bullets
 - All fenced code blocks (```text / ```python / ```cpp) are forbidden — they freeze the App Lab README preview

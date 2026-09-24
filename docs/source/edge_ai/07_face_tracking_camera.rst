@@ -38,10 +38,12 @@ In this lesson, you will learn to:
 This project uses the following Bricks and sketch library:
 
 * Bricks (declared in ``app.yaml``):
+
   * ``video_object_detection`` — runs the **face-detection** AI model on every camera frame
   * ``web_ui`` — serves the Web UI with the live camera feed and face status
   * ``sunfounder_tts`` — text-to-speech for the greeting (EdgeTTS)
 * Libraries (declared in ``sketch.yaml``):
+
   * ``Arduino_HardwareServo`` (0.0.1) — drives the servos with hardware PWM
 
 .. note::
@@ -53,33 +55,25 @@ This project uses the following Bricks and sketch library:
 This lesson uses no breadboard components — everything plugs into the Robot Shield. Plug the pan servo into pin **D9** and the tilt servo into pin **D10** on the Robot Shield's servo headers.
 
 .. image:: /img/wiring/wiring_pan_tilt.png
-   :width: 600
+   :width: 500
    :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
 ----------------
 
 #. Download :download:`07 Face Tracking Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
+#. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield, then click the **Run** button (▶). The servos move to the 90° center position, the Console prints ``Face Tracking Camera with TTS is running.`` and ``EdgeTTS ready.``, and the sketch banner ``=== Face Tracking Camera ===`` appears over serial.
 
-#. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.
-
-#. Click the **Run** button (▶). The servos move to the 90° center position. On the Console you'll see the Python side announce itself: ``Face Tracking Camera with TTS is running.``, and once the speech engine is ready, ``EdgeTTS ready.`` The sketch prints its own banner, ``=== Face Tracking Camera ===``, over the serial connection.
-
-#. Open the **Web UI** tab. The live camera feed fills the page, and a status area reports **Looking for a face** — "The pan-tilt is centered and waiting."
-
-#. Stand in front of the camera. The board greets you with *"Nice to meet you."* and the status flips to **Face detected** — "The pan and tilt servos are following the face."
-
-#. Move left and right, then duck and rise. The camera follows you to keep your face centered. Now step out of view and count to three — after about 2.5 seconds the camera returns to center, the status goes back to **Looking for a face**, and the next face that appears triggers a fresh greeting.
+#. Open the **Web UI** tab: the live camera feed with the status **Looking for a face**. Stand in front of the camera — the board greets you with *"Nice to meet you."* and the status flips to **Face detected**; move left and right, then duck and rise, and the camera follows to keep your face centered. Step out of view and after about 2.5 seconds it returns to center, ready to greet the next face.
 
 .. image:: img/07_face_tracking_camera.png
    :width: 600
    :align: center
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 

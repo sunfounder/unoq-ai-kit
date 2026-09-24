@@ -46,7 +46,7 @@ This project uses no external libraries — the sketch only uses the built-in Ar
 
 **Wiring Diagram**
 
-Connect the motor to the Robot Shield's **M0** terminal (inputs **IN1 on D2**, **IN2 on D3**); place the thermistor — the small black bead with two leads, which has **no polarity** — between **A1** and GND, with the 10kΩ resistor (color bands Brown–Black–Orange–Gold) between **A1** and 3.3V; and avoid bending the thermistor's leads repeatedly at the body, as the bead is fragile.
+Connect the motor to the Robot Shield's **M0** terminal (inputs **IN1 on D2**, **IN2 on D3**); place the thermistor — the small black bead with two leads, which has **no polarity** — between **A1** and **3V3**, with the 10kΩ resistor (color bands Brown–Black–Orange–Gold) between **A1** and GND; and avoid bending the thermistor's leads repeatedly at the body, as the bead is fragile.
 
 .. image:: /img/wiring/wiring_thermistor_fan.png
    :width: 600
@@ -161,11 +161,11 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
        Print temperature and power to Serial Monitor
        Wait 500ms, then repeat
 
-1. **Library Include and Thermistor Constants**
+#. Library Include and Thermistor Constants
 
    - The ``<math.h>`` library provides the ``log()`` function needed for the temperature calculation
    - ``beta`` (3950) describes how rapidly the thermistor's resistance changes with temperature
-   - ``seriesResistor`` (10 kΩ) is the fixed resistor on the breadboard, and ``nominalResistance`` (10 kΩ) is the thermistor's resistance at 25°C
+   - ``seriesResistor`` (10kΩ) is the fixed resistor on the breadboard, and ``nominalResistance`` (10kΩ) is the thermistor's resistance at 25°C
 
    .. code-block:: arduino
 
@@ -176,18 +176,18 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
       const float nominalResistance = 10000.0;
       const float nominalTemp = 25.0 + 273.15;
 
-2. **Step 1: Converting the ADC Reading to Resistance**
+#. Step 1: Converting the ADC Reading to Resistance
 
-   - The ADC reading (0–1023) comes from the voltage divider formed by the thermistor and the 10 kΩ fixed resistor
+   - The ADC reading (0–1023) comes from the voltage divider formed by the thermistor and the 10kΩ fixed resistor
    - This formula reverses the voltage divider equation to recover the thermistor's resistance in ohms
-   - If ``adcValue`` reads 512 (half of 1023), the thermistor resistance equals the series resistor — about 10 kΩ at room temperature
+   - If ``adcValue`` reads 512 (half of 1023), the thermistor resistance equals the series resistor — about 10kΩ at room temperature
 
    .. code-block:: arduino
 
       int adcValue = analogRead(tempPin);
       float resistance = (1023.0 / adcValue - 1.0) * seriesResistor;
 
-3. **Step 2: Converting Resistance to Temperature with the Beta Equation**
+#. Step 2: Converting Resistance to Temperature with the Beta Equation
 
    - ``log()`` calculates the natural logarithm of the resistance ratio, and the Beta equation converts that into a temperature
    - The result is in Kelvin; subtracting 273.15 gives degrees Celsius
@@ -198,7 +198,7 @@ This lesson brings together analog sensing, mathematical conversion, and motor c
       float tempC = 1.0 / (log(resistance / nominalResistance) / beta
                      + 1.0 / nominalTemp) - 273.15;
 
-4. **Step 3: Mapping Temperature to Motor Power**
+#. Step 3: Mapping Temperature to Motor Power
 
    - Three temperature zones control the fan: below 25°C the fan stays off, above 50°C it runs at maximum
    - Between 25°C and 50°C, ``map()`` scales the power smoothly — the warmer it gets, the faster the fan spins

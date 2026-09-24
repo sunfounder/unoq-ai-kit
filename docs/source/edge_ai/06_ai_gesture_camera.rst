@@ -32,7 +32,20 @@ In this lesson, you will learn to:
    * - |list_pan_tilt|
      - |list_usb_cable|
 
-The kit is complete as it comes: the camera is built into the Multimedia Carrier, the two servos already carry the pan-tilt bracket, and the carrier's speaker does the talking. The one thing this project asks for is power — two servos moving under load draw more than the USB port can supply, so you will connect the battery pack to the Robot Shield before running the app.
+**Software Requirements**
+
+This project uses the following Bricks and sketch libraries:
+
+* Bricks (declared in ``app.yaml``):
+
+  * ``video_object_detection`` — runs the **hand-gesture classification** model on every camera frame
+  * ``web_ui`` — serves the Web UI with the live camera feed and the gesture card
+  * ``sunfounder_tts`` — text-to-speech for the spoken feedback (EdgeTTS)
+* Libraries (declared in ``sketch.yaml``):
+
+  * ``Arduino_HardwareServo`` (0.0.1) — drives the pan and tilt servos with hardware PWM
+
+The kit is complete as it comes: the camera is built into the AVIO Carrier, the two servos already carry the pan-tilt bracket, and the carrier's speaker does the talking. The one thing this project asks for is power — two servos moving under load draw more than the USB port can supply, so you will connect the battery pack to the Robot Shield before running the app.
 
 .. note::
 
@@ -40,36 +53,24 @@ The kit is complete as it comes: the camera is built into the Multimedia Carrier
 
 **Wiring Diagram**
 
-Plug the pan servo's signal lead into **D9** and the tilt servo's into **D10**, and make sure both servos are powered from the Robot Shield's **5 V** and **GND** servo headers, because two servos moving under load draw far more current than a signal pin could ever supply.
+Plug the pan servo's signal lead into **D9** and the tilt servo's into **D10**, and make sure both servos are powered from the Robot Shield's **5V** and **GND** servo headers, because two servos moving under load draw far more current than a signal pin could ever supply.
 
 .. image:: /img/wiring/wiring_pan_tilt.png
    :width: 600
    :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
 ----------------
 
 #. Download :download:`06 AI Gesture Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.AI.Gesture.Camera.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The app appears in **Apps** — click it to open.
+#. The servos and the camera together draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield, then click the **Run** button (▶). The pan-tilt swings to its center position (pan 90°, tilt 85°), the Console prints ``AI Gesture Camera is running.`` and then ``[TTS] Ready.`` once the speech engine is up.
 
-#. The servos and the camera together draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield.
-
-#. Click the **Run** button (▶). The pan-tilt swings to its center position — pan at 90° and tilt at 85° — and the Console prints ``AI Gesture Camera is running.``
-
-#. While the speech engine prepares itself, the Console prints ``[TTS] Ready.``
-
-   .. note::
-
-      The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
-#. Open the **Web UI** tab. The live camera feed fills the card, the gesture panel reads **Current Gesture: Waiting...** with no confidence yet, and the hint line reminds you of the four moves: 👍 Move up · ✊ Move down · ✌️ Take photo · 🖐️ Center pan-tilt.
-
-#. Hold up a **thumbs up**, roughly 50 cm from the camera, with your whole hand inside the frame and a plain background behind it. Keep it steady for about 0.6 seconds. The panel switches to **Thumbs up** with a confidence percentage, the tilt servo lifts the camera one 5° step (85° → 80°) and answers *"Moving up."*, and the last-action line adds *"— remove your hand"*. Each further thumbs up takes another 5° step, until the tilt reaches **60°** — the highest position — and the board says *"Highest position reached. I cannot move up any further."*
-
-#. Now take your hand **out of the frame** and leave it out for 3 seconds. The panel flips to **Ready — show a gesture**. That phrase is your green light: the app is armed again and the next gesture will count.
-
-#. Repeat the same rhythm with the other three gestures — hold, wait for the action, then remove your hand. A **fist** tilts the camera down one 5° step (*"Moving down."*) until it stops at **110°**, the lowest position, where the speaker says *"Lowest position reached. I cannot move down any further."* An **open hand** sends the pan-tilt back to center, pan at 90° and tilt at 85° (*"Back to the center."*), and a **V-sign** saves a photo and says *"Photo taken."*
+#. Open the **Web UI** tab: the live camera feed, the gesture panel reading **Current Gesture: Waiting...**, and a hint line for the four moves (👍 up · ✊ down · ✌️ photo · 🖐️ center). Hold a 👍 **thumbs up** about 50 cm from the camera, steady for about 0.6 s — the panel names it with a confidence and the tilt servo steps up 5° (*"Moving up."*, up to 60°). A ✊ **fist** steps down to 110°, a 🖐️ **open hand** re-centers the pan-tilt, and a ✌️ **V-sign** saves a photo (*"Photo taken."*). Take your hand out of the frame for 3 seconds and the panel returns to **Ready — show a gesture**.
 
 .. image:: img/06_ai_gesture_camera.png
    :width: 600
@@ -128,7 +129,7 @@ The data path from gesture to action:
        P->>P: same label held for 0.6 s → lock gesture_armed
        P->>P: action_queue.put_nowait((label, confidence))
        P->>S: Bridge.call("tilt_up" / "tilt_down" / "center_pan_tilt")
-       S->>S: step 5° within 60°–110°; pan and tilt back to center
+       S->>S: step 5° within 60°–110°, then pan and tilt back to center
        S-->>P: new tilt angle
        P->>P: take_photo() → camera.capture() → cv2.imwrite()
        P->>B: gesture_result: action + "remove your hand"
@@ -201,13 +202,6 @@ Run the app and try each of these in order. The point is to feel the three timer
    * - Change straight from a fist into a V-sign without removing your hand
      - The stable timer restarts on the new label, so neither action fires until you hold one of them still
 
-**Challenge: Find the Edges of the Model**
-
-The hand-gestures model was trained on clean, well-lit hands against simple backgrounds — your desk is none of those things. Move your hand closer and farther, and find the distance where a gesture stops being recognized at all. Try it with a cluttered background, with a bare wall, with a lamp aimed at your palm, and with the room lights off. Then try a gesture at an angle, or partially hidden behind a coffee mug. Watch the confidence percentage on the page as you go: at what point does it fall below the 25% threshold and the panel go quiet? Which of the four gestures is the most reliable for *your* hand, and which one do you have to hold longest? There is no right answer — the goal is to learn where this model's eyesight ends, because every gesture project you build later depends on that boundary.
-
-**Challenge: Rework the Rhythm**
-
-The three numbers at the top of ``main.py`` are a personality, not a law. Change ``STABLE_SECONDS`` to ``0.2`` and the app becomes twitchy — how many false triggers can you collect in a minute of casual hand movement? Raise it to ``2.0`` and it feels stubborn — how long does a deliberate gesture take to register, and does that change how carefully you pose your hand? Then shrink ``MIN_ACTION_INTERVAL`` to ``1.0`` and ``REARM_NO_GESTURE_SECONDS`` to ``1.0`` and try to chain four gestures as fast as you can. Which combination makes the app feel like a tool, and which makes it feel like it is arguing with you? Change one number at a time, run again, and describe the difference out loud before you touch the next one.
 
 4. Troubleshooting
 --------------------

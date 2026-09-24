@@ -49,16 +49,25 @@ This project uses the following App Lab Bricks:
   * ``sunfounder_stt`` (microphone recording — only the recording API, no speech recognition in this lesson)
   * ``sunfounder_tts`` (speaker playback — only the playback API, no text synthesis in this lesson)
 
+.. note::
+
+   The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
+
+
 **Wiring Diagram**
 
-Connect the two push buttons between D7 / D6 and GND — no external resistors are needed, the sketch uses the internal pull-up resistors. The microphone and speaker are built into the Multimedia Carrier.
+Connect the two push buttons between D7 / D6 and GND — no external resistors are needed, the sketch uses the internal pull-up resistors. The microphone and speaker are built into the AVIO Carrier.
 
-- Record button: pin 1 → **D7**, pin 2 → **GND**
-- Play button: pin 1 → **D6**, pin 2 → **GND**
+- Record button: D7
+- Play button: D6
 
 .. image:: /img/wiring/wiring_two_buttons.png
    :width: 500
    :align: center
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
 ----------------
@@ -77,10 +86,6 @@ Connect the two push buttons between D7 / D6 and GND — no external resistors a
 #. Press **D7** again — **Recording saved.** appears.
 
 #. Press the **D6 button** once — **Playing...** appears and the speaker plays your recording. Press **D6** again to stop playback.
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -168,12 +173,12 @@ The recording is always saved to the same file, ``stt_last.wav`` — each new re
 **"Recording..." appears but the recording is silent when played back**
 
 * **Cause:** The microphone wasn't picked up, or the recording was too short.
-* **Solution:** Speak closer to the microphone and a bit louder, and record for at least a second. Check that the Multimedia Carrier is firmly attached.
+* **Solution:** Speak closer to the microphone and a bit louder, and record for at least a second. Check that the AVIO Carrier is firmly attached.
 
 **"Playing..." appears but no sound comes out**
 
 * **Cause:** The TTS runtime is still being prepared on the first run.
-* **Solution:** The first run can take half an hour or more while App Lab downloads the TTS runtime — keep the UNO Q connected to the Internet and wait. Check that the Multimedia Carrier is firmly attached to the UNO Q.
+* **Solution:** The first run can take half an hour or more while App Lab downloads the TTS runtime — keep the UNO Q connected to the Internet and wait. Check that the AVIO Carrier is firmly attached to the UNO Q.
 
 **The buttons do nothing when pressed**
 

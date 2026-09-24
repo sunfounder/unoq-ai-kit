@@ -52,6 +52,10 @@ Connect the DHT11: VCC to 3.3V, DATA to D4, GND to GND.
    :width: 500
    :align: center
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 2. Run the App
 ----------------
 
@@ -62,10 +66,6 @@ Connect the DHT11: VCC to 3.3V, DATA to D4, GND to GND.
    *"The temperature is 26.3 degrees Celsius. The humidity is 58.2 percent."*
 
 #. Breathe warm air onto the DHT11 — the temperature rises, and the next announcement reflects the change.
-
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **How it Works**
 
@@ -167,7 +167,7 @@ Change the f-string to make the announcement sound different:
 
 **No sound from the speaker**
 
-* **Cause:** The Multimedia Carrier isn't properly attached, or the TTS runtime is still being prepared.
+* **Cause:** The AVIO Carrier isn't properly attached, or the TTS runtime is still being prepared.
 * **Solution:** Check that the Carrier is firmly connected to the UNO Q. On the first run, wait for the TTS runtime download to finish — verify the Local TTS example works on the same hardware.
 
 5. Summary

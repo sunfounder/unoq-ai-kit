@@ -5,7 +5,7 @@
 Module D: Edge AI
 =====================
 
-In this module, you'll give your UNO Q the ability to **see and respond**. Using the Multimedia Carrier's camera with pre-trained AI models that run entirely on the device, you'll build projects that recognize objects, read your hand gestures, count what passes in front of the lens, follow your face, and finally guard a room on their own.
+In this module, you'll give your UNO Q the ability to **see and respond**. Using the AVIO Carrier's camera with pre-trained AI models that run entirely on the device, you'll build projects that recognize objects, read your hand gestures, count what passes in front of the lens, follow your face, and finally guard a room on their own.
 
 Each project adds one new idea, building on the one before it:
 
@@ -37,4 +37,3 @@ Let's give your UNO Q vision.
    06_ai_gesture_camera
    07_face_tracking_camera
    08_ai_smart_guard
-   camera_troubleshooting

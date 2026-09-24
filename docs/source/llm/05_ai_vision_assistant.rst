@@ -9,7 +9,7 @@ Every conversation in this module so far started with words you typed. This proj
 
 In this lesson, you will learn to:
 
-* Capture frames from the Multimedia Carrier camera in Python, flip them upright, and stream them to the browser
+* Capture frames from the AVIO Carrier camera in Python, flip them upright, and stream them to the browser
 * Send an actual image — not just words — to a vision-capable cloud model, and write a system prompt that keeps it honest about what it can see
 * Keep the slow work off the main path: the cloud request and the spoken answer run on a worker thread while the live preview keeps moving
 * Report each stage of the exchange — capturing, thinking, speaking, ready — to the one browser that asked
@@ -45,18 +45,16 @@ Because the model is reached over the internet, the project needs a key of your 
 
 There are no sketch libraries to install: this project has no ``sketch/`` folder at all, so nothing is compiled for the MCU and nothing crosses the Bridge.
 
-**Hardware Check**
-
-#. The kit arrives assembled — the UNO Q sits on the Robot Shield and the Multimedia Carrier is pressed onto the connectors. Check that the carrier is fully seated, because the camera and the speaker both live on it.
-#. Look at the camera at the front of the carrier. Its ribbon cable must be clicked firmly into its connector with the **blue side facing up**, and the lens must be clear of the bracket that holds it.
-#. Make sure the carrier's **speaker** is not covered or resting on the desk — the answer is read aloud as well as printed.
-#. Plug the **USB-C cable** into the UNO Q and your computer, and check that the board powers up.
-
-No breadboard wiring is needed in this lesson: the camera, the speaker, and the whole "circuit" are already built into the Multimedia Carrier.
+No breadboard wiring is needed in this lesson: the camera, the speaker, and the whole "circuit" are already built into the AVIO Carrier.
 
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`. A camera is never hot-swappable: disconnect the battery and the USB-C cable before you plug one in.
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 
 2. Run the App
 ----------------
@@ -160,7 +158,7 @@ Here is what each piece does:
   * ``vlm.with_memory(max_messages=0)`` stops old images from piling up in the conversation, so each question is answered from the current frame only
   * ``tts.say(answer)`` speaks the reply, and ``ui.send_message("vision_status", {...}, room=sid)`` reports every stage of the exchange back to the single browser that asked
 
-**Camera (App Lab peripheral)** — the Multimedia Carrier's CSI camera
+**Camera (App Lab peripheral)** — the AVIO Carrier's CSI camera
   * ``camera.capture()`` returns the newest frame, and the camera keeps producing them at 20 per second whether or not anybody is looking
   * The camera sits upside down in the carrier's bracket, so the vertical flip is what makes both the preview and the picture the model receives upright — the two always agree, because both come from that one ``current_frame``
   * No brick is involved: the camera comes with App Lab itself, which is why the whole setup is one line
