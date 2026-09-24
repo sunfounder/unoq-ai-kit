@@ -9,16 +9,16 @@ A 4-level LED bar graph that responds to ambient light — the darker it gets, t
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - Photoresistor ×1
-- 10 kΩ resistor ×1
-- Red LEDs ×4
-- 220 Ω resistors ×4
+- 10kΩ resistor ×1
+- LEDs ×4
+- 220Ω resistors ×4
 - Jumper wires
 - USB-C cable ×1
 
 
 ## Wiring
 
-Connect the photoresistor with a 10 kΩ resistor to analog pin A0, and four LEDs to pins D4–D7.
+Connect the photoresistor with a 10kΩ resistor to analog pin A0, and four LEDs to pins D4–D7.
 
 ![Wiring Diagram](assets/docs_assets/wiring_photoresistor_led.png)
 

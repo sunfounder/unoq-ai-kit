@@ -12,7 +12,7 @@ This example uses the following Bricks:
 
 - `video_object_detection` — Runs the **face-detection** model (declared as `model: face-detection`) on every camera frame and reports each face it finds, with its bounding box
 - `web_ui` — Creates the web interface with the live camera feed and the face status
-- `sunfounder_tts` — Speaks the greeting through the Multimedia Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
+- `sunfounder_tts` — Speaks the greeting through the AVIO Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
 
 ### Libraries Used
 
@@ -29,14 +29,14 @@ Connect the pan servo signal to **D9** and the tilt servo signal to **D10**, wit
 
 ![Wiring Diagram](assets/docs_assets/wiring_pan_tilt.png)
 
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 ## How to Use the Example
 
 1. Download [`07 Face Tracking Camera.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Face.Tracking.Camera.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run**.
 4. Stand in front of the camera — the board says *"Nice to meet you."* Move left, right, up, and down slowly and the camera follows you. Step away and after 2.5 seconds both servos return to their center positions.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## Behavior
 

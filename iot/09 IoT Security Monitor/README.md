@@ -13,7 +13,6 @@ Build an IoT security monitor with a live camera stream, PIR motion detection, a
 ## Hardware
 
 - Pan Tilt Kit ×1
-- Multimedia Carrier with CSI camera ×1
 - PIR motion sensor ×1
 - Passive buzzer ×1
 - Jumper wires

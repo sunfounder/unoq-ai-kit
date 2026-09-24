@@ -8,7 +8,7 @@ Read temperature with an NTC thermistor and automatically adjust a DC motor (fan
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - NTC thermistor ×1
-- 10 kΩ resistor ×1
+- 10kΩ resistor ×1
 - DC motor ×1
 - Fan blade (optional)
 - USB-C cable ×1
@@ -16,7 +16,7 @@ Read temperature with an NTC thermistor and automatically adjust a DC motor (fan
 
 ## Wiring
 
-Connect the NTC thermistor with a 10 kΩ resistor to analog pin A1 and the DC motor to the Robot Shield's M0 terminal.
+Connect the NTC thermistor with a 10kΩ resistor to analog pin A1 and the DC motor to the Robot Shield's M0 terminal.
 
 ![Wiring Diagram](assets/docs_assets/wiring_thermistor_fan.png)
 
@@ -37,7 +37,7 @@ Connect the NTC thermistor with a 10 kΩ resistor to analog pin A1 and the DC mo
 
 **Step 1 — the voltage divider**
 
-`(1023.0 / adcValue - 1.0) * seriesResistor` reverses the voltage divider math (the thermistor plus the fixed 10 kΩ resistor, just like the photoresistor you used earlier) to recover the thermistor's resistance in ohms — the decimal `1023.0` keeps the division from truncating.
+`(1023.0 / adcValue - 1.0) * seriesResistor` reverses the voltage divider math (the thermistor plus the fixed 10kΩ resistor, just like the photoresistor you used earlier) to recover the thermistor's resistance in ohms — the decimal `1023.0` keeps the division from truncating.
 
 **Step 2 — the Beta equation**
 

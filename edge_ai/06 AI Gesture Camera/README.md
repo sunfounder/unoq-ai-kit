@@ -29,14 +29,14 @@ Connect the pan servo signal to **D9** and the tilt servo signal to **D10**, wit
 
 ![Wiring Diagram](assets/docs_assets/wiring_pan_tilt.png)
 
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 ## How to Use the Example
 
 1. Download [`06 AI Gesture Camera.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.AI.Gesture.Camera.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run** and open the Web UI.
 4. Hold one gesture steady for about a second — the camera tilts, a photo is taken, or the pan-tilt centers, and the board says what it did. Then take your hand out of the frame and wait for **Ready — show a gesture** before the next one.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## Gesture Actions
 

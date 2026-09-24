@@ -7,13 +7,13 @@ Cycle an RGB LED through 8 colors using three PWM pins and `analogWrite()`. Each
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
-- 220 Ω resistors ×3
+- 220Ω resistors ×3
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to D8, D7, and D6, and the common cathode to GND.
+Connect the RGB LED's red, green, and blue anodes through 220Ω resistors to D8, D7, and D6, and the common cathode to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_rgb_led.png)
 

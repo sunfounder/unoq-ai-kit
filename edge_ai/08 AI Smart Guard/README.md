@@ -12,7 +12,7 @@ This example uses the following Bricks:
 
 - `video_object_detection` — Runs the general object-detection model on every camera frame; Python subscribes only to the **person** class
 - `web_ui` — Creates the web interface with the live camera feed and the guard status panel
-- `sunfounder_tts` — Speaks the intruder alert and the all-clear message through the Multimedia Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
+- `sunfounder_tts` — Speaks the intruder alert and the all-clear message through the AVIO Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
 
 ### Libraries Used
 
@@ -23,16 +23,18 @@ This example uses the following Bricks:
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
-- 220 Ω resistor ×3
+- 220Ω resistor ×3
 - Active buzzer ×1
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220 Ω resistor — and its common cathode to **GND**; connect the buzzer's positive leg to **D5** and its negative leg to **GND**; connect the pan servo signal to **D9** and the tilt servo signal to **D10**, with **5V** and **GND** for servo power.
+Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220Ω resistor — and its common cathode to **GND**; connect the buzzer's positive leg to **D5** and its negative leg to **GND**; connect the pan servo signal to **D9** and the tilt servo signal to **D10**, with **5V** and **GND** for servo power.
 
 ![Wiring Diagram](assets/docs_assets/wiring_smart_guard.png)
+
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How to Use the Example
 
@@ -40,8 +42,6 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run**.
 4. The servo scans left and right while the RGB LED glows green. Walk in front of the camera — the light turns red, the buzzer beeps, and the board announces the intruder. Step away and after 3 seconds it settles back into silent green patrol.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## Person Detection vs Face Detection
 

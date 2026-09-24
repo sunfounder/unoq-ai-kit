@@ -17,7 +17,7 @@ This example uses the following Bricks:
 
 ## Wiring
 
-No breadboard wiring is needed. The microphone is built into the Multimedia Carrier — just attach the carrier to the UNO Q.
+No breadboard wiring is needed. The microphone is built into the AVIO Carrier — just attach the carrier to the UNO Q.
 
 ## How to Use the Example
 

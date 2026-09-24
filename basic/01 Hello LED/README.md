@@ -8,15 +8,15 @@ The **Hello LED** example blinks an external LED connected to digital pin **D5**
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
-- Red LED ×1
-- 220 Ω resistor ×1
+- LED ×1
+- 220Ω resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 
 ## Wiring
 
-Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
+Connect the LED through a 220Ω resistor between digital pin D5 and GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_led.png)
 
@@ -36,7 +36,7 @@ Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
 
 **Digital output**
 
-`digitalWrite(ledPin, HIGH)` sends 3.3 V to pin 5, lighting the LED; `digitalWrite(ledPin, LOW)` sends 0 V, turning it off. That's the "Hello World" of Arduino — writing a `HIGH` or `LOW` value to a digital pin.
+`digitalWrite(ledPin, HIGH)` sends 3.3V to pin 5, lighting the LED; `digitalWrite(ledPin, LOW)` sends 0V, turning it off. That's the "Hello World" of Arduino — writing a `HIGH` or `LOW` value to a digital pin.
 
 **The blink cycle**
 

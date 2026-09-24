@@ -28,7 +28,9 @@ Connect the push button between **D4** and **GND**:
 
 ![Wiring Diagram](assets/docs_assets/wiring_button.png)
 
-No external resistor is needed — the sketch uses the Arduino internal pull-up resistor. The speaker is built into the Multimedia Carrier.
+No external resistor is needed — the sketch uses the Arduino internal pull-up resistor. The speaker is built into the AVIO Carrier.
+
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How to Use the Example
 
@@ -36,8 +38,6 @@ No external resistor is needed — the sketch uses the Arduino internal pull-up 
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run**.
 4. Wait for `STT Echo is ready.` in the **Output** window, then hold the button and speak. When you release the button, the recognized sentence appears after `You said:` and the speaker repeats it aloud.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How it Works
 

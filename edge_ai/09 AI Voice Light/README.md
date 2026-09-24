@@ -10,22 +10,24 @@ This example uses the following Bricks:
 
 - `keyword_spotting` — Runs the `keyword-spotting-hey-arduino` Edge Impulse model on the live microphone stream and calls back when the wake word clears the confidence threshold; it must be the **first** brick in `app.yaml`, or it takes over the port the other audio bricks use
 - `sunfounder_stt` — Whisper speech recognition, started only after the wake word so room audio is never transcribed continuously
-- `sunfounder_tts` — Answers *"I'm here."* through the Multimedia Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
+- `sunfounder_tts` — Answers *"I'm here."* through the AVIO Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
 
 ## Hardware
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
-- 220 Ω resistor ×3
+- 220Ω resistor ×3
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220 Ω resistor — and its common cathode to **GND**.
+Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220Ω resistor — and its common cathode to **GND**.
 
 ![Wiring Diagram](assets/docs_assets/wiring_rgb_led.png)
+
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How to Use the Example
 
@@ -35,8 +37,6 @@ Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** 
 4. Wait for `[READY] Waiting for "Hey Arduino"...` in the console, then say **"Hey Arduino"**.
 5. When the assistant answers *"I'm here."*, say one light command within four seconds — for example *"Turn the light blue."*
 6. The LED keeps that colour and the console returns to `[READY]`, listening for the next wake word.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## Spoken Commands
 

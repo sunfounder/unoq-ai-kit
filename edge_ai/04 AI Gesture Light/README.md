@@ -17,14 +17,14 @@ This example uses the following Bricks:
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
-- Red LED ×1
-- 220 Ω resistor ×1
+- LED ×1
+- 220Ω resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the LED's anode to digital pin **D5** through a **220 Ω resistor**, and its cathode to **GND**.
+Connect the LED's anode to digital pin **D5** through a **220Ω resistor**, and its cathode to **GND**.
 
 ![Wiring Diagram](assets/docs_assets/wiring_led.png)
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quiz Show</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+        <h1>AI Quiz Show</h1>
+        <p>Think Fast · Choose A, B, or C · Score Points</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="connection">
+                <span id="status-dot" class="status-indicator"></span>
+                <span id="connection-label">Connecting</span>
+            </div>
+
+            <section class="score-board">
+                <div>
+                    <span class="score-label">Score</span>
+                    <strong id="score-value">0</strong>
+                </div>
+                <div>
+                    <span class="score-label">Answered</span>
+                    <strong id="answered-value">0</strong>
+                </div>
+                <button id="reset-button" type="button" disabled>RESET</button>
+            </section>
+
+            <section class="question-card">
+                <span class="question-label">Question</span>
+                <h2 id="question-text">Choose NEW QUESTION to begin.</h2>
+            </section>
+
+            <section id="choices" class="choices">
+                <button class="choice" type="button" data-answer="A" disabled>
+                    <span>A</span><strong id="choice-a">—</strong>
+                </button>
+                <button class="choice" type="button" data-answer="B" disabled>
+                    <span>B</span><strong id="choice-b">—</strong>
+                </button>
+                <button class="choice" type="button" data-answer="C" disabled>
+                    <span>C</span><strong id="choice-c">—</strong>
+                </button>
+            </section>
+
+            <div id="status-panel" class="status-panel">
+                <strong id="status-title">Connecting...</strong>
+                <span id="status-message">Waiting for the app.</span>
+            </div>
+
+            <button id="new-button" class="new-button" type="button" disabled>
+                NEW QUESTION
+            </button>
+
+            <article id="result-card" class="result-card">
+                <div class="result-label">Answer Explanation</div>
+                <div id="result-text">The explanation will appear here.</div>
+            </article>
+
+            <p id="error-container"></p>
+            <p class="hint">Choose A, B, or C on the page to answer.</p>
+        </section>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

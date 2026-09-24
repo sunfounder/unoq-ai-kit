@@ -19,7 +19,7 @@ Record a real voice message with the UNO Q microphone, watch the live audio leve
 
 ## Wiring
 
-No breadboard wiring is needed — the microphone and speaker are built into the Multimedia Carrier.
+No breadboard wiring is needed — the microphone and speaker are built into the AVIO Carrier.
 
 ## How to Use the Example
 

@@ -35,14 +35,14 @@ Connect the DHT11 module as follows:
 
 > Double-check the labels on your DHT11 module — different boards may arrange pins differently.
 
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 ## How to Use the Example
 
 1. Download [`02 Dynamic TTS Weather Reporter.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Dynamic.TTS.Weather.Reporter.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run**.
 4. Every 30 seconds, the speaker announces: *"The temperature is 26.3 degrees Celsius. The humidity is 58.2 percent."* Try breathing warm air onto the DHT11 — the next announcement reflects the change.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How it Works
 

@@ -9,15 +9,15 @@ Press a button to turn on an LED — your first interactive circuit. This lesson
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - Push button ×1
-- Red LED ×1
-- 220 Ω resistor ×1
+- LED ×1
+- 220Ω resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 
 ## Wiring
 
-Connect the push button to digital pin D4 and the LED through a 220 Ω resistor to pin D5.
+Connect the push button to digital pin D4 and the LED through a 220Ω resistor to pin D5.
 
 ![Wiring Diagram](assets/docs_assets/wiring_button.png)
 
@@ -37,7 +37,7 @@ Connect the push button to digital pin D4 and the LED through a 220 Ω resistor 
 
 **Reading a button**
 
-`pinMode(buttonPin, INPUT_PULLUP)` enables the board's built-in pull-up resistor, so an unpressed button reads `HIGH` (3.3 V). Pressing the button connects the pin to GND, making it read `LOW` — that's why the code checks for `LOW` instead of `HIGH`.
+`pinMode(buttonPin, INPUT_PULLUP)` enables the board's built-in pull-up resistor, so an unpressed button reads `HIGH` (3.3V). Pressing the button connects the pin to GND, making it read `LOW` — that's why the code checks for `LOW` instead of `HIGH`.
 
 **Making a decision**
 

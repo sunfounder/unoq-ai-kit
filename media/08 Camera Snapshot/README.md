@@ -19,7 +19,7 @@ Connect the push button between **D4** and **GND**:
 
 ![Wiring Diagram](assets/docs_assets/wiring_button.png)
 
-No external resistor is needed — the sketch uses the Arduino internal pull-up resistor. The camera is built into the Multimedia Carrier.
+No external resistor is needed — the sketch uses the Arduino internal pull-up resistor. The camera is built into the AVIO Carrier.
 
 ## How to Use the Example
 

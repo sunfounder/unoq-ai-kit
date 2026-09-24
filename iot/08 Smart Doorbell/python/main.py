@@ -3,7 +3,7 @@
 # Web UI, and announces the visitor through the speaker (EdgeTTS).
 #
 # The button (D4) and buzzer (D5) are handled by the sketch; the camera
-# and speaker are the Multimedia Carrier's built-in peripherals.
+# and speaker are the AVIO Carrier's built-in peripherals.
 import base64
 import time
 from datetime import datetime

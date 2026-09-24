@@ -18,13 +18,13 @@ This example uses the following Bricks:
 - Pan Tilt Kit ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
-- 220 Ω resistor ×3
+- 220Ω resistor ×3
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220 Ω resistor — and its common cathode to **GND**.
+Connect the RGB LED's red, green, and blue anodes to **D8**, **D7**, and **D6** — each through a 220Ω resistor — and its common cathode to **GND**.
 
 ![Wiring Diagram](assets/docs_assets/wiring_rgb_led.png)
 

@@ -18,7 +18,7 @@ Type a message in the Web UI and let the UNO Q speak it aloud through the speake
 
 ## Wiring
 
-No breadboard wiring is needed — the speaker is built into the Multimedia Carrier.
+No breadboard wiring is needed — the speaker is built into the AVIO Carrier.
 
 ## How to Use the Example
 

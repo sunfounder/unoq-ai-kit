@@ -14,13 +14,13 @@ Build a real-time sensor dashboard that displays light levels and visualizes cha
 
 - Pan Tilt Kit ×1
 - Photoresistor ×1
-- 10 kΩ resistor ×1
+- 10kΩ resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the photoresistor between 3.3V and A0, and the 10 kΩ resistor between A0 and GND — the two resistors form a voltage divider, and the UNO Q reads the divided voltage on A0.
+Connect the photoresistor between 3.3V and A0, and the 10kΩ resistor between A0 and GND — the two resistors form a voltage divider, and the UNO Q reads the divided voltage on A0.
 
 ![Wiring Diagram](assets/docs_assets/wiring_photo.png)
 

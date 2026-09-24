@@ -36,6 +36,8 @@ Connect the servos to the Robot Shield and the push button to the UNO Q:
 
 No external resistor is needed for the button — the sketch uses the internal pull-up resistor.
 
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 ## How to Use the Example
 
 1. Download [`07 Voice-Controlled Pan-Tilt.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Voice-Controlled.Pan-Tilt.zip).
@@ -44,8 +46,6 @@ No external resistor is needed for the button — the sketch uses the internal p
 4. Wait for `Voice-controlled pan-tilt is ready.` in the **Output** window, then hold the button and say a command (for example, "Turn left"), and release the button — the pan-tilt moves to the matching angle and the speaker confirms: *"Turning left."*
 
 Supported commands: `Turn left`, `Turn right`, `Look up`, `Look down`, and `Center` (short forms such as `left`, `right`, `up`, `down` also work).
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How it Works
 

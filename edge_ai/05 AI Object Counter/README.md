@@ -12,7 +12,7 @@ This example uses the following Bricks:
 
 - `video_object_detection` — Runs the general object-detection model on every camera frame; Python keeps only the three target classes and ignores everything else
 - `web_ui` — Creates the web interface with the live counters and the **RESET COUNTS** button
-- `sunfounder_tts` — Synthesizes the spoken object names and plays them through the Multimedia Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
+- `sunfounder_tts` — Synthesizes the spoken object names and plays them through the AVIO Carrier's speaker (EdgeTTS needs an Internet connection, but no API key)
 
 ## Hardware
 
@@ -21,7 +21,9 @@ This example uses the following Bricks:
 
 ## Wiring
 
-The camera and the speaker are both built into the Multimedia Carrier, so no breadboard wiring is needed.
+The camera and the speaker are both built into the AVIO Carrier, so no breadboard wiring is needed.
+
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How to Use the Example
 
@@ -29,8 +31,6 @@ The camera and the speaker are both built into the Multimedia Carrier, so no bre
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
 3. Click **Run** and open the Web UI.
 4. Show one mouse, keyboard, or cell phone to the camera. Once the model reaches 60% confidence the matching counter goes up by one and the speaker says the object's name. Remove the object completely, then show the next one. Click **RESET COUNTS** to start again.
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## Counted Objects
 

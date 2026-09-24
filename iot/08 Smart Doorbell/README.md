@@ -14,7 +14,6 @@ Build a smart doorbell with a push button, passive buzzer, live camera preview, 
 ## Hardware
 
 - Pan Tilt Kit ×1
-- Multimedia Carrier with CSI camera ×1
 - Push button ×1
 - Passive buzzer ×1
 - Jumper wires

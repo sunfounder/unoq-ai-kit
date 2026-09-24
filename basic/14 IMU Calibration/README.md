@@ -1,6 +1,6 @@
 # 14 IMU Calibration
 
-Calibrate the 10-axis IMU on the Multimedia Carrier by placing the device in six orientations. Each sensor gets its own calibration method: the accelerometer uses six-face bias and scale calibration, the gyroscope uses stationary zero-rate bias calibration, and the magnetometer uses six-face hard-iron bias and axis scale correction.
+Calibrate the 10-axis IMU on the AVIO Carrier by placing the device in six orientations. Each sensor gets its own calibration method: the accelerometer uses six-face bias and scale calibration, the gyroscope uses stationary zero-rate bias calibration, and the magnetometer uses six-face hard-iron bias and axis scale correction.
 
 
 

@@ -17,7 +17,7 @@ The SunFounder AI Starter Kit for Arduino Uno Q is an all-in-one learning platfo
 
 **Main Content**
 
-Features the Robot Shield, Multimedia carrier, camera, pan-tilt module, sensors, and electronic components, enabling hands-on AI projects with vision recognition, voice interaction, and hardware control.
+Features the Robot Shield, AVIO Carrier, camera, pan-tilt module, sensors, and electronic components, enabling hands-on AI projects with vision recognition, voice interaction, and hardware control.
 
 **Target Users**
 

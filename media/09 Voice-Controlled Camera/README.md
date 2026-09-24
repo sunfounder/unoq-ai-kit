@@ -29,7 +29,9 @@ Connect the servos to the Robot Shield:
 
 ![Wiring Diagram](assets/docs_assets/wiring_pan_tilt.png)
 
-No push button is used — the microphone on the Multimedia Carrier listens automatically. The camera is built into the Multimedia Carrier too.
+No push button is used — the microphone on the AVIO Carrier listens automatically. The camera is built into the AVIO Carrier too.
+
+> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How to Use the Example
 
@@ -39,8 +41,6 @@ No push button is used — the microphone on the Multimedia Carrier listens auto
 4. Wait for `Voice-controlled camera is ready.` in the **Output** window, then speak a command into the microphone — say "Take photo" and a photo is saved as `photos/photo_001.jpg`, or say "Turn left" and the pan-tilt moves. The speaker confirms each action, then the microphone listens again automatically.
 
 Supported commands: `Turn left`, `Turn right`, `Look up`, `Look down`, `Center`, and `Take photo` (short forms such as `left`, `right`, `up`, `down` also work).
-
-> **Note:** The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 ## How it Works
 

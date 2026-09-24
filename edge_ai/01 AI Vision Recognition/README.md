@@ -20,7 +20,7 @@ This example uses the following Bricks:
 
 ## Wiring
 
-The CSI camera is built into the Multimedia Carrier, so no breadboard wiring is needed — just attach the carrier to the UNO Q.
+The CSI camera is built into the AVIO Carrier, so no breadboard wiring is needed — just attach the carrier to the UNO Q.
 
 ## How to Use the Example
 

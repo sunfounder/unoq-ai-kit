@@ -1,6 +1,6 @@
 # 14 IMU Attitude
 
-Read data from the 10-axis IMU (Inertial Measurement Unit) on the Multimedia Carrier via I2C. Outputs accelerometer (motion), gyroscope (rotation), magnetometer (compass heading), and barometer (temperature, pressure, altitude) readings to the Serial Monitor every second. Uses the SunFounder_IMU library with calibration support for improved accuracy.
+Read data from the 10-axis IMU (Inertial Measurement Unit) on the AVIO Carrier via I2C. Outputs accelerometer (motion), gyroscope (rotation), magnetometer (compass heading), and barometer (temperature, pressure, altitude) readings to the Serial Monitor every second. Uses the SunFounder_IMU library with calibration support for improved accuracy.
 
 
 

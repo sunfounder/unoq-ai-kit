@@ -1,5 +1,5 @@
 /*
- * Reads 10-axis IMU sensor data via I2C on the Multimedia Carrier.
+ * Reads 10-axis IMU sensor data via I2C on the AVIO Carrier.
  * Outputs accelerometer, gyroscope, magnetometer, and barometer readings
  * to the Serial Monitor every second.
  *

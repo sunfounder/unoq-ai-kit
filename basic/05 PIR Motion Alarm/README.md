@@ -33,7 +33,7 @@ Connect the PIR sensor's VCC to 3.3V, OUT to D4, GND to GND, and the passive buz
 
 **The PIR sensor**
 
-The PIR sensor has three pins: VCC (5 V), GND, and OUT. When it detects a change in infrared radiation — like a person walking by — the OUT pin goes HIGH. When the area is still, OUT stays LOW. Reading it is just `digitalRead(pirPin)` — the same as reading a button.
+The PIR sensor has three pins: VCC (5V), GND, and OUT. When it detects a change in infrared radiation — like a person walking by — the OUT pin goes HIGH. When the area is still, OUT stays LOW. Reading it is just `digitalRead(pirPin)` — the same as reading a button.
 
 **The 30-second warm-up**
 

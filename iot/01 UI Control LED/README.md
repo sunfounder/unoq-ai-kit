@@ -14,14 +14,14 @@ Control an external LED from a web page. The browser sends button clicks through
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
-- Red LED ×1
-- 220 Ω resistor ×1
+- LED ×1
+- 220Ω resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the LED through a 220 Ω resistor between digital pin D5 and GND.
+Connect the LED through a 220Ω resistor between digital pin D5 and GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_led.png)
 

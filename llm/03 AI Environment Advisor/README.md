@@ -10,8 +10,8 @@ Read temperature, humidity, and light data from the real world, then ask an LLM 
 
 This example uses the following Bricks:
 
-- `web_ui` —Creates the web interface and keeps the browser in sync with Python
-- `cloud_llm` —Sends the prompt to a cloud LLM (OpenAI, Anthropic, or Google) and returns the reply
+- `web_ui` — Creates the web interface and keeps the browser in sync with Python
+- `cloud_llm` — Sends the prompt to a cloud LLM (OpenAI, Anthropic, or Google) and returns the reply
 
 ## Hardware
 
@@ -38,7 +38,7 @@ This example uses the following Bricks:
 
 1. Download [`03 AI Environment Advisor.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Environment.Advisor.zip).
 2. Open **Arduino App Lab**.
-3. Select **Apps** →**Create New App** →**Import App** →**Import from Computer**, then choose the package you downloaded.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. Click **Run**.
 5. The Web UI shows the readings, the model's analysis, and the action it recommends.
 
@@ -47,13 +47,13 @@ This example uses the following Bricks:
 **How It Works**
 
 - DHT11 + Photoresistor
-- →- Arduino reads sensors every 2 seconds
-- →Bridge.notify()
+- → Arduino reads sensors every 2 seconds
+- → Bridge.notify()
 - Python stores the latest readings
-- →- Web UI displays live data
-- →User clicks Analyze
+- → Web UI displays live data
+- → User clicks Analyze
 - CloudLLM analyzes one snapshot
-- →- Status + Summary + Suggestion
+- → Status + Summary + Suggestion
 The LLM returns JSON such as:
 
 - {

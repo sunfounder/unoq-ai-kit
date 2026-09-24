@@ -1,13 +1,13 @@
 /*
  * 12 IoT Smart Room
  *
- * Motor IN1        -> D0 (PWM)
- * Motor IN2        -> D1 (PWM)
+ * Motor IN1        -> D2 (PWM)
+ * Motor IN2        -> D3 (PWM)
  * PIR OUT          -> D4
  * DHT11 DATA       -> D5
- * RGB LED R        -> D6
+ * RGB LED R        -> D8
  * RGB LED G        -> D7
- * RGB LED B        -> D8
+ * RGB LED B        -> D6
  * Pan servo        -> D9
  * Tilt servo       -> D10
  * Photoresistor    -> A0
@@ -20,13 +20,13 @@
 #include <Arduino_HardwareServo.h>
 #include "DHT.h"
 
-const int MOTOR_IN1_PIN = 0;
-const int MOTOR_IN2_PIN = 1;
+const int MOTOR_IN1_PIN = 2;
+const int MOTOR_IN2_PIN = 3;
 const int PIR_PIN = 4;
 const int DHT_PIN = 5;
-const int RGB_R_PIN = 6;
+const int RGB_R_PIN = 8;
 const int RGB_G_PIN = 7;
-const int RGB_B_PIN = 8;
+const int RGB_B_PIN = 6;
 const int PAN_SERVO_PIN = 9;
 const int TILT_SERVO_PIN = 10;
 const int LIGHT_SENSOR_PIN = A0;
@@ -291,7 +291,7 @@ void setup()
 
     Serial.println("=== IoT Smart Room ===");
     Serial.println("Photoresistor: A0");
-    Serial.println("RGB LED: D6 / D7 / D8");
+    Serial.println("RGB LED: D8 / D7 / D6");
 }
 
 

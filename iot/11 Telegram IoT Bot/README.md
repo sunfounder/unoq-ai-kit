@@ -16,13 +16,13 @@ Turn your Arduino UNO Q into an Internet-connected Telegram bot. Send `/status` 
 - Breadboard ×1
 - DHT11 temperature and humidity sensor ×1
 - LED ×1
-- 220 Ω resistor ×1
+- 220Ω resistor ×1
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the external LED's anode through a 220 Ω resistor to D5 and its cathode to GND.
+Connect the DHT11's VCC to 3.3V, DATA to D4, and GND to GND; connect the external LED's anode through a 220Ω resistor to D5 and its cathode to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_dht11_led.png)
 

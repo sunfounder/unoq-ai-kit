@@ -37,37 +37,23 @@ The 8×13 LED matrix is built into the UNO Q board, so no wiring is needed.
 **Emotions**
 
 | Emotion | When it is used |
-
-|---|---|
-
+|---------|-----------------|
 | `happy` | Positive, exciting, or friendly messages |
-
 | `sad` | Disappointing or upsetting messages |
-
 | `surprised` | Unexpected or amazing messages |
-
 | `thinking` | Questions or thoughtful messages |
-
 | `neutral` | General messages or safe fallback |
-
 
 **How It Works**
 
 - Browser message
-- ↓
-- CloudLLM → OpenAI GPT
-- ↓
-- {"emotion":"happy","reply":"That is wonderful!"}
-- ↓
-- Python validates the JSON
-- ├── Web UI displays the reply
-- └── Bridge.call("show_emotion", 1)
-- ↓
-- UNO Q LED matrix
-The System Prompt asks the LLM to return only JSON:
+- → CloudLLM asks OpenAI GPT-4o mini
+- → The model answers with JSON: `{"emotion": "happy", "reply": "That is wonderful!"}`
+- → Python validates the JSON and maps the emotion to a number
+- → The Web UI shows the reply, and `Bridge.call("show_emotion", 1)` reaches the sketch
+- → The UNO Q LED matrix draws the matching face
 
-- {
-- "emotion": "happy",
-- "reply": "Your short reply here."
-- }
-If the LLM returns invalid JSON or an unsupported emotion, Python safely falls back to `neutral`.
+The system prompt asks the model to answer with JSON only, so Python can read the
+emotion and the reply from a single response. If the model returns invalid JSON or
+an emotion that is not in the list, Python falls back to `neutral` and shows the
+neutral face.

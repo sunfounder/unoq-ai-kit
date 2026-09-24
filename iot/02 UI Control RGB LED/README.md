@@ -16,13 +16,13 @@ Control an RGB LED from a web page using a color picker. Pick any color and the 
 - Robot Shield ×1
 - Breadboard ×1
 - RGB LED (common cathode) ×1
-- 220 Ω resistors ×3
+- 220Ω resistors ×3
 - Jumper wires
 - USB-C cable ×1
 
 ## Wiring
 
-Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to P6, P5, and P4 on the Robot Shield, and the common cathode to GND.
+Connect the RGB LED's red, green, and blue anodes through 220Ω resistors to D8, D7, and D6 on the Robot Shield, and the common cathode to GND.
 
 ![Wiring Diagram](assets/docs_assets/wiring_rgb_led.png)
 
@@ -39,7 +39,7 @@ Connect the RGB LED's red, green, and blue anodes through 220 Ω resistors to P6
 
 - Browser — the color picker converts the chosen hex color to 0–255 R/G/B values and sends them through Socket.IO
 - Python (`main.py`) — receives the values and calls `Bridge.call("set_rgb_color", r, g, b)`
-- Sketch (`sketch.ino`) — maps 0–255 values to 0–1000 PWM pulses and sets them on the Robot Shield's P4, P5, P6 channels
+- Sketch (`sketch.ino`) — maps 0–255 values to 0–1000 PWM pulses and sets them on the Robot Shield's D8, D7, and D6 PWM outputs
 - The sketch's `loop()` is empty — everything is event-driven through Bridge
 
 **The PWM mapping**
@@ -48,4 +48,4 @@ Web colors use 0–255 per channel, but the Robot Shield's PWM range is 0–1000
 
 **Three channels, one color**
 
-Each PWM channel (P6 red, P5 green, P4 blue) controls the brightness of one primary color. `set_rgb_color(r, g, b)` sets all three pulse widths in one call, so the LED appears as a single mixed color rather than three separate lights.
+Each PWM channel (D8 red, D7 green, D6 blue) controls the brightness of one primary color. `set_rgb_color(r, g, b)` sets all three pulse widths in one call, so the LED appears as a single mixed color rather than three separate lights.

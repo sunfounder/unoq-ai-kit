@@ -1,0 +1,10 @@
+name: 08 AI Story Dice
+description: Turn objects in the camera into an AI-narrated story
+ports: []
+bricks:
+  - arduino:cloud_llm:
+      variables:
+        API_KEY: ""
+  - arduino:web_ui
+  - sunfounder_tts: {}
+icon: 🎲

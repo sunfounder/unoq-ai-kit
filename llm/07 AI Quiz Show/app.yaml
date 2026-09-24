@@ -1,0 +1,10 @@
+name: 07 AI Quiz Show
+description: Answer AI-generated questions with web A B C buttons
+ports: []
+bricks:
+  - arduino:cloud_llm:
+      variables:
+        API_KEY: ""
+  - arduino:web_ui
+  - sunfounder_tts: {}
+icon: 🎯
