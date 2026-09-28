@@ -34,6 +34,8 @@ This example uses the following Bricks:
 | Photoresistor VCC | 5V |
 | Photoresistor GND | GND |
 
+![Wiring Diagram](assets/docs_assets/wiring_dht11.png)
+
 ## How to Use the Example
 
 1. Download [`03 AI Environment Advisor.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.AI.Environment.Advisor.zip).

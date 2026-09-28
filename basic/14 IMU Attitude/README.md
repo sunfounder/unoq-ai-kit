@@ -6,7 +6,7 @@ Read data from the 10-axis IMU (Inertial Measurement Unit) on the AVIO Carrier v
 
 ## Libraries Used
 
-- **SunFounder_IMU** library
+- **SunFounder_IMU** library (1.1.5)
 
 
 ## Hardware

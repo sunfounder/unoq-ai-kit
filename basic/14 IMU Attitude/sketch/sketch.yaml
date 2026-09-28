@@ -3,6 +3,6 @@ profiles:
     platforms:
       - platform: arduino:zephyr
     libraries:
-      - SunFounder_IMU (1.1.2)
+      - SunFounder_IMU (1.1.5)
 
 default_profile: default

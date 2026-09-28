@@ -6,7 +6,7 @@ Control two servos (pan and tilt) by tilting the board — no joystick, no butto
 ## Libraries Used
 
 - **Arduino_HardwareServo** library
-- **SunFounder_IMU** library
+- **SunFounder_IMU** library (1.1.5)
 
 
 ## Hardware

@@ -2,6 +2,10 @@
 
 The **Camera Snapshot** example captures a photo with the camera whenever you press the button: one press, one JPEG image saved in the `photos` folder with automatic numbering.
 
+## Software
+
+No Bricks and no sketch libraries are needed: the camera is an App Lab peripheral, the sketch only uses the built-in Arduino functions, and the button needs no library at all.
+
 ## Hardware
 
 - Pan Tilt Kit ×1

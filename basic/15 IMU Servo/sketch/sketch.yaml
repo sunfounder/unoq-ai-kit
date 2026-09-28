@@ -5,6 +5,6 @@ profiles:
       - platform: arduino:zephyr
     libraries:
       - Arduino_HardwareServo (0.0.1)
-      - SunFounder_IMU (1.1.2)
+      - SunFounder_IMU (1.1.5)
 
 default_profile: default

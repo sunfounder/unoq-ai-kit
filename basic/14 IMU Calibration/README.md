@@ -6,7 +6,7 @@ Calibrate the 10-axis IMU on the AVIO Carrier by placing the device in six orien
 
 ## Libraries Used
 
-- **SunFounder_IMU** library
+- **SunFounder_IMU** library (1.1.5)
 
 
 ## Hardware
