@@ -11,3 +11,12 @@
   </ul>
 </nav>
 {% endblock %}
+
+{# The home page carries the product name as its own title, so do not repeat it. #}
+{%- block htmltitle %}
+  {%- if title|striptags|trim == project|trim %}
+  <title>{{ project|e }}</title>
+  {%- else %}
+  <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+  {%- endif %}
+{%- endblock -%}

@@ -19,7 +19,7 @@
 import sphinx_rtd_theme
 import time  ###
 
-project = 'Arduino Uno Q AI Starter Kit'
+project = 'SunFounder AI Starter Kit for Arduino UNO Q'
 copyright = f'{time.localtime().tm_year}, SunFounder'  ###
 author = 'www.sunfounder.com'
 
