@@ -2,6 +2,8 @@
 
 Use a slider on an Arduino Cloud Dashboard to raise or lower the pitch of a repeating melody played by a passive buzzer. The Cloud slider sends a pitch level from 0 to 50; the sketch maps it to 50%–200% of the melody's base pitch — 0 plays an octave lower, 50 plays an octave higher.
 
+![Result](assets/docs_assets/4_cloud_result.png)
+
 ## Software
 
 ### Bricks Used

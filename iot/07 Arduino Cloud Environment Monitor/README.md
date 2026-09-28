@@ -2,6 +2,8 @@
 
 Build an IoT environment monitoring system using Arduino Cloud. The sketch reads temperature and humidity from a DHT11 sensor every 5 seconds and uploads them to the Cloud, while a switch on the Cloud Dashboard remotely controls an external LED on D5 — Cloud monitoring and Cloud control in one project.
 
+![Result](assets/docs_assets/4_cloud_result.png)
+
 ## Software
 
 ### Bricks Used
