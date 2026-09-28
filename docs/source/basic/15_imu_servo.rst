@@ -37,7 +37,7 @@ This project uses the following sketch libraries:
 * Libraries:
 
   * ``Arduino_HardwareServo`` (drives the servo with hardware PWM)
-  * ``SunFounder_IMU`` (reads the 10-axis IMU sensor data)
+  * ``SunFounder_IMU`` (1.1.5) — reads the 10-axis IMU sensor data
 
 **Wiring Diagram**
 
@@ -366,6 +366,12 @@ Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoot
 
 * **Cause:** The ``delay(20)`` at the end of loop is too long, or ``maxStep`` is too small.
 * **Solution:** Reduce the ``delay(20)`` to 10ms for faster updates. Increase ``maxStep`` to 3 or 4 for quicker servo response. Balance speed against smoothness.
+
+**The project reports an IMU library error**
+
+* **Cause:** This project needs **SunFounder_IMU 1.1.5**. Older versions (1.1.2 and earlier) fail at runtime on the UNO Q.
+* **Solution:** In App Lab open **Sketch Libraries**, update **SunFounder_IMU** to 1.1.5 (see :ref:`install_update_lib_c`), and run the project again.
+
 
 5. Summary
 -------------

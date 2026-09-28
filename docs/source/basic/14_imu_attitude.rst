@@ -36,7 +36,7 @@ This project uses the following sketch libraries:
 
 * Libraries:
 
-  * ``SunFounder_IMU`` (reads the 10-axis IMU sensor data)
+  * ``SunFounder_IMU`` (1.1.5) — reads the 10-axis IMU sensor data
 
 **Wiring Diagram**
 
@@ -361,6 +361,12 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
 
 * **Cause:** Another I2C device is conflicting, or the bus is in a stuck state.
 * **Solution:** Power-cycle the board (unplug USB, wait 5 seconds, reconnect). I2C buses rarely conflict on the UNO Q because the IMU and Robot Shield use different addresses.
+
+**The project reports an IMU library error**
+
+* **Cause:** This project needs **SunFounder_IMU 1.1.5**. Older versions (1.1.2 and earlier) fail at runtime on the UNO Q.
+* **Solution:** In App Lab open **Sketch Libraries**, update **SunFounder_IMU** to 1.1.5 (see :ref:`install_update_lib_c`), and run the project again.
+
 
 5. Summary
 -------------
