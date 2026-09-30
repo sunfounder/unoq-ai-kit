@@ -87,7 +87,9 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 **Step 2: Apply Calibration and Run**
 
-#. Open ``15 IMU Servo.zip`` in App Lab and navigate to ``sketch/calibration_data.h``.
+#. Download :download:`15 IMU Servo.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/15.IMU.Servo.zip>`.
+#. Import it into App Lab the same way — **Apps** → **Create new app** → **Import App** → **Import from Computer** — and open the app.
+#. Navigate to ``sketch/calibration_data.h``.
 
 #. Replace the calibration values in ``calibration_data.h`` with the ones you copied from the calibration step.
 

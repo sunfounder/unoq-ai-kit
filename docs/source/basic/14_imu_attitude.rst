@@ -86,7 +86,9 @@ Before reading sensor data, calibrate the IMU to ensure accurate measurements.
 
 **Step 2: Apply Calibration and Run**
 
-#. Open ``14 IMU Attitude`` in App Lab and navigate to ``sketch/calibration_data.h``.
+#. Download :download:`14 IMU Attitude.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/14.IMU.Attitude.zip>`.
+#. Import it into App Lab the same way — **Apps** → **Create new app** → **Import App** → **Import from Computer** — and open the app.
+#. Navigate to ``sketch/calibration_data.h``.
 
 #. Replace the default calibration values with the ones you copied from the calibration step.
 
