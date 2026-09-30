@@ -82,18 +82,29 @@
       <div class="pan-panel">
         <div class="section-title">Camera Pan-Tilt</div>
         <div class="pan-layout">
-          <div class="joystick-live">
-            <div class="axis vertical"></div><div class="axis horizontal"></div>
-            <span class="dir up">UP</span><span class="dir down">DOWN</span>
-            <span class="dir left">LEFT</span><span class="dir right">RIGHT</span>
-            <div id="joystickDot" class="joystick-dot"></div>
+          <div class="dpad" id="panTiltPad">
+            <button class="dpad-btn pad-up" data-move="up" type="button" aria-label="Tilt up" title="Tilt up">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6l7 10H5z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn pad-left" data-move="left" type="button" aria-label="Pan left" title="Pan left">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12l10-7v14z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn pad-center" data-move="center" type="button" aria-label="Center" title="Center">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn pad-right" data-move="right" type="button" aria-label="Pan right" title="Pan right">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 12l-10 7V5z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn pad-down" data-move="down" type="button" aria-label="Tilt down" title="Tilt down">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18l-7-10h14z" fill="currentColor"/></svg>
+            </button>
           </div>
           <div class="servo-values">
             <div><span>Pan</span><strong id="panValue">90°</strong></div>
             <div><span>Tilt</span><strong id="tiltValue">90°</strong></div>
-            <div class="wide"><span>Joystick X / Y</span><strong id="joystickValue">512, 512</strong></div>
           </div>
         </div>
+        <p class="note">Click an arrow, or hold it to sweep. You can also say "look left".</p>
       </div>
     </section>
 

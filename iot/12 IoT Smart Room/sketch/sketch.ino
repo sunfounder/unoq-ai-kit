@@ -11,9 +11,10 @@
  * Pan servo        -> D9
  * Tilt servo       -> D10
  * Photoresistor    -> A0
- * Joystick X       -> A3
- * Joystick Y       -> A2
  * Camera           -> CSI (Python)
+ *
+ * The pan-tilt is aimed from the Web UI or by voice commands, so no joystick
+ * module is needed.
  */
 
 #include <Arduino_RouterBridge.h>
@@ -30,8 +31,6 @@ const int RGB_B_PIN = 6;
 const int PAN_SERVO_PIN = 9;
 const int TILT_SERVO_PIN = 10;
 const int LIGHT_SENSOR_PIN = A0;
-const int JOYSTICK_X_PIN = A3;
-const int JOYSTICK_Y_PIN = A2;
 
 #define DHT_TYPE DHT11
 
@@ -55,18 +54,14 @@ const int UP_ANGLE = 45;
 const int DOWN_ANGLE = 115;
 const int CENTER_ANGLE = 90;
 
+/* How far one nudge from the Web UI moves the servos. */
+const int STEP_DEGREES = 10;
+
 int panAngle = CENTER_ANGLE;
 int tiltAngle = CENTER_ANGLE;
-int xCenter = 512;
-int yCenter = 512;
-
-const int DEAD_ZONE = 100;
-const int STEP_SIZE = 1;
 
 unsigned long lastEnvironmentUpdate = 0;
-unsigned long lastJoystickUpdate = 0;
 const unsigned long ENV_INTERVAL = 1000;
-const unsigned long JOYSTICK_INTERVAL = 60;
 
 
 void stopFan()
@@ -140,6 +135,8 @@ void setSystemRunning(bool enabled)
 }
 
 
+/* ---- absolute moves, used by the voice commands ---- */
+
 int panLeft(String dummy)
 {
     (void)dummy;
@@ -187,48 +184,21 @@ int centerPanTilt(String dummy)
 }
 
 
-void calibrateJoystick()
+/* ---- relative moves, used by the Web UI arrow keys ---- */
+
+int panStep(int delta)
 {
-    long xTotal = 0;
-    long yTotal = 0;
-
-    for (int i = 0; i < 20; i++)
-    {
-        xTotal += analogRead(JOYSTICK_X_PIN);
-        yTotal += analogRead(JOYSTICK_Y_PIN);
-        delay(10);
-    }
-
-    xCenter = xTotal / 20;
-    yCenter = yTotal / 20;
+    panAngle = constrain(panAngle + delta, RIGHT_ANGLE, LEFT_ANGLE);
+    panServo.write(panAngle);
+    return panAngle;
 }
 
 
-void updateJoystick()
+int tiltStep(int delta)
 {
-    int xValue = analogRead(JOYSTICK_X_PIN);
-    int yValue = analogRead(JOYSTICK_Y_PIN);
-
-    if (systemRunning)
-    {
-        if (xValue > xCenter + DEAD_ZONE)
-            panAngle -= STEP_SIZE;
-        else if (xValue < xCenter - DEAD_ZONE)
-            panAngle += STEP_SIZE;
-
-        if (yValue > yCenter + DEAD_ZONE)
-            tiltAngle += STEP_SIZE;
-        else if (yValue < yCenter - DEAD_ZONE)
-            tiltAngle -= STEP_SIZE;
-
-        panAngle = constrain(panAngle, RIGHT_ANGLE, LEFT_ANGLE);
-        tiltAngle = constrain(tiltAngle, UP_ANGLE, DOWN_ANGLE);
-
-        panServo.write(panAngle);
-        tiltServo.write(tiltAngle);
-    }
-
-    Bridge.notify("joystick_update", xValue, yValue, panAngle, tiltAngle);
+    tiltAngle = constrain(tiltAngle + delta, UP_ANGLE, DOWN_ANGLE);
+    tiltServo.write(tiltAngle);
+    return tiltAngle;
 }
 
 
@@ -286,10 +256,11 @@ void setup()
     Bridge.provide("tilt_up", tiltUp);
     Bridge.provide("tilt_down", tiltDown);
     Bridge.provide("center", centerPanTilt);
-
-    calibrateJoystick();
+    Bridge.provide("pan_step", panStep);
+    Bridge.provide("tilt_step", tiltStep);
 
     Serial.println("=== IoT Smart Room ===");
+    Serial.println("Pan servo: D9, Tilt servo: D10");
     Serial.println("Photoresistor: A0");
     Serial.println("RGB LED: D8 / D7 / D6");
 }
@@ -298,12 +269,6 @@ void setup()
 void loop()
 {
     unsigned long now = millis();
-
-    if (now - lastJoystickUpdate >= JOYSTICK_INTERVAL)
-    {
-        lastJoystickUpdate = now;
-        updateJoystick();
-    }
 
     if (now - lastEnvironmentUpdate >= ENV_INTERVAL)
     {

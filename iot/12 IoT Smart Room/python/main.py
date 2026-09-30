@@ -31,7 +31,7 @@ latest_environment = {
     "light_percent": None,
     "light_label": "Waiting",
 }
-latest_joystick = {"x": 512, "y": 512, "pan": 90, "tilt": 90}
+latest_pan_tilt = {"pan": 90, "tilt": 90}
 
 system_running = True
 fan_mode = "auto"
@@ -46,8 +46,23 @@ stt = STT(type="local_fast", language="en")
 
 print("Initializing speaker...", flush=True)
 tts = EdgeTTS()
-tts.set_voice("en-US-JennyNeural")
-tts.set_volume(50)
+
+
+def configure_tts():
+    """The TTS sidecar may still be registering its RPC when the app starts."""
+    for attempt in range(6):
+        try:
+            tts.set_voice("en-US-JennyNeural")
+            tts.set_volume(50)
+            return True
+        except Exception as exc:
+            print(f"Speaker not ready ({exc}); retrying...", flush=True)
+            time.sleep(2)
+    print("Speaker unavailable - the app continues without speech.", flush=True)
+    return False
+
+
+configure_tts()
 
 print("Initializing camera...", flush=True)
 camera = Camera()
@@ -96,15 +111,64 @@ def environment_update(temperature, humidity, motion, light_raw):
     send_room_state()
 
 
-def joystick_update(x, y, pan, tilt):
-    latest_joystick.update({
-        "x": int(x), "y": int(y), "pan": int(pan), "tilt": int(tilt)
-    })
-    ui.send_message("camera_control_update", latest_joystick)
-
-
 Bridge.provide("environment_update", environment_update)
-Bridge.provide("joystick_update", joystick_update)
+
+
+def read_angle(value, fallback):
+    """Bridge returns text — fall back to the last known angle on garbage."""
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return fallback
+
+
+def report_pan_tilt():
+    """Push the current servo angles to every open Web UI."""
+    ui.send_message("camera_control_update", dict(latest_pan_tilt))
+
+
+def pan_step(delta):
+    """Nudge the pan servo (positive = left, negative = right)."""
+    latest_pan_tilt["pan"] = read_angle(
+        Bridge.call("pan_step", int(delta)), latest_pan_tilt["pan"]
+    )
+    report_pan_tilt()
+
+
+def tilt_step(delta):
+    """Nudge the tilt servo (positive = down, negative = up)."""
+    latest_pan_tilt["tilt"] = read_angle(
+        Bridge.call("tilt_step", int(delta)), latest_pan_tilt["tilt"]
+    )
+    report_pan_tilt()
+
+
+def pan_to(command, message):
+    """Voice command: jump the pan servo to one of the presets."""
+    latest_pan_tilt["pan"] = read_angle(
+        Bridge.call(command, ""), latest_pan_tilt["pan"]
+    )
+    report_pan_tilt()
+    tts.say(message)
+
+
+def tilt_to(command, message):
+    """Voice command: jump the tilt servo to one of the presets."""
+    latest_pan_tilt["tilt"] = read_angle(
+        Bridge.call(command, ""), latest_pan_tilt["tilt"]
+    )
+    report_pan_tilt()
+    tts.say(message)
+
+
+def center_pan_tilt(speak=False):
+    """Put both servos back to 90 degrees."""
+    Bridge.call("center", "")
+    latest_pan_tilt["pan"] = 90
+    latest_pan_tilt["tilt"] = 90
+    report_pan_tilt()
+    if speak:
+        tts.say("Returning to center.")
 
 
 def set_fan(enabled):
@@ -188,13 +252,36 @@ def on_toggle_light(client, data):
 
 def on_get_initial_state(client, data):
     send_room_state(client)
-    ui.send_message("camera_control_update", latest_joystick, client)
+    ui.send_message("camera_control_update", dict(latest_pan_tilt), client)
 
 
 def on_voice_control(client, data):
     global voice_requested
     voice_requested = True
     ui.send_message("voice_state", {"state": "listening"}, client)
+
+
+PAN_STEP_DEGREES = 10
+TILT_STEP_DEGREES = 10
+
+
+def on_pan_tilt_move(client, data):
+    """Web UI arrow keys: left/right/up/down nudge one step, center resets."""
+    move = str((data or {}).get("move", "")).lower()
+
+    try:
+        if move == "left":
+            pan_step(PAN_STEP_DEGREES)
+        elif move == "right":
+            pan_step(-PAN_STEP_DEGREES)
+        elif move == "up":
+            tilt_step(-TILT_STEP_DEGREES)
+        elif move == "down":
+            tilt_step(TILT_STEP_DEGREES)
+        elif move == "center":
+            center_pan_tilt()
+    except Exception as exc:
+        print(f"Pan-tilt move failed: {exc}", flush=True)
 
 
 ui.on_message("toggle_system", on_toggle_system)
@@ -204,6 +291,7 @@ ui.on_message("set_rgb_color", on_set_rgb_color)
 ui.on_message("toggle_light", on_toggle_light)
 ui.on_message("get_initial_state", on_get_initial_state)
 ui.on_message("voice_control", on_voice_control)
+ui.on_message("pan_tilt_move", on_pan_tilt_move)
 
 
 COLOR_PRESETS = {
@@ -286,28 +374,23 @@ def set_named_color(name):
 
 
 def move_left():
-    Bridge.call("pan_left", "")
-    tts.say("Turning left.")
+    pan_to("pan_left", "Turning left.")
 
 
 def move_right():
-    Bridge.call("pan_right", "")
-    tts.say("Turning right.")
+    pan_to("pan_right", "Turning right.")
 
 
 def move_up():
-    Bridge.call("tilt_up", "")
-    tts.say("Looking up.")
+    tilt_to("tilt_up", "Looking up.")
 
 
 def move_down():
-    Bridge.call("tilt_down", "")
-    tts.say("Looking down.")
+    tilt_to("tilt_down", "Looking down.")
 
 
 def move_center():
-    Bridge.call("center", "")
-    tts.say("Returning to center.")
+    center_pan_tilt(speak=True)
 
 
 def speak_status():
@@ -353,6 +436,13 @@ def run_voice_control():
     voice_requested = False
 
     try:
+        # Stop the speaker first: the microphone sits right next to it, so
+        # anything still playing would be recorded and ruin recognition.
+        try:
+            tts.stop_audio()
+        except Exception:
+            pass
+
         stt.reset()
         print("Listening...", flush=True)
         stt.start_listening()

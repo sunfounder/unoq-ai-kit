@@ -25,10 +25,8 @@ function brightnessChanged(){brightness=parseInt(brightnessSlider.value);const c
 socket.on("connect",()=>socket.emit("get_initial_state",{}));
 socket.on("camera_frame",d=>$("cameraImage").src="data:image/jpeg;base64,"+d.image);
 socket.on("camera_control_update",d=>{
- $("panValue").textContent=d.pan+"°"; $("tiltValue").textContent=d.tilt+"°"; $("joystickValue").textContent=`${d.x}, ${d.y}`;
- const x=Math.max(0,Math.min(1023,Number(d.x)||512)), y=Math.max(0,Math.min(1023,Number(d.y)||512));
- $("joystickDot").style.left=(20+(x/1023)*60)+"%";
- $("joystickDot").style.top=(80-(y/1023)*60)+"%";
+ if(d.pan!=null)$("panValue").textContent=d.pan+"°";
+ if(d.tilt!=null)$("tiltValue").textContent=d.tilt+"°";
 });
 socket.on("room_state",d=>{
  $("temperature").textContent=d.temperature==null?"--°C":d.temperature.toFixed(1)+"°C";
@@ -51,6 +49,38 @@ $("manualMode").onclick=()=>socket.emit("set_fan_mode",{mode:"manual"});
 $("fanToggle").onchange=e=>socket.emit("toggle_fan",{enabled:e.target.checked});
 $("lightToggle").onchange=e=>socket.emit("toggle_light",{enabled:e.target.checked});
 $("voiceButton").onclick=()=>socket.emit("voice_control",{});
+
+// Pan-tilt arrow pad: one step per click, hold to sweep.
+const panTiltPad=$("panTiltPad");
+const HOLD_DELAY=400,HOLD_INTERVAL=140;
+let holdDelayTimer=null,holdRepeatTimer=null,holdButton=null;
+
+function stopHold(){
+ clearTimeout(holdDelayTimer);clearInterval(holdRepeatTimer);
+ holdDelayTimer=holdRepeatTimer=null;
+ if(holdButton){holdButton.classList.remove("active");holdButton=null}
+}
+
+function startHold(button,event){
+ if(!socket.connected)return;
+ event.preventDefault();
+ stopHold();
+ holdButton=button;
+ button.classList.add("active");
+ socket.emit("pan_tilt_move",{move:button.dataset.move});
+ if(button.dataset.move==="center")return;   // a single reset, no repeat
+ holdDelayTimer=setTimeout(()=>{
+  holdRepeatTimer=setInterval(()=>socket.emit("pan_tilt_move",{move:button.dataset.move}),HOLD_INTERVAL);
+ },HOLD_DELAY);
+}
+
+panTiltPad.querySelectorAll(".dpad-btn").forEach(button=>{
+ button.addEventListener("pointerdown",event=>startHold(button,event));
+ button.addEventListener("pointerup",stopHold);
+ button.addEventListener("pointercancel",stopHold);
+ button.addEventListener("pointerleave",stopHold);
+});
+window.addEventListener("blur",stopHold);
 brightnessSlider.oninput=brightnessChanged;
 wheel.addEventListener("mousedown",start);document.addEventListener("mousemove",move);document.addEventListener("mouseup",end);
 wheel.addEventListener("touchstart",start,{passive:false});document.addEventListener("touchmove",move,{passive:false});document.addEventListener("touchend",end);
