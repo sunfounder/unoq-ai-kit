@@ -4,9 +4,9 @@
 
 """04 AI Voice Assistant
 
-Speak a sentence from the Web UI and the local speech recogniser turns
-it into text for a cloud LLM. The reply is spoken by the local text to
-speech brick and shown in the Web UI as well.
+Speak a sentence from the Web UI and online OpenAI Whisper turns it into
+text for a cloud LLM. The reply is spoken by the text-to-speech brick and
+shown in the Web UI as well.
 """
 
 import os
@@ -45,11 +45,18 @@ os.makedirs("./audio_output", exist_ok=True)
 
 ui = WebUI()
 
-# Local Whisper STT does not consume the CloudLLM API key.
+# Online OpenAI Whisper STT. The same OpenAI API key may be entered for the
+# Cloud LLM and the Speech to Text Brick.
 stt = STT(
-    type="local_fast",
+    type="online",
     language=STT_LANGUAGE,
 )
+stt_key = (
+    os.environ.get("OPENAI_API_KEY", "").strip()
+    or os.environ.get("API_KEY", "").strip()
+)
+if stt_key:
+    STT.API_KEY = stt_key
 
 llm = CloudLLM(
     model="openai:gpt-4o-mini",
@@ -123,10 +130,18 @@ def process_voice():
         stt.stop_listening()
         send_status("recognizing", "Recognizing your speech...")
 
+        if not STT.API_KEY:
+            raise RuntimeError(
+                "OpenAI STT API key is missing. Add it in Brick Configuration."
+            )
+
         result = stt.get_result(timeout=60)
         if isinstance(result, dict):
             result = result.get("text", "")
         heard = result.strip() if result else ""
+
+        if heard.startswith("[STT ERROR]"):
+            raise RuntimeError(heard)
 
         if not heard:
             send_status(

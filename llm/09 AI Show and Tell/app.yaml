@@ -1,0 +1,14 @@
+name: 09 AI Show and Tell
+description: Ask spoken questions about objects in the live camera view
+ports: []
+bricks:
+  - arduino:cloud_llm:
+      variables:
+        API_KEY: ""
+  - arduino:web_ui
+  - sunfounder_stt:
+      variables:
+        OPENAI_API_KEY: ""
+  - sunfounder_tts: {}
+icon: 🎤
+

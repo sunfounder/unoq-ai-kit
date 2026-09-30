@@ -6,6 +6,8 @@ bricks:
 - arduino:cloud_llm:
     variables:
       API_KEY: ""
-- sunfounder_stt: {}
+- sunfounder_stt:
+    variables:
+      OPENAI_API_KEY: ""
 - sunfounder_tts: {}
 icon: 🎙️

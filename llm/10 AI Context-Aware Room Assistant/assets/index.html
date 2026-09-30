@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AI Context-Aware Room Assistant</title>
+  <link rel="icon" type="image/png" href="./img/sf_logo.png"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><img src="./img/sf_logo.png" alt="SunFounder Logo"><div><h1>AI Context-Aware Room Assistant</h1><p>Speech-to-Text · Sensors · LLM · Smart Lighting</p></div></header>
+<main><div class="dashboard">
+  <section class="camera card">
+    <div class="section-title"><span>Room Camera</span><span class="live">● LIVE</span></div>
+    <div class="camera-frame"><img id="camera-stream" src="" alt="Live camera view"><div class="camera-placeholder">Waiting for camera...</div></div>
+    <div id="voice-panel" class="voice-inline ready">
+      <div class="voice-copy"><strong id="status-title">Ready</strong><div id="status-message">Select SPEAK and describe the atmosphere you want.</div></div>
+      <button id="speak-button" class="speak-button" type="button" disabled><span>🎤</span> <span id="button-label">SPEAK</span></button>
+    </div>
+    <p class="voice-hint">Select once, then speak naturally during the four-second countdown.</p>
+  </section>
+  <div class="right-column">
+    <section class="card"><div class="section-title">Environment</div><div class="metrics"><div><span>Temperature</span><strong id="temperature">--</strong></div><div><span>Humidity</span><strong id="humidity">--</strong></div></div></section>
+    <section class="card"><div class="section-title">Occupancy</div><div class="motion-row"><div id="motion-icon" class="motion-icon">◌</div><div><span>PIR Motion</span><strong id="motion">UNKNOWN</strong></div></div></section>
+    <section class="card scene-card">
+    <div class="section-title"><span>AI Lighting Scene</span><span class="scene-badge" id="scene-name">READY</span></div>
+    <div class="rgb-layout">
+      <div class="wheel-container">
+        <canvas id="color-wheel" width="150" height="150"></canvas>
+        <div class="wheel-indicator" id="wheel-indicator"></div>
+      </div>
+      <div class="rgb-controls">
+        <div class="row"><span>Room Light</span><label class="switch"><input id="lightToggle" type="checkbox"><span></span></label></div>
+        <div class="slider-row"><span>☀</span><input type="range" id="brightness-slider" min="0" max="100" value="100"></div>
+        <div id="rgb-values">R 0 · G 0 · B 0</div>
+        <div id="hex-value">#000000</div>
+      </div>
+    </div>
+    <p class="note">Drag the wheel or the slider to take over the light. The next AI scene replaces it.</p>
+  </section>
+    <section class="card connection-card"><span id="status-dot" class="status-indicator"></span><strong id="connection-label">CONNECTING</strong></section>
+  </div>
+  <section class="card conversation-card"><article><div class="section-title">You Said</div><p id="heard-text">Your request will appear here.</p></article><article><div class="section-title">AI Explanation</div><p id="reply-text">The AI explanation will appear here.</p></article></section>
+  <p id="error-container"></p>
+</div></main>
+<script src="libs/socket.io.min.js"></script><script src="app.js"></script>
+</body></html>

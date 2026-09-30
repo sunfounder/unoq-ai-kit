@@ -1,0 +1,13 @@
+name: 10 AI Context-Aware Room Assistant
+description: Create an AI lighting scene from speech and live room conditions
+ports: []
+bricks:
+- arduino:cloud_llm:
+    variables:
+      API_KEY: ""
+- arduino:web_ui: {}
+- sunfounder_stt:
+    variables:
+      OPENAI_API_KEY: ""
+- sunfounder_tts: {}
+icon: 🗣️
