@@ -5,13 +5,13 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
-Every project so far has taken its orders from a keyboard: a sentence typed into a box, a slider dragged with a mouse. This project takes the keyboard away. You hold a button on the page, **say a question out loud**, and the UNO Q writes your words down on the board itself, sends only those words to a cloud language model, and answers you in a voice of its own. Three different AI services cooperate in a single loop — and you never type a character.
+Every project so far has taken its orders from a keyboard: a sentence typed into a box, a slider dragged with a mouse. This project takes the keyboard away. You hold a button on the page, **say a question out loud**, and the UNO Q turns your recording into text, sends that text to a cloud language model, and answers you in a voice of its own. Three different AI services cooperate in a single loop — and you never type a character.
 
 In this lesson, you will learn to:
 
 * Chain three AI services into one loop: **speech recognition**, a **cloud language model**, and **text to speech**
 * Use **hold-to-talk** recording — audio is captured only between a button press and a release, and the page stays responsive while the answer is prepared
-* Run speech recognition **on the board** — the Whisper model travels inside the package, so your voice never has to leave the UNO Q
+* Send your recording to an **online** speech service and get the words back — one OpenAI key covers both the recognition and the model
 * Give the model a **system prompt** that decides how the assistant answers, and hear that decision in every reply
 * Follow one spoken sentence through the status panel: Listening, Recognizing, Thinking, Speaking, Ready
 
@@ -39,12 +39,12 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 
 * ``web_ui`` — serves the hold-to-speak page and keeps the browser and Python in sync
 * ``cloud_llm`` — sends the recognized sentence to a cloud language model and streams the answer back
-* ``sunfounder_stt`` — speech recognition that runs **on the board**, with the Whisper model that ships inside the package
+* ``sunfounder_stt`` — turns your recording into text through an **online** speech service
 * ``sunfounder_tts`` — turns the answer text into speech and plays it through the carrier's speaker
 
 There is no sketch in this project and no sketch libraries to install: nothing here drives a pin, so every line of it runs in Python on the Linux MPU.
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The two speech Bricks need no key at all — and because both of them travel inside the package, together with the Whisper model, this download is much larger than the other projects in the module.
+Because both the model and the speech service are reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you — the same key works for both. The package you download stays small, because no speech model travels inside it: the recognition happens on OpenAI's servers.
 
 No breadboard wiring is needed here: the ears and the voice belong to the AVIO Carrier, so the kit works exactly as it comes out of the box.
 
@@ -75,7 +75,7 @@ No breadboard wiring is needed here: the ears and the voice belong to the AVIO C
 
    .. note::
 
-      The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+      The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches both the model and the speech service over the internet. Paste one key into both fields and save it — App Lab keeps the key for your board, so you only do this once.
 
 #. A **Web UI** tab opens by itself. The status row reads **Connected** with a blue dot, the panel shows **Ready** with the line *"Hold the button and speak."*, and the big button reads **Hold to Speak**.
 #. Press and hold the button. The panel turns amber and switches to **Listening...**, and the button label changes to **Release to Finish**.
@@ -111,7 +111,7 @@ An App Lab project is a folder of files. Here is what is inside this one:
     * ``img/sf_logo.png`` — the logo in the page header
     * ``docs_assets/`` — the result image used by this documentation
 
-  * ``bricks/`` — the two speech Bricks travel inside the package, together with the Whisper model they run on
+  * ``bricks/`` — the two speech Bricks travel inside the package; no speech model does, because the recognition happens in the cloud
 
 There is no ``sketch/`` folder in this app: nothing here has to reach the microcontroller, so the whole project runs in Python. The data path, from a pressed button to a spoken answer:
 
@@ -120,7 +120,7 @@ There is no ``sketch/`` folder in this app: nothing here has to reach the microc
    sequenceDiagram
        participant B as Browser (HTML/JS)
        participant P as Python (main.py)
-       participant S as Speech Recognition (sunfounder_stt)
+       participant S as STT (OpenAI)
        participant L as Cloud LLM (OpenAI)
        participant V as Text to Speech (sunfounder_tts)
 
@@ -142,8 +142,10 @@ Here is what each piece does:
 **Python (main.py)** — runs on the Linux MPU
   * ``WebUI()`` starts the server that hands the page in ``assets/`` to your browser
   * ``ui.on_message("start_recording", start_recording)`` and ``ui.on_message("stop_recording", stop_recording)`` listen for the two button events
-  * ``STT(type="local_fast", language="en")`` creates the local recognizer, and ``stt.reset()``, ``stt.start_listening()``, ``stt.stop_listening()`` and ``stt.get_result(timeout=60)`` are the four calls that capture and transcribe one sentence
-  * ``stt.get_result()`` may come back empty — an empty answer stops the loop there and tells the page nothing was recognized
+  * ``STT(type="online", language="en")`` creates the recognizer, and ``stt_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("API_KEY")`` hands it your key
+  * ``stt.reset()``, ``stt.start_listening()``, ``stt.stop_listening()`` and ``stt.get_result(timeout=60)`` are the calls that capture one sentence and have it transcribed
+  * ``if not STT.API_KEY: raise RuntimeError(...)`` refuses to record at all without a key, and a result that starts with ``[STT ERROR]`` is raised as a real error instead of being shown as speech
+  * ``stt.get_result()`` may also come back empty — an empty answer stops the loop there and tells the page nothing was recognized
   * ``CloudLLM(model="openai:gpt-4o-mini", system_prompt=SYSTEM_PROMPT)`` creates the link to the cloud model and fixes its behaviour up front
   * ``llm.chat_stream(message=heard)`` sends the recognized sentence and streams the answer back in pieces, which are joined into one reply
   * ``EdgeTTS()``, ``tts.set_voice("en-US-JennyNeural")``, ``tts.set_volume(50)`` and ``tts.say(reply)`` choose a voice and speak the answer
@@ -152,16 +154,16 @@ Here is what each piece does:
   * ``os.makedirs("/app/audio_output", exist_ok=True)`` creates the folder where the speech Bricks drop their temporary audio files
   * ``App.run()`` starts the app and keeps it alive
 
-**Speech Recognition (behind the ``sunfounder_stt`` brick)** — runs in its own service on the board
+**Speech Recognition (behind the ``sunfounder_stt`` brick)** — runs in its own service on the board and does its work in the cloud
   * ``stt.start_listening()`` opens the carrier's microphone and records until you release the button
-  * ``stt.stop_listening()`` closes the recording and hands the audio to the **Whisper** model
+  * ``stt.stop_listening()`` closes the recording and hands the audio to the online recognition service
   * ``stt.get_result(timeout=60)`` returns the text — the words that end up in the **You said** card
-  * The model is a small Whisper build that ships inside the package, so this step needs no key and no internet: your voice is transcribed on the UNO Q itself
+  * This step needs the internet and your **OpenAI API key**. There is no model inside the package to fall back on, so a service that cannot be reached is the usual reason a perfectly clear sentence comes back as nothing
 
 **Cloud LLM (behind the ``cloud_llm`` brick)** — runs on OpenAI's servers
   * The **system prompt** introduces a *friendly voice assistant* and asks for a natural answer of one or two sentences, in whatever language you used
   * Your sentence is sent with that instruction over the internet, and the answer streams back as text
-  * This is the only step that asks for your **API key** — the reasoning happens in the cloud
+  * The same key you gave the speech service, and the same internet connection — the reasoning happens in the cloud
 
 **Text to Speech (behind the ``sunfounder_tts`` brick)** — the brick runs on the board and the voice is synthesized online
   * ``tts.say(reply)`` turns the answer text into audio and plays it through the AVIO Carrier's speaker
@@ -175,7 +177,7 @@ Here is what each piece does:
   * While the app is busy the button is disabled and reads **Please Wait**, and ``window.addEventListener('blur', ...)`` releases it for you if you click away mid-sentence
   * ``socket.on('connect')`` and ``socket.on('disconnect')`` drive the status dot, and an error state fills the red banner with the message Python sent
 
-Notice how the loop is split: the listening half never leaves the board, the thinking half happens in the cloud, and the speaking half comes home again. What travels over the internet is only text — the sentence the recognizer wrote down and the answer the model wrote back. The model never touches the hardware either: this project has no Bridge call and no sketch, so words are the only thing it can produce.
+Notice how much of this loop depends on the network. Your recording, the sentence the recognizer wrote down, and the answer the model wrote back all cross the internet; only the speaker is local. That is a real trade: the package you download stays small and the recognition is better than anything that would fit on the board, but the assistant goes quiet the moment the connection does. The model still never touches the hardware — there is no Bridge call and no sketch here, so words are the only thing it can produce.
 
 3. Experiment
 ----------------
@@ -219,8 +221,8 @@ The card under **You said** is not what you said — it is what the recognizer h
 
 **The panel says "No speech was recognized..."**
 
-* **Cause:** The recording was silent or too quiet to transcribe. The recognizer found no words in it — usually because the button was released before you started speaking, or because you were too far from the microphone.
-* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing. If the panel instead shows *"Unable to start recording"*, the microphone itself could not be opened: check that the AVIO Carrier is firmly attached and that no other app is holding the audio device.
+* **Cause:** Two very different problems share this message. Either the recording really was silent or too quiet — the button was released before you began speaking, or you were too far from the microphone — or the recording was fine and the online speech service could not be reached, which ends in an empty result as well.
+* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing. If your voice was clear and the message still comes back, test the board's internet connection before you touch the microphone: the recognition happens in the cloud, and a restricted network can load ordinary web pages and still fail here. If the panel instead shows *"Unable to start recording"*, the microphone itself could not be opened: check that the AVIO Carrier is firmly attached and that no other app is holding the audio device.
 
 **The answer appears on screen, but you hear nothing**
 
@@ -229,7 +231,7 @@ The card under **You said** is not what you said — it is what the recognizer h
 
 **The first run takes half an hour or more**
 
-* **Cause:** Nothing is broken. The first run has real work to do — App Lab downloads and prepares the text to speech runtime and its audio dependencies, and the speech Bricks arrive with the package together with the Whisper model.
+* **Cause:** Nothing is broken. The first run has real work to do — App Lab downloads and prepares the text to speech runtime and its audio dependencies, and the two speech Bricks build their services on the board.
 * **Solution:** Keep the UNO Q connected to the Internet and let the setup finish. This happens once: after it completes, every speech example starts much faster.
 
 **The Web UI never opens, or the status dot turns red and reads "Disconnected"**
@@ -240,10 +242,10 @@ The card under **You said** is not what you said — it is what the recognizer h
 5. Summary
 -------------
 
-You just held a conversation with your UNO Q. It listened through the carrier's microphone, wrote your words down on the board itself, sent only those words to a cloud model, and answered you out loud in a voice it fetched for the occasion — no keyboard, no wiring, just speech in and speech out.
+You just held a conversation with your UNO Q. It listened through the carrier's microphone, turned your recording into text, sent that text to a cloud model, and answered you out loud in a voice it fetched for the occasion — no keyboard, no wiring, just speech in and speech out.
 
-* Three services, one loop: recognition on the board, reasoning in the cloud, and speech on the way back
-* Speech recognition stays local — the Whisper model travels inside the package, so your voice never leaves the UNO Q and needs neither a key nor a connection
+* Three services, one loop: recognition in the cloud, reasoning in the cloud, and speech on the way back
+* Speech recognition is **online** — the recording goes to a speech service and the text comes back, so one key and one connection cover both the recognition and the model, and the package you download stays small
 * A **system prompt** sets the personality and the length of every answer, which is why the assistant stays brief no matter how you phrase the question
 * The **You said** card is the honest record of the loop — read it whenever the answer does not match the question you thought you asked
 * The status panel is the whole program in five words: Listening, Recognizing, Thinking, Speaking, Ready

@@ -14,12 +14,14 @@ This module covers:
 * **LLM Integration**: Connect your UNO Q to GPT-4o-mini via the CloudLLM brick
 * **Natural Language Control**: Control RGB LEDs, servos, and sensors by describing what you want
 * **Prompt Engineering**: Write system prompts that make the LLM behave reliably as a hardware controller
+* **Context-Aware Control**: Combine what you say with what the room is actually doing — temperature, humidity, movement — and let the model answer with light
 
 By the end of this module, you will be able to:
 
 * Configure an API key and connect an LLM to your hardware
 * Write prompts that translate natural language into hardware commands
 * Build AI-powered devices that understand and respond to human speech
+* Describe a behaviour in a prompt — like turning a mood into a colour — instead of writing it as rules in code
 
 Let's give your UNO Q a mind.
 
@@ -34,5 +36,7 @@ Let's give your UNO Q a mind.
    06_ai_scavenger_hunt
    07_ai_quiz_show
    08_ai_story_dice
+   09_ai_show_and_tell
+   10_ai_context_aware_room_assistant
 
 
