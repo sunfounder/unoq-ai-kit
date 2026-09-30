@@ -5,7 +5,7 @@
 12 IoT Smart Room
 ======================
 
-This is the finale of the IoT module — everything you've learned in one room. Sensors watch the environment, a fan ventilates automatically, the camera streams live video, a joystick and your voice aim the pan-tilt, an RGB LED lights the room in any color, and the board answers you aloud. Welcome to your **IoT Smart Room**.
+This is the finale of the IoT module — everything you've learned in one room. Sensors watch the environment, a fan ventilates automatically, the camera streams live video, the control panel and your voice aim the pan-tilt, an RGB LED lights the room in any color, and the board answers you aloud. Welcome to your **IoT Smart Room**.
 
 .. image:: img/iot_smart_room.png
    :width: 600
@@ -36,13 +36,13 @@ In this lesson, you will learn to:
      - |list_pir|
      - |list_rgb_led|
    * - 1 * :ref:`cpn_photoresistor`
-     - 1 * :ref:`cpn_joystick`
      - 1 * :ref:`cpn_breadboard`
      - Several :ref:`cpn_wires`
+     - -
    * - |list_photoresistor|
-     - |list_joystick_module|
      - |list_breadboard|
      - |list_wire|
+     - -
    * - 3 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_resistor` (10kΩ)
      - 1 * USB Cable
@@ -82,7 +82,6 @@ This project uses the following Bricks and sketch libraries:
 - RGB LED **R/G/B** → **D8/D7/D6**, each through a 220Ω resistor
 - Pan servo → **D9**, Tilt servo → **D10**
 - Photoresistor → **A0** (with a 10kΩ fixed resistor to GND)
-- Joystick **X** → **A3**, Joystick **Y** → **A2**, Joystick **VCC** → **3.3V**, **GND** → **GND**
 
 .. image:: /img/wiring/wiring_smart_room.png
    :width: 600
@@ -102,9 +101,9 @@ This project uses the following Bricks and sketch libraries:
 
    *"IoT Smart Room ready."*
 
-#. Open the **Web UI** tab. You'll see the live camera feed, temperature and humidity, light level, PIR motion status, and the joystick position. Try the controls:
+#. Open the **Web UI** tab. You'll see the live camera feed, temperature and humidity, light level, PIR motion status, and the pan-tilt arrow pad. Try the controls:
 
-   * Move the physical joystick — the pan-tilt follows, and the indicator moves on the page.
+   * Click an arrow on the **Camera Pan-Tilt** panel — the camera nudges one step (10°), and holding an arrow sweeps it. The centre button returns both servos to 90°.
    * Pick a color from the color wheel — the RGB LED changes to match.
    * Set the fan to **MANUAL** and toggle it on — the fan spins at 30% power.
    * Click the **voice** button and say a command, for example *"Set light blue"* or *"System status"* — the board confirms aloud.
@@ -132,11 +131,10 @@ This project uses the following Bricks and sketch libraries:
            P->>P: camera.capture() → JPEG
            P-->>B: camera_frame
        end
-       loop every 60 ms
-           S->>S: read joystick, move servos
-           S-->>P: Bridge.notify("joystick_update")
-           P-->>B: camera_control_update
-       end
+       B->>P: pan_tilt_move (arrow pad)
+       P->>S: Bridge.call("pan_step" / "tilt_step" / "center")
+       S-->>P: new pan / tilt angle
+       P-->>B: camera_control_update
        B->>P: set_rgb_color (color wheel)
        P->>S: Bridge.call("set_rgb_color", r, g, b)
        Note over P: voice button pressed
@@ -146,21 +144,43 @@ This project uses the following Bricks and sketch libraries:
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
 
-* The sketch owns the sensors and actuators: it reads the DHT11, PIR, photoresistor, and joystick, and drives the fan, RGB LED, and servos with ``analogWrite()`` and the ``Arduino_HardwareServo`` library.
-* ``updateFan()`` respects the **System Run** switch — when the system is off, the fan stops, the RGB LED turns off, and the servos return to the 90° center.
+* The sketch owns the sensors and actuators: it reads the DHT11, PIR, and photoresistor, and drives the fan, RGB LED, and servos with ``analogWrite()`` and the ``Arduino_HardwareServo`` library.
+* ``setSystemRunning()`` is a global stop — when the system is off, the fan stops, the RGB LED turns off, and both servos return to the 90° center. The app leaves the system running; the Challenge below uses it.
 * The fan runs at 30% power: ``analogWrite(MOTOR_IN1_PIN, FAN_PWM)`` where ``FAN_PWM = 255 * 30 / 100``.
-* Eight Bridge RPCs are registered (``set_fan_enabled``, ``set_rgb_color``, ``set_system_running``, and the five servo functions), and two ``Bridge.notify()`` streams push sensor and joystick data to Python.
+* Ten Bridge RPCs are registered (``set_fan_enabled``, ``set_rgb_color``, ``set_system_running``, the five servo presets, and ``pan_step`` / ``tilt_step`` for the arrow pad), and one ``Bridge.notify()`` stream pushes the sensor readings to Python.
 
 **Python (main.py)** — runs on the Linux MPU
 
 * ``environment_update`` stores the latest sensor values and runs the **automatic fan loop**: in AUTO mode, the fan turns on when the temperature reaches ``AUTO_FAN_ON_TEMP`` (28°C) and off below it.
 * The camera streams about 4 frames per second (``STREAM_INTERVAL = 0.25``) as JPEG images to the Web UI.
+* The **pan-tilt arrow pad** sends ``pan_tilt_move`` (``left`` / ``right`` / ``up`` / ``down`` / ``center``). Python nudges the servo with ``Bridge.call("pan_step", ±10)`` and sends the new angle back, so the Pan and Tilt readouts always match the hardware.
 * The **voice assistant** listens for 4 seconds, matches the recognized text against a command table, and speaks a confirmation — color names are matched with ``"set light <color>"`` phrases, and *"System status"* speaks a summary of the room: temperature, humidity, light, motion, fan, and light color.
 * A custom color is remembered as ``last_nonzero_rgb``, so *"Light on"* restores the last color instead of a fixed one.
 * When the app stops, Python switches the fan off, turns the light off, and stops the camera — a clean shutdown.
 
 3. Experiment
 ----------------
+
+**Aim the Camera from the Web UI**
+
+Use the **Camera Pan-Tilt** arrow pad on the control panel:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 45 55
+
+   * - You do
+     - Expected result
+   * - Click ◀ / ▶
+     - The camera pans left / right by 10° and the Pan readout follows
+   * - Click ▲ / ▼
+     - The camera tilts up / down by 10° and the Tilt readout follows
+   * - Hold an arrow
+     - The camera sweeps smoothly until you let go
+   * - Click ●
+     - Both servos return to 90°
+
+The camera stops at its limits — pan 45°–135°, tilt 45°–115° — so a nudge past the end has no visible effect.
 
 **Control the Room by Voice**
 
@@ -196,13 +216,13 @@ Add a new voice command to ``main.py`` — for example, *"Good night"*: switch t
 
 **The fan never spins**
 
-* **Cause:** The motor wires are on the wrong pins, or the System Run switch is off.
-* **Solution:** Check the motor connects to D2/D3, and that the **System Run** switch is on. In AUTO mode the fan only starts above 28°C — switch to MANUAL to test it directly.
+* **Cause:** The motor wires are on the wrong pins.
+* **Solution:** Check the motor connects to D2/D3. In AUTO mode the fan only starts above 28°C — switch to MANUAL to test it directly.
 
-**The servos don't move with the joystick**
+**The servos don't move**
 
-* **Cause:** The joystick isn't wired to A2/A3, or the System Run switch is off.
-* **Solution:** Check the joystick VCC goes to 3.3V, X to A3, Y to A2, and GND to GND. Turn the **System Run** switch on — the servos only follow the joystick while the system is running.
+* **Cause:** The servo signal wires are on the wrong pins, the servos have no power, or the angle is already at its limit.
+* **Solution:** Check the pan servo is on **D9** and the tilt servo on **D10**, and connect the battery — the servos need the battery or an external 5 V supply, USB alone cannot drive them. The camera also stops at its limits (pan 45°–135°, tilt 45°–115°), so nudging past the end does nothing.
 
 **Voice commands are never recognized**
 
