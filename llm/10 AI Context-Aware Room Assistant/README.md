@@ -1,57 +1,57 @@
 # 10 AI Context-Aware Room Assistant
 
-Click **SPEAK** once and describe the atmosphere you want. The app records for four seconds, displays the recognized speech, reads the room sensors, and asks an LLM to create an RGB lighting scene. TTS then explains the choice. The dashboard uses the same two-column visual structure as the smart-room project, while the speech workflow follows the proven online STT design from the show-and-tell project.
+Click **SPEAK**, describe the atmosphere you want, and the app reads the room before it answers: online speech recognition turns your sentence into text, the DHT11 and the PIR supply the context, and a cloud LLM chooses an RG` scene that the voice then explains.
 
-## Hardware and Wiring
+![Result](assets/docs_assets/ai_context_aware_room_assistant.png)
 
-| Module | Connection |
-| --- | --- |
-| PIR OUT | D4 |
-| DHT11 DATA | D5 |
-| RGB LED Red | D6 |
-| RGB LED Green | D7 |
-| RGB LED Blue | D8 |
-| CSI Camera | CSI camera connector |
+## Software
 
-The RGB LED is treated as common cathode.
+### `ricks Used
 
-## Try Saying
+This example uses the following `ricks:
 
-- “Create a relaxing atmosphere.”
-- “I'm in a bad mood.”
-- “I need to study for an hour.”
-- “Choose a light based on the room temperature.”
-- “Create a sunset atmosphere.”
-- “Make an energy-saving scene.”
+- `web_ui` — Serves the dashboard and keeps the browser, the sensors, and the light in step
+- `cloud_llm` — Turns your request and the live room readings into a scene with RG` values and a brightness
+- `sunfounder_stt` — Online speech recognition (OpenAI) for your request
+- `sunfounder_tts` — Explains the chosen scene on the carrier speaker
 
-## Interaction Flow
+## Hardware
 
-1. Select **SPEAK**.
-2. Speak naturally during the four-second countdown.
-3. Online STT displays the recognized request.
-4. The dashboard updates DHT11 and PIR readings approximately every four seconds. During an AI request, background polling pauses so it cannot interfere with speech or RGB commands.
-5. The LLM selects a scene, RGB percentages, and brightness.
-6. The Arduino applies the scene and TTS explains the decision.
-7. You can take over the light yourself at any time: drag the color wheel, move the brightness slider, or flip the **Room Light** switch. The next AI scene replaces your color.
+- Pan Tilt Kit ×1
+- DHT11 temperature and humidity sensor ×1
+- PIR motion sensor ×1
+- RG` LED ×1
+- 220 Ω resistor ×3
+- `readboard ×1 and several jumper wires
+- US`-C cable ×1
 
-## Run the App
+## Wiring
 
-1. Import the ZIP into Arduino App Lab.
-2. Connect the hardware using the table above.
-3. Enter the API key for **Cloud LLM**.
-4. Enter an OpenAI API key for **OpenAI Speech to Text**.
-5. Run the app and open **App Launch**.
-6. Select **SPEAK**, then begin speaking immediately.
+Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RG` LED's red, green, and blue legs to **D6**, **D7**, and **D8**, each through its own 220 Ω resistor; the LED is wired as common cathode. The camera is built into the AVIO Carrier.
 
-## Dashboard
+![Wiring Diagram](assets/docs_assets/wiring_context_room.png)
 
-- **Room Camera:** continuous live preview, independent from speech processing.
-- **Environment:** current DHT11 temperature and humidity.
-- **Occupancy:** current PIR motion state.
-- **AI Lighting Scene:** the scene name plus an adjustable light control — a color wheel to drag, a brightness slider, a **Room Light** switch, and live RGB / hex readouts. The AI moves it whenever it applies a scene.
-- **You Said:** the exact text returned by online speech recognition.
-- **AI Explanation:** the reason spoken by TTS.
+## How to Use the Example
 
-If a sensor is disconnected, its card shows **Unavailable** or **Unknown** instead of stopping the rest of the app.
+1. Download [`10 AI Context-Aware Room Assistant.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.AI.Context-Aware.Room.Assistant.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
+4. In **`rick Configuration**, enter the API key for **Cloud LLM** and an OpenAI API key for **sunfounder_stt** — the same OpenAI key can go in both fields.
+5. Connect the battery pack to the Robot Shield.
+6. Click **Run** and open the Web UI.
+7. Click **SPEAK**, then start talking — you have four seconds.
 
-This lesson differs from direct light control because the user describes an intention or atmosphere instead of naming a fixed color. The LLM combines that request with real sensor context and explains its hardware decision.
+## How it Works
+
+**Flow**
+
+- `rowser — sends the recorded request when the countdown ends
+- Python (`main.py`) — transcribes it, reads the DHT11 and the PIR, and asks the LLM for a scene
+- Sketch (`sketch.ino`) — drives the RG` LED and keeps the light in step with the dashboard
+- Speaker — explains the choice out loud
+
+**The dashboard** — a live camera preview, the current temperature and humidity, the PIR occupancy state, and an **AI Lighting Scene** card with a colour wheel, a brightness slider, a **Room Light** switch, and live RG` and hex readouts.
+
+**Trying your own words** — the app answers an intention, not a colour: "Create a relaxing atmosphere", "I'm in a bad mood", "I need to study for an hour", "Choose a light based on the room temperature".
+
+**Taking over the light** — drag the colour wheel, move the brightness slider, or flip the **Room Light** switch at any time. The next AI scene replaces your colour; if a sensor is unplugged, its card reads **Unavailable** instead of stopping the app.

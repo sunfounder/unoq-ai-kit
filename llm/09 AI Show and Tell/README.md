@@ -1,71 +1,50 @@
 # 09 AI Show and Tell
 
-Place an object in front of the camera, hold the button on the Web UI, and ask a question about it. Online GPT speech-to-text converts the question into text, a vision-capable LLM examines the captured image, and text-to-speech reads the answer aloud.
+Place an object in front of the camera, hold the button on the Web UI, and ask a question about it. Online GPT speech-to-text turns the question into text, a vision-capable LLM examines the captured image, and text-to-speech reads the answer aloud.
 
-## What You Will Learn
+![Result](assets/docs_assets/ai_show_tell.png)
 
-- Record speech with a hold-to-speak web control.
-- Convert live speech into text using online GPT STT.
-- Combine a spoken question with a camera image.
-- Use a vision-capable LLM for multimodal question answering.
-- Display and narrate the AI response.
+## Software
+
+### `ricks Used
+
+This example uses the following `ricks:
+
+- `cloud_llm` — Sends the spoken question and the captured image to a vision-capable cloud model
+- `web_ui` — Serves the Web UI and carries the hold-to-speak events between the browser and Python
+- `sunfounder_stt` — Online speech recognition (OpenAI) that turns the recording into text
+- `sunfounder_tts` — Reads the answer aloud through the carrier speaker
 
 ## Hardware
 
-- Arduino UNO Q
-- RobotShield
-- USB camera
-- RobotShield microphone and speaker
+- Pan Tilt Kit ×1
 
-No external button is required. The hold-to-speak button is on the Web UI.
+The camera, microphone, and speaker are all built into the AVIO Carrier, and no external button is needed — the hold-to-speak button lives on the Web UI.
 
-## How It Works
+## Wiring
 
-1. The camera continuously displays a 640 × 480 live preview.
-2. Place an object clearly in front of the camera.
-3. Hold **HOLD TO SPEAK** and ask a question.
-4. Release the button when you finish speaking.
-5. The app captures the current camera image and sends the recording to online GPT STT.
-6. The recognized question and captured image are sent to the vision-capable LLM.
-7. The Web UI displays the question and answer.
-8. TTS reads the answer aloud.
+The camera, microphone, and speaker are built into the AVIO Carrier, so there is no breadboard wiring to do.
 
-Example questions:
+## How to Use the Example
 
-- What is this?
-- What color is it?
-- What can I use it for?
-- Tell me something interesting about it.
-- Is this object safe for a young child?
+1. Download [`09 AI Show and Tell.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.AI.Show.and.Tell.zip).
+2. Open **Arduino App Lab**.
+3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
+4. In **`rick Configuration**, enter the API key for **Cloud LLM** and an OpenAI API key for **sunfounder_stt** — the same OpenAI key can go in both fields.
+5. Make sure the UNO Q has internet access, then click **Run** and open the Web UI.
+6. Hold the blue button while you speak, then release it to send the question.
 
-## Run the App
+## How it Works
 
-1. Import the app ZIP into Arduino App Lab.
-2. Connect the USB camera.
-3. In Brick Configuration, enter the API key for **Cloud LLM**.
-4. Enter an OpenAI API key for **sunfounder_stt**. The same OpenAI key can be entered in both fields.
-5. Make sure the UNO Q has internet access.
-6. Select **RUN**, then open **App Launch**.
-7. Hold the blue button while speaking and release it to submit the question.
+**Flow**
 
-## Interface States
+- Camera — keeps a 640 × 480 live preview on the page, with the image corrected vertically
+- `rowser — sends the recording and the current frame as soon as you release the button
+- Python (`main.py`) — transcribes the recording with online STT, then asks the vision-capable LLM about the captured image
+- Speaker — reads the answer aloud while the page shows the same text
 
-| State | Meaning |
-| --- | --- |
-| Listening | The microphone is recording |
-| Recognizing Speech | Online STT is transcribing the recording |
-| AI Is Looking | The LLM is examining the captured image |
-| Speaking | TTS is reading the answer |
-| Ready | You can ask another question |
+**Interface states** — the badge on the page walks through *Listening*, *Recognizing Speech*, *AI Is Looking*, *Speaking*, and *Ready*, so you can always tell which part is working.
 
-## Tips
+**Questions that work well** — "What is this?", "What color is it?", "What can I use it for?", "Is this object safe for a young child?".
 
-- Speak after the page changes to **Listening**.
-- Keep holding the button until the full question is finished.
-- Recording stops automatically after 15 seconds if the button is not released.
-- Keep the object near the center of the image.
-- Use a plain background and bright, even lighting.
-- The camera image is corrected vertically in the Python program.
-- Camera capture runs in its own thread so speech and AI tasks do not block the live preview.
-- If STT returns no text, move closer to the microphone and try again.
-- STT, vision analysis, and TTS require an internet connection.
+**Getting a good answer** — speak only once the badge reads *Listening*, keep the object near the centre of the frame with even lighting, and remember that recording stops by itself after 15 seconds. Speech recognition, the vision model, and the voice all need a working internet connection.
