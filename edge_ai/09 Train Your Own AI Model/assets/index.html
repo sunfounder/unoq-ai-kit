@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Your Own AI Model</title>
+    <link rel="icon" type="image/png" href="./img/sf_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="./img/sf_logo.png" alt="SunFounder Logo">
+        <h1>Train Your Own AI Model</h1>
+    </header>
+
+    <main>
+        <div class="layout">
+            <section class="card card-camera">
+                <div class="status-row">
+                    <span class="status-indicator" id="status-dot"></span>
+                    <span class="status-label" id="status-label">Connecting</span>
+                </div>
+
+                <div class="camera-container">
+                    <iframe id="camera-stream" title="Camera" frameborder="0"
+                            allow="autoplay" style="display: none;"></iframe>
+                    <div class="camera-placeholder">Starting camera...</div>
+                </div>
+
+                <p class="hint">Running the model selected in the Video Image Classification brick. To use your own: open the brick's <b>AI models</b> tab, click <b>Download</b> on your model, then select it &mdash; no code change needed.</p>
+                <p id="error-container"></p>
+            </section>
+
+            <section class="card card-results">
+                <div class="section-title">What the Model Sees</div>
+                <div id="detections" class="detections">
+                    <p class="empty">Nothing yet - point the camera at your object.</p>
+                </div>
+
+                <div class="section-title">Per-Class Totals</div>
+                <div id="totals" class="totals">
+                    <p class="empty">No classes seen yet.</p>
+                </div>
+
+                <div class="summary">
+                    <div><span>Session</span><strong id="session-time">0:00</strong></div>
+                    <div><span>Classifications</span><strong id="session-detections">0</strong></div>
+                    <div><span>Classes Seen</span><strong id="session-classes">0</strong></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

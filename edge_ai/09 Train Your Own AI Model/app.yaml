@@ -1,0 +1,7 @@
+name: 09 Train Your Own AI Model
+description: Put your own Edge Impulse model to work and test how well it sees
+ports: []
+bricks:
+- arduino:video_image_classification: {}
+- arduino:web_ui: {}
+icon: 🧠
