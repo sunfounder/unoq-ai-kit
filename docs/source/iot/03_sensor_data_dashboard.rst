@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 03 Sensor Data Dashboard
-==========================
+========================
 
 So far, data flowed **from** the browser **to** your hardware — click a button, the LED obeys. Now you'll reverse the direction: a sensor reads the real world, and its data flows **from** the hardware **to** the browser as a live-updating dashboard. A photoresistor measures the light in your room, and a web page shows the current level plus a scrolling chart of the last 30 seconds — watch the curve react the moment you cover the sensor with your hand.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Visualize a live data stream with a scrolling chart
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -61,7 +61,7 @@ Connect the photoresistor between **3.3V** and **A0**, and the 10kΩ resistor be
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 
 #. Download :download:`03 Sensor Data Dashboard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Sensor.Data.Dashboard.zip>`.
@@ -133,7 +133,7 @@ Here's what each component does:
 The sketch uses ``millis()`` instead of ``delay()`` to pace the readings — the board stays responsive to Bridge events between samples. 200 ms per sample (5 readings per second) is fast enough to look "live" while keeping the Bridge traffic light.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Chart Window**
 
@@ -161,7 +161,7 @@ Depending on your photoresistor circuit, brighter light may produce either a hig
    int lightLevel = map(rawValue, 0, 1023, 100, 0);
 
 4. Troubleshooting
---------------------
+------------------
 
 **The dashboard shows 0% or 100% and never changes**
 
@@ -184,7 +184,7 @@ Depending on your photoresistor circuit, brighter light may produce either a hig
 * **Solution:** Open the browser's Developer Tools (F12) and check the Console tab. Verify that ``app.js`` loads after the ``canvas`` element exists in ``index.html``.
 
 5. Summary
--------------
+----------
 
 You've built your first hardware-to-browser data pipeline! In this lesson, you learned:
 

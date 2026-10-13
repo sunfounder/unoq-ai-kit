@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 10 Ultrasonic Radar
-=====================
+===================
 
 Bats fly in complete darkness without crashing — they emit high-pitched sounds and listen for the echoes to "see" their surroundings. In this lesson, you'll use the same principle with an **ultrasonic sensor** (HC-SR04) to build a parking radar: it measures how far away an object is and beeps faster as you get closer. No more crashing into things — your circuit now has sonar.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Build a multi-level alarm system that changes behavior based on distance
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the HC-SR04's **VCC to 3.3V**, **Trig to D12**, **Echo to D11**, and **G
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -229,7 +229,7 @@ This lesson introduces three new tools — microsecond timing with ``pulseIn()``
       }
 
 3. Experiment
-----------------
+-------------
 
 **Adjust the Thresholds**
 
@@ -252,7 +252,7 @@ Try changing the distance thresholds and observe how the radar responds:
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **Distance always shows "Out of range"**
 
@@ -275,7 +275,7 @@ Try changing the distance thresholds and observe how the radar responds:
 * **Solution:** For detecting objects closer than 2 cm, use an infrared proximity sensor (covered in a later lesson). The 2 cm minimum is a physical limitation of ultrasonic technology, not a bug in your code.
 
 5. Summary
--------------
+----------
 
 You've built a working sonar — a device that sees with sound. In this lesson, you learned:
 

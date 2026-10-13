@@ -1,16 +1,16 @@
 .. include:: /index.rst
    :start-after: start_hello_message
    :end-before: end_hello_message
-   
+
 .. _arduino_ide:
 
 Play with Arduino IDE (Optional)
-============================================
+================================
 
 This optional section introduces how to use the Arduino IDE with UNO Q and how it differs from Arduino App Lab. You will also install the core and run a simple Blink example.
 
 Arduino IDE vs Arduino App Lab (Optional)
---------------------------------------------------
+-----------------------------------------
 
 Arduino UNO Q works with the standard Arduino IDE, allowing you to program using C/C++.
 
@@ -68,7 +68,7 @@ It lets you build applications using:
 - You want to build complete applications  
 
 Install UNO Q Core
-----------------------------
+------------------
 
 To get started, you must install the board support package (core) for UNO Q (based on Zephyr).
 
@@ -91,7 +91,7 @@ To get started, you must install the board support package (core) for UNO Q (bas
 --------------------------------------------------
 
 Hello World (Blink)
---------------------------
+-------------------
 
 After installing the core, you can verify everything by uploading the classic **Blink** sketch.
 

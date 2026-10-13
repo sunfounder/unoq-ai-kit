@@ -5,7 +5,7 @@
 .. _cpn_uno_q:
 
 Arduino Uno Q
-======================================
+=============
 
 .. image:: img/unoq_chips.png
    :width: 600
@@ -20,7 +20,7 @@ The board can be programmed using **Arduino App Lab**, which provides an integra
 * |link_unoq_full_pinout|
 
 Onboard User Interface
----------------------------
+----------------------
 
 The Arduino UNO Q includes several onboard components that make it easy to interact with the board and monitor its status. These built-in interfaces allow users to quickly test features, display information, and control the device without adding extra hardware.
 
@@ -105,8 +105,29 @@ By connecting a **USB-C adapter or hub**, the UNO Q can access additional multim
    * - Storage
      - External microSD card or USB drive support
 
+.. _voltage_domains:
+
+Voltage Domains
+---------------
+
+The UNO Q's headers do not all run at the same voltage, and connecting a signal to the wrong one damages the board. Three domains matter:
+
+* **3.3 V — driven by the STM32 MCU.** JANALOG (14 pin), JDIGITAL (18 pin), JSPI (6 pin) and Qwiic (4 pin). Most of these pins tolerate 5 V *as inputs*, which is why a 5 V sensor's data line is safe on a digital pin.
+* **1.8 V — driven by the QRB2210 MPU.** JMEDIA (60 pin), the JMISC SoC GPIO, and JCTL (10 pin). **Never connect a 5 V or 3.3 V logic module to these pins.**
+* **Mixed — JMISC (60 pin).** 1.8 V and 3.3 V share the same header, so a carrier board has to be checked pin by pin before it is plugged in.
+
+Two pins on the 3.3 V side are tighter still and must always be checked:
+
+* **A0 and A1** are wired straight to the STM32 ADC. They must never see 5 V: the absolute maximum is VDD + 0.3 V, about **3.6 V**.
+* **~D3 (PB0)** has a TT-type I/O structure and tolerates only **3.6 V in every mode**, digital output included.
+
+
+A sensor module that needs 5 V is still safe on the digital side: the **DHT11** and the **PIR motion sensor** in this kit are powered from **5V** and drive a digital pin such as **D4** or **D5**, and the digital pins tolerate that as an input. Two rules keep it that way: never route a 5 V module's output to **D3**, and never route an analog sensor to **A0 or A1** unless it is powered from 3.3 V.
+
+Every lesson in this kit stays on the 3.3 V side, using the Robot Shield's D2-D10 and A0-A3 headers. Two things follow from that: sensors powered from 5 V are only connected through a digital input (the DHT11 is the example), and analog sensors are powered from **3.3V**, so the voltage the ADC sees never exceeds the pin's limit.
+
 Pins
--------------
+----
 
 The UNO Q provides two types of connectors for hardware expansion.  
 On the **top side**, it keeps the classic **Arduino UNO-style headers**, which are ideal for prototyping and debugging and ensure full compatibility with many Arduino UNO shields and accessories.  

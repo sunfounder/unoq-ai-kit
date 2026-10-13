@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Combine input and output in a single program
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the button to **D4** and the LED to **D5** through a 220Ω resistor (ban
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -157,7 +157,7 @@ Every Arduino sketch follows the same rhythm, and this lesson introduces two new
    - Without ``INPUT_PULLUP``, the pin would be "floating" when released, giving random HIGH/LOW readings
 
 3. Experiment
-----------------
+-------------
 
 **Swap the Logic**
 
@@ -220,7 +220,7 @@ What if you want the button to act like a toggle — press once to turn the LED 
    This pattern — detecting a **change** rather than the absolute state — is called **edge detection**. The ``!`` operator means "not": ``!true`` is ``false``, ``!false`` is ``true``. The ``? :`` is a compact if/else called the **ternary operator**.
 
 4. Troubleshooting
---------------------
+------------------
 
 **LED does not light up when button is pressed**
 
@@ -243,7 +243,7 @@ What if you want the button to act like a toggle — press once to turn the LED 
 * **Solution:** Push the button firmly into the breadboard. Check that jumper wires are fully inserted at both ends. Try a different row on the breadboard if the contacts feel loose.
 
 5. Summary
--------------
+----------
 
 Congratulations! You now know how to read input from the physical world. In this lesson, you learned:
 

@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 04 Photoresistor Night Light
-==============================
+============================
 
 In the first three lessons, every signal was either ON or OFF — button pressed or not, tilt detected or not, LED lit or dark. Now you'll enter the world of **analog** signals, where values can vary smoothly across a continuous range. A **photoresistor** (light-dependent resistor) changes its resistance with light, producing a voltage that the UNO Q can measure. The brighter the light, the more LEDs turn on — like a visual light meter. This is your first **analog sensor**.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Build a 4-level LED bar graph that responds to ambient light
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the photoresistor between **3.3V** and **A0** — it has no polarity, so
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -185,7 +185,7 @@ Without arrays or loops, controlling four LEDs would take many repetitive lines:
 With an array and a loop, the same work is done in just three lines inside ``loop()``. If you later add a fifth LED, you change one number (``4`` to ``5``) and add one pin to the array — the loop handles everything automatically. This pattern scales to dozens of components.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Bar Graph Direction**
 
@@ -240,7 +240,7 @@ A real night light should turn **off** during the day and only activate at night
    Notice how the ``map()`` input range changed from ``0, 1023`` to ``0, 700`` — this remaps only the nighttime values (0–700) across all 4 levels, giving you full resolution in the range that matters. This is a common technique: adapt your sensor's working range to the conditions you care about.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Only 1 LED lights up, or no LEDs in a dim room**
 
@@ -258,7 +258,7 @@ A real night light should turn **off** during the day and only activate at night
 * **Solution:** Swap the suspect LED with a known working one to test. Check polarity — the long leg (anode) goes through the resistor to the digital pin, and the short leg (cathode) to GND. Verify the jumper wire from the digital pin to the LED's row is fully inserted.
 
 5. Summary
--------------
+----------
 
 Congratulations! Your circuit now senses the world on its own — no knobs, no buttons, just automatic response to light. In this lesson, you learned:
 

@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 12 IoT Smart Room
-======================
+=================
 
 This is the finale of the IoT module — everything you've learned in one room. Sensors watch the environment, a fan ventilates automatically, the camera streams live video, the control panel and your voice aim the pan-tilt, an RGB LED lights the room in any color, and the board answers you aloud. Welcome to your **IoT Smart Room**.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Coordinate two processors: sensors and motors on the sketch, UI and AI on Python
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -61,6 +61,7 @@ This project uses the following Bricks and sketch libraries:
   * ``web_ui`` — serves the control panel with the live camera feed
   * ``sunfounder_stt`` — local speech-to-text for the voice commands (Whisper model)
   * ``sunfounder_tts`` — text-to-speech for the spoken replies (EdgeTTS)
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``Arduino_HardwareServo`` (0.0.1) — drives the pan and tilt servos with hardware PWM
@@ -75,25 +76,24 @@ This project uses the following Bricks and sketch libraries:
 
    The Pan Tilt Kit includes the two servos, the camera, and the AVIO Carrier. Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 - Motor **IN1** → **D2**, Motor **IN2** → **D3**
 - PIR **OUT** → **D4**, DHT11 **DATA** → **D5**
 - RGB LED **R/G/B** → **D8/D7/D6**, each through a 220Ω resistor
 - Pan servo → **D9**, Tilt servo → **D10**
-- Photoresistor → **A0** (with a 10kΩ fixed resistor to GND)
+- Photoresistor between **3.3V** and **A0**, with a 10kΩ fixed resistor from A0 to GND
 
 .. image:: /img/wiring/wiring_smart_room.png
    :width: 600
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`12 IoT Smart Room.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/12.IoT.Smart.Room.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -107,7 +107,6 @@ This project uses the following Bricks and sketch libraries:
    * Pick a color from the color wheel — the RGB LED changes to match.
    * Set the fan to **MANUAL** and toggle it on — the fan spins at 30% power.
    * Click the **voice** button and say a command, for example *"Set light blue"* or *"System status"* — the board confirms aloud.
-
 
    .. image:: img/iot_smart_room.png
      :width: 600
@@ -159,7 +158,7 @@ This project uses the following Bricks and sketch libraries:
 * When the app stops, Python switches the fan off, turns the light off, and stops the camera — a clean shutdown.
 
 3. Experiment
-----------------
+-------------
 
 **Aim the Camera from the Web UI**
 
@@ -212,7 +211,7 @@ Set the fan mode to **AUTO** and warm the DHT11 with your breath — when the re
 Add a new voice command to ``main.py`` — for example, *"Good night"*: switch the system off, turn the light off, and answer *"Good night."* You'll need a new action function, a new entry in the ``COMMANDS`` table, and a call to ``Bridge.call("set_system_running", False)``.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The fan never spins**
 
@@ -222,7 +221,7 @@ Add a new voice command to ``main.py`` — for example, *"Good night"*: switch t
 **The servos don't move**
 
 * **Cause:** The servo signal wires are on the wrong pins, the servos have no power, or the angle is already at its limit.
-* **Solution:** Check the pan servo is on **D9** and the tilt servo on **D10**, and connect the battery — the servos need the battery or an external 5 V supply, USB alone cannot drive them. The camera also stops at its limits (pan 45°–135°, tilt 45°–115°), so nudging past the end does nothing.
+* **Solution:** Check the pan servo is on **D9** and the tilt servo on **D10**,. The camera also stops at its limits (pan 45°–135°, tilt 45°–115°), so nudging past the end does nothing.
 
 **Voice commands are never recognized**
 
@@ -240,7 +239,7 @@ Add a new voice command to ``main.py`` — for example, *"Good night"*: switch t
 * **Solution:** Check the Output window for errors and run the app again. The DHT11 sometimes misses a read — the sketch simply skips the update until the next interval.
 
 5. Summary
--------------
+----------
 
 You've built a complete IoT Smart Room — sensors, automation, camera, voice, and light in one project! In this lesson, you learned:
 

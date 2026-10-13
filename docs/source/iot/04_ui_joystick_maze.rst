@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 04 UI Joystick Maze
-=====================
+===================
 
 Your UNO Q has been dutifully reporting data — now it's time to play. In this lesson, you'll use a physical **joystick** to guide an explorer through a maze that runs in your browser. Push the stick and the character moves one cell; reach the yellow goal and the page shows your move count and completion time. The joystick is just two potentiometers at right angles — but combined with a browser game, it becomes a real game controller.
 
@@ -20,7 +20,7 @@ In this lesson, you will learn to:
 * Keep the game logic in the browser while the sketch only reports input
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -54,7 +54,7 @@ Connect the joystick's **VRx** to **A3**, **VRy** to **A2**, **SW** to **D4**, *
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 
 #. Download :download:`04 UI Joystick Maze.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.UI.Joystick.Maze.zip>`.
@@ -132,7 +132,7 @@ Here's what each component does:
 Without the ``joystickReady`` lock, a single push would fire dozens of "right" events while the stick is held — the player would teleport across the maze. Requiring the stick to return to center between moves keeps the game fair and deliberate. For diagonal pushes, the stronger axis wins.
 
 3. Experiment
-----------------
+-------------
 
 **Tune the Feel**
 
@@ -157,7 +157,7 @@ The maze layout lives in ``assets/app.js`` as a grid of cells. Replace the maze 
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **The explorer moves by itself or wanders between cells**
 
@@ -180,7 +180,7 @@ The maze layout lives in ``assets/app.js`` as a grid of cells. Replace the maze 
 * **Solution:** Check SW → D4 with ``INPUT_PULLUP``. The sketch detects the falling edge (``lastButtonState == HIGH && buttonState == LOW``) — holding the button down restarts only once, on the press.
 
 5. Summary
--------------
+----------
 
 You've turned the UNO Q into a game controller! In this lesson, you learned:
 

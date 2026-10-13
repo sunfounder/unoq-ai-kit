@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 03 Voice Recorder
-====================
+=================
 
 The board has been talking — now you'll speak to it. In this lesson, the UNO Q becomes a **dictaphone**: press one button to record your voice, press it again to save, then press the other button to play the recording back through the speaker. No speech recognition yet — just capture and playback.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Keep recording and playback from running at the same time
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -53,6 +53,9 @@ This project uses the following App Lab Bricks:
 
    The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **Wiring Diagram**
 
@@ -65,12 +68,8 @@ Connect the two push buttons between D7 / D6 and GND — no external resistors a
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`03 Voice Recorder.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/03.Voice.Recorder.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -138,7 +137,7 @@ The sketch reads both buttons and registers two RPC functions:
 * Recording and playback never overlap — starting a recording stops any playback first, and pressing Play while recording only prints a reminder: **Stop recording before playback.**
 
 3. Experiment
-----------------
+-------------
 
 **Record a Longer Message**
 
@@ -168,7 +167,7 @@ Press D6 to play a clip, then press D7 while it plays — the playback stops and
 The recording is always saved to the same file, ``stt_last.wav`` — each new recording replaces the previous one. Change the ``AUDIO_FILE`` path in ``main.py`` to a new name such as ``/app/audio_output/stt_note.wav`` and run again — recordings now save under the new name.
 
 4. Troubleshooting
---------------------
+------------------
 
 **"Recording..." appears but the recording is silent when played back**
 
@@ -191,7 +190,7 @@ The recording is always saved to the same file, ``stt_last.wav`` — each new re
 * **Solution:** Press D7 to record first — the playback button only works after a recording is saved.
 
 5. Summary
--------------
+----------
 
 You've built a voice recorder! In this lesson, you learned:
 

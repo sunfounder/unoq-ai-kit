@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Use a simple software **debounce** to prevent a single press from registering multiple times
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the left button to D7 and the right button to D6 — both use ``INPUT_PU
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -416,7 +416,7 @@ This lesson builds directly on LED matrix knowledge from the previous lesson —
       }
 
 3. Experiment
-----------------
+-------------
 
 **Adjust the Game Difficulty**
 
@@ -461,7 +461,7 @@ Send the correct-streak count to the Serial Monitor. Reset it to zero on a wrong
    Add ``Serial.begin(115200)`` in ``setup()`` and open the Serial Monitor while playing. Compete with friends for the highest streak.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Buttons don't respond — game ignores presses**
 
@@ -484,7 +484,7 @@ Send the correct-streak count to the Serial Monitor. Reset it to zero on a wrong
 * **Solution:** Make sure ``matrix_patterns.h`` is included at the top of the sketch and contains valid 8×13 arrays for all five patterns used: ``LEFT_ARROW``, ``RIGHT_ARROW``, ``CHECK_MARK``, ``CROSS_MARK``, and ``SMILE``. Check that each array has exactly 8 rows of 13 columns.
 
 5. Summary
--------------
+----------
 
 You just built a real game — random events, input handling, audio feedback, and game-over logic. In this lesson, you learned:
 

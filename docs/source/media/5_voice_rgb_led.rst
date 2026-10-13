@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 05 Voice-Controlled RGB LED
-=============================
+===========================
 
 Earlier, you mixed colors by writing PWM values into three pins. Now your voice picks the color. Hold the button, say "Turn on the blue light", release it — the board recognizes the color name and lights the RGB LED. Speech is no longer just text on a screen; it drives hardware.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Check the most important keyword first so commands don't collide
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -67,7 +67,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`05 Voice-Controlled RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.Voice-Controlled.RGB.LED.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -139,7 +139,7 @@ The sketch receives a color name and converts it into three PWM values:
 * On startup, ``setup()`` flashes red → green → blue → off so you can verify the wiring before speaking a single word.
 
 3. Experiment
-----------------
+-------------
 
 **Try Every Command**
 
@@ -184,7 +184,7 @@ Add ``pink`` to both sides of the system:
 Run again and say "pink" — if the LED lights, your Python and sketch changes are working together.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The LED shows the wrong color**
 
@@ -207,7 +207,7 @@ Run again and say "pink" — if the LED lights, your Python and sketch changes a
 * **Solution:** Use the exact keywords: red, green, blue, yellow, cyan, purple, white, off. Avoid phrases like "make it darker" that contain no keyword.
 
 5. Summary
--------------
+----------
 
 Your voice now controls real hardware! In this lesson, you learned:
 

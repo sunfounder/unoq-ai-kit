@@ -3,14 +3,14 @@
    :end-before: end_hello_message
 
 08 Smart Doorbell
-=====================
+=================
 
 You've built dashboards and remote controls — but all of them waited for a human to look at a screen. Now you'll build a system that **announces events on its own**. Press a button at the "door" and the UNO Q plays a "ding-dong" chime, shows "Someone is at the door!" in the browser, snaps a photo of your visitor, and logs the visit — a complete smart doorbell with camera, sound, and browser notification.
 
 .. image:: img/doorbell_result.png
    :width: 700
    :align: center
-   
+
 In this lesson, you will learn to:
 
 * Detect a button press with edge detection and trigger a chain of events
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Combine hardware events, camera snapshots, and browser notifications in one pipeline
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -53,6 +53,10 @@ This project uses the following Bricks:
 
    You used the AVIO Carrier and camera in Module B — they should already be attached. If not, attach the carrier to the UNO Q and connect the camera's FFC ribbon cable to a CSI connector — the blue side of the cable faces up.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and the passive buzzer between **D5** and **GND**.
@@ -61,14 +65,8 @@ Connect the push button between **D4** and **GND** (uses ``INPUT_PULLUP``), and 
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
-
 2. Run the App
-----------------
-
+--------------
 
 #. Download :download:`08 Smart Doorbell.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Smart.Doorbell.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -144,7 +142,7 @@ Here's what each component does:
 The camera frame isn't captured inside the Bridge callback — callbacks should be short. Instead, ``doorbell_pressed()`` just sets a flag, and the main loop saves the latest available frame. This keeps Bridge responsive while the camera works at its own pace.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Chime**
 
@@ -170,7 +168,7 @@ The chime is two ``tone()`` calls. Try different note pairs:
 Currently every press saves a photo. Add a photoresistor on A0 and modify the Python app: if the light level is below a threshold, skip the snapshot and send a "dark" flag to the browser instead. The visitor list should show the event without a photo.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Pressing the button fires multiple events**
 
@@ -193,7 +191,7 @@ Currently every press saves a photo. Add a photoresistor on A0 and modify the Py
 * **Solution:** ``STREAM_INTERVAL = 0.20`` (5 FPS) and ``JPEG_QUALITY = 70`` balance quality against network load. Increase the interval to 0.5 for smoother page behavior on slow Wi-Fi.
 
 5. Summary
--------------
+----------
 
 You've built a smart doorbell — a button press now announces visitors with sound, photo, and browser notification! In this lesson, you learned:
 

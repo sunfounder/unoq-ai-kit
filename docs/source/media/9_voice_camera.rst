@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 09 Voice-Controlled Camera
-============================
+==========================
 
 This is where everything comes together. No button this time — the microphone listens on its own, in repeating cycles. Say "Take photo" and the camera snaps a picture; say "Turn left" and the pan-tilt moves; every action is confirmed aloud. Speech → command → action → feedback, hands-free.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Recover from errors so one bad cycle doesn't stop the program
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -47,6 +47,10 @@ This project uses the following App Lab Bricks and libraries:
 
 Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 Connect the servos to the Robot Shield:
@@ -58,12 +62,8 @@ Connect the servos to the Robot Shield:
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`09 Voice-Controlled Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.Voice-Controlled.Camera.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -107,7 +107,7 @@ The sketch is the same five servo RPCs from the pan-tilt lesson: ``pan_left``, `
 * The sketch drives the servos with the ``Arduino_HardwareServo`` library — the UNO Q uses the STM32's hardware PWM, because the standard Servo library causes jitter on this board.
 
 3. Experiment
-----------------
+-------------
 
 **Try Every Command**
 
@@ -146,7 +146,7 @@ The sketch is the same five servo RPCs from the pan-tilt lesson: ``pan_left``, `
      - More time to finish a long command, but responds slower
 
 4. Troubleshooting
---------------------
+------------------
 
 **The servos move but the camera doesn't work — or the other way around**
 
@@ -174,7 +174,7 @@ The sketch is the same five servo RPCs from the pan-tilt lesson: ``pan_left``, `
 * **Solution:** Nothing to fix. This is the safety net working: the error is printed, the app waits 2 seconds, and the next cycle starts fresh.
 
 5. Summary
--------------
+----------
 
 You've built a voice-controlled robot assistant! In this lesson, you learned:
 

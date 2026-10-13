@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 05 PIR Motion Alarm
-======================
+===================
 
 You've used buttons, tilt switches, and photoresistors to detect physical states. Now you'll use a sensor that can detect **people** — the PIR (Passive Infrared) motion sensor. When it spots movement, a passive buzzer sounds a two-tone warning siren — just like the motion-activated lights and security systems in everyday life.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Understand why PIR sensors need a warm-up period before they work reliably
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the PIR sensor's three pins — **VCC → 5V**, **GND → GND**, **OUT �
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -217,7 +217,7 @@ You've used both types now — let's compare them:
   **With an active buzzer you say "beep or don't beep." With a passive buzzer you say "play this exact note for this long."**
 
 3. Experiment
-----------------
+-------------
 
 **Change the Siren Frequencies**
 
@@ -260,7 +260,7 @@ Add a counter variable that increments each time motion is detected. Print the c
       Serial.println(motionCount);
 
 4. Troubleshooting
---------------------
+------------------
 
 **"Buzzer beeps constantly even when nothing is moving"**
 
@@ -288,7 +288,7 @@ Add a counter variable that increments each time motion is detected. Print the c
 * **Solution:** Check that the passive buzzer's leads are firmly inserted into the breadboard. Verify the buzzer is on pin D5 — if the pin was accidentally changed in code, update ``buzzerPin`` to match the physical connection. If the sound is still weak, try a different digital pin (D2, D3, or D6) and update the code accordingly.
 
 5. Summary
--------------
+----------
 
 You've built a motion-activated alarm with a two-tone siren — the same principle behind automatic lights, security systems, and wildlife cameras. In this lesson, you learned:
 

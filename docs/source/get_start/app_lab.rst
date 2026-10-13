@@ -5,10 +5,10 @@
 .. _arduino_app_lab:
 
 Arduino App Lab
-=======================
+===============
 
 What is **Arduino App Lab**?
----------------------------------------------
+----------------------------
 
 **Arduino App Lab** is an integrated development environment designed for the **UNO Q hybrid platform**. It allows developers to create applications that combine **Linux-based software** running on the main processor with **real-time control** running on the microcontroller.
 
@@ -35,7 +35,7 @@ You can access the official **Arduino App Lab** tutorial from the link below:
 --------------------------------------------------
 
 Install & Set Up **Arduino App Lab**
------------------------------------------
+------------------------------------
 
 
 #. Navigate to |link_arduino_software| and download **Arduino App Lab** for your OS.
@@ -82,7 +82,7 @@ Install & Set Up **Arduino App Lab**
 --------------------------------------------------
 
 Connecting UNO Q to **Arduino App Lab**
------------------------------------------------------
+---------------------------------------
 
 #. Connect the UNO Q to your PC using a USB cable.
 
@@ -134,7 +134,7 @@ Connecting UNO Q to **Arduino App Lab**
 --------------------------------------------------
 
 **Arduino App Lab** UI Overview
--------------------------------------
+-------------------------------
 
 **Arduino App Lab** is designed as both an editor and a resource manager for creating and deploying applications.
 
@@ -149,6 +149,6 @@ Connecting UNO Q to **Arduino App Lab**
 --------------------------------------------------
 
 Summary
--------------------------------
+-------
 
 **Arduino App Lab** extends the traditional Arduino workflow into a hybrid development model, enabling seamless integration between high-level Linux applications and low-level microcontroller control. This makes it a powerful tool for building modern embedded systems and AI-enabled applications.

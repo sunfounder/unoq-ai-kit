@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 06 STT Echo
-=============
+===========
 
 You've made the board speak (TTS) and made it listen (STT). Now you'll close the loop: hold the button, say a sentence, release it — the board recognizes your speech and repeats it aloud through the speaker. Your own words travel in through the microphone and back out through the speaker.
 
@@ -14,7 +14,7 @@ In this lesson, you will learn to:
 * Keep the microphone off while the speaker plays so the board never hears itself
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -52,6 +52,10 @@ This project uses the following App Lab Bricks:
 
    The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 Connect the push button between D4 and GND — no external resistor is needed, the sketch uses the internal pull-up resistor. The speaker and microphone are built into the AVIO Carrier.
@@ -60,12 +64,8 @@ Connect the push button between D4 and GND — no external resistor is needed, t
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`06 STT Echo.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.STT.Echo.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -96,7 +96,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
 * If the recognition result is empty (silence or noise), the code prints **No speech detected.** instead of speaking.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Echo Volume**
 
@@ -136,7 +136,7 @@ The board currently echoes your exact words. Make it answer like a robot instead
 Now the board comments on what you said instead of just repeating it.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The speaker stays silent after recognition**
 
@@ -159,7 +159,7 @@ Now the board comments on what you said instead of just repeating it.
 * **Solution:** Speak closer to the microphone and a bit louder. Check that the AVIO Carrier is firmly attached. Say a full sentence instead of a single word.
 
 5. Summary
--------------
+----------
 
 The board heard you and answered back — the speech loop is closed! In this lesson, you learned:
 

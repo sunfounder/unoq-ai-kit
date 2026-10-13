@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 05 IoT Voice Announcer
-==========================
+======================
 
 You've built web controls that make LEDs blink, colors change, and games move. Now the UNO Q will **speak**: type a message in a Web UI, click **Speak**, and the board reads your text aloud through the speaker. The browser becomes a keyboard for the board's voice.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Guard the TTS engine against empty or oversized messages
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -48,7 +48,7 @@ No breadboard wiring is needed — the speaker is built into the AVIO Carrier.
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`05 IoT Voice Announcer.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.IoT.Voice.Announcer.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -91,7 +91,7 @@ The data path from your typed text to the spoken sentence:
 The sketch is intentionally empty — all the logic of this lesson lives in Python, because the speaker and the TTS Brick run on the Linux side.
 
 3. Experiment
-----------------
+-------------
 
 **Try Different Messages**
 
@@ -125,7 +125,7 @@ Run again — the same message now speaks with a British accent.
 After speaking, the status returns to **Ready to speak another message.** Find this string in ``main.py`` and change it to something friendlier, such as **All done — type another one!** The button stays the same; only the status text changes.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The board speaks nothing after clicking Speak**
 
@@ -148,7 +148,7 @@ After speaking, the status returns to **Ready to speak another message.** Find t
 * **Solution:** Refresh the browser tab. If the problem persists, stop and run the app again.
 
 5. Summary
--------------
+----------
 
 Your UNO Q can now speak whatever you type! In this lesson, you learned:
 

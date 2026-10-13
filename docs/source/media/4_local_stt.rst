@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 04 Local STT
-===============
+============
 
 In the previous lesson, the UNO Q recorded your voice and played it back — but it didn't understand a word. Now it will **transcribe** your speech: using the AVIO Carrier's built-in microphone and a local speech-to-text engine, the board listens to your voice and prints what you said. Everything runs on the device — no cloud, no internet needed for recognition.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Run a background worker thread so the app keeps looping while listening
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -41,7 +41,7 @@ This project uses the following App Lab Brick:
    The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`04 Local STT.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.Local.STT.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -69,7 +69,7 @@ This project uses the following App Lab Brick:
 * Each cycle records for ``LISTEN_SECONDS`` (5 s) — change this constant to listen longer or shorter.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Listening Duration**
 
@@ -93,7 +93,7 @@ Edit ``LISTEN_SECONDS`` at the top of ``main.py``:
 Change the ``language`` parameter in ``STT(type="local_fast", language="en")``. Try ``"zh"`` for Chinese or ``"es"`` for Spanish, then speak in that language — the board prints what you said in the language it heard.
 
 4. Troubleshooting
---------------------
+------------------
 
 **"Loading the local STT model..." takes a long time**
 
@@ -111,7 +111,7 @@ Change the ``language`` parameter in ``STT(type="local_fast", language="en")``. 
 * **Solution:** Speak clearly and reduce background noise. Short, common words (like "hello", "test", "light") work best with the small model.
 
 5. Summary
--------------
+----------
 
 The UNO Q can now hear you! In this lesson, you learned:
 

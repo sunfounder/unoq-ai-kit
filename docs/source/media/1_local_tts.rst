@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 01 Local TTS
-===============
+============
 
 In Module A, your output devices were LEDs, buzzers, and servos — they communicated through light, sound, and motion. Now you'll use the AVIO Carrier's built-in **speaker** — it can speak real sentences. This project is simple: make the speaker say one sentence.
 
@@ -14,7 +14,7 @@ In this lesson, you will learn to:
 * Control the speaker volume with ``set_volume()``
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -40,7 +40,7 @@ This project uses the following App Lab Brick:
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`01 Local TTS.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.Local.TTS.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -63,7 +63,7 @@ This project uses the following App Lab Brick:
 * ``App.run(user_loop=loop)`` keeps the Python app alive after the speech finishes.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Text**
 
@@ -122,7 +122,7 @@ Make the speaker say three sentences in a row — a greeting, a question, and an
    tts.say("I hope you enjoy building with the UNO Q.")
 
 4. Troubleshooting
---------------------
+------------------
 
 **No sound at all**
 
@@ -140,7 +140,7 @@ Make the speaker say three sentences in a row — a greeting, a question, and an
 * **Solution:** Try a different voice from the Experiment section. Keep sentences short and simple — local TTS engines handle common words best.
 
 5. Summary
--------------
+----------
 
 You've made the UNO Q speak real sentences! In this lesson, you learned:
 

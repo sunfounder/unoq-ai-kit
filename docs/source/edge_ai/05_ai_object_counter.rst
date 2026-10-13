@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 05 AI Object Counter
-======================
+====================
 
 The gesture project read *you* — one hand signal, one LED. This project goes back to watching the world, but asks a different kind of question: not *what is it?* but *how many?* Many real systems need a running tally: how many boxes passed on a conveyor belt, how many people walked through a door. In this lesson, you'll build an AI counter. The UNO Q watches the camera and counts how many times three everyday objects appear — a computer **mouse**, a **keyboard**, and a **cell phone** — showing the totals live in a Web UI and announcing every new count out loud.
 
@@ -20,7 +20,7 @@ In this lesson, you will learn to:
 * Announce each new count with online text-to-speech
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -60,7 +60,7 @@ To test the project, gather three objects you probably already have nearby: a co
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`05 AI Object Counter.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/05.AI.Object.Counter.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -135,21 +135,13 @@ Here's what each component does:
 **Python (main.py)** — runs on the Linux MPU
   * Starts the camera with ``Camera(adjustments=lambda frame: frame[::-1, :])`` and ``camera.start()``
   * ``VideoObjectDetection(camera, confidence=0.60, debounce_sec=0.2)`` reports every object it recognizes in each frame
-  * ``detection.on_detect_all(on_detection)`` receives those results; ``on_detection()`` keeps only the three entries of ``TARGETS``
-  * ``counts[label] += 1`` the first time a class is present while ``armed``, then disarms it so a single appearance is never counted twice
-  * ``MISSING_FRAMES_TO_REARM`` (10) consecutive missing frames re-arm the class — the object has to leave the view before it can be counted again
-  * ``ui.send_message("counter_state", public_state())`` publishes the counts, the total, and the latest detection as a socket event
-  * ``speak()`` puts the object's name into ``speech_queue``; ``speech_worker()`` runs ``EdgeTTS.say()`` on a background thread so detection never pauses
-  * ``ui.expose_api()`` publishes ``GET /state`` and ``POST /reset-counts``; reset zeroes the counters but deliberately leaves the armed flags alone
 
 **Browser (index.html / app.js)** — runs in the user's browser
   * Shows the live camera feed, the three counter cards, and the **TOTAL OBJECTS** counter
   * ``socket.on('counter_state')`` flashes the +1 animation and writes the "Mouse added" panel with its confidence
-  * ``fetch('/state')`` loads the current counts when the page connects
-  * The **RESET COUNTS** button posts to ``/reset-counts`` and redraws the cards at 0
 
 3. Experiment
-----------------
+-------------
 
 **Count Each Target Object**
 
@@ -176,35 +168,25 @@ Show the objects to the camera one at a time and check the results:
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **The counters never increase, even with an object in view**
 
 * **Cause:** The model's confidence stays below the 60% threshold — the object is too far, too small, poorly lit, or not one of the three target classes.
-* **Solution:** Hold the object 0.5–1.5 m from the camera, roughly centered, in good light. Only mice, keyboards, and cell phones are counted — a notebook or coffee cup will never move a counter, by design.
+* **Solution:** Hold the object 0.5–1.5 m from the camera, roughly centered, in good light.
 
 **An object counts twice while it never left the view**
 
 * **Cause:** The object briefly left the frame — or was only half-visible at the edge — for the 10-frame rearm window, so the class armed itself again.
-* **Solution:** Keep the object fully and continuously in view for one appearance. For a clean sequence, remove it completely between appearances, as the Web UI hint says: "Remove the object from view before counting another one."
+* **Solution:** Keep the object fully and continuously in view for one appearance.
 
 **Counting works in the Web UI, but there is no voice**
 
 * **Cause:** The TTS runtime is still being prepared on the first run, the internet connection is down, or the TTS engine failed to start.
-* **Solution:** Wait for the one-time TTS setup described in the note above and keep the UNO Q online — EdgeTTS synthesizes speech in the cloud, so it needs internet on every run. Watch the console: it should print ``TTS ready.``; if it prints ``TTS startup failed: ...`` instead, check the network and run the app again. Counting and the Web UI keep working either way.
-
-**RESET COUNTS returns to zero, but the object on screen isn't counted again**
-
-* **Cause:** Reset zeroes the counters but deliberately leaves the armed states untouched.
-* **Solution:** Remove the object from view and show it again — once it has been absent long enough to rearm, the next appearance counts as a fresh event.
-
-**The Web UI shows a black screen or "Disconnected"**
-
-* **Cause:** The camera is not enabled, the app stopped running, or the board disconnected.
-* **Solution:** Enable external carriers (see :ref:`enable_external_carriers`) and check the camera's FFC ribbon cable — the blue side faces up and both ends must click securely. Then click **Run** in App Lab and check the USB-C cable is firmly connected at both ends.
+* **Solution:** Wait for the one-time TTS setup described in the note above and keep the UNO Q online — EdgeTTS synthesizes speech in the cloud, so it needs internet on every run.
 
 5. Summary
--------------
+----------
 
 You built your first AI *event counter* — not just a classifier, but a small state machine that turns a stream of frames into meaningful events. In this lesson, you learned:
 

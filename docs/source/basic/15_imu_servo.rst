@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 15 IMU Servo
-======================
+============
 
 Earlier, you used a joystick to control servos — you pushed a stick and the servo followed. Now you'll remove the joystick entirely. **Tilt the board itself** and the servos respond — just like tilting a smartphone to steer a racing game, or the motion controls in a VR headset. The IMU provides the motion data; the servos do the moving; and the math you'll learn converts gravity into angles.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Fuse two concepts learned earlier — IMU readings and servo control — into one integrated system
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -49,7 +49,7 @@ Connect the IMU to the UNO Q's QWIIC connector (no wiring needed), then plug the
    :align: center
 
 2. Run the App
-----------------
+--------------
 **Step 1: Calibrate the IMU**
 
 Before reading sensor data, calibrate the IMU to ensure accurate measurements.
@@ -317,7 +317,7 @@ When the board is perfectly level, gravity points straight down — 100% on the 
 This is the same math your smartphone uses to rotate the screen when you turn it sideways.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Dead Zone**
 
@@ -342,7 +342,7 @@ Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoot
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **"IMU not detected" — servos don't move**
 
@@ -376,7 +376,7 @@ Try changing ``maxStep`` from 2 to 5. The servos will move faster but less smoot
 
 
 5. Summary
--------------
+----------
 
 You've built a motion-controlled pan-tilt system — the same technology inside camera gimbals, drone stabilizers, and VR controllers. In this lesson, you learned:
 

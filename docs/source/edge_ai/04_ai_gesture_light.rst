@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Reset the display automatically after the hand leaves the camera's view
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -72,7 +72,7 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`04 AI Gesture Light.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.AI.Gesture.Light.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -82,12 +82,12 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
       :width: 500
       :align: center
 
-#. The **Web UI** opens automatically — the live camera feed with a **Current Gesture** card underneath (the status dot goes from **Connecting...** to **Connected**). 
+#. The **Web UI** opens automatically — the live camera feed with a **Current Gesture** card underneath (the status dot goes from **Connecting...** to **Connected**).
 
-   * Hold your hand about 50 cm from the camera against a plain background: 
-   * A 👍 **thumbs up** shows **Thumbs up** with a confidence and the action **LED ON**, and the LED lights up; 
-   * A ✊ **fist** shows **LED OFF** and the LED goes dark. 
-   * A ✌️ **V-sign** or 🖐️ **open hand** is named but does not change the LED. 
+   * Hold your hand about 50 cm from the camera against a plain background:
+   * A 👍 **thumbs up** shows **Thumbs up** with a confidence and the action **LED ON**, and the LED lights up;
+   * A ✊ **fist** shows **LED OFF** and the LED goes dark.
+   * A ✌️ **V-sign** or 🖐️ **open hand** is named but does not change the LED.
    * Take your hand out of the frame and the card clears back to **Waiting...** after about two seconds.
 
    .. image:: img/04_ai_gesture_light.png
@@ -158,40 +158,21 @@ Here's what each component does:
 **Sketch (sketch.ino)** — runs on the STM32 MCU
   * ``digitalWrite(LED_PIN, state ? HIGH : LOW)`` switches **D5**
   * ``setLed()`` takes a plain integer — Python sends ``1`` or ``0``, never a gesture name
-  * ``Bridge.provide("set_led", setLed)`` registers the function Python is allowed to call
-  * ``setup()`` drives the pin LOW once so the LED starts dark, and ``loop()`` only delays — all the real work is event-driven
 
 **Python (main.py)** — runs on the Linux MPU
   * ``VideoObjectDetection(camera, confidence=0.25, debounce_sec=0.2)`` runs the hand-gesture model locally
   * ``best_gesture()`` ignores any label that is not in ``GESTURE_NAMES`` and returns the highest-confidence one
-  * ``on_detections()`` compares the new label with ``last_gesture`` and returns early when the two match
-  * ``set_led()`` calls ``Bridge.call("set_led", 1 if state else 0)``, and only for ``good`` (thumbs up) and ``neut`` (fist)
-  * ``send_result()`` pushes the gesture name, the confidence as a percentage, and an action string to the browser
-  * ``reset_when_gesture_is_lost()`` runs in a background thread and clears the stored label after ``GESTURE_LOST_TIMEOUT`` (2 seconds)
 
 **Bridge** — the communication channel between the MPU and the MCU
   * Sketch side: ``Bridge.provide("set_led", setLed)`` exposes the LED function
   * Python side: ``Bridge.call("set_led", 1)`` invokes it with one integer
-  * Keeping the gesture vocabulary on the Linux side leaves the MCU with nothing to interpret — it just switches a pin
 
 **Browser (HTML/JS)** — runs in the user's browser
   * ``socket.on('gesture_result', ...)`` writes the gesture name, the confidence, and the action into the Current Gesture card
   * ``setDefaultUI()`` runs on page load, before the socket connects, so the card starts at **Waiting...** / **Confidence: --**
-  * The live video travels on its own channel: ``app.js`` embeds the camera stream from port 4912 in an ``<iframe>``
-  * ``socket.on('connect')`` and ``socket.on('disconnect')`` drive the status dot, independently of the gesture card
-
-This project is a two-process team, and each process does what it is good at. On the Linux MPU, **Python decides what the camera sees** — a classification model runs entirely on the board and labels each frame. On the STM32 MCU, the **sketch decides how the LED should light**, because it owns the pin. The link between them is a single small number.
-
-* **A classification model, not an object model** — the general model from earlier answers *"what is in this picture?"* across dozens of categories; this project requests ``model: hand-gestures``, a small model that answers only *"which of my four gestures is this?"* It never returns cups or chairs, and its answer is always one of its own four classes.
-
-* **Four labels, four meanings** — ``GESTURE_NAMES`` translates the model's labels (``good`` 👍, ``neut`` ✊, ``five`` 🖐️, ``peace`` ✌️) into the names the Web UI shows, and decides which labels are supported. Only two have a hardware consequence: ``good`` turns the LED on and ``neut`` turns it off; the other two are display-only.
-
-* **Act on the change, not on the frame** — ``on_detections()`` fires on every frame, so the code compares each label with ``last_gesture`` and returns early when nothing changed; only a genuine change reaches ``Bridge.call("set_led", ...)``. That is **edge-triggered** behaviour. A background thread clears the stored label after ``GESTURE_LOST_TIMEOUT`` (2 seconds), so the same gesture can fire again.
-
-* **Why the settings are this loose** — ``confidence=0.25`` is deliberately permissive: the model must choose one of four classes, so the score is spread across four candidates rather than dozens, and a picky threshold would leave you waving at nothing. ``debounce_sec=0.2`` is the brick's own rate limit — five reports a second, enough to feel live while swallowing frame-to-frame flicker.
 
 3. Experiment
----------------
+-------------
 
 **Test Each Gesture**
 
@@ -220,32 +201,26 @@ Hold each gesture up to the camera for a second or two, about 50 cm away against
 
 The percentage in the card is the model's own certainty, and it reacts to how you present your hand. Hold a thumbs up steady and watch it climb. Move your hand much closer, so it fills the frame, and watch the number change — the model was trained on hands at a typical distance. Turn the hand slightly, or rotate your wrist, and the score usually dips because the silhouette the model sees is no longer the one it learned. Then try the same gestures in a dim room and in bright daylight: lighting is the single biggest influence on this number, and it is worth seeing how far it falls before the label disappears from the card entirely.
 
-
 4. Troubleshooting
---------------------
+------------------
 
 **Your gestures are never recognized — the card stays at "Waiting..."**
 
 * **Cause:** Your hand is the wrong size in the frame, the background is cluttered, or the lighting is too dim for the model to read the hand's shape.
-* **Solution:** Hold your hand about 50 cm from the camera and keep the **whole hand** inside the frame — if your palm looks huge on screen, move farther back. Use a clean, plain background (a white wall works well) and avoid other objects or a second hand near the camera. Good, even light makes a large difference to this model.
+* **Solution:** Hold your hand about 50 cm from the camera and keep the **whole hand** inside the frame — if your palm looks huge on screen, move farther back.
 
 **The card names the gesture, but the LED never changes**
 
 * **Cause:** The LED circuit is wired to the wrong pin, the LED is in backwards, or the Bridge connection to the sketch was never established.
-* **Solution:** Check that the **anode** — the longer leg — goes through the 220Ω resistor to **D5**, with the shorter leg to **GND**; an LED only conducts one way, so a reversed one stays dark. Also confirm the sketch's ``Bridge.provide("set_led", setLed)`` ran without error in the Console, because the card can update over socket.io even when the Bridge half has failed.
+* **Solution:** Check that the **anode** — the longer leg — goes through the 220Ω resistor to **D5**, with the shorter leg to **GND**; an LED only conducts one way, so a reversed one stays dark.
 
 **The LED changes at the wrong moments — false triggers**
 
 * **Cause:** ``CONFIDENCE_THRESHOLD`` is deliberately permissive at **0.25**, so a partial or ambiguous hand shape can be named as one of the four classes.
-* **Solution:** Raise the threshold in ``python/main.py`` — try ``0.5`` — and re-run, until the wrong gestures stop appearing. On the camera side, keep your hand away from patterned backgrounds and out of frame when you are not gesturing, and note that the display-only gestures (✌️ and 🖐️) are the safest way to check what the model is seeing without changing the LED.
-
-**The status shows "Disconnected", or the camera area stays black**
-
-* **Cause:** Two different connections feed this page — the socket to Python (the status dot) and the camera stream (the picture). Losing either one has its own symptom, and the app being stopped breaks both.
-* **Solution:** First make sure the app is still running and that external carriers are enabled for the camera (:ref:`enable_external_carriers`). Then stop the app, run it again, and refresh the Web UI tab — the page re-requests the stream every second, so a reload usually brings it back. If the board is unplugged or the Wi-Fi dropped, reconnect it and run the app once more.
+* **Solution:** Raise the threshold in ``python/main.py`` — try ``0.5`` — and re-run, until the wrong gestures stop appearing.
 
 5. Summary
--------------
+----------
 
 You just taught your UNO Q to read a gesture and answer with hardware — a camera, four classes, and an LED that obeys two of them. In this lesson, you learned:
 

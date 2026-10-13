@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 09 IoT Security Monitor
-==========================
+=======================
 
 A doorbell waits for a visitor. A security system **watches** — continuously. In this lesson, you'll build the most complex project in this module: a PIR motion sensor watches the room, a live camera preview streams to your browser, a two-tone siren sounds when motion is detected, snapshots are saved automatically, and every event is logged with a timestamp. Motion, camera, alarm, and event log — all working together.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Build a monitoring system with states (MOTION DETECTED / AREA CLEAR) shared across sketch, Python, and browser
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -61,7 +61,7 @@ Connect the PIR sensor: **VCC** → **3.3V**, **GND** → **GND**, **OUT** → *
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 
 #. Download :download:`09 IoT Security Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/09.IoT.Security.Monitor.zip>`.
@@ -141,7 +141,7 @@ Here's what each component does:
 Real PIR sensors sometimes flicker LOW for a moment even when a person is still in the room. Without the hold time, the alarm would stutter on and off. The 10-second rule means "the area is clear" only when the sensor has been quiet for a while — exactly how real security systems behave.
 
 3. Experiment
-----------------
+-------------
 
 **Tune the Hold Time**
 
@@ -169,7 +169,7 @@ The siren alternates ``ALARM_LOW_FREQ`` (800 Hz) and ``ALARM_HIGH_FREQ`` (1200 H
 Add a counter in the sketch that increments each time motion is detected (each AREA CLEAR → MOTION DETECTED transition). Send it to Python with the motion state and display "Motion events today: N" in the browser.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The alarm triggers constantly even when nothing moves**
 
@@ -192,7 +192,7 @@ Add a counter in the sketch that increments each time motion is detected (each A
 * **Solution:** Check that ``Bridge.notify("motion_state", active)`` and ``Bridge.provide("motion_state", ...)`` match exactly. Refresh the browser page — it re-requests the initial state on reconnect.
 
 5. Summary
--------------
+----------
 
 You've built a complete IoT security monitor — motion detection, siren alarm, live camera, automatic snapshots, and an event log! In this lesson, you learned:
 

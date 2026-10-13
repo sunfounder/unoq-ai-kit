@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 Get Started
-==================================
+===========
 
 Before you jump into building circuits and writing code, take a few minutes to get familiar with the hardware and software that power every project in this kit.
 
@@ -16,9 +16,10 @@ Before you jump into building circuits and writing code, take a few minutes to g
 * **Install App Lab** — Set up the Arduino App Lab development environment on your computer. This is the main tool you'll use throughout the course — no driver installation needed.
 * **Download the Code** — Get the course code from GitHub and learn how the project folders are organized.
 * **Run Your First App** — Create, import, and run a blink sketch in App Lab. Learn the app structure (``sketch.ino``, ``main.py``, ``app.yaml``) so you're comfortable navigating projects.
+* **The App Lab AI Agent (optional)** — Open App Lab's agent, connect your own AI account, and learn what it is good at before you rely on it.
 * **Arduino IDE (Optional)** — A brief introduction to the traditional Arduino IDE for those who want to explore beyond App Lab.
 
-By the end of this section, your UNO Q will be connected, App Lab will be running, and you'll have seen the onboard LED blink — ready for Lesson 1.
+By the end of this section, your UNO Q will be connected, App Lab will be running, and you'll have seen the onboard LED blink — ready for your first project.
 
 .. toctree::
     :maxdepth: 1
@@ -30,4 +31,5 @@ By the end of this section, your UNO Q will be connected, App Lab will be runnin
     app_lab
     download_code
     first_app
+    ai_agent
     arduino_ide

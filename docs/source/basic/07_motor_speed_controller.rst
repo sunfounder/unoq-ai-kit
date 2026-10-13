@@ -12,10 +12,10 @@ In this lesson, you will learn to:
 * Control a DC motor with two PWM input pins — **IN1** and **IN2**
 * Set motor **speed** with ``analogWrite()`` values (0–255)
 * Control motor **direction** by swapping which of the two inputs you drive
-* Understand why motors need a **separate power source** (battery) — USB alone isn't enough
+* Understand why the motor driver takes its power straight from the Robot Shield
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -45,7 +45,7 @@ The motor connects to the Robot Shield's **M0** terminal — its two control inp
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -184,7 +184,7 @@ This lesson drives the motor the direct way: two PWM-capable pins and the same `
 
 
 3. Experiment
-----------------
+-------------
 
 **Change Speed and Direction**
 
@@ -240,12 +240,12 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **Motor does not spin at all**
 
-* **Cause:** The battery is not connected or depleted, or the motor connector is loose.
-* **Solution:** Check that the battery pack is connected and has fresh batteries. Verify the motor connector is firmly seated in the M0 terminal.
+* **Cause:** The motor connector is loose, or the motor is not seated in the **M0** terminal.
+* **Solution:** Check that the motor connector is firmly seated in the **M0** terminal.
 
 **Motor hums but doesn't turn**
 
@@ -253,19 +253,5 @@ Instead of jumping instantly to full speed, make the motor **ramp up** from 0 to
 * **Solution:** Increase the PWM value to at least 77–102 (about 30–40% of 255). Every motor has a minimum starting threshold. Check that nothing is touching the motor shaft or fan blade.
 
 **Motor only spins in one direction**
-
-* **Cause:** The code never swaps which of the two inputs is driven — the H-bridge keeps sending current the same way.
-* **Solution:** Make sure the code swaps the two ``analogWrite()`` calls: driving ``MOTOR_IN1_PIN`` while ``MOTOR_IN2_PIN`` is 0 spins one way, and driving ``MOTOR_IN2_PIN`` while ``MOTOR_IN1_PIN`` is 0 spins the other. Check that your ``delay()`` values are long enough to notice the change — a reversed motor at 50% looks identical to a forward motor if you blink.
-
-5. Summary
--------------
-
-You just made something move — and that's a big deal. DC motors are the foundation of robotics, drones, electric vehicles, and industrial automation. In this lesson, you learned:
-
-* How to control a DC motor with two PWM inputs — **D2 (IN1)** and **D3 (IN2)**
-* How ``analogWrite()`` sets the speed (0–255) while swapping which input you drive picks the direction
-* How an H-bridge reverses motor polarity to change direction
-* Why motors need a separate battery — logic power and motor power are independent
-* How to ramp speed smoothly with ``for`` loops and ``analogWrite()``
 
 In the next lesson, you'll control a different kind of motor — a **servo** that moves to precise angles instead of spinning continuously. Servos are how robots achieve precise positioning: steering, pan-tilt camera mounts, and robotic arms.

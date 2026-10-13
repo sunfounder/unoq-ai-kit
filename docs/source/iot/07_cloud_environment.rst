@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 07 Arduino Cloud Environment Monitor
-======================================
+====================================
 
 In the previous lesson, commands flowed **from** the cloud **to** your device. Now you'll reverse the flow — uploading temperature and humidity data **from** your UNO Q **up to** Arduino Cloud, where you can view it as live gauges. You'll also add a cloud switch that controls an LED on your desk from anywhere in the world. This is the core pattern of IoT: devices report, cloud stores and visualizes.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Control an LED remotely via a cloud switch
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -51,10 +51,18 @@ This project uses the following Bricks and sketch libraries:
 * Bricks (declared in ``app.yaml``):
 
   * ``arduino_cloud`` — connects the app to Arduino Cloud and exposes the ``temperature``, ``humidity``, and ``led`` variables
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``DHT sensor library`` (1.4.6) — reads the DHT11 temperature and humidity sensor
   * ``Adafruit Unified Sensor`` (1.1.15) — the sensor abstraction the DHT library is built on
+
+.. note::
+
+   We recommend clicking **Download** to save the generated **Device ID** and **Secret Key**, as you will need them later when configuring the Arduino Cloud Brick.
+
+   .. image:: img/3_cloud_device_id.png
+   :width: 90%
 
 **Wiring Diagram**
 
@@ -65,7 +73,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED with
    :align: center
 
 2. Setup
----------------
+--------
 
 **1. Create a Device**
 
@@ -82,14 +90,6 @@ Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED with
       :width: 90%
 
 #. Follow the on-screen instructions, enter a **Device Name**, then click **Continue**.
-
-   .. note::
-
-      We recommend clicking **Download** to save the generated **Device ID** and **Secret Key**, as you will need them later when configuring the Arduino Cloud Brick.
-
-   .. image:: img/3_cloud_device_id.png
-      :width: 90%
-
 **2. Create a Thing**
 
 #. Go to the  |link_cloud_things|  page and create a new thing. Name it "Environment Monitor".
@@ -161,7 +161,7 @@ Connect the DHT11: VCC to 3.3V, DATA to pin D4, GND to GND. Connect the LED with
       :width: 90%
 
 3. Run the App
-----------------
+--------------
 
 #. Download :download:`07 Arduino Cloud Environment Monitor.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Arduino.Cloud.Environment.Monitor.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -235,18 +235,18 @@ Here's what each component does:
 This lesson introduces **bidirectional cloud communication**: sensor data flows up every 5 seconds, LED commands flow down the moment you flip the switch.
 
 4. Experiment
-----------------
+-------------
 
 **Adjust the Upload Interval**
 
-Change ``SENSOR_INTERVAL`` in the sketch: 2000 ms for rapid updates, 10000 ms for battery-friendly logging.
+Change ``SENSOR_INTERVAL`` in the sketch: 2000 ms for rapid updates, 10000 ms for slower, steadier logging.
 
 **Challenge: Add an Alert Threshold**
 
 In ``update_environment_cloud``, check if temperature exceeds 30°C. If so, set ``iot_cloud.led = True`` automatically — the LED becomes a high-temperature warning light without any cloud interaction.
 
 5. Troubleshooting
---------------------
+------------------
 
 **Dashboard shows stale or no data**
 
@@ -264,7 +264,7 @@ In ``update_environment_cloud``, check if temperature exceeds 30°C. If so, set 
 * **Solution:** Verify ``Bridge.provide("set_led_state", ...)`` in the sketch uses the exact same name as ``Bridge.call("set_led_state", ...)`` in Python.
 
 6. Summary
--------------
+----------
 
 Your UNO Q is a bidirectional cloud-connected device! In this lesson, you learned:
 

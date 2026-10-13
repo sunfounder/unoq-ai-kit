@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Use parameters to make functions flexible and reusable
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ The RGB LED has **four legs**: the longest is the **common cathode** — connect
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -257,7 +257,7 @@ You've just discovered how screens and displays create every color you see. The 
 This is the same principle behind every pixel in your phone, computer, and TV screen — millions of tiny RGB elements, each independently controlled to form the image you see.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Cycle Speed**
 
@@ -322,7 +322,7 @@ Pick a color that's not in the basic eight. Use values between 0 and 255 for eac
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **RGB LED does not light up at all**
 
@@ -345,7 +345,7 @@ Pick a color that's not in the basic eight. Use values between 0 and 255 for eac
 * **Solution:** The RGB LED needs a resistor on **each** of the three color pins. Replace the LED with a new one and double-check all three 220Ω resistors are in place before running again.
 
 5. Summary
--------------
+----------
 
 You just painted with light! In this lesson, you learned:
 

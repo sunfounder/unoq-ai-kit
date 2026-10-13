@@ -5,7 +5,7 @@
 .. _cpn_avio_carrier:
 
 AVIO Carrier
-=================
+============
 
 .. image:: img/avio_carrier.png
    :width: 500
@@ -16,7 +16,7 @@ The **AVIO Carrier** (Audio Video Input Output Carrier) is the multimedia expans
 Together with the UNO Q and the Robot Shield, the AVIO Carrier is one of the boards the Pan Tilt Kit is built from. Every camera, voice, and audio lesson in this course uses it.
 
 Specifications
-----------------
+--------------
 
 .. list-table::
    :header-rows: 1
@@ -60,7 +60,7 @@ Specifications
      - JMEDIA / JMISC
 
 Audio
---------
+-----
 
 .. image:: img/carrier_speaker_microphone.png
    :width: 600
@@ -73,7 +73,7 @@ The audio chain is built around the **NS4150B** Class-D amplifier and its **4Ω 
 * **Headphones** — plug into the 3.5 mm jack for private listening. The jack shares the amplifier output, so keep the volume moderate.
 
 Camera
----------
+------
 
 .. image:: img/carrier_camera.png
    :width: 600
@@ -86,7 +86,7 @@ The AVIO Carrier exposes **two CSI-2 camera channels**, silkscreened CAMERA 0 an
 * Reset/enable and status-LED control for both channels comes from the TCA9555 expander, so no extra GPIO pins are consumed on the UNO Q.
 
 RGB LEDs
------------
+--------
 
 .. image:: img/carrier_rgb_led.png
    :width: 600

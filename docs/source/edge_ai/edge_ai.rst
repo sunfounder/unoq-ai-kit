@@ -3,9 +3,9 @@
    :end-before: end_hello_message
 
 Module D: Edge AI
-=====================
+=================
 
-In this module, you'll give your UNO Q the ability to **see and respond**. Using the AVIO Carrier's camera with pre-trained AI models that run entirely on the device, you'll build projects that recognize objects, read your hand gestures, count what passes in front of the lens, follow your face, and finally guard a room on their own.
+In this module, you'll give your UNO Q the ability to **see and respond**. Using the AVIO Carrier's camera with pre-trained AI models that run entirely on the device, you'll build projects that recognize objects, read your hand gestures, count what passes in front of the lens, follow your face, and finally guard a room on their own. The last lesson goes one step further: you collect your own dataset, train your own model, and swap it into the same app.
 
 Each project adds one new idea, building on the one before it:
 
@@ -17,12 +17,14 @@ Each project adds one new idea, building on the one before it:
 * **06 AI Gesture Camera** — gestures drive a pan-tilt camera, take a photo, and get a spoken answer
 * **07 Face Tracking Camera** — the camera stops reacting just once and starts following you continuously
 * **08 AI Smart Guard** — everything fused into one autonomous security sentry
+* **09 Train Your Own AI Model** — the model stops being somebody else's: collect a dataset, train it in Edge Impulse Studio, install it, and recognize what you choose
 
 By the end of this module, you will be able to:
 
 * Run pre-trained AI vision models on the UNO Q
 * Connect AI results to physical hardware through the Bridge
 * Build systems that respond to what the camera sees
+* Train a custom object-detection model and swap it into a brick without touching the code
 
 Let's give your UNO Q vision.
 
@@ -37,3 +39,4 @@ Let's give your UNO Q vision.
    06_ai_gesture_camera
    07_face_tracking_camera
    08_ai_smart_guard
+   09_train_your_own_model

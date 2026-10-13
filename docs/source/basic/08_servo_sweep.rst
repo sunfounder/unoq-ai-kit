@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Understand the difference between **continuous rotation** (DC motor) and **positional control** (servo)
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -46,7 +46,7 @@ The Pan Tilt Kit is already assembled — connect the servo's signal wire to **D
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -208,7 +208,7 @@ The servo is your first **positional actuator** — instead of setting a speed, 
 A servo is essentially a DC motor with a gearbox, a potentiometer (for position feedback), and a tiny controller board — all in one package. When you call ``write(90)``, the servo's internal controller reads the potentiometer, compares it to 90°, and drives the motor until they match.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Sweep Range and Speed**
 
@@ -287,17 +287,17 @@ Connect a potentiometer (used in the Analog Input lesson) to A2 and use it to co
    Turn the knob fully left → servo moves to 0°. Turn fully right → servo moves to 180°. Every position in between maps smoothly. The short ``delay(20)`` gives near-instant response. This is a complete **analog input → position output** system — the same control pattern used in robotic arms, pan-tilt camera mounts, and model aircraft.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Servo does not move at all**
 
-* **Cause:** The servo cable is plugged in backwards, the battery isn't connected, or the wrong pin is selected in code.
-* **Solution:** Check the servo connector orientation: Brown = GND, Red = 5V, Orange = Signal. Make sure its signal wire is on pin 9 (the pin matching ``myservo.attach(9)`` in the code). Verify the battery pack is connected and has fresh batteries.
+* **Cause:** The servo cable is plugged in backwards, or the wrong pin is selected in code.
+* **Solution:** Check the servo connector orientation: Brown = GND, Red = 5V, Orange = Signal. Make sure its signal wire is on pin 9 (the pin matching ``myservo.attach(9)`` in the code).
 
 **Servo jitters or vibrates in place**
 
 * **Cause:** The servo is trying to hold a position but the angle updates too frequently, or the power supply is unstable.
-* **Solution:** Increase the ``delay()`` between angle updates to 50ms or more. Check that the battery pack is charged.
+* **Solution:** Increase the ``delay()`` between angle updates to 50ms or more.
 
 **Servo moves to the wrong angle or overshoots**
 
@@ -306,11 +306,8 @@ Connect a potentiometer (used in the Analog Input lesson) to A2 and use it to co
 
 **Servo moves erratically or randomly**
 
-* **Cause:** The battery is low or there's a loose connection.
-* **Solution:** Replace with fresh batteries and check all wiring.
-
 5. Summary
--------------
+----------
 
 Your robot just gained a joint! Servos bring precision and control to motion — instead of "spinning," you say "go to 45 degrees and stay there." In this lesson, you learned:
 

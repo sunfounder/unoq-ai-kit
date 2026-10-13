@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 12 Thermistor-Controlled Fan
-==============================
+============================
 
 You've controlled a motor manually and sensed temperature digitally in earlier lessons. Now you'll connect the two to build an **automatic cooling system**: a temperature sensor that reads the room, and a fan that spins faster as it gets warmer — all without any human input. This is how your laptop's cooling fan, your car's radiator fan, and industrial temperature controllers work.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Use ``math.h`` and the ``log()`` function for temperature calculation
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the motor to the Robot Shield's **M0** terminal (inputs **IN1 on D2**, *
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -246,7 +246,7 @@ If the formula seems complicated, here is the simplified version of what happens
 Every NTC thermistor application follows these same four steps. The parameters (beta, nominal resistance, series resistor) change based on the specific components, but the pattern is universal.
 
 3. Experiment
-----------------
+-------------
 
 **Adjust the Temperature Thresholds**
 
@@ -294,12 +294,12 @@ Reverse the system: make the motor spin when the temperature is **below** a thre
    This inverts the system logic — same components, opposite behavior. Try breathing cold air on the thermistor (blow gently) to see the fan activate. This is how a thermostat-controlled heater works: the colder it gets, the harder it works.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Motor does not spin, even when the thermistor feels warm**
 
 * **Cause:** The temperature isn't exceeding 25°C, or the thermistor circuit is wired incorrectly.
-* **Solution:** Check the battery connection. Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and A1, 10kΩ resistor between A1 and 3.3V. Verify the motor is connected to the M0 terminal on the Robot Shield, with its IN1 wire on D2 and IN2 wire on D3.
+* **Solution:** Open the Serial Monitor — if the temperature reads below 25°C, pinch the thermistor firmly to warm it past the threshold. If the temperature reads 0°C or a negative number, check the voltage divider wiring: thermistor between GND and A1, 10kΩ resistor between A1 and 3.3V. Verify the motor is connected to the M0 terminal on the Robot Shield, with its IN1 wire on D2 and IN2 wire on D3.
 
 **Temperature readings are way off (0°C, 100°C, or negative)**
 
@@ -317,7 +317,7 @@ Reverse the system: make the motor spin when the temperature is **below** a thre
 * **Solution:** Check the Serial Monitor for the actual temperature values. If room temperature is already reading above 50°C, there's a wiring or calculation error — see the previous troubleshooting item. If temperatures look correct, verify the ``if/else if`` thresholds are in the right order.
 
 5. Summary
--------------
+----------
 
 You've built a complete automatic control system — a sensor that reads the environment and an actuator that responds without any human intervention. In this lesson, you learned:
 

@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 08 Camera Snapshot
-====================
+==================
 
 The AVIO Carrier doesn't just speak and listen — it has eyes too. In this lesson you'll use the built-in camera: press the button, and the board captures a photo and saves it to the ``photos`` folder with automatic numbering. One press, one picture.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Generate never-overwriting filenames like ``photo_001.jpg``
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -55,7 +55,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`08 Camera Snapshot.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Camera.Snapshot.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -90,7 +90,7 @@ Connect the push button between D4 and GND — no external resistor is needed, t
 * The same edge detection from the earlier button lessons is used: a photo is captured only when the button **changes** from released to pressed, so holding the button down still takes exactly one photo.
 
 3. Experiment
-----------------
+-------------
 
 **Take a Photo Series**
 
@@ -130,7 +130,7 @@ New photos now appear in ``my_snapshots`` instead — the folder is created auto
 Modify ``next_photo_path()`` so the app never keeps more than five photos: before saving a new one, delete the oldest files when more than five exist. You'll need the ``Path`` methods ``glob()`` (to list files), ``stat().st_mtime`` (to find the oldest), and ``unlink()`` (to delete) — or sort by name instead of time.
 
 4. Troubleshooting
---------------------
+------------------
 
 **"Initializing camera..." never finishes**
 
@@ -153,7 +153,7 @@ Modify ``next_photo_path()`` so the app never keeps more than five photos: befor
 * **Solution:** Point the camera at a well-lit subject and hold the board still for a moment after pressing the button.
 
 5. Summary
--------------
+----------
 
 The UNO Q can now see and save what it sees! In this lesson, you learned:
 

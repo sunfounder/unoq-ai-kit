@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 02 UI Control RGB LED
-==========================
+=====================
 
 A single on/off button is useful. But what if you want to pick any color? In this lesson, you'll build a **web color picker** that controls an RGB LED — spin a color wheel and adjust the brightness, and the LED mixes the colors in real time. The same hybrid architecture from the previous lesson (Python + Bridge + Sketch) now drives three PWM channels on the Robot Shield instead of one digital pin.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Map web-standard 0–255 values to the Robot Shield's 0–1000 PWM range
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -51,6 +51,7 @@ This project uses the following Bricks and sketch libraries:
 * Bricks (declared in ``app.yaml``):
 
   * ``web_ui`` — serves the Web UI and pushes live colour updates to the browser
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``RobotShield`` (1.0.4) — access to the Robot Shield's GPIO, PWM, and I2C hardware
@@ -70,7 +71,7 @@ This project uses the following Bricks and sketch libraries:
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 
 #. Download :download:`02 UI Control RGB LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.UI.Control.RGB.LED.zip>`.
@@ -144,7 +145,7 @@ Here's what each component does:
 Humans think of color as "which hue, how vivid, how bright" — that's HSV, and it's what a color wheel naturally represents. LEDs physically mix red, green, and blue light. The conversion happens in the browser before the values even leave the page — the sketch only ever sees three numbers.
 
 3. Experiment
-----------------
+-------------
 
 **Add Preset Color Buttons**
 
@@ -164,7 +165,7 @@ In ``index.html``, add preset buttons below the color wheel. In ``app.js``:
 Add a "Fade" button in the HTML. In ``app.js``, animate between two colors over 3 seconds using ``setInterval`` — send incremental R/G/B values at ~30 FPS. The smooth transition is handled entirely in the browser; the sketch just receives the stream of updated values.
 
 4. Troubleshooting
---------------------
+------------------
 
 **LED shows wrong colors — red is green, etc.**
 
@@ -187,7 +188,7 @@ Add a "Fade" button in the HTML. In ``app.js``, animate between two colors over 
 * **Solution:** The sketch already dedupes identical colors (``lastSent``). If it still feels jumpy, close other apps that are loading the network, or reduce the brightness-slider update rate.
 
 5. Summary
--------------
+----------
 
 You've built a real-time web color mixer! In this lesson, you learned:
 

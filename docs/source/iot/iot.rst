@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 Module C: UI / Arduino Cloud / IoT
-=======================================
+==================================
 
 In Module A, you controlled hardware with sketches — LEDs, sensors, servos, and motors, all running locally on your desk. In Module B, you explored the AVIO Carrier's built-in **speaker**, **microphone**, and **camera**. Now you'll connect your device to the **internet** and build applications that bridge the physical and digital worlds.
 

@@ -3,11 +3,13 @@
    :end-before: end_hello_message
 
 FAQ
-===============
+===
 
+Packages and downloads
+----------------------
 
 How do I import a lesson package?
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Every lesson page and every project README links to its own package on the
 `releases page <https://github.com/sunfounder/unoq-ai-kit/releases/latest>`_.
@@ -37,106 +39,64 @@ identical and the app inside keeps its name.
 The speech lessons bundle the bricks they need, which is why those packages
 are about 100 MB; the rest are a few hundred kilobytes.
 
+Why are some lesson packages about 100 MB?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The speech lessons carry the bricks they need inside the package, including the
+Whisper model used for local speech recognition, which is what makes those
+packages large. Every other package is a few hundred kilobytes.
+
+The downloaded package name is not what the lesson says
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GitHub rewrites spaces in the file names it publishes, so ``01 Hello LED`` is
+published as ``01.Hello.LED.zip``. The contents are identical and the app
+inside keeps its name. See :doc:`/get_start/download_code`.
+
 Why does a lesson take so long the first time?
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Several lessons download something the first time they run — the text to
 speech runtime, the speech recognition model, or an AI model. That download
 happens once. If an app sits at "starting" for a few minutes, let it finish.
 
 Which lessons need an Internet connection?
--------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lessons that speak, that ask a cloud AI model a question, or that use Arduino
 Cloud or Blynk need the Internet. The rest — vision, sensors, motors, the LED
 matrix, local speech recognition — run entirely on the board.
 
-Why are some lesson packages about 100 MB?
--------------------------------------------
 
-The speech lessons carry the bricks they need inside the package, including the
-Whisper model used for local speech recognition, which is what makes those
-packages large. Every other package is a few hundred kilobytes.
-
-App Lab says a library is missing
-----------------------------------
-
-When a project needs a library that is not installed yet, App Lab lists it
-under **Sketch Libraries**. Follow :ref:`install_update_lib_c` to install or
-update it, then run the app again.
-
-The camera lessons do not work
--------------------------------
-
-The camera needs external carriers enabled on the UNO Q. That is a one-time
-setup, described in :ref:`enable_external_carriers`. Cameras are also not
-hot-swappable: disconnect the battery and the USB cable before you plug one in.
-
-The voice lessons do not hear me
----------------------------------
-
-Two things are worth checking, in this order. First, whether the microphone
-picks up anything at all — speak from 30–50 cm in a quiet room. Second, the
-wake-word model shipped with the board was trained on one speaker's voice, so
-it recognises some voices better than others; the lesson console prints what
-the model made of every window of audio, which shows whether the microphone or
-the model is the problem.
-
-Where do I enter an API key, and how do I change it?
------------------------------------------------------
-
-Lessons that use a cloud AI model ask for the key the first time you click
-**Run**. App Lab stores it, so you only enter it again if it changes. Cloud
-platforms such as Arduino Cloud and Blynk also give you a **Device ID** and a
-**Secret Key** — save them when they are generated, because the lesson needs
-them later.
-
-Can more than one app run at a time?
--------------------------------------
-
-No. The UNO Q runs one app at a time, so starting a lesson stops whatever was
-running. If **Run** answers that another app is running, stop that app first.
-
-Where do I see what an app is printing?
-----------------------------------------
-
-Open the app in App Lab and watch its console while it runs. The lessons refer
-to those lines — ``[READY]``, ``[HEARD]``, and so on — so you can follow what
-the code is doing. Arduino documents the app window in `Run and Monitor Apps
-<https://docs.arduino.cc/software/app-lab/apps/run/>`_.
-
-The downloaded package name is not what the lesson says
---------------------------------------------------------
-
-GitHub rewrites spaces in the file names it publishes, so ``01 Hello LED`` is
-published as ``01.Hello.LED.zip``. The contents are identical and the app
-inside keeps its name. See :doc:`/get_start/download_code`.
-
-The board cannot be reached any more
--------------------------------------
-
-The board keeps its name when its address changes, so ``jojo.local`` usually
-still works when an old IP address does not. App Lab finds the board by itself;
-this only matters if you connect from a terminal.
-
-The board is running out of space
-----------------------------------
-
-Apps bring their own runtimes with them, so a board that has run many lessons
-fills up. Deleting the apps you no longer use frees the space again.
+App Lab basics
+--------------
 
 New to App Lab?
-----------------
+~~~~~~~~~~~~~~~
 
 Arduino documents App Lab itself — apps, bricks, the editor, publishing — at
 `Arduino App Lab documentation <https://docs.arduino.cc/software/app-lab/>`_.
 For the board's hardware, see
 `Arduino UNO Q <https://www.arduino.cc/en/uno-q/>`_.
 
+Where do I see what an app is printing?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open the app in App Lab and watch its console while it runs. The lessons refer
+to those lines — ``[READY]``, ``[HEARD]``, and so on — so you can follow what
+the code is doing. Arduino documents the app window in `Run and Monitor Apps
+<https://docs.arduino.cc/software/app-lab/apps/run/>`_.
+
+Can more than one app run at a time?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+No. The UNO Q runs one app at a time, so starting a lesson stops whatever was
+running. If **Run** answers that another app is running, stop that app first.
+
 .. _run_button_does_nothing:
 
 Run button does nothing
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 If the **Run** button (▶) doesn't respond or your board doesn't appear in App Lab:
 
@@ -148,7 +108,7 @@ If the **Run** button (▶) doesn't respond or your board doesn't appear in App 
 .. _install_update_lib_c:
 
 Install or Update Sketch Libraries
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you import a ``.zip`` file, App Lab may list the libraries the app needs under **Sketch Libraries**. They are installed automatically, so there is nothing to do.
 
@@ -172,10 +132,68 @@ Note: To ensure the UNO Q board is properly detected by the Arduino App Lab, you
 https://docs.arduino.cc/tutorials/uno-q/user-manual/#linux-host-setup-required-for-linux-users
 
 
+App Lab says a library is missing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When a project needs a library that is not installed yet, App Lab lists it
+under **Sketch Libraries**. Follow :ref:`install_update_lib_c` to install or
+update it, then run the app again.
+
+
+The board itself
+----------------
+
+The board cannot be reached any more
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The board keeps its name when its address changes, so ``jojo.local`` usually
+still works when an old IP address does not. App Lab finds the board by itself;
+this only matters if you connect from a terminal.
+
+The board is running out of space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Apps bring their own runtimes with them, so a board that has run many lessons
+fills up. Deleting the apps you no longer use frees the space again.
+
+Flashing a New Image to the UNO Q
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Short two pins together, then plug in the UNO Q.
+
+.. An image showing which two pins to short is still needed.
+
+https://docs.arduino.cc/tutorials/uno-q/update-image/
+
+Download the Arduino Flasher CLI for your OS (macOS / Linux / Windows): https://www.arduino.cc/en/software/#flasher-tool
+
+
+Unzip the downloaded file, (you will receive an executable binary named arduino-flasher-cli)
+
+
+Navigate to the unzipped folder (e.g. arduino-flasher-cli-x.x.x-windows-amd64), and run the following command:
+
+On Windows, run the following command:
+
+
+./arduino-flasher-cli.exe flash latest
+
+
+Camera
+------
+
+The camera lessons do not work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The camera needs external carriers enabled on the UNO Q. That is a one-time
+setup, described in :ref:`enable_external_carriers`. Cameras are also not
+hot-swappable: disconnect the USB-C cable before you plug one in.
+
 .. _enable_external_carriers:
 
 Enable External Carriers (one-time setup)
--------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before you can use the camera, you must enable external carriers on your
 UNO Q. This is a **one-time setup** — once enabled, it stays enabled for
@@ -216,7 +234,7 @@ every project.
 .. _check_camera_detected:
 
 How do I check that the camera is detected?
---------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The camera works as soon as external carriers are enabled
 (:ref:`enable_external_carriers`). If a camera lesson still cannot find the
@@ -316,7 +334,7 @@ up to date:
 .. _camera_detected_app_fails:
 
 The camera is detected, but a camera app still fails
-------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **"No camera found" in App Lab**
 
@@ -338,26 +356,72 @@ The camera is detected, but a camera app still fails
 * **Cause:** These commands need root privileges.
 * **Solution:** Prefix them with ``sudo`` (for example ``sudo cam -l``, ``sudo i2cdetect -y 0``).
 
-Flashing a New Image to the UNO Q
--------------------------------------------
+
+Sound and speech
+----------------
+
+The voice lessons do not hear me
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Two things are worth checking, in this order. First, whether the microphone
+picks up anything at all — speak from 30–50 cm in a quiet room. Second, the
+wake-word model shipped with the board was trained on one speaker's voice, so
+it recognises some voices better than others; the lesson console prints what
+the model made of every window of audio, which shows whether the microphone or
+the model is the problem.
 
 
-Short two pins together, then plug in the UNO Q.
+AI models and Edge Impulse
+--------------------------
 
-.. An image showing which two pins to short is still needed.
+Where can I learn more about Edge Impulse?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-https://docs.arduino.cc/tutorials/uno-q/update-image/
+Edge Impulse documents the same workflow in more depth. The course keeps the
+Arduino-specific steps — setting the target, deploying, and downloading the model
+in App Lab — that these pages leave out:
 
-Download the Arduino Flasher CLI for your OS (macOS / Linux / Windows): https://www.arduino.cc/en/software/#flasher-tool
+* `Image classification <https://docs.edgeimpulse.com/tutorials/end-to-end/image-classification>`_ — the end-to-end training tutorial this course follows
+* `Run Arduino App Lab <https://docs.edgeimpulse.com/hardware/deployments/run-arduino-app-lab>`_ — deploying a model for the UNO Q
+* `Custom AI models for Arduino App Lab <https://docs.arduino.cc/software/app-lab/integrations/ai-models/>`_ — Arduino's own walkthrough
+
+An app will not start after adding a second video AI brick
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every video AI brick opens the live preview on port **4912**, so an app can hold
+only one of them. Adding a second one — a ``video_image_classification`` brick next to an
+existing ``video_object_detection`` brick, for example — stops the app with a message
+such as ``Bind for :::4912 failed: port is already allocated``.
+
+Open the app's ``app.yaml`` in the App Lab editor and keep just one video brick,
+deleting the others, then run the app again. Classification and detection both
+fit a camera app; keep the one that matches the model you trained.
+
+A model shows one result when there are two identical objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+That is what an **image classification** model does: it answers for the whole
+picture — "this is a card reader" — instead of listing every object it can
+find. Two identical objects therefore produce one result with one confidence,
+and the class totals count how often each class won, not how many objects were
+in the frame.
+
+An **object detection** model returns one result per object, each with a box or
+a centre point, so two objects give two results. Training one takes longer,
+because every training image has to be annotated with a box around each
+object. In App Lab, classification models run on the ``image_classification``
+and ``video_image_classification`` bricks, and detection models on ``object_detection``
+and ``video_object_detection``.
 
 
-Unzip the downloaded file, (you will receive an executable binary named arduino-flasher-cli)
+API keys and cloud services
+---------------------------
 
+Where do I enter an API key, and how do I change it?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Navigate to the unzipped folder (e.g. arduino-flasher-cli-x.x.x-windows-amd64), and run the following command:
-
-On Windows, run the following command:
-
-
-./arduino-flasher-cli.exe flash latest
-
+Lessons that use a cloud AI model ask for the key the first time you click
+**Run**. App Lab stores it, so you only enter it again if it changes. Cloud
+platforms such as Arduino Cloud and Blynk also give you a **Device ID** and a
+**Secret Key** — save them when they are generated, because the lesson needs
+them later.

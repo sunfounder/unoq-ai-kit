@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Handle sensor errors gracefully with ``isnan()``
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -59,7 +59,7 @@ The DHT11 module has three labeled pins — double-check them before powering on
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -234,14 +234,14 @@ In the first lesson, you used ``delay(500)`` to blink an LED. During those 500 m
    * - Adding another sensor
      - Each sensor adds its own delay, compounding the freeze
      - Each sensor just checks its own timer independently
-   * - Battery usage
+   * - Power usage
      - Higher — processor runs at full speed doing nothing
      - Same — but can enter low-power sleep between checks
 
 With ``millis()``, your program can read the DHT11 every 2 seconds **and** simultaneously check a button, blink an LED, update a display, and stream data — all without any of them blocking the others. This is how real embedded systems work.
 
 3. Experiment
-----------------
+-------------
 
 **Adjust the Sampling Interval**
 
@@ -266,7 +266,7 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **Serial Monitor shows "Failed to read from DHT11!" repeatedly**
 
@@ -284,7 +284,7 @@ The DHT11's minimum sampling period is about 1 second; anything faster and the s
 * **Solution:** Breathe gently on the sensor — humidity should rise within seconds. If it doesn't change at all, the sensor may be damaged. Some DHT11 clones have very slow humidity response — wait 10–15 seconds after breathing on it before concluding it's broken.
 
 5. Summary
--------------
+----------
 
 You've moved beyond simple analog and digital sensors to a device that reports real environmental data. In this lesson, you learned:
 

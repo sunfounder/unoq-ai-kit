@@ -5,7 +5,7 @@
 .. _cpn_robot_shield:
 
 Robot Shield
-=================
+============
 
 .. image:: img/robot_shield.png
    :width: 500
@@ -16,7 +16,7 @@ The **Robot Shield** is the expansion board that turns the Arduino UNO Q into a 
 Almost every hands-on lesson in this kit is powered through the Robot Shield: the board brings out the UNO Q's digital, PWM, and analog pins, supplies 5V and 3.3V to the breadboard rails, and keeps the electronics running from either USB-C or a battery.
 
 Specifications
-----------------
+--------------
 
 .. list-table::
    :header-rows: 1
@@ -52,7 +52,7 @@ Specifications
    The Robot Shield has no processor of its own. Every pin is wired straight through to the UNO Q, so all of the control logic is written in your sketches on the UNO Q.
 
 Interfaces
--------------
+----------
 
 .. list-table::
    :header-rows: 1
@@ -69,14 +69,14 @@ Interfaces
    * - Motor outputs x2
      - XH2.54 2P connectors for two DC motors (MOTOR0 and MOTOR1)
    * - Digital / PWM headers
-     - 2.54 mm headers carrying the UNO Q digital IO at 5V
+     - 2.54 mm headers carrying the UNO Q digital IO. The pins are **3.3 V logic** and most of them tolerate 5 V *as inputs*, so a 5 V sensor module can drive them — see :ref:`voltage_domains` for the two pins that cannot
    * - Analog / sensor headers
      - A0–A3 at 3.3V for sensors; A4 and A5 are used internally for battery status
    * - Status pins
      - A4 = battery voltage ÷ 3, A5 = charging status
 
 Pin Headers
---------------
+-----------
 
 .. image:: img/shield_io_headers.png
    :width: 600
@@ -93,7 +93,7 @@ The analog / sensor header runs at 3.3V and is the right place to connect sensor
 * **A4 and A5** — not broken out to a header. Internally, A4 is the battery voltage divided by 3 (multiply by 3 to get the battery voltage) and A5 is the charging status (HIGH = charging, LOW = not charging).
 
 Motor Outputs
-----------------
+-------------
 
 .. image:: img/shield_motor_ports.png
    :width: 600
@@ -137,7 +137,7 @@ The H-bridge responds to the two pins like this.
 Each motor channel is protected by a self-resetting fuse (1A hold / 2A trip), and the 5V rail by a 4A / 8A self-resetting fuse.
 
 Power and Charging
---------------------
+------------------
 
 .. note::
 

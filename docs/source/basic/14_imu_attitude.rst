@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 14 IMU Attitude
-==================
+===============
 
 In previous lessons, your sensors communicated through simple voltages. The DHT11 took it a step further with a custom single-wire protocol. Now you'll use **I2C** — a two-wire bus that lets multiple sensors share the same pins. Your IMU packs four sensors into one chip, all talking through I2C: accelerometer (motion), gyroscope (rotation), magnetometer (compass), and barometer (altitude). You'll read all of them at once.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Monitor multi-sensor data in the Serial Monitor
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -47,7 +47,7 @@ Plug the 10-Axis IMU into the UNO Q's QWIIC connector — no breadboard wiring i
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Step 1: Calibrate the IMU**
 
@@ -287,7 +287,7 @@ This lesson introduces I2C communication — and works with the most sensor-rich
    - The IMU's four sensors may each have their own address or share one; the library handles this transparently
 
 3. Experiment
-----------------
+-------------
 
 **Tilt the Board and Observe**
 
@@ -342,7 +342,7 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
       }
 
 4. Troubleshooting
---------------------
+------------------
 
 **"IMU not detected" or no sensor output**
 
@@ -371,7 +371,7 @@ Modify the code to print "LEVEL" when the board is approximately flat (X and Y a
 
 
 5. Summary
--------------
+----------
 
 Congratulations! You've used I2C — the most common communication bus for complex sensors — and read data from four different sensor types at once. In this lesson, you learned:
 

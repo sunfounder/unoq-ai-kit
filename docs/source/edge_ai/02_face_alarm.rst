@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 02 Face Alarm
-===============
+=============
 
 In the previous project the AI *watched* — it recognized objects and reported them on screen, but nothing happened beyond the Web UI. This lesson crosses that line: the moment the camera sees a face, a buzzer on the breadboard starts sounding an alarm, and when the face leaves, the alarm stops by itself. This is the first time in this module that an AI decision directly drives physical hardware — the AI sees, decides, and acts.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Follow a complete AI loop: camera → model → Python → sketch → hardware
 
 1. Setup
------------
+--------
 
 **What You Need**
 
@@ -66,7 +66,7 @@ Connect the active buzzer between **D5** and **GND**: the buzzer is polarized, s
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`02 Face Alarm.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Face.Alarm.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -134,14 +134,10 @@ Here's what each component does:
 **Sketch (sketch.ino)** — runs on the STM32 MCU
   * ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)`` register the two functions Python can call
   * ``alarm_on()`` raises the ``alarmActive`` flag; ``alarm_off()`` clears it and immediately drives the pin low
-  * ``loop()`` beeps ``buzzerPin`` (D5) — 150 ms high, 150 ms low, over and over — while the flag is set, and idles when it is not
 
 **Python (main.py)** — runs on the Linux MPU
   * ``VideoObjectDetection(camera, confidence=0.5, debounce_sec=0.5)`` runs the ``face-detection`` model declared in ``app.yaml``
   * ``detection.on_detect("face", face_detected)`` fires only for the class this project cares about
-  * ``Bridge.call("alarm_on")`` and ``Bridge.call("alarm_off")`` command the sketch
-  * ``ui.send_message("face_status", ...)`` tells the browser whether a face is present
-  * A background thread watches the clock so the alarm silences itself
 
 **Bridge** — communication channel between MPU and MCU
   * Sketch side: ``Bridge.provide("name", function)`` exposes a function
@@ -151,16 +147,16 @@ Here's what each component does:
   * ``socket.on('face_status', ...)`` flips the status between "🚨 Face detected — Alarm ON" and "No face — Alarm OFF"
   * The live video arrives on its own channel, in an ``<iframe>`` pointed at port 4912 ``/embed``
 
-**The sketch owns the buzzer** — the two Bridge functions are tiny: they only set or clear a flag. The real work happens back in ``loop()``, which sleeps while the flag is clear and otherwise toggles ``buzzerPin`` (D5) on and off every 150 ms — the rapid beep you heard. Because ``alarm_off()`` also writes the pin low, the buzzer falls silent instantly, even in the middle of a beep.
+**The sketch owns the buzzer** — the two Bridge functions are tiny: they only set or clear a flag.
 
-**Python asks for the alarm** — the AI side follows the pattern from the previous project with two differences. First, the model: ``app.yaml`` requests ``video_object_detection`` with ``model: face-detection``, a model specialized for faces rather than the general object model. Second, the listener: instead of ``on_detect_all`` (every object, every frame), Python registers ``on_detect("face", ...)``, which fires only for the single class the project cares about. The settings are tuned more strictly — ``confidence=0.5`` means a face must score at least 50% before it counts, and ``debounce_sec=0.5`` paces the callbacks.
+**Python asks for the alarm** — the AI side follows the pattern from the previous project with two differences.
 
-**The first-sighting latch** — the brick may call ``face_detected()`` again and again while a face stays in view, and the function must not flood the Bridge with ``alarm_on`` calls, so a ``face_visible`` flag turns it into a latch: the first sighting refreshes the timestamp and calls ``Bridge.call("alarm_on")``, while every later sighting only updates the timestamp and returns early. The alarm turns on exactly once, and the browser is told so the page can flip to "🚨 Face detected — Alarm ON".
+**The first-sighting latch** — a ``face_visible`` flag turns repeated detections into a single alarm: only the first sighting calls ``Bridge.call("alarm_on")``.
 
-**The watchdog thread** — someone has to notice when the face is *gone*, and that cannot happen in the detection callback because it only fires when a face is seen. So Python starts a background thread: every 0.2 seconds it wakes up, and if a face was seen but the last sighting is more than 2.0 seconds ago, it clears the latch, calls ``Bridge.call("alarm_off")``, and tells the Web UI the alarm is off. That is the two-second grace period you felt — step out of frame briefly and the alarm keeps going; stay away and it stops. Both threads touch ``face_visible``, so every access is guarded by a lock to keep them from stepping on each other.
+**The watchdog thread** — someone has to notice when the face is *gone*, and that cannot happen in the detection callback because it only fires when a face is seen.
 
 3. Experiment
-----------------
+-------------
 
 **Test the Alarm's Behavior**
 
@@ -188,30 +184,25 @@ The alarm has a clear on-condition (a face above 50% confidence) and a timer-bas
 A face detector has its own comfort zone of distance, angle, and light. Walk backward slowly, step by step, until the alarm refuses to trigger, then walk forward again — note roughly how far that point is. Try the same test in dim light and with a light behind you, and notice whether the reliable distance shrinks. Finally, hold up a photo of a face or a face drawn on paper: does the model treat it as a face? An AI detector works on visual patterns, not on consciousness — finding where the pattern breaks is the point of the experiment.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The Web UI shows the alarm is ON, but the buzzer is silent**
 
 * **Cause:** The buzzer is not connected to D5, or its + and − pins are swapped.
-* **Solution:** Check the wiring: the + pin goes to D5 and the − pin to GND. If the legs are swapped the buzzer cannot sound. Confirm the jumper wires are seated firmly in the breadboard.
+* **Solution:** Check the wiring: the + pin goes to D5 and the − pin to GND.
 
 **The buzzer never sounds, even when you face the camera**
 
 * **Cause:** Your face is too far, too small, or too dim for the model to reach the 50% confidence threshold — or the model was still loading in the first seconds after Run.
-* **Solution:** Sit 30–60 cm away, face the camera squarely, and keep the room lit. Wait a few seconds after the app starts before testing. Watch the Web UI: if the status never flips to "Face detected — Alarm ON", the model is not seeing a confident face.
+* **Solution:** Sit 30–60 cm away, face the camera squarely, and keep the room lit.
 
 **The alarm triggers when nobody is there**
 
 * **Cause:** The face detector matched a face-like pattern — a photo, a poster, a face on a phone screen, or a strong shadow — at 50% or higher confidence.
-* **Solution:** Move or remove the face-like object, or turn the camera away from it. Remember the model reports patterns, not intentions — a confident guess is still a guess.
-
-**The alarm keeps buzzing long after you leave the frame**
-
-* **Cause:** Something the model reads as a face is still in view. Every new detection refreshes the 2-second timer, so the alarm can keep itself alive indefinitely.
-* **Solution:** Check the frame for face-like objects near the edge of the view (a person passing behind you, your own hand, a screen). When the view is truly empty of faces, the alarm stops about two seconds after the last detection.
+* **Solution:** Move or remove the face-like object, or turn the camera away from it.
 
 5. Summary
--------------
+----------
 
 Congratulations — your AI has left the screen and touched the physical world! The face appeared, the model decided, Python called Bridge, and a buzzer physically sounded. You have now seen the complete AI loop that this module is built around:
 

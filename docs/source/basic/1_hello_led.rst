@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 01 Hello LED
-======================
+============
 
 Welcome to your first hardware lesson! In the Get Started section, you blinked the onboard LED on the UNO Q. Now you'll build a real circuit on a breadboard and control an external LED with code — the "Hello World" of electronics.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Use ``delay()`` to create a blinking pattern
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the LED to **D5** through a 220Ω resistor: the long leg (anode) goes th
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -144,7 +144,7 @@ Every Arduino sketch has two functions, and this program follows a simple rhythm
       }
 
 3. Experiment
-----------------
+-------------
 
 **Change the Blink Speed**
 
@@ -197,7 +197,7 @@ SOS in Morse code is three short, three long, three short (··· −−− ··
       }
 
 4. Troubleshooting
---------------------
+------------------
 
 **LED does not light up**
 
@@ -220,7 +220,7 @@ SOS in Morse code is three short, three long, three short (··· −−− ··
 * **Solution:** Replace the LED with a new one. Double-check that the 220Ω resistor is correctly in the circuit before running again.
 
 5. Summary
--------------
+----------
 
 Congratulations! You've built your first circuit and controlled it with code. In this lesson, you learned:
 

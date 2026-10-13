@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 07 Voice-Controlled Pan-Tilt
-==============================
+============================
 
 Earlier, you swept servos with the ``Arduino_HardwareServo`` library — now your voice will aim them. Say "Turn left", and the pan-tilt turns left while the speaker confirms *"Turning left."* Speech moves motors, and the board talks back to confirm what it did.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Confirm each action with spoken feedback
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -57,6 +57,10 @@ This project uses the following App Lab Bricks and libraries:
 
    The project ZIP is large (about 100 MB) because it bundles the local speech recognition model. The first import takes a while — this is normal.
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 Connect the servos to the Robot Shield and the push button to the UNO Q — no external resistor is needed for the button, the sketch uses the internal pull-up resistor:
@@ -70,12 +74,8 @@ Connect the servos to the Robot Shield and the push button to the UNO Q — no e
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`07 Voice-Controlled Pan-Tilt.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Voice-Controlled.Pan-Tilt.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -130,7 +130,7 @@ The sketch owns the servo angles. Each Bridge function moves a servo to a fixed 
 * Five RPCs are registered: ``pan_left``, ``pan_right``, ``tilt_up``, ``tilt_down``, and ``center`` — plus ``button_read`` from the earlier lessons.
 
 3. Experiment
-----------------
+-------------
 
 **Try Every Command**
 
@@ -165,7 +165,7 @@ The same voice commands now move the pan-tilt through a narrower sweep.
 The sketch angles and the spoken feedback live in different places — the feedback is the third column of each ``COMMANDS`` row in ``main.py``. Change the feedback text so the board speaks a different confirmation, for example make "Turn left" answer *"Moving left."* instead of *"Turning left."* — without touching the sketch at all.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The servos don't move at all**
 
@@ -183,7 +183,7 @@ The sketch angles and the spoken feedback live in different places — the feedb
 * **Solution:** Use the exact phrases: turn left, turn right, look up, look down, center. Short forms like "left" and "up" also work — but "go sideways" doesn't.
 
 5. Summary
--------------
+----------
 
 Your voice aims the pan-tilt! In this lesson, you learned:
 

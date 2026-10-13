@@ -1017,3 +1017,44 @@ example starts much faster.
 | RobotShield | `robot_shield` |
 | SunFounder_STT | `sunfounder_stt` |
 | SunFounder_TTS | `sunfounder_tts` |
+
+### Community Note and Note Placement
+
+Every page opens with the shared community note, pulled in from `index.rst`:
+
+.. code-block:: rst
+
+   .. include:: /index.rst
+      :start-after: start_hello_message
+      :end-before: end_hello_message
+
+That block goes at the **very top of the file, above the page title** — never after the title,
+and never lower in the page.
+
+The same idea — a note belongs before the block it warns about, not inside it — gives the rest of
+these rules:
+
+* The **Wiring Diagram** section holds one sentence describing the connections and **one** image.
+  No `.. note::`, `.. warning::`, `.. tip::`, tables, or extra images.
+* A TTS first-run note or an API-key note goes just before the **Wiring Diagram** heading
+  (after Software Requirements), never inside the Run the App steps.
+* Lesson intro order: title -> one short project description -> result image ->
+  "In this lesson, you will learn to:" list.
+* `3. Experiment` keeps a single bold sub-heading; `4. Troubleshooting` keeps the three
+  most important entries, each a one-line Cause and a one-line Solution.
+
+### How it Works: No Design-Essay Blocks
+
+The **How it Works** section holds exactly three things, in this order:
+
+1. one short transition sentence,
+2. the project structure as an RST nested list,
+3. one data-flow diagram, then
+4. `**Name (file)**` component blocks — **at most two bullets each**, naming the API calls.
+
+Nothing else. In particular there is **no design essay** after the component blocks:
+no lead-in paragraph such as "This project is a two-process team ...", and no bulleted
+deep-dive such as "Picking the best object" / "Sending a code, not colors". Those
+design discussions are not part of the module template and made the pages several times
+longer than they needed to be. If a mechanism needs explaining, it is one line inside
+the component block that owns it.

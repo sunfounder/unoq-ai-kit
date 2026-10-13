@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Keep the AI detection callback fast by handing servo, disk, and speech work to a background worker
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -41,15 +41,20 @@ This project uses the following Bricks and sketch libraries:
   * ``video_object_detection`` — runs the **hand-gesture classification** model on every camera frame
   * ``web_ui`` — serves the Web UI with the live camera feed and the gesture card
   * ``sunfounder_tts`` — text-to-speech for the spoken feedback (EdgeTTS)
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``Arduino_HardwareServo`` (0.0.1) — drives the pan and tilt servos with hardware PWM
 
-The kit is complete as it comes: the camera is built into the AVIO Carrier, the two servos already carry the pan-tilt bracket, and the carrier's speaker does the talking. The one thing this project asks for is power — two servos moving under load draw more than the USB port can supply, so you will connect the battery pack to the Robot Shield before running the app.
+The kit is complete as it comes: the camera is built into the AVIO Carrier, the two servos already carry the pan-tilt bracket, and the carrier's speaker does the talking. There is nothing extra to connect — plug in the USB-C cable and you are ready.
 
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **Wiring Diagram**
 
@@ -59,16 +64,12 @@ Plug the pan servo's signal lead into **D9** and the tilt servo's into **D10**, 
    :width: 600
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`06 AI Gesture Camera.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.AI.Gesture.Camera.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The servos and the camera together draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield, then click the **Run** button (▶). The pan-tilt swings to its center position (pan 90°, tilt 85°), the Console prints ``AI Gesture Camera is running.`` and then ``[TTS] Ready.`` once the speech engine is up.
+#. Click the **Run** button (▶). The pan-tilt swings to its center position (pan 90°, tilt 85°), the Console prints ``AI Gesture Camera is running.`` and then ``[TTS] Ready.`` once the speech engine is up.
 
 #. Open the **Web UI** tab: the live camera feed, the gesture panel reading **Current Gesture: Waiting...**, and a hint line for the four moves (👍 up · ✊ down · ✌️ photo · 🖐️ center). Hold a 👍 **thumbs up** about 50 cm from the camera, steady for about 0.6 s — the panel names it with a confidence and the tilt servo steps up 5° (*"Moving up."*, up to 60°). A ✊ **fist** steps down to 110°, a 🖐️ **open hand** re-centers the pan-tilt, and a ✌️ **V-sign** saves a photo (*"Photo taken."*). Take your hand out of the frame for 3 seconds and the panel returns to **Ready — show a gesture**.
 
@@ -78,7 +79,7 @@ Plug the pan servo's signal lead into **D9** and the tilt servo's into **D10**, 
 
 **How it Works**
 
-The whole project is a pipeline with a filter in the middle: frames go in at the top, and at the bottom either a servo moves, a photo is written, or a sentence is spoken — never more than one of those per gesture. The filter is needed because the hand-gestures model runs on every frame and reports what it sees many times per second; if each report triggered an action, one thumbs up would slam the camera into its mechanical limit in a blink. Raw labels are not decisions — they are noise that has to be turned into **events**.
+The whole project is a pipeline with a filter in the middle: frames go in at the top, and at the bottom either a servo moves, a photo is written, or a sentence is spoken — never more than one of those per gesture. The filter is needed because the hand-gestures model runs on every frame and reports what it sees many times per second; if each report triggered an action, one thumbs up would slam the camera into its mechanical limit in a blink.
 
 * ``06 AI Gesture Camera/`` — the app folder
 
@@ -142,34 +143,21 @@ Here's what each component does:
 **Python (main.py)** — runs on the Linux MPU
   * ``detection.on_detect_all(on_detections)`` receives every frame's detections; ``best_gesture()`` keeps the four labels of ``GESTURE_NAMES`` and ignores everything else
   * ``CONFIDENCE_THRESHOLD`` (0.25) decides how sure the model has to be before a label is even considered
-  * ``on_detections()`` accepts a gesture only after the **same** label has held for ``STABLE_SECONDS`` (0.6) — a one-frame flicker restarts the clock instead of firing
-  * An accepted gesture sets ``gesture_armed = False`` and queues the label, so one gesture earns exactly one action
-  * ``rearm_after_hand_is_removed()`` unlocks only after ``MIN_ACTION_INTERVAL`` (5 s) **and** ``REARM_NO_GESTURE_SECONDS`` (3 s) with no recognizable gesture
-  * ``action_queue`` is a ``queue.Queue(maxsize=1)`` filled with ``put_nowait()`` — at most one action can ever be waiting
-  * ``action_worker()`` performs the slow work on a background thread: ``Bridge.call()`` for the servos, ``take_photo()`` for the JPEG, and ``tts.say()`` for the voice
-  * ``camera.capture()`` grabs a fresh frame and ``cv2.imwrite()`` writes it as ``gesture_001.jpg``, ``gesture_002.jpg``, and so on, so no photo is ever overwritten
-  * ``ui.send_message("gesture_result", ...)`` reports the gesture, its confidence, the action, and a timestamp to the page
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
   * ``HardwareServo`` drives the pan servo on **D9** and the tilt servo on **D10** with hardware PWM
   * Keeps the only hardware state that matters, ``tiltAngle``, which starts at the ``TILT_CENTER_ANGLE`` of 85°
-  * ``Bridge.provide("tilt_up", tiltUp)`` subtracts ``TILT_STEP`` (5°) and squeezes the result into the 60°–110° window with ``constrain()``, then returns the new angle
-  * ``Bridge.provide("tilt_down", tiltDown)`` adds the same 5° step, clamped to the same window
-  * ``Bridge.provide("center_pan_tilt", centerPanTilt)`` writes the pan servo back to 90°, waits 150 ms, then returns the tilt to 85° — the short delay keeps both servos from pulling current at the same instant
-  * ``loop()`` does nothing but ``delay(10)`` — every movement arrives through the Bridge
 
 **Bridge** — communication channel between MPU and MCU
   * Sketch side: ``Bridge.provide("name", function)`` exposes a function
   * Python side: ``Bridge.call("name", args...)`` invokes it and receives its return value
-  * That return value is how Python knows the exact tilt angle to print and speak about
 
 **Browser (index.html / app.js)** — runs in the user's browser
   * Shows the live camera feed from the ``web_ui`` brick, the current gesture, and its confidence
   * ``socket.on('gesture_result')`` writes the gesture name, the confidence percentage, and the action text, including the *"remove your hand"* reminder
-  * The hint line lists the four moves: 👍 Move up · ✊ Move down · ✌️ Take photo · 🖐️ Center pan-tilt
 
 3. Experiment
----------------
+-------------
 
 **Learn the Rhythm of the Lock**
 
@@ -202,32 +190,26 @@ Run the app and try each of these in order. The point is to feel the three timer
    * - Change straight from a fist into a V-sign without removing your hand
      - The stable timer restarts on the new label, so neither action fires until you hold one of them still
 
-
 4. Troubleshooting
---------------------
+------------------
 
 **My hand is clearly in the frame but no gesture ever fires**
 
-* **Cause:** The model cannot read the gesture, so ``best_gesture()`` keeps returning nothing and the stable window never even starts. Common reasons: the hand is too far away or too close, the background is busy, the lighting is dim, or part of the hand is outside the frame.
-* **Solution:** Bring your hand to about 50 cm and fill a good part of the frame with it, use a plain light background, and keep your whole hand visible. Hold the pose steady rather than moving it. If the panel still never shows a gesture name, the model is not recognizing the pose at all — the Console only prints ``[GESTURE]`` lines for gestures that were actually accepted, so a completely silent Console means the recognition step is failing, not the state machine.
+* **Cause:** The model cannot read the gesture, so ``best_gesture()`` keeps returning nothing and the stable window never even starts.
+* **Solution:** Bring your hand to about 50 cm and fill a good part of the frame with it, use a plain light background, and keep your whole hand visible.
 
 **The action fires twice, or fires again while my hand is still there**
 
-* **Cause:** The app is only re-armed after **both** the 5-second action lock **and** 3 seconds with no recognizable gesture. If your hand never leaves the frame, ``last_detection_time`` keeps being refreshed and the app stays locked — so the next thing that happens can feel like a delayed repeat of the first action. Two genuine actions from one "gesture" usually mean the model saw two different labels: a fist that relaxes into an open hand is two gestures, not one.
-* **Solution:** Treat removing your hand as part of the gesture. After each action, take your hand completely out of the frame and wait for **Ready — show a gesture** before presenting the next one. To confirm what really happened, read the Console: every accepted gesture prints exactly one ``[GESTURE]`` line with the label, the confidence, and the action. Two lines mean two gestures were recognized — and if you want more patience than that, raise ``MIN_ACTION_INTERVAL`` and ``REARM_NO_GESTURE_SECONDS`` at the top of ``main.py``.
+* **Cause:** The app is only re-armed after **both** the 5-second action lock **and** 3 seconds with no recognizable gesture.
+* **Solution:** Treat removing your hand as part of the gesture.
 
 **The camera moves but there is no sound**
 
 * **Cause:** The TTS runtime is still being prepared, the UNO Q has no Internet connection, or the speech worker failed to start and printed a ``[TTS ERROR]`` line.
-* **Solution:** Wait for ``[TTS] Ready.`` on the Console before expecting speech — the very first run can take half an hour to download dependencies, and EdgeTTS synthesizes its audio online, so the board must stay connected to the Internet. If you see a ``[TTS ERROR]`` line instead, re-run the app once the setup has finished. Volume is set to 40 in ``set_volume()``, so if the carrier is sitting next to a fan or a laptop speaker, move it somewhere quieter before assuming the audio is broken.
-
-**The servo buzzes instead of moving, or the photo is missing from the folder**
-
-* **Cause:** For the servos, the battery pack is not connected (USB power alone is too weak for two servos under load), the mechanism is mechanically obstructed, or the tilt has reached its 60°/110° limit and correctly refuses to move further. For the photo, ``camera.capture()`` returned nothing or ``cv2.imwrite()`` failed, so the worker reported ``Photo failed``.
-* **Solution:** Connect the battery pack to the Robot Shield, check that the pan and tilt brackets swing freely by hand, and remember that the tilt stops at 60° and 110° by design — a servo that stops moving after one more thumbs up or fist is working correctly, and the board says "Highest position reached" or "Lowest position reached" when that happens. For a missing photo, look for the Console line: ``Photo saved: gesture_NNN.jpg`` confirms the exact filename, so browse ``/app/photos/`` for that file; if you see ``Photo failed`` instead, the camera was busy or not started, so stop the app and run it again.
+* **Solution:** Wait for ``[TTS] Ready.`` on the Console before expecting speech — the very first run can take half an hour to download dependencies, and EdgeTTS synthesizes its audio online, so the board must stay connected to the Internet.
 
 5. Summary
--------------
+----------
 
 You just taught your UNO Q to take orders from your hand — one wave of a thumbs up and a camera on your desk physically moves. That is a real robot control loop, and the interesting part is not the gesture model at all: it is the small state machine that decides *when* a gesture counts. Along the way you learned:
 

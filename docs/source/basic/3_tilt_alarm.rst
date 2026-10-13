@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 03 Tilt Alarm
-======================
+=============
 
 In the last two lessons, you controlled an LED and read a button. Now you'll combine those skills to build something practical — a **tilt alarm** that sounds a buzzer when the device tips over.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Create a rhythmic alarm pattern by sequencing ``delay()`` calls
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -53,7 +53,7 @@ Connect the tilt switch to **D4** and the active buzzer to **D5**: the buzzer is
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -193,7 +193,7 @@ This lesson introduces debounce — a technique for handling the noisy, bouncy b
       }
 
 3. Experiment
-----------------
+-------------
 
 **Change the Alarm Pattern**
 
@@ -220,7 +220,7 @@ Try modifying the delay values to create different rhythms:
 What happens if you increase the debounce delay from 30ms to 100ms? Or decrease it to 10ms? Try each and observe how the alarm responds to gentle tilts vs. sharp shakes. Which value feels most reliable?
 
 4. Troubleshooting
---------------------
+------------------
 
 **Buzzer does not make any sound**
 
@@ -243,7 +243,7 @@ What happens if you increase the debounce delay from 30ms to 100ms? Or decrease 
 * **Solution:** Most active buzzers in this kit work fine directly from a pin. If yours is quiet, a transistor driver circuit can provide more current — this is covered in a later lesson.
 
 5. Summary
--------------
+----------
 
 Congratulations! You've built a working alarm system — your most practical project yet. In this lesson, you learned:
 

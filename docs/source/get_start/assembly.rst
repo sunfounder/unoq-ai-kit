@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 Assembly
-============
+========
 
 Put the kit together before starting the lessons. There are two parts: the **board stack** and the **pan-tilt mount**.
 

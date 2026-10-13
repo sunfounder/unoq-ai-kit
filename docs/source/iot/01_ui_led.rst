@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 01 UI Control LED
-=====================
+=================
 
 In Module A, you controlled an LED with code running on the UNO Q. In Module B, you used the AVIO Carrier's built-in speaker, microphone, and camera. Now you'll control hardware from a **webpage** — click a button in your browser, and an LED on your desk turns on. This is your first step into the hybrid architecture of the UNO Q: **Python** on the Linux processor handles the web server, while the **sketch** on the microcontroller controls the hardware. They talk to each other through the **Bridge**.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Trace the full data path: browser → Python → Bridge → sketch → hardware
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -51,6 +51,7 @@ This project uses the following Bricks and sketch libraries:
 * Bricks (declared in ``app.yaml``):
 
   * ``web_ui`` — serves the Web UI and pushes live LED updates to the browser
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``RobotShield`` (1.0.4) — access to the Robot Shield's GPIO, PWM, and I2C hardware
@@ -64,7 +65,7 @@ Connect the LED between **digital pin 5** and **GND**, with the 220Ω resistor o
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 
 #. Download :download:`01 UI Control LED.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/01.UI.Control.LED.zip>`.
@@ -159,7 +160,7 @@ Here's what each component does:
 
 
 3. Experiment
-----------------
+-------------
 
 **Change the Button Style**
 
@@ -197,7 +198,7 @@ Modify ``get_led_status()`` in ``main.py`` to include extra info:
 Then update ``index.html`` to display the timestamp alongside the button.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Button clicks don't affect the LED**
 
@@ -220,7 +221,7 @@ Then update ``index.html`` to display the timestamp alongside the button.
 * **Solution:** Open the browser's Developer Tools (F12) and check the Console tab for errors. Verify that ``style.css`` and ``app.js`` are in the ``assets/`` folder and referenced correctly in ``index.html``.
 
 5. Summary
--------------
+----------
 
 You've built a web-controlled LED using the UNO Q's hybrid architecture! In this lesson, you learned:
 

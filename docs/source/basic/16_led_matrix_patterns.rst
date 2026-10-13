@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Organize code by separating **data** (patterns) from **logic** (the sketch)
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -36,7 +36,7 @@ No breadboard wiring is needed — the 8×13 LED matrix is built into the UNO Q 
 
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -206,7 +206,7 @@ The sketch itself is simple — the complexity lives in the library and the patt
    At any given instant, only 13 LEDs (one row) are actually lit. But because the scan happens hundreds of times per second, your persistence of vision blends them into a single steady image — the same reason a spinning fan looks like a blurry disc rather than individual blades.
 
 3. Experiment
-----------------
+-------------
 
 **Create a Custom Pattern**
 
@@ -230,7 +230,7 @@ Add your pattern to the cycle by adding one ``showPattern(yourPattern)`` call af
 Make an icon appear to move by showing it in one position, clearing the screen, then showing it shifted by one column. Use ``matrix.clear()`` between frames to prevent ghosting. Three frames of an arrow at different positions is enough to create the illusion of movement.
 
 4. Troubleshooting
---------------------
+------------------
 
 **LED matrix doesn't light up at all**
 
@@ -253,7 +253,7 @@ Make an icon appear to move by showing it in one position, clearing the screen, 
 * **Solution:** Verify that ``matrix.begin()`` is called in ``setup()`` before any rendering. Without initialization, the matrix hardware never activates.
 
 5. Summary
--------------
+----------
 
 You just turned 104 tiny LEDs into a programmable display! In this lesson, you learned:
 

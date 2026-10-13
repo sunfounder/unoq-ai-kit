@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 Run Your First App
-========================
+==================
 
 **Overview**
 
@@ -13,7 +13,7 @@ You will also learn how to copy, edit, create, export, import applications, and 
 --------------------------------------------------
 
 Run Your First Example
-------------------------------------
+----------------------
 
 Running code traditionally starts with the **Blink LED** example.
 
@@ -47,7 +47,7 @@ Running code traditionally starts with the **Blink LED** example.
 --------------------------------------------------
 
 App Management (Create, Copy, Import & Export)
-----------------------------------------------------------
+----------------------------------------------
 
 **Run at Startup**
 
@@ -142,7 +142,7 @@ You can import apps created by yourself or shared by others.
 --------------------------------------------------
 
 Summary
--------------------------------
+-------
 
 You have now learned the basic operations in Arduino App Lab, including:
 

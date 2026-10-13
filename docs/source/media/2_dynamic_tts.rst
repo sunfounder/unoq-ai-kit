@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 02 Dynamic TTS Weather Reporter
-=================================
+===============================
 
 In the previous lesson, you made the speaker say a fixed sentence. Now you'll make it speak **dynamic content** — sensor readings that change in real time. A DHT11 sensor measures temperature and humidity, and the speaker announces the values aloud every 30 seconds, like a talking weather station.
 
@@ -14,7 +14,7 @@ In this lesson, you will learn to:
 * Announce sensor readings on a repeating interval
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -44,6 +44,10 @@ This project uses the following App Lab Bricks and libraries:
   * ``DHT sensor library`` (reads temperature and humidity from DHT11/DHT22 sensors)
   * ``Adafruit Unified Sensor`` (common interface for Adafruit sensor libraries)
 
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+
 **Wiring Diagram**
 
 Connect the DHT11: VCC to 3.3V, DATA to D4, GND to GND.
@@ -52,12 +56,8 @@ Connect the DHT11: VCC to 3.3V, DATA to D4, GND to GND.
    :width: 500
    :align: center
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`02 Dynamic TTS Weather Reporter.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/02.Dynamic.TTS.Weather.Reporter.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -126,7 +126,7 @@ Python calls the sketch every 30 seconds, formats the result, and speaks:
 * An **f-string** inserts the live numbers into a readable sentence. Because the readings change, the sentence changes — this is the core concept: **changing data → changing speech**.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Interval**
 
@@ -158,7 +158,7 @@ Change the f-string to make the announcement sound different:
    message = f"Current conditions: {temperature:.1f}°C, {humidity:.1f}% RH."
 
 4. Troubleshooting
---------------------
+------------------
 
 **"Failed to read from the DHT11 sensor"**
 
@@ -171,7 +171,7 @@ Change the f-string to make the announcement sound different:
 * **Solution:** Check that the Carrier is firmly connected to the UNO Q. On the first run, wait for the TTS runtime download to finish — verify the Local TTS example works on the same hardware.
 
 5. Summary
--------------
+----------
 
 You've built a talking weather station. In this lesson, you learned:
 

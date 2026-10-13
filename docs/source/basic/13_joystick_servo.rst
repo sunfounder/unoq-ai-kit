@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 13 Joystick Servo
-======================
+=================
 
 You've controlled LEDs with buttons, pitch with potentiometers, and motors with thermistors. Now you'll combine a joystick — essentially two potentiometers at right angles — with two servos to create a **pan-tilt controller**. Push the stick left/right to pan, up/down to tilt, and press it down to reset both to center. This is the same mechanism behind security cameras, drone gimbals, and robotic arms.
 
@@ -15,7 +15,7 @@ In this lesson, you will learn to:
 * Use a **dead zone** to prevent drift when the stick is at rest
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -57,7 +57,7 @@ Connect the joystick's VCC to the UNO Q's 3.3V pin (not 5V — its analog inputs
    :align: center
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -258,7 +258,7 @@ This lesson combines all three types of I/O — analog input (joystick axes), di
    - Incremental control holds the last position when the stick centers, giving precise, deliberate positioning like a real pan-tilt controller
 
 3. Experiment
-----------------
+-------------
 
 **Adjust the Dead Zone**
 
@@ -290,12 +290,12 @@ Larger stepSize = faster movement but choppier motion.
 * The ideal value depends on your application — surgical robots use tiny steps, game controllers use larger ones.
 
 4. Troubleshooting
---------------------
+------------------
 
 **Servos don't move at all**
 
-* **Cause:** The battery is not connected, or the servos aren't attached to the right pins.
-* **Solution:** Connect the battery pack to the Robot Shield. Verify ``panServo.attach(9)`` and ``tiltServo.attach(10)`` appear in ``setup()``. Also check that ``servo.write()`` is being called — the Serial Monitor prints the Pan/Tilt values every loop, so you can see whether the loop is running.
+* **Cause:** The servos aren't attached to the pins the code drives.
+* **Solution:** Verify ``panServo.attach(9)`` and ``tiltServo.attach(10)`` appear in ``setup()``. Also check that ``servo.write()`` is being called — the Serial Monitor prints the Pan/Tilt values every loop, so you can see whether the loop is running.
 
 **Servos jitter or twitch at rest**
 
@@ -318,7 +318,7 @@ Larger stepSize = faster movement but choppier motion.
 * **Solution:** Verify the SW pin of the joystick connects to D4, and the code uses ``pinMode(swPin, INPUT_PULLUP)``. Without INPUT_PULLUP, the pin floats and gives random readings.
 
 5. Summary
--------------
+----------
 
 You've built a two-axis pan-tilt controller — the same mechanism behind countless real-world devices. In this lesson, you learned:
 

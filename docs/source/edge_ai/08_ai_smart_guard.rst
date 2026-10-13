@@ -20,7 +20,7 @@ In this lesson, you will learn to:
 * Auto-recover: return to patrol after the intruder has been gone for 3 seconds
 
 1. Setup
-----------
+--------
 
 **What You Need**
 
@@ -46,6 +46,7 @@ This project uses the following Bricks and sketch library:
   * ``video_object_detection`` — runs the **general object-detection** model on every camera frame
   * ``web_ui`` — serves the Web UI with the live camera feed and guard status
   * ``sunfounder_tts`` — text-to-speech for the voice alerts (EdgeTTS)
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``Arduino_HardwareServo`` (0.0.1) — drives the servos with hardware PWM
@@ -53,6 +54,10 @@ This project uses the following Bricks and sketch library:
 .. note::
 
    Before using the camera, make sure external carriers are enabled on your UNO Q — this is a one-time setup: :ref:`enable_external_carriers`.
+
+.. note::
+
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
 
 **Wiring Diagram**
 
@@ -66,16 +71,12 @@ Wire the RGB LED with the same layout as the color mixing project earlier: the *
 
 Why does the guard watch for whole people instead of faces? Because the two jobs need two different models. The **face-detection** model you used earlier only fires on a clear view of a face — eyes, nose, and mouth. The **general object-detection** model this project uses reports a "person" class for a full body, so it still works when someone faces away, wears a mask or sunglasses, or is partly hidden. A greeter wants faces; a guard wants intruders — and an intruder usually doesn't cooperate by facing the camera.
 
-.. note::
-
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
-
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`08 AI Smart Guard.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.AI.Smart.Guard.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
-#. The pan-tilt servos draw more power than the USB port alone can provide, so connect the battery pack to the Robot Shield, then click the **Run** button (▶). The RGB LED glows **green** and the pan servo starts sweeping slowly side to side like a watchman; the Console shows ``🛡️  AI Smart Guard is running.`` and then ``🔊 TTS ready.`` once the speech engine is up.
+#. Click the **Run** button (▶). The RGB LED glows **green** and the pan servo starts sweeping slowly side to side like a watchman; the Console shows ``🛡️  AI Smart Guard is running.`` and then ``🔊 TTS ready.`` once the speech engine is up.
 
 #. Open the **Web UI** tab: the live camera feed and a green **All clear — scanning** panel. Walk in front of the camera — the guard snaps to **red**, the buzzer starts beeping, and the voice alert says *"Intruder detected. Intruder detected."* Step out of view and after about 3 seconds it returns to **green**, the buzzer falls silent, the servo resumes its patrol sweep, and the speaker announces *"All clear."*
 
@@ -138,38 +139,27 @@ Here's what each component does:
 **Sketch (sketch.ino)** — runs on the STM32 MCU
   * ``loop()`` sweeps the pan servo one degree every 40 ms (``scanInterval``) between 45° and 135°, reversing at each end; the tilt servo holds its 90° center
   * ``alarm_on()`` sets ``alarming = true`` and ``scanning = false``, then paints the LED red with ``setRgb()`` — ``analogWrite()`` on **D8** (red), **D7** (green), and **D6** (blue)
-  * While alarming, ``loop()`` toggles the buzzer on **D5** every 150 ms — a beep-beep-beep alarm with no blocking ``delay()``
-  * ``alarm_off()`` silences the buzzer, returns the RGB LED to green, and lets the sweep resume
-  * ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)`` expose both commands, and each one ignores a repeated call
 
 **Python (main.py)** — runs on the Linux MPU
   * ``Camera(adjustments=lambda frame: frame[::-1, :])`` flips every frame vertically, because the CSI camera is mounted upside down on the carrier
   * ``VideoObjectDetection(camera, confidence=0.4, debounce_sec=0.5)`` runs the **general object-detection** model — this time with no ``model:`` restriction, so it reports all of its classes
-  * ``detection.on_detect("person", person_detected)`` subscribes to the ``person`` class only
-  * ``person_detected()`` refreshes ``last_intruder_time`` and, on the first sighting, calls ``Bridge.call("alarm_on")``
-  * ``speak()`` queues the alert for EdgeTTS, which runs in its own daemon thread, and ``last_spoke_alert`` throttles it to once every 8 seconds
-  * ``ui.send_message("guard_status", …)`` sends the red or green panel state to the browser
-  * ``monitor_guard()`` checks the clock every 0.2 s and, after ``LOST_TIMEOUT = 3.0`` seconds with no person, calls ``Bridge.call("alarm_off")`` and speaks "All clear."
-  * ``App.run()`` starts the app
 
 **Bridge** — communication channel between MPU and MCU
   * Python side: ``Bridge.call("alarm_on")`` and ``Bridge.call("alarm_off")``
   * Sketch side: ``Bridge.provide("alarm_on", alarm_on)`` and ``Bridge.provide("alarm_off", alarm_off)``
-  * Only two short commands ever cross the Bridge — the pins, the sweep speed, and the beep timing all stay in the sketch
 
 **Browser (HTML/JS)** — runs in the user's browser
   * The camera feed is an ``<iframe>`` pointed at the stream URL on port 4912 (``/embed``), reloaded once a second until it loads
   * ``socket.on("guard_status", …)`` swaps the panel between the green **All clear — scanning** state and the red **🚨 Intruder detected! (100%)** alert
-  * ``socket.on("disconnect")`` flips the dot red and shows **Connection lost**
 
-**The RGB LED is the guard's status lamp** — Green means *patrolling — all clear*; red means *intruder!* Because the LED is common cathode, a channel lights when its pin goes high, so full brightness is 255. The buzzer on **D5** is an *active* buzzer — it generates its own tone, so the sketch only has to switch its power on and off.
+**The RGB LED is the guard's status lamp** — green means *patrolling, all clear* and red means *intruder detected*.
 
-**Why throttle the voice?** — Speaking takes seconds and the intruder usually stays in view, so announcing every detection would leave the speaker screaming continuously. The ``last_spoke_alert`` timestamp limits the alert to **once every 8 seconds**, however many detections arrive. The sentence repeats "Intruder detected" on purpose, so it stays audible over the buzzer.
+**Why throttle the voice?** — Speaking takes seconds and the intruder usually stays in view, so announcing every detection would leave the speaker screaming continuously.
 
-**All clear, automatically** — A background monitor thread checks every 0.2 s whether any person detection has refreshed ``last_intruder_time`` within the last 3 seconds. Once the intruder leaves — or hides long enough — the thread flips the state back: ``Bridge.call("alarm_off")``, a spoken *"All clear."*, and the Web UI's green panel. The guard is then ready for its next intruder — no button, no human in the loop.
+**All clear, automatically** — A background monitor thread checks every 0.2 s whether any person detection has refreshed ``last_intruder_time`` within the last 3 seconds.
 
 3. Experiment
-----------------
+-------------
 
 **Test the Guard**
 
@@ -192,42 +182,26 @@ Try each of these scenarios with the app running and watch the whole system resp
    * - Put a coat or backpack on a chair in view
      - May trigger — person-shaped objects can fool the model (that's what the next experiment is about)
 
-
 4. Troubleshooting
---------------------
+------------------
 
 **The RGB LED colors are wrong (or nothing lights up)**
 
 * **Cause:** Channels are swapped, a resistor is missing, or the common cathode isn't grounded.
-* **Solution:** Check the wiring: red anode → **D8**, green anode → **D7**, blue anode → **D6**, each through its own 220Ω resistor, and the longest leg (common cathode) → **GND**. Never connect an RGB channel to a pin without its resistor — it burns out the LED.
+* **Solution:** Check the wiring: red anode → **D8**, green anode → **D7**, blue anode → **D6**, each through its own 220Ω resistor, and the longest leg (common cathode) → **GND**.
 
 **The buzzer doesn't sound during an alarm**
 
 * **Cause:** The buzzer legs are reversed, or it's a passive buzzer.
-* **Solution:** Connect the buzzer's **+** leg to **D5** and **−** leg to **GND**. This project needs an *active* buzzer — it beeps by itself when powered. A passive buzzer needs a tone signal to make any sound at all.
+* **Solution:** Connect the buzzer's **+** leg to **D5** and **−** leg to **GND**.
 
 **The guard raises false alarms on empty rooms**
 
 * **Cause:** The model sees person-like shapes — coats, shadows, curtains moving in a draft — and the 0.4 confidence threshold is generous on purpose.
-* **Solution:** Raise ``confidence=0.4`` in ``main.py`` to ``0.6`` or ``0.7`` and re-run. Point the camera away from windows and doors where shadows move. You can also increase ``debounce_sec`` so the model must agree over a longer time before a detection counts.
-
-**The guard never triggers, even when someone walks by**
-
-* **Cause:** The person is too far away or too dimly lit, or the servo sweep aims the camera at the wrong area at the wrong moment.
-* **Solution:** Stay within 1–3 meters of the camera and keep the room reasonably lit. Remember the camera *scans* — an intruder who crosses while the camera is aimed the other way is simply not in the frame yet. Test by standing still in view for a moment while the sweep passes over you.
-
-**The servos don't sweep after an alarm ends**
-
-* **Cause:** The battery is weak, or the pan servo plug has worked loose.
-* **Solution:** Connect (or recharge) the battery pack — the sweep keeps drawing power continuously. Check that the pan servo is firmly plugged into **D9** with the cable's brown wire toward the outside edge of the header.
-
-**No voice alerts, though the lights and buzzer work**
-
-* **Cause:** The TTS runtime is still being prepared, or the board has no Internet access.
-* **Solution:** The first TTS run can take half an hour to download dependencies — watch the Console for ``🔊 TTS ready.`` before expecting speech. EdgeTTS synthesizes audio online, so keep the UNO Q connected to the Internet.
+* **Solution:** Raise ``confidence=0.4`` in ``main.py`` to ``0.6`` or ``0.7`` and re-run.
 
 5. Summary
--------------
+----------
 
 You just built a fully autonomous security guard — it patrols on its own, raises the alarm on its own, and stands down on its own. In this lesson, you learned:
 

@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 06 Arduino Cloud Melody Pitch
-===================================
+=============================
 
 So far, your web controls worked over a local connection — your browser and UNO Q were on the same network. Now you'll use **Arduino Cloud** to control your hardware from **anywhere with internet access**. A cloud slider lets you raise or lower the pitch of a repeating four-note melody (C4 → E4 → G4 → C5) — move the slider on your phone and the melody shifts in real time.
 
@@ -18,14 +18,13 @@ In this lesson, you will learn to:
 * Understand the cloud → Python → Bridge → sketch → hardware pipeline
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
 .. list-table::
    :widths: 25 25 25 25
    :header-rows: 0
-
 
    * - 1 * Pan Tilt Kit
      - 1 * Passive :ref:`cpn_buzzer`
@@ -36,7 +35,6 @@ In this lesson, you will learn to:
      - |list_wire|
      - |list_usb_cable|
 
-
 **Software Requirements**
 
 This project uses the following Bricks and sketch libraries:
@@ -44,9 +42,17 @@ This project uses the following Bricks and sketch libraries:
 * Bricks (declared in ``app.yaml``):
 
   * ``arduino_cloud`` — connects the app to Arduino Cloud and exposes the ``pitch`` variable
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``RobotShield`` (1.0.3) — access to the Robot Shield's GPIO, PWM, and I2C hardware
+
+.. note::
+
+   We recommend clicking **Download** to save the generated **Device ID** and **Secret Key**, as you will need them later when configuring the Arduino Cloud Brick.
+
+   .. image:: img/3_cloud_device_id.png
+   :width: 90%
 
 **Wiring Diagram**
 
@@ -57,7 +63,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
    :align: center
 
 2. Setup
----------------
+--------
 
 **1. Create a Device**
 
@@ -68,20 +74,12 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
    .. image:: img/3_cloud_new_device.png
       :width: 90%
 
-#. Select **Arduino UNO Q** under **Manual Setup**. 
+#. Select **Arduino UNO Q** under **Manual Setup**.
 
    .. image:: img/3_cloud_device_q.png
       :width: 90%
 
 #. Follow the on-screen instructions, enter a **Device Name**, then click **Continue**.
-
-   .. note:: 
-
-      We recommend clicking **Download** to save the generated **Device ID** and **Secret Key**, as you will need them later when configuring the Arduino Cloud Brick.
-
-   .. image:: img/3_cloud_device_id.png
-      :width: 90%
-
 **2. Create a Thing**
 
 #. Go to the |link_cloud_things| page and create a new thing. Name it "Buzzer Pitch Control".
@@ -99,17 +97,14 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
    * Inside the thing, select **Associated Device**.
 
     .. image:: img/3_cloud_thing_associated.png
-       
 
    * Click **Choose from your list**
 
      .. image:: img/3_cloud_thing_choose.png
-     
 
    * Select the device you created and click **CONFIRM**
 
      .. image:: img/3_cloud_thing_device.png
-
 
 **3. Create a Dashboard**
 
@@ -134,7 +129,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
       :width: 90%
 
 3. Run the App
-----------------
+--------------
 
 #. Download :download:`06 Arduino Cloud Melody Pitch.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/06.Arduino.Cloud.Melody.Pitch.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -147,7 +142,7 @@ Connect the passive buzzer between **D5** and **GND** — the sketch drives it w
 
    .. image:: img/3_cloud_brick_secret_id.png
       :width: 90%
-      
+
 #. Click the **Run** button (▶). The melody plays immediately at the default pitch. Open the cloud dashboard on your phone — move the slider and the melody pitch shifts in real time.
 
    .. image:: img/4_cloud_result.png
@@ -202,7 +197,7 @@ Here's what each component does:
   * The melody keeps playing regardless — the cloud only changes the pitch
 
 4. Experiment
-----------------
+-------------
 
 **Adjust the Pitch Range**
 
@@ -213,7 +208,7 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` in the sketch to control 
 Add a fifth note to the ``MELODY`` array — try inserting G4 (392 Hz) between the existing notes so the melody goes C4→E4→G4→G4→C5. The ``MELODY_LENGTH`` calculation adapts automatically.
 
 5. Troubleshooting
---------------------
+------------------
 
 **Cloud dashboard shows "Device Offline"**
 
@@ -231,7 +226,7 @@ Add a fifth note to the ``MELODY`` array — try inserting G4 (392 Hz) between t
 * **Solution:** Make sure you're using the passive buzzer. Active buzzers can't play variable frequencies — they only do on/off at a single frequency.
 
 6. Summary
--------------
+----------
 
 Your hardware is now internet-controlled! In this lesson, you learned:
 

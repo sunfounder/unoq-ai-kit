@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 10 IoT Voice Message
-=========================
+====================
 
 Earlier in this module, you typed messages and the board spoke them. Now the flow reverses: **record your real voice** with the UNO Q's microphone, watch the live audio level in the Web UI, and play the recording back through the speaker — a voice memo app, controlled entirely from the browser.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Coordinate several browser events (record, stop, play, pause) in one app
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -54,7 +54,7 @@ No breadboard wiring is needed — the microphone and speaker are built into the
 
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`10 IoT Voice Message.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/10.IoT.Voice.Message.zip>`.
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
@@ -109,7 +109,7 @@ No breadboard wiring is needed — the microphone and speaker are built into the
 The sketch is intentionally empty — the microphone, speaker, and both Bricks run on the Linux side, so this lesson needs no sketch logic at all.
 
 3. Experiment
-----------------
+-------------
 
 **Record a Series of Messages**
 
@@ -145,7 +145,7 @@ Run again — the recording plays louder.
 The Web UI receives a ``duration`` field in the status updates, but right now it only shows the level bar. Open ``assets/app.js`` and display the recording duration (in seconds) next to the status text — the data is already on its way, you just need to render it.
 
 4. Troubleshooting
---------------------
+------------------
 
 **The audio level bar never moves while recording**
 
@@ -168,7 +168,7 @@ The Web UI receives a ``duration`` field in the status updates, but right now it
 * **Solution:** Stop the app and run it again. The recording is written to a shared audio folder — make sure the app has enough free space on the board.
 
 5. Summary
--------------
+----------
 
 You've built a browser-controlled voice memo app! In this lesson, you learned:
 

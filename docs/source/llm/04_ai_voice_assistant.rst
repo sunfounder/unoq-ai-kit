@@ -1,11 +1,15 @@
-04 AI Voice Assistant
-======================
-
 .. include:: /index.rst
    :start-after: start_hello_message
    :end-before: end_hello_message
 
+04 AI Voice Assistant
+=====================
+
 Every project so far has taken its orders from a keyboard: a sentence typed into a box, a slider dragged with a mouse. This project takes the keyboard away. You hold a button on the page, **say a question out loud**, and the UNO Q turns your recording into text, sends that text to a cloud language model, and answers you in a voice of its own. Three different AI services cooperate in a single loop — and you never type a character.
+
+.. image:: img/ai_voice_assistant.png
+   :width: 600
+   :align: center
 
 In this lesson, you will learn to:
 
@@ -16,7 +20,7 @@ In this lesson, you will learn to:
 * Follow one spoken sentence through the status panel: Listening, Recognizing, Thinking, Speaking, Ready
 
 1. Setup
------------
+--------
 
 **What You Need**
 
@@ -50,42 +54,22 @@ No breadboard wiring is needed here: the ears and the voice belong to the AVIO C
 
 .. note::
 
-   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection. Keep the UNO Q connected to the Internet and wait for the setup to complete. This setup only happens once — after it finishes, every TTS example starts much faster.
+   The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
+
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches both the model and the speech service over the internet. Paste one key into both fields and save it — App Lab keeps the key for your board, so you only do this once.
 
 2. Run the App
-----------------
+--------------
 
 #. Download :download:`04 AI Voice Assistant.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/04.AI.Voice.Assistant.zip>`.
-#. Open **Arduino App Lab** and go to **Apps**. Click the dropdown arrow next to **Create new app +** and select **Import App**.
-
-   .. image:: /img/app_import_app.png
-      :width: 600
-
-#. Select **Import from Computer**.
-
-   .. image:: /img/app_import_pc.png
-      :width: 600
-
-#. Choose the package you downloaded. The app appears in **Apps** — click it to open.
-#. With the app open, click the **Run** button (▶) in the top-right corner. The Output window prints *"AI Voice Assistant ready."*
+#. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
+#. Click the **Run** button (▶) in the top-right corner. The Output window prints *"AI Voice Assistant ready."*
 
    .. image:: /img/app_run.png
       :width: 500
       :align: center
 
-   .. note::
-
-      The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches both the model and the speech service over the internet. Paste one key into both fields and save it — App Lab keeps the key for your board, so you only do this once.
-
-#. A **Web UI** tab opens by itself. The status row reads **Connected** with a blue dot, the panel shows **Ready** with the line *"Hold the button and speak."*, and the big button reads **Hold to Speak**.
-#. Press and hold the button. The panel turns amber and switches to **Listening...**, and the button label changes to **Release to Finish**.
-#. Still holding, say a short question out loud — *"What is the capital of France?"* — then let go. The label becomes **Please Wait**, the button greys out, and the panel walks through **Recognizing your speech...**, **AI is thinking...**, and **Speaking...** before returning to **Ready**.
-#. Your sentence appears in the **You said** card, the model's answer appears in the **AI reply** card, and the carrier's speaker reads the answer out loud. Ask a few more questions the same way — hold, speak, release — and each one gets its own answer.
-#. The page looks like this while the conversation is running, with the status panel above the button and the two cards underneath.
-
-   .. image:: img/ai_voice_assistant.png
-      :width: 600
-      :align: center
+The **Web UI** tab opens by itself — the next section walks through what to do with it.
 
 **How it Works**
 
@@ -142,45 +126,27 @@ Here is what each piece does:
 **Python (main.py)** — runs on the Linux MPU
   * ``WebUI()`` starts the server that hands the page in ``assets/`` to your browser
   * ``ui.on_message("start_recording", start_recording)`` and ``ui.on_message("stop_recording", stop_recording)`` listen for the two button events
-  * ``STT(type="online", language="en")`` creates the recognizer, and ``stt_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("API_KEY")`` hands it your key
-  * ``stt.reset()``, ``stt.start_listening()``, ``stt.stop_listening()`` and ``stt.get_result(timeout=60)`` are the calls that capture one sentence and have it transcribed
-  * ``if not STT.API_KEY: raise RuntimeError(...)`` refuses to record at all without a key, and a result that starts with ``[STT ERROR]`` is raised as a real error instead of being shown as speech
-  * ``stt.get_result()`` may also come back empty — an empty answer stops the loop there and tells the page nothing was recognized
-  * ``CloudLLM(model="openai:gpt-4o-mini", system_prompt=SYSTEM_PROMPT)`` creates the link to the cloud model and fixes its behaviour up front
-  * ``llm.chat_stream(message=heard)`` sends the recognized sentence and streams the answer back in pieces, which are joined into one reply
-  * ``EdgeTTS()``, ``tts.set_voice("en-US-JennyNeural")``, ``tts.set_volume(50)`` and ``tts.say(reply)`` choose a voice and speak the answer
-  * ``ui.send_message("voice_status", {...})`` keeps the page informed of the state, what was heard, and what was answered
-  * ``threading.Thread(target=process_voice, daemon=True)`` keeps the button handler free while recognition, the model, and the voice do their work
-  * ``os.makedirs("/app/audio_output", exist_ok=True)`` creates the folder where the speech Bricks drop their temporary audio files
-  * ``App.run()`` starts the app and keeps it alive
 
 **Speech Recognition (behind the ``sunfounder_stt`` brick)** — runs in its own service on the board and does its work in the cloud
   * ``stt.start_listening()`` opens the carrier's microphone and records until you release the button
   * ``stt.stop_listening()`` closes the recording and hands the audio to the online recognition service
-  * ``stt.get_result(timeout=60)`` returns the text — the words that end up in the **You said** card
-  * This step needs the internet and your **OpenAI API key**. There is no model inside the package to fall back on, so a service that cannot be reached is the usual reason a perfectly clear sentence comes back as nothing
 
 **Cloud LLM (behind the ``cloud_llm`` brick)** — runs on OpenAI's servers
   * The **system prompt** introduces a *friendly voice assistant* and asks for a natural answer of one or two sentences, in whatever language you used
   * Your sentence is sent with that instruction over the internet, and the answer streams back as text
-  * The same key you gave the speech service, and the same internet connection — the reasoning happens in the cloud
 
 **Text to Speech (behind the ``sunfounder_tts`` brick)** — the brick runs on the board and the voice is synthesized online
   * ``tts.say(reply)`` turns the answer text into audio and plays it through the AVIO Carrier's speaker
   * The voice is fixed to ``en-US-JennyNeural`` at volume 50 in ``main.py``; the voice service needs an internet connection, but never a key
-  * The first run downloads the runtime this Brick needs, which is why the very first conversation takes so long to speak
 
 **Browser (HTML/JS)** — runs in your browser
   * ``socket.emit('start_recording', {})`` fires on ``pointerdown`` and ``socket.emit('stop_recording', {})`` on ``pointerup``, so the button really is a push-to-talk switch
   * ``socket.on('voice_status', updateState)`` repaints the panel, the button label, and both transcript cards
-  * The ``stateTitles`` map names the six states the panel can show — Ready, Listening, Recognizing, Thinking, Speaking, and Error
-  * While the app is busy the button is disabled and reads **Please Wait**, and ``window.addEventListener('blur', ...)`` releases it for you if you click away mid-sentence
-  * ``socket.on('connect')`` and ``socket.on('disconnect')`` drive the status dot, and an error state fills the red banner with the message Python sent
 
-Notice how much of this loop depends on the network. Your recording, the sentence the recognizer wrote down, and the answer the model wrote back all cross the internet; only the speaker is local. That is a real trade: the package you download stays small and the recognition is better than anything that would fit on the board, but the assistant goes quiet the moment the connection does. The model still never touches the hardware — there is no Bridge call and no sketch here, so words are the only thing it can produce.
+Notice how much of this loop depends on the network. Your recording, the sentence the recognizer wrote down, and the answer the model wrote back all cross the internet; only the speaker is local.
 
 3. Experiment
-----------------
+-------------
 
 **Ask It Anything**
 
@@ -203,44 +169,26 @@ Speak each request in your normal voice and watch the panel, the two cards, and 
    * - Releasing the button without speaking
      - The panel returns to **Ready** with *"No speech was recognized. Hold the button and try again."* — an empty recording is dropped before it ever reaches the model
 
-**Challenge: Find the Edges of "Briefly"**
-
-The assistant is told to answer in one or two sentences, so put that instruction under pressure. Ask for the longest answer you can get — *"Explain how rainbows form, in detail."*, *"Tell me the entire history of the UNO Q."* — then ask it to be verbose, then ask a question that can be answered with a single word. Compare the lengths in the **AI reply** card each time. Which wins more often: your wording, or the instruction the code gave the model?
-
-**Challenge: Hear What the Recognizer Heard**
-
-The card under **You said** is not what you said — it is what the recognizer heard, and the two do not always agree. Try to pull them apart: speak from across the room, whisper, talk very fast, switch on a fan or some music, or slip into another language or a made-up word. Every time the text differs from your intention, you are looking at the weakest link in the chain. Then watch what the assistant does with the misheard sentence — it will answer the question it was handed, not the one you meant, because text is the only thing it ever receives.
-
 4. Troubleshooting
---------------------
+------------------
 
 **The red banner reports "Voice assistant error: ..."**
 
-* **Cause:** The request to the cloud model failed. The app shows this message for any failure at all: no key saved yet, a key that was rejected or has run out of credit, or no internet connection on the board.
-* **Solution:** Check the board's internet connection first, since the model lives in the cloud. Then confirm your key is still valid and funded in your OpenAI account, stop the app, and press **Run** again to enter a fresh key.
+* **Cause:** The request to the cloud model failed.
+* **Solution:** Check the board's internet connection first, since the model lives in the cloud.
 
 **The panel says "No speech was recognized..."**
 
-* **Cause:** Two very different problems share this message. Either the recording really was silent or too quiet — the button was released before you began speaking, or you were too far from the microphone — or the recording was fine and the online speech service could not be reached, which ends in an empty result as well.
-* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing. If your voice was clear and the message still comes back, test the board's internet connection before you touch the microphone: the recognition happens in the cloud, and a restricted network can load ordinary web pages and still fail here. If the panel instead shows *"Unable to start recording"*, the microphone itself could not be opened: check that the AVIO Carrier is firmly attached and that no other app is holding the audio device.
+* **Cause:** Two very different problems share this message.
+* **Solution:** Hold the button first and wait until the panel says **Listening...**, then speak at a normal volume from 30–50 cm away before releasing.
 
 **The answer appears on screen, but you hear nothing**
 
-* **Cause:** The **AI reply** card is filled before the speech starts, so text without sound means recognition and the model both worked and only the voice failed. The usual reasons are a board that has lost its internet connection — the voice is synthesized online — a muted or covered speaker, or something plugged into the headphone jack.
-* **Solution:** Check the board's connection first, then the audio: unplug anything in the headphone jack, make sure the carrier's speaker is not covered, and remember the project sets the volume to 50, so a noisy room can swallow it. If the Console shows a speech error, re-run the app once the first-run setup has finished.
-
-**The first run takes half an hour or more**
-
-* **Cause:** Nothing is broken. The first run has real work to do — App Lab downloads and prepares the text to speech runtime and its audio dependencies, and the two speech Bricks build their services on the board.
-* **Solution:** Keep the UNO Q connected to the Internet and let the setup finish. This happens once: after it completes, every speech example starts much faster.
-
-**The Web UI never opens, or the status dot turns red and reads "Disconnected"**
-
-* **Cause:** The app is not running yet, your browser blocked the new tab, or the socket between the page and Python dropped because the app stopped or the board was unplugged.
-* **Solution:** Press **Run** again and wait for the *"AI Voice Assistant ready."* line in the Output window, then allow pop-ups for App Lab or open the Web UI from the app's tab strip yourself. If the page lost the board while you were talking, reconnect the USB-C cable if it came loose and refresh the tab — the page reconnects on its own once the app is back.
+* **Cause:** The **AI reply** card is filled before the speech starts, so text without sound means recognition and the model both worked and only the voice failed.
+* **Solution:** Check the board's connection first, then the audio: unplug anything in the headphone jack, make sure the carrier's speaker is not covered, and remember the project sets the volume to 50, so a noisy room can swallow it.
 
 5. Summary
--------------
+----------
 
 You just held a conversation with your UNO Q. It listened through the carrier's microphone, turned your recording into text, sent that text to a cloud model, and answered you out loud in a voice it fetched for the occasion — no keyboard, no wiring, just speech in and speech out.
 

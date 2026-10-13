@@ -3,7 +3,7 @@
    :end-before: end_hello_message
 
 11 Telegram IoT Bot
-=====================
+===================
 
 In this final lesson of Module C, you'll connect your UNO Q to **Telegram**. You'll create a bot that responds to chat commands — send ``/led_on`` and the LED lights up; send ``/status`` and the bot replies with the current temperature and humidity. Your hardware becomes a chat contact you can message from anywhere.
 
@@ -19,7 +19,7 @@ In this lesson, you will learn to:
 * Read sensors and control hardware via Bridge — triggered by chat messages
 
 1. Build the Circuit
-----------------------
+--------------------
 
 **Components Needed**
 
@@ -51,6 +51,7 @@ This project uses the following Bricks and sketch libraries:
 * Bricks (declared in ``app.yaml``):
 
   * ``telegram_bot`` — connects the app to your Telegram bot (paste the token from @BotFather in the Brick settings)
+
 * Libraries (declared in ``sketch.yaml``):
 
   * ``DHT sensor library`` (1.4.6) — reads the DHT11 temperature and humidity sensor
@@ -65,7 +66,7 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND*
    :align: center
 
 2. Setup
----------------
+--------
 
 **Create the Bot and Get the API Token**
 
@@ -74,7 +75,7 @@ Connect the DHT11: **VCC** → **3.3V**, **DATA** → **D4**, **GND** → **GND*
 #. Copy the **API token** that BotFather returns. You will paste it into the **Telegram Bot** Brick in the next section.
 
 3. Run the App
-----------------
+--------------
 
 
 #. Download :download:`11 Telegram IoT Bot.zip <https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/11.Telegram.IoT.Bot.zip>`.
@@ -159,7 +160,7 @@ Here's what each component does:
 Every handler wraps its Bridge calls in ``try``/``except`` — if the DHT11 hiccups, the bot replies "❌ I couldn't read the sensor right now. Please try again." instead of crashing the whole App.
 
 4. Experiment
-----------------
+-------------
 
 **Add a Beep Command**
 
@@ -177,7 +178,7 @@ The circuit has an LED — what else could the bot control? Add a passive buzzer
 Make the bot **proactive**: store the chat ID from the last ``/status`` request, and have the Python app check the temperature in a loop — if it exceeds 30°C, send an unsolicited warning message.
 
 5. Troubleshooting
---------------------
+------------------
 
 **Bot never responds to messages**
 
@@ -200,7 +201,7 @@ Make the bot **proactive**: store the chat ID from the last ``/status`` request,
 * **Solution:** Never include a real token in screenshots, documentation, or shared ZIP files. If a token leaks, open @BotFather and revoke/regenerate it — the old one stops working immediately.
 
 6. Summary
--------------
+----------
 
 Your hardware is a Telegram contact! In this lesson, you learned:
 

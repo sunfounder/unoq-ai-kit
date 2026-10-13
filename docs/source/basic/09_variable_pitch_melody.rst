@@ -16,7 +16,7 @@ In this lesson, you will learn to:
 * Calculate note **frequencies** from a melody array and a pitch percentage
 
 1. Setup
-----------------------
+--------
 
 **What You Need**
 
@@ -55,7 +55,7 @@ Connect the passive buzzer — it has **no polarity**, so either orientation wor
 
 
 2. Run the App
-----------------
+--------------
 
 **Import and Run the Code**
 
@@ -245,7 +245,7 @@ In the PIR Motion Alarm lesson, you drove a passive buzzer on pin **D5**, altern
   * ``noTone(BUZZER_PIN)`` — stops the wave so you can insert the 50ms silence between notes, keeping them separate.
 
 3. Experiment
-----------------
+-------------
 
 **Change the Melody**
 
@@ -281,7 +281,7 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` to control how far the kn
 
 
 4. Troubleshooting
---------------------
+------------------
 
 **Buzzer makes no sound at all**
 
@@ -309,7 +309,7 @@ Change ``MIN_PITCH_PERCENT`` and ``MAX_PITCH_PERCENT`` to control how far the kn
 * **Solution:** Active buzzers ignore frequency changes — they only beep at their fixed internal frequency. Check that your buzzer is a **passive** type (usually has a bare metal disc visible on top, without a sealed plastic cap).
 
 5. Summary
--------------
+----------
 
 Congratulations! You've made music — not just a single tone, but a melody that you can control with a knob. In this lesson, you learned:
 
