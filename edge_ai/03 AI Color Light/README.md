@@ -17,7 +17,7 @@ This example uses the following Bricks:
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
-- RGB LED (common cathode) ×1
+- RGB LED ×1
 - 220Ω resistor ×3
 - Jumper wires
 - USB-C cable ×1

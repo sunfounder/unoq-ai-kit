@@ -19,7 +19,7 @@ This example uses the following Bricks:
 - Pan Tilt Kit ×1
 - Arduino UNO Q ×1
 - Breadboard ×1
-- RGB LED (common cathode) ×1
+- RGB LED ×1
 - 220Ω resistors ×3
 - Buzzer ×1
 - Jumper wires

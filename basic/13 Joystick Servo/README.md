@@ -20,15 +20,16 @@ Control two servos (pan and tilt) with a joystick — push up/down to tilt, left
 
 Connect the joystick's VCC to 3.3V, VRx to A3, VRy to A2, SW to D4, and GND to GND; connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
 
+Connect the joystick's VCC to 3.3V, VRx to A3, VRy to A2, SW to D4, and GND to GND; connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
+
 ![Wiring Diagram](assets/docs_assets/wiring_joystick_servo.png)
 
 ## How to Use the Example
 
 1. Download [`13 Joystick Servo.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/13.Joystick.Servo.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
-3. Connect the battery pack to the Robot Shield.
-4. Click **Run**.
-5. Wait one second for auto-calibration (don't touch the joystick). Then move the stick — the servos follow in real time. Press the stick down to reset both to center (90°).
+3. Click **Run**.
+4. Wait one second for auto-calibration (don't touch the joystick). Then move the stick — the servos follow in real time. Press the stick down to reset both to center (90°).
 
 ## How it Works
 

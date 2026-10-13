@@ -18,15 +18,16 @@ Read temperature with an NTC thermistor and automatically adjust a DC motor (fan
 
 Connect the NTC thermistor with a 10kΩ resistor to analog pin A1 and the DC motor to the Robot Shield's M0 terminal.
 
+Connect the NTC thermistor with a 10kΩ resistor to analog pin A1 and the DC motor to the Robot Shield's M0 terminal.
+
 ![Wiring Diagram](assets/docs_assets/wiring_thermistor_fan.png)
 
 ## How to Use the Example
 
 1. Download [`12 Thermistor-Controlled Fan.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/12.Thermistor-Controlled.Fan.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
-3. Connect the battery pack to the Robot Shield.
-4. Click **Run**.
-5. Open the Serial Monitor. Gently pinch the thermistor bead between your fingers — the temperature rises and the fan starts spinning. Let go and watch it cool down and stop.
+3. Click **Run**.
+4. Open the Serial Monitor. Gently pinch the thermistor bead between your fingers — the temperature rises and the fan starts spinning. Let go and watch it cool down and stop.
 
 ## How it Works
 

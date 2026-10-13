@@ -13,7 +13,11 @@ Sweep a servo back and forth between 45° and 135° (±45° around the 90° cent
 
 ## Wiring
 
-Connect the servo to the Robot Shield's servo channel 0 (Arduino pin 9) and the battery pack to the Robot Shield.
+Connect the servo to the Robot Shield's servo channel 0 (Arduino pin 9).
+
+Connect the servo to the Robot Shield's servo channel 0 (Arduino pin 9).
+
+
 
 ![Wiring Diagram](assets/docs_assets/wiring_servo.png)
 
@@ -21,9 +25,8 @@ Connect the servo to the Robot Shield's servo channel 0 (Arduino pin 9) and the 
 
 1. Download [`08 Servo Sweep.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/08.Servo.Sweep.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
-3. Connect the battery pack to the Robot Shield.
-4. Click **Run**.
-5. The servo sweeps smoothly from 45° to 135° and back, incrementing by 2° every 30 ms. Open the Serial Monitor to see the current angle.
+3. Click **Run**.
+4. The servo sweeps smoothly from 45° to 135° and back, incrementing by 2° every 30 ms. Open the Serial Monitor to see the current angle.
 
 ## How it Works
 

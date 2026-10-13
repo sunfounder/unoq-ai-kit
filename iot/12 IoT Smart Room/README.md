@@ -25,7 +25,7 @@ This example uses the following Bricks:
 - Pan Tilt Kit ×1
 - DHT11 temperature and humidity sensor ×1
 - PIR motion sensor ×1
-- RGB LED (common cathode) ×1
+- RGB LED ×1
 - 220Ω resistors ×3
 - 10kΩ resistor ×1
 - Photoresistor module ×1

@@ -6,7 +6,7 @@ Cycle an RGB LED through 8 colors using three PWM pins and `analogWrite()`. Each
 
 - Pan Tilt Kit ×1
 - Breadboard ×1
-- RGB LED (common cathode) ×1
+- RGB LED ×1
 - 220Ω resistors ×3
 - Jumper wires
 - USB-C cable ×1

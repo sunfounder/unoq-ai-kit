@@ -21,15 +21,16 @@ Control two servos (pan and tilt) by tilting the board — no joystick, no butto
 
 The IMU is connected to the UNO Q QWIIC connector (no wiring needed); connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
 
+The IMU is connected to the UNO Q QWIIC connector (no wiring needed); connect the pan servo to pin 9 and the tilt servo to pin 10 on the Robot Shield's servo headers.
+
 ![Wiring Diagram](assets/docs_assets/wiring_imu_servo.png)
 
 ## How to Use the Example
 
 1. Download [`15 IMU Servo.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/15.IMU.Servo.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
-3. Connect the battery pack to the Robot Shield.
-4. Click **Run**.
-5. Hold the board level — both servos center at 90°. Tilt left/right to pan, forward/back to tilt. The servos follow your motion smoothly.
+3. Click **Run**.
+4. Hold the board level — both servos center at 90°. Tilt left/right to pan, forward/back to tilt. The servos follow your motion smoothly.
 
 ## How it Works
 

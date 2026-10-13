@@ -11,7 +11,11 @@ Drive a DC motor with speed and direction control using the Robot Shield's H-bri
 
 ## Wiring
 
-Connect the DC motor to the Robot Shield's M0 terminal and the battery pack to the Robot Shield.
+Connect the DC motor to the Robot Shield's M0 terminal.
+
+Connect the DC motor to the Robot Shield's **M0** terminal.
+
+
 
 ![Wiring Diagram](assets/docs_assets/wiring_motor.png)
 
@@ -19,9 +23,8 @@ Connect the DC motor to the Robot Shield's M0 terminal and the battery pack to t
 
 1. Download [`07 Motor Speed Controller.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/07.Motor.Speed.Controller.zip).
 2. In App Lab, go to **Apps** → **Create New App** → **Import App** → **Import from Computer** and open the package you downloaded.
-3. Connect the battery pack to the Robot Shield.
-4. Click **Run**.
-5. The motor spins forward 3 s → stops 1 s → reverses 3 s → stops 3 s → repeats. Attach the fan blade to see and feel the airflow change direction.
+3. Click **Run**.
+4. The motor spins forward 3 s → stops 1 s → reverses 3 s → stops 3 s → repeats. Attach the fan blade to see and feel the airflow change direction.
 
 ## How it Works
 

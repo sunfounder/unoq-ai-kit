@@ -15,7 +15,7 @@ Control an RGB LED from a web page using a color picker. Pick any color and the 
 - Pan Tilt Kit ×1
 - Robot Shield ×1
 - Breadboard ×1
-- RGB LED (common cathode) ×1
+- RGB LED ×1
 - 220Ω resistors ×3
 - Jumper wires
 - USB-C cable ×1

@@ -27,7 +27,9 @@ This example uses the following `ricks:
 
 ## Wiring
 
-Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RG` LED's red, green, and blue legs to **D6**, **D7**, and **D8**, each through its own 220 Ω resistor; the LED is wired as common cathode. The camera is built into the AVIO Carrier.
+Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RGB LED's red, green, and blue legs to **D6**, **D7**, and **D8**, each through its own 220 Ω resistor; the LED is wired as common cathode. The camera is built into the AVIO Carrier.
+
+Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RGB LED's red, green, and blue legs to **D6**, **D7**, and **D8**, each through its own 220 Ω resistor; the LED is wired as common cathode. The camera is built into the AVIO Carrier.
 
 ![Wiring Diagram](assets/docs_assets/wiring_context_room.png)
 
@@ -37,9 +39,8 @@ Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RG` LED'
 2. Open **Arduino App Lab**.
 3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
 4. In **`rick Configuration**, enter the API key for **Cloud LLM** and an OpenAI API key for **sunfounder_stt** — the same OpenAI key can go in both fields.
-5. Connect the battery pack to the Robot Shield.
-6. Click **Run** and open the Web UI.
-7. Click **SPEAK**, then start talking — you have four seconds.
+5. Click **Run** and open the Web UI.
+6. Click **SPEAK**, then start talking — you have four seconds.
 
 ## How it Works
 
@@ -47,7 +48,7 @@ Connect the PIR output to **D4**, the DHT11 data pin to **D5**, and the RG` LED'
 
 - `rowser — sends the recorded request when the countdown ends
 - Python (`main.py`) — transcribes it, reads the DHT11 and the PIR, and asks the LLM for a scene
-- Sketch (`sketch.ino`) — drives the RG` LED and keeps the light in step with the dashboard
+- Sketch (`sketch.ino`) — drives the RGB LED'sand keeps the light in step with the dashboard
 - Speaker — explains the choice out loud
 
 **The dashboard** — a live camera preview, the current temperature and humidity, the PIR occupancy state, and an **AI Lighting Scene** card with a colour wheel, a brightness slider, a **Room Light** switch, and live RG` and hex readouts.
