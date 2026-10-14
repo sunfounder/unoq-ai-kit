@@ -67,7 +67,7 @@ The Bridge library that lets the sketch and Python talk to each other is part of
 
 **Wiring Diagram**
 
-The **DHT11** uses three pins — **DATA** to **D4**, **VCC** to **5V**, **GND** to **GND** — and the **photoresistor module** is wired the same way except for one thing that matters: its **VCC goes to 3.3V, not 5V**, and its signal pin goes to **A0**. A0 is wired straight to the STM32 analog input and tolerates about 3.6 V at most, so a light module fed from 5 V must never drive it — powering the module from 3.3 V keeps its output inside that limit. The light reading is a *relative* classroom measurement taken from the voltage on **A0**, so it depends on how the module is built: on most modules the percentage rises as the room gets brighter, but on a module whose resistor and photoresistor are swapped it will rise as the room gets darker instead. Compare the number with the room you are sitting in — if it moves the wrong way, that is the module, not a mistake in your wiring.
+The **DHT11** uses three pins — **DATA** to **D4**, **VCC** to **5V**, **GND** to **GND** — while the **photoresistor** is a two-lead part, so it needs a divider: one leg to **3.3V**, the other leg to **A0** and through a **10kΩ** resistor to **GND**. Feed the divider from **3.3V, not 5V** — A0 is wired straight to the STM32 analog input and tolerates about 3.6 V at most. The light reading is a *relative* classroom measurement taken from the voltage on **A0**, so it follows which side of the divider the photoresistor sits on: with the photoresistor towards 3.3V the percentage rises as the room gets brighter, and with the two parts swapped it rises as the room gets darker instead. Compare the number with the room you are sitting in — if it moves the wrong way, swap the two parts.
 
 .. image:: /img/wiring/wiring_dht11_photoresistor.png
    :width: 500
@@ -203,7 +203,7 @@ The model only ever sees the snapshot you send it, so the fastest way to underst
 
 **The light percentage moves the opposite way to the real room**
 
-* **Cause:** The percentage is calculated from the raw voltage on **A0**, and a photoresistor module is a voltage divider — which half of it the photoresistor sits in decides whether more light means a larger or a smaller reading.
+* **Cause:** The percentage is calculated from the raw voltage on **A0**, and the photoresistor and the 10kΩ resistor form a voltage divider — which of the two sits towards 3.3V decides whether more light means a larger or a smaller reading.
 * **Solution:** Shine a light at the module and watch the card.
 
 **The panel says "Analysis unavailable" instead of an answer**
