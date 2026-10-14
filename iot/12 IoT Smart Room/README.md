@@ -28,7 +28,7 @@ This example uses the following Bricks:
 - RGB LED ×1
 - 220Ω resistors ×3
 - 10kΩ resistor ×1
-- Photoresistor module ×1
+- Photoresistor ×1
 - Breadboard ×1
 - Jumper wires
 - USB-C cable ×1

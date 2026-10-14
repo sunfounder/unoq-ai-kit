@@ -19,7 +19,7 @@ This example uses the following Bricks:
 - Arduino UNO Q ×1
 - Robot Shield ×1
 - DHT11 temperature and humidity sensor ×1
-- Photoresistor module ×1
+- Photoresistor ×1
 - USB-C cable ×1
 - Jumper wires
 
