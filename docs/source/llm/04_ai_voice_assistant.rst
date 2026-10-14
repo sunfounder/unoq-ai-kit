@@ -48,7 +48,7 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 
 There is no sketch in this project and no sketch libraries to install: nothing here drives a pin, so every line of it runs in Python on the Linux MPU.
 
-Because both the model and the speech service are reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you — the same key works for both. The package you download stays small, because no speech model travels inside it: the recognition happens on OpenAI's servers.
+Because both the model and the speech service are reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you — the same key works for both. The package you download stays small, because no speech model travels inside it: the recognition happens on OpenAI's servers. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 No breadboard wiring is needed here: the ears and the voice belong to the AVIO Carrier, so the kit works exactly as it comes out of the box.
 

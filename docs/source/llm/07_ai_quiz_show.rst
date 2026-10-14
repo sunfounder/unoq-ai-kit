@@ -53,7 +53,7 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * ``cloud_llm`` — asks a cloud language model for a new question and returns the JSON behind it
 * ``sunfounder_tts`` — reads the question, the three choices, and the explanation aloud on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you.
+Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 The sketch declares no external libraries: ``sketch.yaml`` has no ``libraries:`` section at all, because the Bridge library that lets Python call the sketch is part of the UNO Q core and needs no installation.
 

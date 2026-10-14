@@ -52,7 +52,7 @@ This project uses two App Lab **Bricks** — support packages that App Lab adds 
 * ``web_ui`` — serves the chat page and keeps the browser and Python in sync
 * ``cloud_llm`` — sends your message to a cloud language model and streams the answer back
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you.
+Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 The sketch needs no libraries at all — the Bridge library that lets Python call the sketch is part of the UNO Q core, so there is nothing to install.
 

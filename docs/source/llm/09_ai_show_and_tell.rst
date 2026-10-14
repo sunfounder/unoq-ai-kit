@@ -46,7 +46,7 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 * ``sunfounder_stt`` — turns your recording into text. This project uses its **online** mode, so no speech model runs on the board
 * ``sunfounder_tts`` — reads the answer aloud on the board's speaker
 
-Because the model and the speech-to-text service are both reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The same key works for both. The board also needs an internet connection that can actually reach OpenAI — worth testing before you blame the microphone.
+Because the model and the speech-to-text service are both reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The same key works for both. The board also needs an internet connection that can actually reach OpenAI — worth testing before you blame the microphone. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 The sketch declares no libraries and contains no code. Every part of this project — camera, microphone, speaker, speech recognition, and the model — belongs to the Linux side, so the microcontroller simply idles. There is nothing to flash beyond the empty sketch that ships with the app.
 

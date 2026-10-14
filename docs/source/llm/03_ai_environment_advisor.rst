@@ -52,7 +52,7 @@ This project uses two App Lab **Bricks** — support packages that App Lab adds 
 * ``web_ui`` — serves the advisor page and carries the live readings and the model's answer between the browser and Python
 * ``cloud_llm`` — sends the reading summary to a cloud language model and streams the advice back
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you.
+Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 The sketch needs two libraries, both declared in ``sketch.yaml`` and installed for you when the app is built:
 

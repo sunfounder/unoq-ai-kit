@@ -45,7 +45,7 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * `cloud_llm` — sends the camera frame and your chosen style to a cloud vision model, and returns the story as JSON
 * `sunfounder_tts` — narrates the finished story on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. `app.yaml` declares the `cloud_llm` brick with an empty `API_KEY`, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you.
+Because the model is reached over the internet, the project needs a key of your own. `app.yaml` declares the `cloud_llm` brick with an empty `API_KEY`, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 The sketch declares no libraries of its own in `sketch.yaml`. The two headers it includes — the Bridge library and the LED matrix library — ship with the UNO Q core, so there is nothing to install.
 

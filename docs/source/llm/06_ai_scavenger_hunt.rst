@@ -53,7 +53,7 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * ``cloud_llm`` — writes each mission and referees the camera image with a cloud vision model
 * ``sunfounder_tts`` — reads the mission and the referee's verdict aloud on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you.
+Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
 
 There are no libraries to install on the sketch side either: ``sketch.yaml`` declares no ``libraries:`` section at all, so the only code the MCU runs is the sketch itself.
 

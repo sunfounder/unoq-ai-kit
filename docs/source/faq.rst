@@ -425,3 +425,12 @@ Lessons that use a cloud AI model ask for the key the first time you click
 platforms such as Arduino Cloud and Blynk also give you a **Device ID** and a
 **Secret Key** — save them when they are generated, because the lesson needs
 them later.
+
+Can I use a model from another provider?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Yes - ``cloud_llm`` supports **OpenAI**, **Anthropic (Claude)** and **Google (Gemini)**.
+Change the model name in ``python/main.py`` from ``"openai:gpt-4o-mini"`` to the provider
+and model you want, for example ``"anthropic:<model-id>"``, then enter **that provider's**
+API key when App Lab asks for it. See :ref:`llm_other_models`.
+
