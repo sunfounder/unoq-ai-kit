@@ -176,14 +176,6 @@ Try each of these with the app running and observe what the pan-tilt does:
    * - Step back into view
      - Greets you again — this counts as a new visit
 
-**Challenge: How Fast Can It Follow?**
-
-Walk across the room in front of the camera — first at a slow stroll, then briskly, then a jog. Watch how the pan servo keeps up. Each detection moves the servo only 1°, so what happens when you outrun the frame rate? Is the tracking smoother with slow, steady movement or fast, jerky movement? Can you find a speed where the camera visibly lags behind you?
-
-**Two Faces**
-
-Ask a friend to stand beside you, and have both of you face the camera. Which one does the camera follow when you're at different distances? Try slowly swapping who stands closer to the camera — notice how the pan-tilt switches targets. Then have one person leave the frame while the other stays: does the board greet the remaining person again? The greeting fires only when *no face at all* has been seen for 2.5 seconds — observe whether that matches what happens.
-
 4. Troubleshooting
 ------------------
 

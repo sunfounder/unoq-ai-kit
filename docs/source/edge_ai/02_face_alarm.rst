@@ -179,10 +179,6 @@ The alarm has a clear on-condition (a face above 50% confidence) and a timer-bas
    * - Turn your head so only your profile is visible
      - Detection becomes less reliable; the alarm may flicker on and off
 
-**Challenge: Find the Face-Detection Envelope**
-
-A face detector has its own comfort zone of distance, angle, and light. Walk backward slowly, step by step, until the alarm refuses to trigger, then walk forward again — note roughly how far that point is. Try the same test in dim light and with a light behind you, and notice whether the reliable distance shrinks. Finally, hold up a photo of a face or a face drawn on paper: does the model treat it as a face? An AI detector works on visual patterns, not on consciousness — finding where the pattern breaks is the point of the experiment.
-
 4. Troubleshooting
 ------------------
 

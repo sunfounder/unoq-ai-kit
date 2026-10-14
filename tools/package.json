@@ -1,0 +1,13 @@
+{
+  "name": "unoq-ai-kit-doc-tools",
+  "private": true,
+  "type": "module",
+  "description": "Validation helpers for the UNO Q AI Starter Kit docs",
+  "scripts": {
+    "check:mermaid": "node check_mermaid.mjs"
+  },
+  "dependencies": {
+    "jsdom": "^30.1.2",
+    "mermaid": "11.12.1"
+  }
+}

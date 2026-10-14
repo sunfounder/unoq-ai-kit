@@ -172,10 +172,6 @@ Show each object to the camera and check the result:
    * - A friend standing in front of the camera
      - LED glows white; card shows ``person`` / White
 
-**Challenge: Two Objects at Once**
-
-Hold an apple and a banana side by side in front of the camera. Watch the LED — it takes the color of whichever object the model is more confident about in the current frame, so it may hop between red and yellow as the confidence scores jitter. Watch the Confidence number in the Web UI while you move one object closer or further away — can you predict which color wins?
-
 4. Troubleshooting
 ------------------
 

@@ -197,10 +197,6 @@ Hold each gesture up to the camera for a second or two, about 50 cm away against
    * - Show the same thumbs up again, twice in a row
      - Each one is reported once; the LED turns on the first time and simply stays on
 
-**Watch the Confidence Number Move**
-
-The percentage in the card is the model's own certainty, and it reacts to how you present your hand. Hold a thumbs up steady and watch it climb. Move your hand much closer, so it fills the frame, and watch the number change — the model was trained on hands at a typical distance. Turn the hand slightly, or rotate your wrist, and the score usually dips because the silhouette the model sees is no longer the one it learned. Then try the same gestures in a dim room and in bright daylight: lighting is the single biggest influence on this number, and it is worth seeing how far it falls before the label disappears from the card entirely.
-
 4. Troubleshooting
 ------------------
 

@@ -1058,3 +1058,29 @@ deep-dive such as "Picking the best object" / "Sending a code, not colors". Thos
 design discussions are not part of the module template and made the pages several times
 longer than they needed to be. If a mechanism needs explaining, it is one line inside
 the component block that owns it.
+
+### Experiment: One Block Only (edge_ai and llm)
+
+In the **edge_ai** and **llm** modules, `3. Experiment` holds **one** bold sub-heading and its
+guided table. There is no second block, no second guided table, and **no Challenge** at all -
+the first block already walks the reader through the different cases, and a page with three
+challenges is far longer than one experiment needs to be. Other modules keep their own
+Experiment format (the basic module keeps a Challenge with a dropdown solution).
+
+### Validating Mermaid Diagrams
+
+Sphinx does **not** validate Mermaid: a broken diagram builds with zero warnings and only shows
+an error box in the browser. After editing any ``.. mermaid::`` block, run:
+
+.. code-block:: bash
+
+   cd tools && npm install && node check_mermaid.mjs
+
+It parses every diagram with the same Mermaid version the site loads (pinned in
+``tools/package.json``) and exits non-zero when one is invalid.
+
+The same trap hides other RST faults: a literal ``.. note::``, a list that never rendered, a
+missing blank line before a directive, or an image directive glued onto the sentence around it.
+The docs build stays silent through all of them - check the rendered page or the built HTML for
+stray markup after a large edit.
+

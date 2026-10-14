@@ -153,10 +153,6 @@ The percentage under each object name is a window into the model's certainty. Wi
    * - Move everything out of view
      - No new detections arrive; the last rows stay on screen until the next detection message replaces them
 
-**Challenge: Explore the Model's Limits**
-
-The general model knows around 80 common categories — but it cannot recognize everything. Walk around your desk and test objects whose icons are built into the page (a book, bottle, chair, laptop, mouse, keyboard, or clock), then try something unusual, like a small toy or a kitchen utensil. Which objects does the model name confidently, and which never appear at all? Also try the same object under different lighting and distances, and see how far you can move it away before its confidence drops below the 40% line. There is no right answer to find — the goal is to feel where the model's abilities end, because later projects rely on knowing exactly what your model can and cannot see.
-
 4. Troubleshooting
 ------------------
 
