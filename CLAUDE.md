@@ -1,5 +1,8 @@
 # UNO Q AI Kit — Code Project Conventions
 
+**Never commit or push on your own.** Leave changes in the working tree and wait for
+the user to ask - they review first and decide when work is published.
+
 Code projects in this repository are App Lab apps organized by module. Each app
 follows a standard structure with a README.md documenting the project.
 
