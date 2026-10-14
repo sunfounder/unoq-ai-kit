@@ -65,7 +65,13 @@ No breadboard wiring is needed in this lesson — the pet's face is drawn on the
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Digital Pet ready — configure your API Key and start chatting!"* and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot.
+#. Type something into the message box — the placeholder suggests *"Try: I passed my exam today!"* — and press **Send** or the Enter key. Your message joins the chat, the input box and the button go quiet while the app waits, and Pixel switches to a thinking face straight away.
+#. A moment later the answer arrives: the reply joins the chat, the face on the LED matrix changes to the mood the model chose, and the input box comes back. The page looks like this — the pet's current face at the top, both halves of the conversation underneath, and a 300-character counter under the input box.
+
+   .. image:: img/ai_digital_pet.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

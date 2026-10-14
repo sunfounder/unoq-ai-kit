@@ -70,7 +70,14 @@ No breadboard wiring is needed in this lesson: the camera, the speaker, and the 
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Vision Assistant ready."* and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot, and the live camera view appears inside the frame.
+#. Point the camera at something — a mug, a toy, your hand — and type a question in the box. The default text is *"What can you see?"*, and you can ask anything the picture could answer: *"What colour is it?"*, *"What is on the left?"*, *"How many fingers am I holding up?"*. Then click **ASK AI**.
+#. The status panel walks through its stages while the answer is on its way: **Image Captured**, then **Thinking** with *"AI is looking at the image..."*, then **Speaking...** as the reply is read aloud. The button reads **PLEASE WAIT** and the box is locked for as long as this takes.
+#. The answer lands in the **AI answer** card and the panel returns to **Ready**. The page looks like this — the live view at the top, the assistant's current state below it, and the question box underneath.
+
+   .. image:: img/ai_vision_assistant.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

@@ -81,7 +81,15 @@ The RGB LED's red, green, and blue anodes go to **D8**, **D7**, and **D6**, each
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Quiz Show ready."* and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot.
+#. The page shows the score board first — **Score 0**, **Answered 0**, and a greyed-out **RESET** — then the question card, the three choice buttons each showing a dash, the status panel reading *"Choose NEW QUESTION to begin."*, the **NEW QUESTION** button, and the explanation card with *"The explanation will appear here."*
+#. Click **NEW QUESTION**. The status panel walks through its stages — **Creating Question** while the model writes, then **Reading Question** while the voice reads the question and all three choices aloud — and only then does it settle on **Ready**. The RGB LED glows yellow the moment the question has arrived, and the three buttons unlock when the reading has finished.
+#. Read the choices and click **A**, **B**, or **C**. A correct answer turns the LED green, plays two rising tones, and shows **Correct!** with a point added to the score; a wrong answer turns the LED red, plays one low tone, and tells you which letter was right. Either way the explanation lands in the **Answer Explanation** card and is read aloud, and the panel finishes on *"Choose NEW QUESTION to continue."*
+#. Play a few rounds, then try **RESET** to clear the scoreboard, and **NEW QUESTION** whenever you want another one. The page looks like this — the score and answered counters at the top, the question and its three choices in the middle, and the explanation at the bottom.
+
+   .. image:: img/ai_quiz_show.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

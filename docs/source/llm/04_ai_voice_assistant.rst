@@ -69,7 +69,15 @@ No breadboard wiring is needed here: the ears and the voice belong to the AVIO C
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. A **Web UI** tab opens by itself. The status row reads **Connected** with a blue dot, the panel shows **Ready** with the line *"Hold the button and speak."*, and the big button reads **Hold to Speak**.
+#. Press and hold the button. The panel turns amber and switches to **Listening...**, and the button label changes to **Release to Finish**.
+#. Still holding, say a short question out loud — *"What is the capital of France?"* — then let go. The label becomes **Please Wait**, the button greys out, and the panel walks through **Recognizing your speech...**, **AI is thinking...**, and **Speaking...** before returning to **Ready**.
+#. Your sentence appears in the **You said** card, the model's answer appears in the **AI reply** card, and the carrier's speaker reads the answer out loud. Ask a few more questions the same way — hold, speak, release — and each one gets its own answer.
+#. The page looks like this while the conversation is running, with the status panel above the button and the two cards underneath.
+
+   .. image:: img/ai_voice_assistant.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

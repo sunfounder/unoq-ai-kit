@@ -84,7 +84,14 @@ The **DHT11** uses three pins — **DATA** to **D4**, **VCC** to **5V**, **GND**
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Environment Advisor ready — waiting for sensor data."* and a **Web UI** tab opens by itself. The status row reads **Connected** with a blue dot.
+#. Watch the three cards at the top of the page. Temperature and humidity update every two seconds, and the light card shows a percentage with a word underneath it — **Dark**, **Dim**, **Bright**, or **Very Bright**.
+#. Once real readings appear, the **Analyze Environment** button becomes clickable. Press it, and the status row switches to **Analyzing** while the model reads the current snapshot. A moment later the panel fills in: a status word, a one-sentence summary, and a suggestion in its own box.
+#. Leave the page open for a while. The sensor cards keep updating the whole time — you can press **Analyze Environment** again whenever the room has changed and compare the two pieces of advice.
+
+   .. image:: img/environment_advisor.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

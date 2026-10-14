@@ -79,7 +79,13 @@ The RGB LED has four legs: the longest one is the **common cathode** and goes to
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"💬 AI Light Control ready — configure your API Key and start chatting!"* and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot.
+#. Type a request into the box — the placeholder suggests *"Turn the light red"* — and press **Send** or the Enter key. Your sentence appears in the chat, the model's decision arrives a moment later, and the RGB LED on the breadboard follows it.
+#. Keep the conversation going: ask for a few different colours, then ask it to switch the light off. The page looks like this, with the colour the model chose at the top and both halves of the conversation underneath.
+
+   .. image:: img/ai_rgb_result.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

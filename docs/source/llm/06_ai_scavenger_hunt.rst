@@ -81,7 +81,16 @@ The RGB LED has four legs: the longest one is the **common cathode** and goes to
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Scavenger Hunt ready."* and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot, and the live camera view appears inside the frame. Every button stays greyed out until that dot turns blue.
+#. Click **NEW MISSION**. The status panel reads **Creating Mission**, the mission card fills with a sentence the model has just invented — something like *"Find something used for writing"* — and the RGB LED turns **yellow**. Once the mission has been spoken, the panel returns to **Ready** and **CHECK OBJECT** becomes available.
+#. Show a matching object to the camera and click **CHECK OBJECT**. The panel walks through its stages — **Image Captured**, then **AI Referee Is Thinking**, then **Speaking** — while the referee's one-sentence explanation appears in the **AI Referee** card at the bottom.
+#. A match turns the LED **green**, plays two rising tones, adds one point to **Score**, and the status reads **Mission Complete**. A mismatch turns the LED **red**, plays one low note, adds one to **Attempts**, and lets you try the same mission again with another object.
+#. Click **RESET** whenever you want a fresh start: the score and attempts go back to zero, the mission is cleared, and the LED goes out.
+#. The page looks like this — the score board at the top, the mission below it, the live view in the middle, and the referee's verdict at the bottom.
+
+   .. image:: img/ai_scavenger_hunt.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

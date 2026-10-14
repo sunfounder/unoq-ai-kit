@@ -65,7 +65,16 @@ No breadboard wiring is needed either: the camera, the microphone, and the speak
 #. In App Lab, go to **Apps** → **Create new app** → **Import App** → **Import from Computer**, and open the package you downloaded.
 #. Click the **Run** button (▶) in the top-right corner. The Python side opens the camera and starts the Web UI; the sketch does nothing at all, which is exactly what this project asks of it.
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints ``AI Show and Tell ready.`` and a **Web UI** tab opens by itself. The connection label reads **Connected** with a blue dot, and the live camera view fills the frame.
+#. Place an object in front of the camera and hold the **🎤 Hold to Speak** button down. The panel switches to **Listening** with *"Keep holding the button while you speak."*, and the button itself changes to **Listening... Release to Send**. Ask your question while you keep holding.
+#. Release the button. The panel runs through the rest of the job on its own: **Captured** with *"Question and camera image captured."*, **Recognizing Speech**, **AI Is Looking** with *"AI is examining the captured image..."*, and **Speaking** with *"Reading the answer aloud..."*. The button stays locked for the whole trip.
+#. Your question appears under **You Said**, the model's answer under **AI Reply**, and the speaker reads it out. The page looks like this once the panel returns to **Ready**.
+
+   .. image:: img/ai_show_tell.png
+      :width: 600
+      :align: center
+
+#. Try the two deliberate limits before you move on. Press and release the button as fast as you can — the app refuses the request with *"Hold the button while speaking, then release it."*, because a recording shorter than a third of a second cannot contain a question. Then hold the button and keep talking: the recording stops by itself after **15 seconds**, so an accidental press or a stuck finger cannot leave the app listening forever.
 
 **How it Works**
 

@@ -68,7 +68,14 @@ No breadboard wiring is needed in this lesson: the camera sits on the AVIO Carri
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints *"AI Story Dice ready."* and *"Place two or three objects in view, then open App Launch."*, and a **Web UI** tab opens by itself. The status row reads **Connecting** for a moment, then **Connected** with a blue dot, and the live camera view appears inside the frame.
+#. Place two or three everyday objects in front of the camera — a mug, a toy, a key, a piece of fruit — leaving a little space between them, and choose a **Story Style** from the dropdown: **Adventure**, **Funny**, **Mystery**, **Magical**, or **Space**. Then click **CREATE STORY**.
+#. The status panel walks through its stages while the story is on its way: **Image Captured** with *"Camera image captured."*, then **AI Is Writing** with *"AI is finding the objects and writing a story..."*, then **Reading Your Story** as the finished text is spoken aloud. The button and the dropdown are locked for as long as this takes.
+#. The objects appear as chips under **Objects Found**, the title and the three-sentence story land in the **AI Story** card, and the card takes on the colour of the mood the model chose. The LED matrix shows that same mood and the speaker reads the title and the story. When the panel returns to **Ready**, the page looks like this — the live view at the top, the style picker and the current state below it, and the story underneath.
+
+   .. image:: img/story_dice_result.png
+      :width: 600
+      :align: center
 
 **How it Works**
 

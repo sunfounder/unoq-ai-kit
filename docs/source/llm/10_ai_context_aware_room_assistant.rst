@@ -82,7 +82,16 @@ The PIR module's **OUT** pin goes to **D4**, the DHT11's **DATA** pin to **D5**,
       :width: 500
       :align: center
 
-The **Web UI** tab opens by itself — the next section walks through what to do with it.
+#. The Output window prints ``AI Context-Aware Room Assistant ready.`` and a **Web UI** tab opens by itself. The camera view starts moving, **Environment** fills in with the room's temperature and humidity, **Occupancy** reports **CLEAR** or **DETECTED**, and the pill at the bottom right reads **CONNECTED**.
+#. Wait until the live view is moving and the sensors show real numbers — the request only carries the readings it has, and an empty card travels as *Unavailable*. Then click **SPEAK** and describe the atmosphere you want during the four-second countdown.
+#. The status panel walks through the whole job: **Listening** with the seconds ticking down, **Recognizing Speech**, **Reading Sensors**, **AI Is Creating a Scene**, **Applying Light**, and finally **Speaking** while the board explains its choice out loud. The button stays locked for the whole trip.
+#. The words you actually said land under **You Said**, the model's sentence lands under **AI Explanation**, and the lamp changes to match: the scene name appears next to **AI LIGHTING SCENE**, and the colour wheel, the brightness slider, and the **Room Light** switch all move to the values the model chose. The page looks like this when the panel returns to **Ready**.
+
+   .. image:: img/ai_context_aware_room_assistant.png
+      :width: 600
+      :align: center
+
+#. Now take the light back. Drag anywhere on the **colour wheel** to pick a colour, move the **brightness** slider, or flip the **Room Light** switch off and on again. The board follows your hand immediately, the RGB and hex readouts under the slider keep up, and the scene name changes to **Your Colour**. The next thing the AI decides will replace all of it — that is the deal between the two of you.
 
 **How it Works**
 
