@@ -91,8 +91,8 @@ This is a one-component circuit on a breadboard: the LED's **anode** (the longer
    * Take your hand out of the frame and the card clears back to **Waiting...** after about two seconds.
 
    .. image:: img/04_ai_gesture_light.png
-     :width: 600
-     :align: center
+      :width: 600
+      :align: center
 
 **How it Works**
 

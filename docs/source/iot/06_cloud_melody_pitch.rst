@@ -52,7 +52,7 @@ This project uses the following Bricks and sketch libraries:
    We recommend clicking **Download** to save the generated **Device ID** and **Secret Key**, as you will need them later when configuring the Arduino Cloud Brick.
 
    .. image:: img/3_cloud_device_id.png
-   :width: 90%
+      :width: 90%
 
 **Wiring Diagram**
 

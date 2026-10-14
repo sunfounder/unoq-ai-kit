@@ -201,8 +201,8 @@ The mapping between the microcontroller pins and the Arduino-style digital pins 
 **Analog Pins**
 
 .. image:: img/unoq_analog_pin.png
-  :width: 600
-  :align: center
+   :width: 600
+   :align: center
 
 The UNO Q provides the familiar **analog input pins** through the **JANALOG connector**.
 

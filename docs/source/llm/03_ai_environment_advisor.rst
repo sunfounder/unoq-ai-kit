@@ -30,7 +30,7 @@ In this lesson, you will learn to:
 
    * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_humiture_sensor` (DHT11)
-     - 1 * :ref:`cpn_photoresistor` (Photoresistor Module)
+     - 1 * :ref:`cpn_photoresistor`
      - 1 * USB-C Cable
    * - |list_pan_tilt|
      - |list_dht11|

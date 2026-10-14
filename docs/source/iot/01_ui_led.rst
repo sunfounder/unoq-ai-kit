@@ -75,8 +75,8 @@ Connect the LED between **digital pin 5** and **GND**, with the 220Ω resistor o
 #. You'll see a large circular button labeled "**LED IS OFF**". Click it — the LED lights up and the button glows teal with "**LED IS ON**". Click again to turn it off.
 
    .. image:: img/led_result.png
-     :width: 600
-     :align: center
+      :width: 600
+      :align: center
 
 **How it Works**
 

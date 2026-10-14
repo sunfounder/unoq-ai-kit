@@ -109,8 +109,8 @@ This project uses the following Bricks and sketch libraries:
    * Click the **voice** button and say a command, for example *"Set light blue"* or *"System status"* — the board confirms aloud.
 
    .. image:: img/iot_smart_room.png
-     :width: 600
-     :align: center
+      :width: 600
+      :align: center
 
 **How it Works**
 

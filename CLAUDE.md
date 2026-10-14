@@ -1084,3 +1084,9 @@ missing blank line before a directive, or an image directive glued onto the sent
 The docs build stays silent through all of them - check the rendered page or the built HTML for
 stray markup after a large edit.
 
+Before a final check, delete ``docs/build`` and build from scratch: Sphinx's cache hides warnings
+on incremental builds, so a fault can survive a dozen green builds. Ten directive option lines sat
+at their directive's own indent instead of one level deeper and only showed up on a build from
+scratch - an option line must be indented **more** than its directive, including directives nested
+inside a note.
+
