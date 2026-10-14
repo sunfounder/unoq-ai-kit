@@ -67,7 +67,7 @@ The Bridge library that lets the sketch and Python talk to each other is part of
 
 **Wiring Diagram**
 
-The **DHT11** uses three pins — **DATA** to **D4**, **VCC** to **5V**, **GND** to **GND** — while the **photoresistor** is a two-lead part, so it needs a divider: one leg to **3.3V**, the other leg to **A0** and through a **10kΩ** resistor to **GND**. Feed the divider from **3.3V, not 5V** — A0 is wired straight to the STM32 analog input and tolerates about 3.6 V at most. The light reading is a *relative* classroom measurement taken from the voltage on **A0**, so it follows which side of the divider the photoresistor sits on: with the photoresistor towards 3.3V the percentage rises as the room gets brighter, and with the two parts swapped it rises as the room gets darker instead. Compare the number with the room you are sitting in — if it moves the wrong way, swap the two parts.
+Connect the **DHT11** with **DATA** to **D4**, **VCC** to **5V**, and **GND** to **GND**. Wire the **photoresistor** from **3.3V** to **A0**, with a **10kΩ** resistor from **A0** to **GND** — the divider must not run from 5V, because A0 tolerates about 3.6 V at most.
 
 .. image:: /img/wiring/wiring_dht11_photoresistor.png
    :width: 500
