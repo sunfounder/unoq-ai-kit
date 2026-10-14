@@ -2,6 +2,8 @@
    :start-after: start_hello_message
    :end-before: end_hello_message
 
+.. _pan_tilt_kit:
+
 Assembly
 ========
 

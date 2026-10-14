@@ -23,9 +23,9 @@ In this lesson, you will learn to:
    :widths: 25 25 25
    :header-rows: 0
 
-   * - 1 * Pan Tilt Kit
+   * - 1 * :ref:`Pan Tilt Kit <pan_tilt_kit>`
      - 1 * USB Cable
-     - 1 * 10-Axis IMU
+     - 1 * :ref:`cpn_10_axis_imu`
    * - |list_pan_tilt|
      - |list_usb_cable|
      - |list_imu|

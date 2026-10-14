@@ -23,7 +23,7 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * UNO Q
+   * - 1 * :ref:`cpn_uno_q`
      - 1 * :ref:`cpn_breadboard`
      - 2 * :ref:`cpn_button`
      - 1 * Passive :ref:`cpn_buzzer`

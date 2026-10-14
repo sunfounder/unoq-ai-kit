@@ -23,7 +23,7 @@ In this lesson, you will learn to:
    :widths: 25 25 25 25
    :header-rows: 0
 
-   * - 1 * Pan Tilt Kit
+   * - 1 * :ref:`Pan Tilt Kit <pan_tilt_kit>`
      - 1 * :ref:`cpn_ultrasonic_sensor`
      - 1 * Active :ref:`cpn_buzzer`
      - Several :ref:`cpn_wires`

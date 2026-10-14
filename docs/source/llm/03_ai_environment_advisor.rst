@@ -28,7 +28,7 @@ In this lesson, you will learn to:
    :widths: 20 20 20 20 20
    :header-rows: 0
 
-   * - 1 * Pan Tilt Kit
+   * - 1 * :ref:`Pan Tilt Kit <pan_tilt_kit>`
      - 1 * :ref:`cpn_humiture_sensor` (DHT11)
      - 1 * :ref:`cpn_photoresistor`
      - 1 * :ref:`cpn_resistor` (10kΩ)

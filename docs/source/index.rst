@@ -50,6 +50,7 @@ Questions, feedback, or support: **service@sunfounder.com**
     iot/iot
     edge_ai/edge_ai
     llm/llm
+    component
     faq
 
 
