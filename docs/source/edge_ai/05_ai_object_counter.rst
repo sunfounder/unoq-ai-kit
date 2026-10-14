@@ -188,11 +188,10 @@ Show the objects to the camera one at a time and check the results:
 5. Summary
 ----------
 
-You built your first AI *event counter* — not just a classifier, but a small state machine that turns a stream of frames into meaningful events. In this lesson, you learned:
+You built your first AI *event counter* — not just a classifier, but a small state machine that turns a stream of frames into meaningful events.
 
 * How to filter detections to the three classes your project targets
 * Why counting events instead of frames matters, and how the armed/rearm pattern makes it work
 * How to expose live state and actions to a Web UI through socket.io events and web APIs
-* How a speech worker thread adds voice feedback without ever blocking detection
 
-In the next project, gestures come back — and this time they do more than switch a light. One gesture tilts the camera, another returns it to the centre, another takes a photo, and the UNO Q tells you out loud what it just did.
+In the next project, gestures come back — and this time they do more than switch a light.

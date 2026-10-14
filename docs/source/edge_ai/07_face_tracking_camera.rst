@@ -194,12 +194,10 @@ Try each of these with the app running and observe what the pan-tilt does:
 5. Summary
 ----------
 
-You just built a camera that sees you, speaks to you, and follows you around — a tiny robot companion! In this lesson, you learned:
+You just built a camera that sees you, speaks to you, and follows you around — a tiny robot companion!
 
 * How to track a face with two servos, moving the pan and tilt independently
 * Why a dead zone keeps servo tracking smooth and jitter-free
 * How one-degree incremental steps create fluid, natural motion
-* How a timeout state (face lost for 2.5 s) returns the system to "ready" automatically
-* How a background TTS thread speaks greetings without ever blocking the AI
 
 In the next lesson, you'll turn this tracking talent into a real security system — one that patrols, detects intruders by their whole body, and raises the alarm.

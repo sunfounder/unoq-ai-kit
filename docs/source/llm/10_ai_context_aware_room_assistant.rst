@@ -54,14 +54,12 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 * ``sunfounder_stt`` — turns your recorded speech into text. This project uses its **online** mode, so no speech model has to run on the board
 * ``sunfounder_tts`` — speaks the assistant's explanation on the board's speaker
 
-Because both the model and the online speech-to-text are reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The board also needs a working internet connection — and one that can actually reach OpenAI, which is worth testing before you blame your wiring. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch declares no libraries of its own in ``sketch.yaml``. The two headers it includes — the Bridge library and the DHT sensor library — ship with the app's support packages, so there is nothing to install by hand.
 
 .. note::
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches the model through the ``cloud_llm`` brick and the speech-to-text service through ``sunfounder_stt``. Paste one key from your OpenAI account into both fields and save it — App Lab keeps it for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches the model through the ``cloud_llm`` brick and the speech-to-text service through ``sunfounder_stt``. Paste one key from your OpenAI account into both fields and save it — App Lab keeps it for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 **Wiring Diagram**
 
@@ -237,12 +235,10 @@ Work down the list with the room in the same state each time. The temperature an
 5. Summary
 ----------
 
-You just built an assistant that listens to you and looks at the room at the same time, and then changes the light because of it. In this lesson, you learned:
+You just built an assistant that listens to you and looks at the room at the same time, and then changes the light because of it.
 
 * Two kinds of context — words and sensor readings — can travel in one request, and the model weighs them together
 * A system prompt can describe a **feeling-to-hardware** table, which is how *"I'm in a bad mood"* becomes warm amber at 25 per cent instead of a bright cool scene
-* ``parse_scene()`` treats the answer as untrusted input: it finds the braces, parses them, and clamps every number before anything reaches a pin
-* A manual control and an AI decision can share one output, and the interesting question is not who is allowed to write the value but who should win
-* The hardest failure in this project is invisible to a compiler: a reply that is right in form and wrong in meaning can only be fixed in the prompt, not in the parser
+* ``parse_scene()`` treats the answer as untrusted input
 
-The pattern from the rest of this module — an input, a model, and a page that shows you what happened — has one new member here. Until now your code decided everything the model was not allowed to do. Now your code also has to decide what the model *should* do, and it says so in English, in a prompt, where the mood table is the difference between a lamp that reacts and a lamp that understands.
+The pattern from the rest of this module — an input, a model, and a page that shows you what happened — has one new member here.

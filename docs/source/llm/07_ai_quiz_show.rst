@@ -29,7 +29,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_rgb_led` (common cathode)
+     - 1 * :ref:`cpn_rgb_led`
      - 3 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_buzzer` (passive)
    * - |list_pan_tilt|
@@ -53,14 +53,12 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * ``cloud_llm`` — asks a cloud language model for a new question and returns the JSON behind it
 * ``sunfounder_tts`` — reads the question, the three choices, and the explanation aloud on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch declares no external libraries: ``sketch.yaml`` has no ``libraries:`` section at all, because the Bridge library that lets Python call the sketch is part of the UNO Q core and needs no installation.
 
 .. note::
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 **Wiring Diagram**
 
@@ -227,13 +225,10 @@ Every round is the same three stages — asking, reading, answering — so the f
 5. Summary
 ----------
 
-You just built a quiz show that writes its own questions. The board asks a cloud model for structured data, checks that the data makes sense, reads it out loud, judges your answer, and reports the verdict through an LED, a buzzer, a voice, and a scoreboard — all from a single click on the page.
+You just built a quiz show that writes its own questions.
 
-* Asking for **JSON** instead of prose is what turns a chat reply into data — one ``json.loads()`` and the question, the choices, the answer, and the explanation become fields your program can use
+* Asking for **JSON** instead of prose is what turns a chat reply into data
 * ``parse_quiz()`` is the gate: a missing choice or an answer letter that is not one of the choices is refused outright, so a malformed reply becomes a message on screen instead of a broken round
 * The answer is checked locally with ``selected == quiz["answer"]``, so a round costs exactly one cloud request and the score never depends on the network
-* One tiny integer carries the whole verdict to the hardware — ``Bridge.call("quiz_feedback", code)`` drives the RGB colour and the buzzer pattern from a single ``switch``
-* Score, answered count, and the current question all live in Python behind ``state_lock``, so a browser that reloads asks for ``get_state`` and picks the round up where it left off
 
-The next project hands the model something far less tidy than a scoreboard: the camera. You will roll a set of story dice, photograph what they show, and listen while the model turns that picture into a narrated story — the same three pieces you have used all along, an input on the board, a model for judgement, and a page that shows you what happened.
-
+The next project hands the model something far less tidy than a scoreboard: the camera.

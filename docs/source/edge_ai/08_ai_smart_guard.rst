@@ -203,12 +203,10 @@ Try each of these scenarios with the app running and watch the whole system resp
 5. Summary
 ----------
 
-You just built a fully autonomous security guard — it patrols on its own, raises the alarm on its own, and stands down on its own. In this lesson, you learned:
+You just built a fully autonomous security guard — it patrols on its own, raises the alarm on its own, and stands down on its own.
 
 * How a general object-detection model catches whole people, not just faces
 * How a two-state system (patrolling / alarming) keeps the logic simple and reliable
 * How Python decides and the sketch executes — clean cooperation across the two processors
-* How a spoken alert is throttled so the guard warns without nagging
-* How a timeout state returns the system to patrol after 3 quiet seconds
 
-Your UNO Q can now watch a room like a security professional. The Edge AI module is complete — and every project in it began with the same question: *what does the camera see?* Your board has got very good at answering that. But it still cannot *understand* what it sees, answer a question about it, or act on a sentence you type. That is exactly where you are headed next.
+Your UNO Q can now watch a room like a security professional.

@@ -44,15 +44,13 @@ This project uses two App Lab **Bricks** — support packages that App Lab adds 
 * ``web_ui`` — serves the pet page and carries messages between the browser and Python
 * ``cloud_llm`` — sends your message to a cloud language model and streams the answer back
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch declares no libraries of its own in ``sketch.yaml``. The two headers it uses — the Bridge library and the LED matrix library — ship with the UNO Q core, so there is nothing to install.
 
 No breadboard wiring is needed in this lesson — the pet's face is drawn on the LED matrix that is already part of the UNO Q, so there is nothing to connect before you run the app.
 
 .. note::
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 2. Run the App
 --------------
@@ -192,12 +190,10 @@ The pet answers in words and in mood at the same time, so you can watch both hal
 5. Summary
 ----------
 
-You just gave your UNO Q a personality. Your message goes out as plain English and comes back as two things at once: a sentence you can read and a mood the board can act on.
+You just gave your UNO Q a personality.
 
 * Asking for **JSON** in the system prompt is what turns a chatty model into a part your code can wire up
-* ``parse_pet_response()`` treats the answer as untrusted input — it strips code fences, finds the braces, and validates the mood against a lookup table
+* ``parse_pet_response()`` treats the answer as untrusted input
 * Every failure path still produces a face and a sentence, so the pet degrades politely instead of going dark
-* ``Bridge.call("show_emotion", code)`` carries one integer across to a ``switch`` that picks one of five 8 × 13 patterns
-* A single model answer can now drive two different outputs — text for the screen and a value for the hardware
 
-So far the model only knows what you tell it. In the next project the board starts feeding it facts of its own: live temperature, humidity, and light readings travel up from the sketch to the model, and the AI turns them into practical advice about the room you are sitting in.
+So far the model only knows what you tell it.

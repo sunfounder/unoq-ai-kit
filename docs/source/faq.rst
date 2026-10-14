@@ -426,11 +426,46 @@ platforms such as Arduino Cloud and Blynk also give you a **Device ID** and a
 **Secret Key** — save them when they are generated, because the lesson needs
 them later.
 
-Can I use a model from another provider?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _llm_other_models:
 
-Yes - ``cloud_llm`` supports **OpenAI**, **Anthropic (Claude)** and **Google (Gemini)**.
-Change the model name in ``python/main.py`` from ``"openai:gpt-4o-mini"`` to the provider
-and model you want, for example ``"anthropic:<model-id>"``, then enter **that provider's**
-API key when App Lab asks for it. See :ref:`llm_other_models`.
+Can I use a model from another provider?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+The ``cloud_llm`` brick is not tied to OpenAI. It speaks to **OpenAI**, **Anthropic
+(Claude)** and **Google (Gemini)** through the same API, and the model name each lesson
+passes to ``CloudLLM(...)`` is what picks the provider:
+
+.. code-block:: python
+
+   llm = CloudLLM(
+       model="openai:gpt-4o-mini",   # what the lessons use
+       system_prompt=...,
+   )
+
+Everything before the colon is the **provider** - ``openai``, ``anthropic`` or ``google`` -
+and everything after it is any model id that provider publishes. A name with no provider
+prefix is treated as OpenAI, so switching is a one-line change:
+
+.. code-block:: python
+
+   llm = CloudLLM(model="anthropic:<model-id>", system_prompt=...)
+
+The brick also exposes an enum that always points at the provider's current model, so you
+never have to type a model id:
+
+.. code-block:: python
+
+   from arduino.app_bricks.cloud_llm import CloudLLM, CloudModel
+
+   llm = CloudLLM(model=CloudModel.ANTHROPIC_CLAUDE, system_prompt=...)
+
+Two things stay the same whatever you choose:
+
+* **The API key.** The brick reads it from its ``API_KEY`` variable - the field App Lab asks
+  you to fill in the first time the app runs. Paste the key **for the provider you picked**;
+  App Lab keeps it on the board.
+* **The rest of the project.** System prompts, temperature and the streaming calls are
+  provider-independent, so nothing else in the code changes.
+
 

@@ -48,15 +48,13 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 
 There is no sketch in this project and no sketch libraries to install: nothing here drives a pin, so every line of it runs in Python on the Linux MPU.
 
-Because both the model and the speech service are reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you — the same key works for both. The package you download stays small, because no speech model travels inside it: the recognition happens on OpenAI's servers. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 No breadboard wiring is needed here: the ears and the voice belong to the AVIO Carrier, so the kit works exactly as it comes out of the box.
 
 .. note::
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches both the model and the speech service over the internet. Paste one key into both fields and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches both the model and the speech service over the internet. Paste one key into both fields and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 2. Run the App
 --------------
@@ -198,12 +196,10 @@ Speak each request in your normal voice and watch the panel, the two cards, and 
 5. Summary
 ----------
 
-You just held a conversation with your UNO Q. It listened through the carrier's microphone, turned your recording into text, sent that text to a cloud model, and answered you out loud in a voice it fetched for the occasion — no keyboard, no wiring, just speech in and speech out.
+You just held a conversation with your UNO Q.
 
 * Three services, one loop: recognition in the cloud, reasoning in the cloud, and speech on the way back
 * Speech recognition is **online** — the recording goes to a speech service and the text comes back, so one key and one connection cover both the recognition and the model, and the package you download stays small
 * A **system prompt** sets the personality and the length of every answer, which is why the assistant stays brief no matter how you phrase the question
-* The **You said** card is the honest record of the loop — read it whenever the answer does not match the question you thought you asked
-* The status panel is the whole program in five words: Listening, Recognizing, Thinking, Speaking, Ready
 
 Next, the UNO Q gets eyes as well as ears: point a camera at something, ask a question about what it sees, and the answer comes back in the same voice you just built.

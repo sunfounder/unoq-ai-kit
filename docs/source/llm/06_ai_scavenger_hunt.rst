@@ -29,7 +29,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_rgb_led` (common cathode)
+     - 1 * :ref:`cpn_rgb_led`
      - 3 * :ref:`cpn_resistor` (220Ω)
      - 1 * :ref:`cpn_buzzer`
    * - |list_pan_tilt|
@@ -53,14 +53,12 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * ``cloud_llm`` — writes each mission and referees the camera image with a cloud vision model
 * ``sunfounder_tts`` — reads the mission and the referee's verdict aloud on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 There are no libraries to install on the sketch side either: ``sketch.yaml`` declares no ``libraries:`` section at all, so the only code the MCU runs is the sketch itself.
 
 .. note::
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 **Wiring Diagram**
 
@@ -227,12 +225,10 @@ The referee only knows what is in the frame at the instant you click, so what yo
 5. Summary
 ----------
 
-You just built a game that writes its own rules and then judges you by them. The board invents a mission, speaks it aloud, watches you through the camera, and answers with colour, sound, and a score — and the only thing that changed between the two model calls was the sentence of instruction wrapped around each one.
+You just built a game that writes its own rules and then judges you by them.
 
-* A single model can play two roles at once: ``task_llm`` writes the mission at ``temperature=0.9``, while ``judge_llm`` referees it at ``temperature=0.1``
-* **Structured output** turns an opinion into data — the referee is told to answer with ``{"success": true, "message": "..."}``, and ``parse_judgement()`` accepts the verdict only when that JSON parses and ``success`` is exactly ``True``
-* The same one-integer Bridge protocol as the earlier projects is enough for a whole game: 1 yellow, 2 green with two rising tones, 3 red with one low note, 0 off
-* One shared state object — mission, score, attempts, result — means the page, the referee card, and the status panel can never disagree
-* Both halves of the exchange run on worker threads, so the live preview keeps moving while the model thinks, and the ``busy`` flag keeps exactly one request in flight
+* A single model can play two roles at once
+* **Structured output** turns an opinion into data
+* The same one-integer Bridge protocol as the earlier projects is enough for a whole game
 
-The next project puts the model on the other side of the desk. Instead of writing a mission and judging an object, it will write the quiz questions *and* decide whether your answers are correct — so the intelligence that checks you is the same intelligence that set the test. Everything you built here is the groundwork: two prompts with two jobs, a shared game state, and a board that reacts the moment the verdict arrives.
+The next project puts the model on the other side of the desk.

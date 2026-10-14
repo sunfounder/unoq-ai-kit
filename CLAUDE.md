@@ -1,5 +1,13 @@
   # UNO Q AI Starter Kit — Project Documentation
 
+## Working Agreement
+
+**Never commit or push on your own.** Editing files, building the docs and reporting
+results are fine at any time, but leave the changes in the working tree. Run
+``git add``, ``git commit`` or ``git push`` **only when the user asks for it in that
+message** - they review first and decide when work is published. When they do ask,
+state the repository and branch you are about to touch, then act.
+
 ## Project Overview
 
 This is the documentation and course repository for the **SunFounder AI Starter Kit with Arduino Uno Q** (UNO Q AIoT Learning Kit). The kit targets beginners aged 10+, students, educators, and makers. Through hardware experiments, IoT applications, and AI technology practices, learners progress from basic hardware control to IoT systems to AI-powered devices.

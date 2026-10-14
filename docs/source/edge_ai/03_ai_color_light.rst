@@ -193,11 +193,10 @@ Show each object to the camera and check the result:
 5. Summary
 ----------
 
-You just built a complete AI decision chain: the camera sees, the model classifies, Python chooses, and the LED obeys. In this lesson, you learned:
+You just built a complete AI decision chain: the camera sees, the model classifies, Python chooses, and the LED obeys.
 
 * How to filter detection results down to the classes your project responds to
 * How to map each object to a single color code sent over Bridge — a small message that means a clear color
 * How the sketch's ``setColor()`` switch turns the code into PWM values on three channels
-* How a watchdog thread turns the LED off automatically when the object leaves
 
-In the next project the camera turns away from the desk and toward *you*. Instead of naming an object, the AI reads a hand signal — and the gesture you make will switch an LED on or off.
+In the next project the camera turns away from the desk and toward *you*.

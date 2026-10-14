@@ -211,12 +211,10 @@ Run the app and try each of these in order. The point is to feel the three timer
 5. Summary
 ----------
 
-You just taught your UNO Q to take orders from your hand — one wave of a thumbs up and a camera on your desk physically moves. That is a real robot control loop, and the interesting part is not the gesture model at all: it is the small state machine that decides *when* a gesture counts. Along the way you learned:
+You just taught your UNO Q to take orders from your hand — one wave of a thumbs up and a camera on your desk physically moves.
 
 * How to run the ``VideoObjectDetection`` brick with the **hand-gestures** model and map its labels (``good``, ``neut``, ``five``, ``peace``) to real actions
 * Why raw model output has to be filtered: a 0.6-second stable window turns a stream of flickering labels into single, deliberate events
 * How a lock plus a re-arm rule — 5 seconds after an action, 3 seconds with no hand in view — guarantees one gesture produces exactly one action
-* How a background worker and a one-slot queue keep slow work (servos, disk writes, online speech) out of the AI detection callback
-* How the same sketch can expose several unrelated abilities — a 5° tilt step, a centering move — through the Bridge, and return an angle Python can report
 
-The pattern you built here — detect something, decide whether it is real, then act — is the pattern behind almost every physical AI system. In the next project, the camera stops waiting for your hand and starts **following your face**: the pan-tilt will track you as you move around the room, and greet you when you arrive.
+The pattern you built here — detect something, decide whether it is real, then act — is the pattern behind almost every physical AI system.

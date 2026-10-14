@@ -174,11 +174,10 @@ The percentage under each object name is a window into the model's certainty. Wi
 5. Summary
 ----------
 
-You just gave your UNO Q a pair of AI eyes — the board can now look at a scene and tell you what is in it, all by itself. Along the way you met the pattern that every project in this module will reuse:
+You just gave your UNO Q a pair of AI eyes — the board can now look at a scene and tell you what is in it, all by itself.
 
 * The ``Camera`` peripheral feeds frames to an AI brick
 * ``VideoObjectDetection`` with ``confidence`` and ``debounce_sec`` controls how the model reports what it sees
 * ``on_detect_all`` delivers detections to Python as plain data
-* A socket.io ``send_message`` puts that data on screen next to the live stream
 
-But so far the AI only *reports* what it sees — it does nothing about it. In the next project, the AI's decision will reach out of the screen and into the real world: the moment the camera sees a face, a buzzer will sound.
+But so far the AI only *reports* what it sees — it does nothing about it.

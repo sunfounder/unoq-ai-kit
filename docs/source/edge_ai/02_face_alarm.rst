@@ -200,11 +200,10 @@ The alarm has a clear on-condition (a face above 50% confidence) and a timer-bas
 5. Summary
 ----------
 
-Congratulations — your AI has left the screen and touched the physical world! The face appeared, the model decided, Python called Bridge, and a buzzer physically sounded. You have now seen the complete AI loop that this module is built around:
+Congratulations — your AI has left the screen and touched the physical world!
 
 * A dedicated ``face-detection`` model watches every frame at 50% confidence
 * ``on_detect("face", ...)`` fires only for faces, and a latch makes sure the alarm turns on exactly once
 * ``Bridge.call("alarm_on")`` and ``Bridge.call("alarm_off")`` let Python command the sketch, which beeps D5 at 150 ms on / 150 ms off
-* A background watchdog thread gives a face two seconds of grace before silencing the alarm
 
-The buzzer answered a yes-or-no question: is there a face? In the next project the AI will answer a richer one — not just *whether* something is there, but *what* it is — and the answer will pick a color for an LED.
+The buzzer answered a yes-or-no question: is there a face?

@@ -46,8 +46,6 @@ This project uses four App Lab **Bricks** — support packages that App Lab adds
 * ``sunfounder_stt`` — turns your recording into text. This project uses its **online** mode, so no speech model runs on the board
 * ``sunfounder_tts`` — reads the answer aloud on the board's speaker
 
-Because the model and the speech-to-text service are both reached over the internet, the project needs a key of your own. ``app.yaml`` declares ``cloud_llm`` and ``sunfounder_stt`` with empty key fields, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The same key works for both. The board also needs an internet connection that can actually reach OpenAI — worth testing before you blame the microphone. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch declares no libraries and contains no code. Every part of this project — camera, microphone, speaker, speech recognition, and the model — belongs to the Linux side, so the microcontroller simply idles. There is nothing to flash beyond the empty sketch that ships with the app.
 
 No breadboard wiring is needed either: the camera, the microphone, and the speaker are all built into the AVIO Carrier.
@@ -56,7 +54,7 @@ No breadboard wiring is needed either: the camera, the microphone, and the speak
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches the model through the ``cloud_llm`` brick and the speech service through ``sunfounder_stt``. Paste one key into both fields and save it — App Lab keeps it for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app reaches the model through the ``cloud_llm`` brick and the speech service through ``sunfounder_stt``. Paste one key into both fields and save it — App Lab keeps it for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 2. Run the App
 --------------
@@ -204,12 +202,10 @@ The same object can be a good question or a bad one. Put one object in the middl
 5. Summary
 ----------
 
-You just built an assistant that listens to a question, looks at the same object you are asking about, and answers out loud — and you did it without writing a single line for the microcontroller. In this lesson, you learned:
+You just built an assistant that listens to a question, looks at the same object you are asking about, and answers out loud
 
-* A hold-to-speak button is three small decisions: start on press, stop on release, and never let a lost pointer leave the microphone open
+* A hold-to-speak button is three small decisions
 * A question and a camera frame can travel in **one** model request, which is what keeps the answer about the object in front of you
-* A system prompt can make a model refuse to guess — *answer from the image, say what you cannot see, never identify a person* — and that refusal is the feature
-* Temperature is a dial between imagination and accuracy: 0.3 here, 0.8 in the storytelling project, and the difference shows in every answer
-* A complete App Lab project can live entirely on the Linux side, with a sketch that does nothing at all
+* A system prompt can make a model refuse to guess
 
-There is one more thing this project quietly does that the earlier ones did not: it asks a model a question whose answer it cannot check. Every previous project handed the answer to something that would reject it — a list of colours, a set of moods, a pin. Here the answer goes to a screen and a speaker, and the only guard is a sentence of English telling the model to stay inside what it can see. That is the shape most real AI devices take, and it is worth knowing exactly how much of their trustworthiness comes from the prompt.
+There is one more thing this project quietly does that the earlier ones did not: it asks a model a question whose answer it cannot check.

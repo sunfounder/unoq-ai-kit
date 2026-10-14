@@ -45,8 +45,6 @@ This project uses three App Lab **Bricks** — support packages that App Lab add
 * ``cloud_llm`` — sends your question together with a camera frame to a cloud vision model and returns the answer
 * ``sunfounder_tts`` — turns the finished answer into speech on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 There are no sketch libraries to install: this project has no ``sketch/`` folder at all, so nothing is compiled for the MCU and nothing crosses the Bridge.
 
 No breadboard wiring is needed in this lesson: the camera, the speaker, and the whole "circuit" are already built into the AVIO Carrier.
@@ -57,7 +55,7 @@ No breadboard wiring is needed in this lesson: the camera, the speaker, and the 
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 2. Run the App
 --------------
@@ -202,12 +200,10 @@ The model answers only from the picture it was handed, so what you show it *is* 
 5. Summary
 ----------
 
-You just taught your UNO Q to look. The board takes a picture, sends it into the cloud with a question attached, gets a short answer back, and reads that answer to you out loud.
+You just taught your UNO Q to look.
 
 * A picture is just data: ``camera.capture()`` hands Python a frame, and ``cv2.imencode()`` shrinks it into JPEG bytes small enough to send
-* The vision model is reached exactly like every other model in this module — one ``CloudLLM`` object, one ``chat()`` call — except that the message now travels with ``images=[frame]``
-* The **system prompt** is what keeps a vision model honest: answer only from the image, admit when the picture cannot answer, stay brief, and reply in the reader's language
-* The slow half of the work runs on a worker thread, so the live preview never freezes, and a ``busy`` flag keeps exactly one question in flight
-* ``ui.send_message(..., room=sid)`` shows how a Web UI can answer one browser instead of all of them — every state change goes back only to the person who asked
+* The vision model is reached exactly like every other model in this module
+* The **system prompt** is what keeps a vision model honest
 
-This is the last project in this module, and it is worth looking back at how far one idea has travelled. First the model chose a colour from a list, then it held a conversation and picked a mood at the same time, and now it looks at the world and tells you what it sees. The board did not change — the camera, the speaker, and the Web UI were always there. What changed was the question you sent and the rules you wrapped around the answer. That is the whole skill this module has been building: the model supplies the understanding, and your code decides what is allowed to happen next. You have used it to light an LED, to pull a face, and now to see — and every project you build from here can reuse the same three pieces: an input on the board, a model for judgement, and a page that shows you what happened.
+This is the last project in this module, and it is worth looking back at how far one idea has travelled.

@@ -29,7 +29,7 @@ In this lesson, you will learn to:
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
-     - 1 * :ref:`cpn_rgb_led` (Common Cathode)
+     - 1 * :ref:`cpn_rgb_led`
      - 3 * :ref:`cpn_resistor` (220Ω)
      - 1 * USB-C Cable
    * - |list_pan_tilt|
@@ -52,13 +52,11 @@ This project uses two App Lab **Bricks** — support packages that App Lab adds 
 * ``web_ui`` — serves the chat page and keeps the browser and Python in sync
 * ``cloud_llm`` — sends your message to a cloud language model and streams the answer back
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch needs no libraries at all — the Bridge library that lets Python call the sketch is part of the UNO Q core, so there is nothing to install.
 
 .. note::
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 **Wiring Diagram**
 
@@ -204,12 +202,10 @@ The model reads intent, so you never have to find the one phrase it accepts. Typ
 5. Summary
 ----------
 
-You just taught your UNO Q to understand you. Instead of writing the exact command for every colour, you described what you wanted in plain English, a cloud model made the decision, and a single small number carried that decision all the way to the LED.
+You just taught your UNO Q to understand you.
 
-* A **system prompt** is how you turn a chatty model into a reliable one: list the answers you can handle, and ask for nothing else
+* A **system prompt** is how you turn a chatty model into a reliable one
 * Python turns the model's word into an integer with a simple lookup table, and refuses any answer that is not in it
 * ``Bridge.call()`` carries that integer across to the sketch, where one ``switch`` and three ``analogWrite()`` calls produce the colour
-* The Web UI shows both halves of the exchange — your sentence and the model's decision — so you can always see why the light changed
-* The intelligence lives in the cloud, while the board keeps the pins, the timing, and the last word on what is allowed
 
 The next project gives the model more than one job: instead of choosing a colour, it will hold a conversation with you *and* choose an emotion at the same moment, so the board's built-in LED matrix can pull a face while the words appear on screen.

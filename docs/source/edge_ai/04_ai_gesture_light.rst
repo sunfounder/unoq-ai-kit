@@ -218,12 +218,10 @@ Hold each gesture up to the camera for a second or two, about 50 cm away against
 5. Summary
 ----------
 
-You just taught your UNO Q to read a gesture and answer with hardware — a camera, four classes, and an LED that obeys two of them. In this lesson, you learned:
+You just taught your UNO Q to read a gesture and answer with hardware — a camera, four classes, and an LED that obeys two of them.
 
 * How a **classification** model differs from a general object model: it answers with one of its own fixed classes instead of scanning the world
 * How to map a model label onto a hardware state and send it to the sketch over the Bridge
 * Why a low confidence threshold suits a four-class model, and why the debounce can be as short as 0.2 s
-* How **edge-triggered** logic acts only on a change of label, so the same gesture does not repeat its command on every frame
-* How a timed reset after two quiet seconds lets the same gesture fire again
 
-So far your projects have each responded to a single thing the camera showed. In the next project, the UNO Q will keep *count* — objects will come and go, and the board will tally them up and announce the total out loud.
+So far your projects have each responded to a single thing the camera showed.

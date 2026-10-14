@@ -25,18 +25,21 @@ In this lesson, you will learn to:
 **What You Need**
 
 .. list-table::
-   :widths: 25 25 25 25
+   :widths: 20 20 20 20 20
    :header-rows: 0
 
    * - 1 * Pan Tilt Kit
      - 1 * :ref:`cpn_humiture_sensor` (DHT11)
      - 1 * :ref:`cpn_photoresistor`
+     - 1 * :ref:`cpn_resistor` (10kΩ)
      - 1 * USB-C Cable
    * - |list_pan_tilt|
      - |list_dht11|
      - |list_photoresistor|
+     - |list_10kohm|
      - |list_usb_cable|
    * - Several :ref:`cpn_wires`
+     -
      -
      -
      -
@@ -52,8 +55,6 @@ This project uses two App Lab **Bricks** — support packages that App Lab adds 
 * ``web_ui`` — serves the advisor page and carries the live readings and the model's answer between the browser and Python
 * ``cloud_llm`` — sends the reading summary to a cloud language model and streams the advice back
 
-Because the model is reached over the internet, the project needs a key of your own. ``app.yaml`` declares the ``cloud_llm`` brick with an empty ``API_KEY``, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
 The sketch needs two libraries, both declared in ``sketch.yaml`` and installed for you when the app is built:
 
 * ``DHT sensor library (1.4.6)`` — the ``DHT`` class that reads temperature and humidity from the sensor
@@ -63,7 +64,7 @@ The Bridge library that lets the sketch and Python talk to each other is part of
 
 .. note::
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 **Wiring Diagram**
 
@@ -214,12 +215,10 @@ The model only ever sees the snapshot you send it, so the fastest way to underst
 5. Summary
 ----------
 
-You just gave your board a sense of judgement. The DHT11 and the photoresistor supply three honest numbers, Python turns them into a labelled snapshot, and a cloud model reads that snapshot and tells you what it means for the room you are sitting in — a measurement on one side, an interpretation on the other.
+You just gave your board a sense of judgement.
 
-* A **structured answer** is what makes a model usable in a program: ask for named fields like ``status``, ``summary``, and ``suggestion``, and your page can place each one instead of searching through prose
-* ``Bridge.notify()`` is the reverse of the Bridge calls you have used before — the sketch starts the conversation twice a second, and Python listens with ``Bridge.provide()``
+* A **structured answer** is what makes a model usable in a program
+* ``Bridge.notify()`` is the reverse of the Bridge calls you have used before
 * The body of the prompt is only three numbers, so every answer is tied to one moment and you can always see exactly what the model was shown
-* ``parse_analysis()`` and ``VALID_STATUSES`` are your side of the bargain: strip the fences, pull out the JSON, and replace anything unrecognised with a safe fallback
-* Python and the model do different jobs — the code decides what the light *is*, the model decides what it *means* — and neither one is allowed to do the other's work
 
 The next project gives the model ears and a voice: you hold a button and speak into the microphone, speech recognition turns your words into text, the model replies, and the speaker reads that reply out loud so nothing has to appear on a screen at all.

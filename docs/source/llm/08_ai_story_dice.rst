@@ -41,13 +41,11 @@ In this lesson, you will learn to:
 
 This project uses three App Lab **Bricks** — support packages that App Lab adds to your app for you:
 
-* `web_ui` — serves the story page and carries messages between the browser and Python
-* `cloud_llm` — sends the camera frame and your chosen style to a cloud vision model, and returns the story as JSON
-* `sunfounder_tts` — narrates the finished story on the board's speaker
+* ``web_ui`` — serves the story page and carries messages between the browser and Python
+* ``cloud_llm`` — sends the camera frame and your chosen style to a cloud vision model, and returns the story as JSON
+* ``sunfounder_tts`` — narrates the finished story on the board's speaker
 
-Because the model is reached over the internet, the project needs a key of your own. `app.yaml` declares the `cloud_llm` brick with an empty `API_KEY`, so App Lab asks you for an **OpenAI API key** the first time you press **Run** and stores it for you. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` for the one line that changes.
-
-The sketch declares no libraries of its own in `sketch.yaml`. The two headers it includes — the Bridge library and the LED matrix library — ship with the UNO Q core, so there is nothing to install.
+The sketch declares no libraries of its own in ``sketch.yaml``. The two headers it includes — the Bridge library and the LED matrix library — ship with the UNO Q core, so there is nothing to install.
 
 No breadboard wiring is needed in this lesson: the camera sits on the AVIO Carrier, and the mood display is the LED matrix that is already built into the UNO Q. There is nothing to connect before you press **Run**.
 
@@ -55,7 +53,7 @@ No breadboard wiring is needed in this lesson: the camera sits on the AVIO Carri
 
    The first time you run a TTS example on this UNO Q, App Lab needs to download and prepare the TTS runtime and audio dependencies. This may take half an hour or more, depending on your network connection.
 
-   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the `cloud_llm` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once.
+   The first time you run this project, App Lab asks for your **OpenAI API key**, because the app uses the ``cloud_llm`` brick to reach the model. Paste a key from your OpenAI account and save it — App Lab keeps the key for your board, so you only do this once. The ``cloud_llm`` brick also speaks to **Anthropic** and **Google** - see :ref:`llm_other_models` in the FAQ for the one line that changes.
 
 2. Run the App
 --------------
@@ -83,32 +81,32 @@ Here is the whole path a story travels — in through the camera, up to the clou
 
 An App Lab project is a folder of files. Here is what is inside this one:
 
-* `08 AI Story Dice/` — the app folder
+* ``08 AI Story Dice/`` — the app folder
 
-  * `app.yaml` — app metadata: name, icon, and the three Bricks the project declares
-  * `README.md` — a short guide to the project
+  * ``app.yaml`` — app metadata: name, icon, and the three Bricks the project declares
+  * ``README.md`` — a short guide to the project
 
-  * `python/`
+  * ``python/``
 
-    * `main.py` — the camera loop, the MJPEG stream, the story request, the JSON parser, and the Bridge call
+    * ``main.py`` — the camera loop, the MJPEG stream, the story request, the JSON parser, and the Bridge call
 
-  * `sketch/`
+  * ``sketch/``
 
-    * `sketch.ino` — the four mood faces, the mood switch, and the Bridge function
-    * `sketch.yaml` — sketch configuration for the UNO Q board
+    * ``sketch.ino`` — the four mood faces, the mood switch, and the Bridge function
+    * ``sketch.yaml`` — sketch configuration for the UNO Q board
 
-  * `bricks/`
+  * ``bricks/``
 
-    * `sunfounder_tts/` — the text-to-speech brick the app ships with: the local voice server behind `tts.say()`
+    * ``sunfounder_tts/`` — the text-to-speech brick the app ships with: the local voice server behind ``tts.say()``
 
-  * `assets/`
+  * ``assets/``
 
-    * `index.html` — the story page: status row, camera frame, style picker, object chips, and story card
-    * `app.js` — browser logic: the socket events, the state panel, the object chips, and the stream retry
-    * `style.css` — the visual styling of the page, including one colour for each mood
-    * `libs/socket.io.min.js` — the Socket.IO client that carries messages between the page and the board
-    * `img/sf_logo.png` — the logo in the page header
-    * `docs_assets/` — the result image used by this documentation
+    * ``index.html`` — the story page: status row, camera frame, style picker, object chips, and story card
+    * ``app.js`` — browser logic: the socket events, the state panel, the object chips, and the stream retry
+    * ``style.css`` — the visual styling of the page, including one colour for each mood
+    * ``libs/socket.io.min.js`` — the Socket.IO client that carries messages between the page and the board
+    * ``img/sf_logo.png`` — the logo in the page header
+    * ``docs_assets/`` — the result image used by this documentation
 
 The data path, from three objects on the desk to a story you can hear and see:
 
@@ -139,24 +137,24 @@ The data path, from three objects on the desk to a story you can hear and see:
 Here is what each piece does:
 
 **Sketch (sketch.ino)** — runs on the STM32 MCU
-  * `setup()` starts the display with `matrix.begin()`, sets `matrix.setGrayscaleBits(3)`, clears the grid, and draws the calm face
-  * Each mood is a 104-value brightness array — 8 rows of 13 columns — painted with `matrix.draw()`
+  * ``setup()`` starts the display with ``matrix.begin()``, sets ``matrix.setGrayscaleBits(3)``, clears the grid, and draws the calm face
+  * Each mood is a 104-value brightness array — 8 rows of 13 columns — painted with ``matrix.draw()``
 
 **Python (main.py)** — runs on the Linux MPU
-  * `Camera(fps=20)` is the whole camera setup — an App Lab peripheral, not a brick — and `with camera: App.run(user_loop=loop)` opens it before the first frame
-  * `loop()` runs over and over: `camera.capture()` takes a frame, `cv2.flip(frame, 0)` turns it the right way up, and `cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])` compresses it into JPEG bytes that are parked in a shared `current_frame` under `frame_lock`
+  * ``Camera(fps=20)`` is the whole camera setup — an App Lab peripheral, not a brick — and ``with camera: App.run(user_loop=loop)`` opens it before the first frame
+  * ``loop()`` runs over and over: ``camera.capture()`` takes a frame, ``cv2.flip(frame, 0)`` turns it the right way up, and ``cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])`` compresses it into JPEG bytes that are parked in a shared ``current_frame`` under ``frame_lock``
 
-**Cloud LLM (behind the `cloud_llm` brick)** — runs on OpenAI's servers
+**Cloud LLM (behind the ``cloud_llm`` brick)** — runs on OpenAI's servers
   * The **system prompt** makes the model a creative storyteller for students: examine only the supplied camera image, identify up to three clear ordinary objects, never claim to see an object that is not visible, and avoid violence, fear, adult content, brands, and personal identification
-  * It also demands the answer as valid JSON with the exact keys `objects`, `title`, `story`, and `mood`, where the story is exactly three short sentences under 70 words and the mood is one of happy, mysterious, exciting, or calm
+  * It also demands the answer as valid JSON with the exact keys ``objects``, ``title``, ``story``, and ``mood``, where the story is exactly three short sentences under 70 words and the mood is one of happy, mysterious, exciting, or calm
 
 **Bridge** — the channel between the MPU and the MCU
-  * Sketch side: `Bridge.provide("show_story_mood", show_story_mood)` exposes the face function
-  * Python side: `Bridge.call("show_story_mood", code)` invokes it with one integer
+  * Sketch side: ``Bridge.provide("show_story_mood", show_story_mood)`` exposes the face function
+  * Python side: ``Bridge.call("show_story_mood", code)`` invokes it with one integer
 
 **Browser (HTML/JS)** — runs in your browser
-  * `socket.emit('create_story', {genre: genreSelect.value})` sends the chosen style; the **CREATE STORY** button is the only place that happens
-  * `socket.emit('get_state', {})` runs on `connect`, so a freshly opened page asks for the current story right away instead of showing an empty card
+  * ``socket.emit('create_story', {genre: genreSelect.value})`` sends the chosen style; the **CREATE STORY** button is the only place that happens
+  * ``socket.emit('get_state', {})`` runs on ``connect``, so a freshly opened page asks for the current story right away instead of showing an empty card
 
 Notice how much of this project is validation rather than generation. The model is free to invent a story, but it is not free to invent the *shape* of its answer: the code looks for braces, parses JSON, keeps three objects, trims the title and the story, and quietly turns a mood it does not recognise into calm.
 
@@ -203,18 +201,16 @@ The objects are the dice and the style is the roll. Keep the same two or three o
 
 **The panel says "The camera image is not ready yet."**
 
-* **Cause:** You clicked **CREATE STORY** before the first frame had been captured, so the shared `current_frame` was still empty and there was nothing to send to the model.
+* **Cause:** You clicked **CREATE STORY** before the first frame had been captured, so the shared ``current_frame`` was still empty and there was nothing to send to the model.
 * **Solution:** Wait until the live view is moving before you click.
 
 5. Summary
 ----------
 
-You just turned a handful of objects into a story. The board took a picture, sent it into the cloud with a style attached, and got back a title, three sentences, and a mood — then spoke them, showed them, and pulled a face to match.
+You just turned a handful of objects into a story.
 
-* Asking for **JSON** in the system prompt is what turns a creative model into a part your code can use: named keys, a fixed length, and a mood chosen from a list
-* `parse_story()` treats the answer as untrusted input — it finds the braces, parses them, trims every field, and replaces an unknown mood with `calm`
-* One answer drives three outputs at once: text and chips on the page, a voice on the speaker, and one integer across the Bridge to the LED matrix
-* The cloud request and the spoken narration run on a worker thread, so the live preview keeps moving while the story is written
-* `ui.send_message(..., room=sid)` keeps the exchange private: every stage goes back only to the browser that asked for the story
+* Asking for **JSON** in the system prompt is what turns a creative model into a part your code can use
+* ``parse_story()`` treats the answer as untrusted input
+* One answer drives three outputs at once
 
-That is where this project leaves you: the model has now held a conversation, picked a mood at the same moment, given advice about the room you were sitting in, listened to your voice, described a picture, sent you hunting for an object, hosted a quiz show, and written a story about whatever happened to be on your desk. The board never changed — the same camera, the same speaker, the same LED matrix, and the same three-step pattern of an input, a model, and a page that shows you what happened. What changed each time was the shape of the answer you asked for and the rules you wrapped around it. That is the skill this module was built to teach, and every AI device you build from here will use it. The projects that follow push the same pattern one step further: first a question you ask out loud, and then a room that answers with light because it knows how you feel.
+That is where this project leaves you: the model has now held a conversation, picked a mood at the same moment, given advice about the room you were sitting in, listened to your voice, described a picture, sent you hunting for an object, hosted a quiz show, and written a story about whatever happened to be on your desk.
