@@ -4,8 +4,8 @@
 
 .. _arduino_ide:
 
-Play with Arduino IDE (Optional)
-================================
+Play with Arduino IDE
+=====================
 
 This optional section introduces how to use the Arduino IDE with UNO Q and how it differs from Arduino App Lab. You will also install the core and run a simple Blink example.
 

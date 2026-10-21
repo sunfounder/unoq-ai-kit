@@ -7,7 +7,7 @@
 Robot Shield
 ============
 
-.. image:: img/robot_shield.png
+.. image:: /get_start/img/robot_shield.png
    :width: 500
    :align: center
 
@@ -78,7 +78,7 @@ Interfaces
 Pin Headers
 -----------
 
-.. image:: img/shield_io_headers.png
+.. image:: /get_start/img/shield_io_headers.png
    :width: 600
    :align: center
 
@@ -95,7 +95,7 @@ The analog / sensor header runs at 3.3V and is the right place to connect sensor
 Motor Outputs
 -------------
 
-.. image:: img/shield_motor_ports.png
+.. image:: /get_start/img/shield_motor_ports.png
    :width: 600
    :align: center
 
@@ -146,7 +146,7 @@ Power and Charging
    connected to the KF350 or VH3.96 terminal. A purchase link will be added
    here soon.
 
-.. image:: img/shield_pwr.png
+.. image:: /get_start/img/shield_pwr.png
    :width: 600
    :align: center
 

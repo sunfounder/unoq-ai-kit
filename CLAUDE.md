@@ -24,9 +24,9 @@ The kit is built around three boards: the **Arduino UNO Q** (Qualcomm QRB2210 MP
 
 Do not mirror the component list, pin assignments, or board specs in this file — they change with the kit. The Get Started pages are the source of truth:
 
-- ``docs/source/get_start/uno_q.rst`` — the UNO Q board
-- ``docs/source/get_start/robot_shield.rst`` — the Robot Shield
-- ``docs/source/get_start/avio_carrier.rst`` — the AVIO Carrier
+- ``docs/source/uno_q.rst`` — the UNO Q board
+- ``docs/source/robot_shield.rst`` — the Robot Shield
+- ``docs/source/avio_carrier.rst`` — the AVIO Carrier
 
 Pin assignments live in each lesson's own Setup section, and the board headers are described on the **Robot Shield** page. Components may share pins because each lesson uses only a subset.
 
@@ -196,10 +196,11 @@ Introduction
 
 **Pan Tilt Kit:**
 
-For lessons using the Robot Shield + servos + AVIO Carrier + battery,
+For lessons using the Robot Shield + servos + AVIO Carrier,
 use the ``Pan Tilt Kit`` entry in Components Needed instead of listing each
 item separately. The kit includes: UNO Q, Robot Shield, AVIO Carrier,
-2× servos, camera, battery, and structural parts — pre-assembled.
+2× servos, camera, and structural parts — pre-assembled. It does **not**
+include a battery.
 
 .. code-block:: rst
 
@@ -227,7 +228,7 @@ the standard Servo library causes jitter on this board.
 
 **Removed from all basic lessons:**
 - Generic "Run button does nothing" troubleshooting — now in FAQ
-- Long battery warnings — Robot Shield implicitly requires battery
+- Long power warnings — supply options belong on the Robot Shield page
 - Functions described without parameters, e.g. write ``digitalWrite(ledPin, HIGH)`` not ``digitalWrite(HIGH)``
 
 ---
@@ -278,7 +279,7 @@ Introduction
 
 4. Troubleshooting
     - **bold heading** per issue + * Cause: / * Solution: bullets
-    - Focus: carrier attachment, STT/TTS first run, wiring, battery power
+    - Focus: carrier attachment, STT/TTS first run, wiring, power supply
     - NO entries for bugs the shipped code already handles
 
 5. Summary
@@ -590,17 +591,20 @@ no gaps. The base pattern is:
 5. [Expected result.]
 ```
 
-For projects that require battery power, insert an additional step
-between Import and Run:
+For projects that draw more current than the UNO Q's USB-C should supply
+(servos and motors), insert an additional step between Import and Run:
 
 ```
 1. Download [`NN Name.zip`](https://github.com/sunfounder/unoq-ai-kit/releases/latest/download/NN.Name.zip).
 2. Open **Arduino App Lab**.
 3. Select **Apps** → **Create New App** → **Import App** → **Import from Computer**, then choose the package you downloaded.
-4. Connect the battery pack to the Robot Shield.
+4. Connect an external 5V supply to the Robot Shield's USB-C port.
 5. Click **Run**.
 6. [Expected result.]
 ```
+
+The kit does **not** ship a battery — servo and motor projects run from an
+external 5V supply (or a 7.4V 2S pack the reader already owns).
 
 For projects with extra setup steps (e.g. IMU calibration), add steps
 after Run but before the result step. All numbering must be sequential.
@@ -863,7 +867,7 @@ project. Keep it concise: the code is right there, no need to duplicate it.
 4. **No Code Overview section** — the code lives in the same folder; README describes behavior, not implementation.
 5. **Result image after the description** — every project README shows one result screenshot right after the one-sentence description: ``![Result](assets/docs_assets/<result_image>.png)``. The wiring image belongs only in the Wiring section.
 6. **Wiring section** = one short sentence + one ``![Wiring Diagram](assets/docs_assets/wiring_xxx.png)`` image. No bullet lists, no tables, no warnings.
-7. **Hardware** = ``Pan Tilt Kit ×1`` as the first item, followed by breadboard components. The kit contains UNO Q, Robot Shield, AVIO Carrier, 2× servos, camera, and battery — all pre-assembled. Do NOT list kit components individually.
+7. **Hardware** = ``Pan Tilt Kit ×1`` as the first item, followed by breadboard components. The kit contains UNO Q, Robot Shield, AVIO Carrier, 2× servos, and camera — all pre-assembled, and **no battery**. Do NOT list kit components individually.
 8. **How it Works** uses plain markdown only: ``**Flow**`` bullet list for setup/loop, then ``**Descriptive Title**`` subsections with 1–3 sentence explanations. Function names and values use inline `` `code` `` backticks.
 9. **Software before Hardware** — if the project uses Bricks or Libraries, those sections come first.
 

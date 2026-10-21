@@ -7,29 +7,25 @@ Get Started
 
 Before you jump into building circuits and writing code, take a few minutes to get familiar with the hardware and software that power every project in this kit.
 
-**What's in this section**
+.. rubric:: Required
 
-* **Meet the UNO Q** — Get to know the dual-processor board at the heart of the kit: its pins, onboard LEDs, USB-C features, and how it differs from a classic Arduino.
-* **Robot Shield** — Understand the expansion board that handles power, battery charging, motors, servos, and sensor connections.
-* **AVIO Carrier** — Meet the multimedia expansion board that adds the camera, microphone, speaker, and RGB LEDs.
-* **Assembly** — Put the kit together: stack the UNO Q, Robot Shield, and AVIO Carrier, and mount the pan-tilt.
-* **Install App Lab** — Set up the Arduino App Lab development environment on your computer. This is the main tool you'll use throughout the course — no driver installation needed.
-* **Download the Code** — Get the course code from GitHub and learn how the project folders are organized.
-* **Run Your First App** — Create, import, and run a blink sketch in App Lab. Learn the app structure (``sketch.ino``, ``main.py``, ``app.yaml``) so you're comfortable navigating projects.
-* **The App Lab AI Agent (optional)** — Open App Lab's agent, connect your own AI account, and learn what it is good at before you rely on it.
-* **Arduino IDE (Optional)** — A brief introduction to the traditional Arduino IDE for those who want to explore beyond App Lab.
-
-By the end of this section, your UNO Q will be connected, App Lab will be running, and you'll have seen the onboard LED blink — ready for your first project.
+Read the first page once, then install App Lab and assemble the kit — everything else can wait until after the first lesson.
 
 .. toctree::
     :maxdepth: 1
 
-    uno_q
-    robot_shield
-    avio_carrier
-    assembly
+    what_you_need
     app_lab
-    download_code
+    assembly
+
+.. rubric:: Optional
+
+Extra material: what App Lab can do, how the code is organised, and the two tools beyond App Lab. Read it when you are curious.
+
+.. toctree::
+    :maxdepth: 1
+
     first_app
+    download_code
     ai_agent
     arduino_ide

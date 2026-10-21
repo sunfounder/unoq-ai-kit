@@ -9,6 +9,9 @@ projects it appears in. The material lists inside the lessons link to these page
 .. toctree::
    :maxdepth: 1
 
+   Arduino Uno Q <uno_q>
+   Robot Shield <robot_shield>
+   AVIO Carrier <avio_carrier>
    Breadboard <_shared/component/cpn_breadboard>
    Button <_shared/component/cpn_button>
    Buzzer <_shared/component/cpn_buzzer>

@@ -7,7 +7,7 @@
 AVIO Carrier
 ============
 
-.. image:: img/avio_carrier.png
+.. image:: /get_start/img/avio_carrier.png
    :width: 500
    :align: center
 
@@ -62,7 +62,7 @@ Specifications
 Audio
 -----
 
-.. image:: img/carrier_speaker_microphone.png
+.. image:: /get_start/img/carrier_speaker_microphone.png
    :width: 600
    :align: center
 
@@ -75,7 +75,7 @@ The audio chain is built around the **NS4150B** Class-D amplifier and its **4Ω 
 Camera
 ------
 
-.. image:: img/carrier_camera.png
+.. image:: /get_start/img/carrier_camera.png
    :width: 600
    :align: center
 
@@ -88,7 +88,7 @@ The AVIO Carrier exposes **two CSI-2 camera channels**, silkscreened CAMERA 0 an
 RGB LEDs
 --------
 
-.. image:: img/carrier_rgb_led.png
+.. image:: /get_start/img/carrier_rgb_led.png
    :width: 600
    :align: center
 

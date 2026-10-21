@@ -7,7 +7,7 @@
 Arduino Uno Q
 =============
 
-.. image:: img/unoq_chips.png
+.. image:: /get_start/img/unoq_chips.png
    :width: 600
    :align: center
   
@@ -26,7 +26,7 @@ The Arduino UNO Q includes several onboard components that make it easy to inter
 
 **LED Matrix**
 
-.. image:: img/unoq_led_matrix.png
+.. image:: /get_start/img/unoq_led_matrix.png
    :width: 600
    :align: center
 
@@ -38,7 +38,7 @@ Because the display is built directly into the board, users can quickly create v
 
 **RGB LEDs**
 
-.. image:: img/unoq_leds.png
+.. image:: /get_start/img/unoq_leds.png
    :width: 600
    :align: center
 
@@ -52,7 +52,7 @@ The other two LEDs (**LED #3 and #4**) are controlled by the **STM32 microcontro
 
 **Power Button**
 
-.. image:: img/unoq_power_button.png
+.. image:: /get_start/img/unoq_power_button.png
    :width: 600
    :align: center
 
@@ -63,7 +63,7 @@ The UNO Q includes a **power button** that can be used to reboot the board.
 
 **USB-C Connector**
 
-.. image:: img/unoq_usbc.png
+.. image:: /get_start/img/unoq_usbc.png
    :width: 600
    :align: center
 
@@ -137,7 +137,7 @@ These connectors give developers flexibility: the UNO headers support traditiona
 
 **Digital Pins**
 
-.. image:: img/unoq_digital_pin.png
+.. image:: /get_start/img/unoq_digital_pin.png
    :width: 600
    :align: center
 
@@ -200,7 +200,7 @@ The mapping between the microcontroller pins and the Arduino-style digital pins 
 
 **Analog Pins**
 
-.. image:: img/unoq_analog_pin.png
+.. image:: /get_start/img/unoq_analog_pin.png
    :width: 600
    :align: center
 
@@ -232,7 +232,7 @@ The analog pin mapping is shown below.
 
 **PWM Pins**
 
-.. image:: img/unoq_pwm_pin.png
+.. image:: /get_start/img/unoq_pwm_pin.png
    :width: 600
    :align: center
 
@@ -242,7 +242,7 @@ In your sketch, ``analogWrite(pin, value)`` works on **D0 through D13 with the s
 
 **Power Pins**
 
-.. image:: img/unoq_power_pin.png
+.. image:: /get_start/img/unoq_power_pin.png
    :width: 600
    :align: center
 
@@ -268,7 +268,7 @@ The available power and control pins are summarized below.
 
 **Bottom High-Speed Connectors**
 
-.. image:: img/unoq_bottom_connector.png
+.. image:: /get_start/img/unoq_bottom_connector.png
    :width: 400
    :align: center
 
