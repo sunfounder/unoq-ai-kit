@@ -414,6 +414,22 @@ and ``video_image_classification`` bricks, and detection models on ``object_dete
 and ``video_object_detection``.
 
 
+Text to speech and speech to text
+-------------------------------------
+
+The board stops talking, and the console shows a 403 from speech.platform.bing.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Cause:** the EdgeTTS engine talks to a free service that Microsoft runs for the
+Edge browser's Read Aloud feature. Microsoft changes the handshake token without
+notice, and an older copy of the engine then gets a 403.
+
+**Solution:** download the latest package for that lesson again — the current
+packages pin the engine to a version that speaks the new handshake, and they fall
+back to the offline **espeak** engine if the online service fails again, so the
+board keeps talking even when the service changes. If you maintain your own copy,
+re-pin it with ``"edge-tts>=7.3.1"`` and rebuild the brick image.
+
 API keys and cloud services
 ---------------------------
 
@@ -467,5 +483,4 @@ Two things stay the same whatever you choose:
   App Lab keeps it on the board.
 * **The rest of the project.** System prompts, temperature and the streaming calls are
   provider-independent, so nothing else in the code changes.
-
 

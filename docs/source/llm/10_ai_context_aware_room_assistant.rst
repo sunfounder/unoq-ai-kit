@@ -63,7 +63,7 @@ The sketch declares no libraries of its own in ``sketch.yaml``. The two headers 
 
 **Wiring Diagram**
 
-The PIR module's **OUT** pin goes to **D4**, the DHT11's **DATA** pin to **D5**, and the RGB LED's three anodes go to **D6** (red), **D7** (green), and **D8** (blue), each through its own **220Ω** resistor, with the longest leg — the **common cathode** — to **GND**. Never connect a colour channel straight to a pin without its resistor; the LED can burn out.
+The PIR module's **OUT** pin goes to **D4**, the DHT11's **DATA** pin to **D5**, and the RGB LED's three anodes go to **D8** (red), **D7** (green), and **D6** (blue), each through its own **220Ω** resistor, with the longest leg — the **common cathode** — to **GND**. Never connect a colour channel straight to a pin without its resistor; the LED can burn out.
 
 .. image:: /img/wiring/wiring_context_room.png
    :width: 600
