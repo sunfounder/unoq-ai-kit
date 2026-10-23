@@ -24,12 +24,6 @@ from arduino.app_utils import App, Logger
 from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
-try:
-    from robot_shield import setup_audio_output
-except ImportError:
-    setup_audio_output = None
-
-
 STT_LANGUAGE = "en"
 TTS_VOICE = "en-US-JennyNeural"
 MAX_QUESTION_LENGTH = 300
@@ -46,12 +40,6 @@ SYSTEM_PROMPT = (
 
 logger = Logger("AIShowAndTell")
 ui = WebUI()
-
-if setup_audio_output is not None:
-    try:
-        setup_audio_output()
-    except Exception as error:
-        logger.warning(f"Audio mixer setup unavailable: {error}")
 
 stt = STT(type="online", language=STT_LANGUAGE)
 stt_key = (

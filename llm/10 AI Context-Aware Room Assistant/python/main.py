@@ -10,11 +10,6 @@ from arduino.app_utils import App, Bridge, Logger
 from sunfounder_stt import STT
 from sunfounder_tts import EdgeTTS
 
-try:
-    from robot_shield import setup_audio_output
-except ImportError:
-    setup_audio_output = None
-
 RECORD_SECONDS, SENSOR_TIMEOUT = 4, 1.5
 SYSTEM_PROMPT = (
     "You are a warm, thoughtful room-atmosphere assistant. The user says what they are "
@@ -41,10 +36,6 @@ SYSTEM_PROMPT = (
     "not a report of what you did."
 )
 logger, ui = Logger("AIContextAwareRoomAssistant"), WebUI()
-if setup_audio_output:
-    try: setup_audio_output()
-    except Exception as error: logger.warning(f"Audio mixer setup unavailable: {error}")
-
 stt = STT(type="online", language="en")
 stt_key = os.environ.get("OPENAI_API_KEY", "").strip() or os.environ.get("API_KEY", "").strip()
 if stt_key: STT.API_KEY = stt_key

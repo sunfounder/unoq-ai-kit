@@ -10,5 +10,4 @@ bricks:
       variables:
         OPENAI_API_KEY: ""
   - sunfounder_tts: {}
-- robot_shield: {}
 icon: 🎤
