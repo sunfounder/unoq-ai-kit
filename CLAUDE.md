@@ -132,6 +132,48 @@ sequenceDiagram
 
 ---
 
+## Zip Packaging
+
+**Never build the course `.zip` files with PowerShell's `Compress-Archive`.** It
+stores backslash separators in the archive (`python\main.py`). App Lab unpacks on the
+Linux side, so it sees one oddly named file instead of a `python/` folder and rejects
+the import with:
+
+```text
+Error: invalid app: bad request: main python file missing from app
+```
+
+The archive builds without an error and looks fine in Explorer, so nothing catches it
+until somebody imports the package. This has already cost us one release.
+
+Build with a tool that writes forward slashes — Python's `zipfile` is what we use:
+
+```python
+import os, zipfile
+
+proj, out = r"media/01 Local TTS", r"media/01 Local TTS.zip"
+with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+    for d, dirs, files in os.walk(proj):
+        dirs[:] = [x for x in dirs if x not in (".git", "__pycache__")]
+        for f in files:
+            p = os.path.join(d, f)
+            z.write(p, os.path.relpath(p, proj).replace(os.sep, "/"))
+```
+
+`app.yaml` must sit at the archive root, which is why the walk starts **inside** the
+project folder — never zip the folder itself.
+
+Check every package before uploading:
+
+```python
+import zipfile
+
+n = zipfile.ZipFile("media/01 Local TTS.zip").namelist()
+print("backslashes:", sum(1 for x in n if chr(92) in x))   # must be 0
+print("entry:", "python/main.py" in n)                     # must be True
+print("root:", [x for x in n if "/" not in x])             # app.yaml + README.md
+```
+
 ## App Project Structure
 
 Each app follows this directory layout:
