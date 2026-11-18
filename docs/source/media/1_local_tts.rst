@@ -124,6 +124,11 @@ Make the speaker say three sentences in a row — a greeting, a question, and an
 4. Troubleshooting
 ------------------
 
+**The app stops with "Can't write to ... audio_output/..."**
+
+* **Cause:** The TTS Brick saves a temporary audio file into the ``audio_output`` folder of the app package. If that folder is missing from the package, or it exists but is owned by ``root``, the write fails and the app stops.
+* **Solution:** Check that the app folder contains an ``audio_output`` folder with at least one file inside it — the downloaded package ships ``audio_output/.keep`` for exactly this reason. If the folder is present but not writable, correct its ownership on the UNO Q (``sudo chown -R 1000:1000`` the folder in the app directory) and run the app again.
+
 **No sound at all**
 
 * **Cause:** The AVIO Carrier isn't properly attached, or the volume is set too low.
